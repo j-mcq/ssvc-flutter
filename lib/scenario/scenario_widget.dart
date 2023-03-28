@@ -30,11 +30,15 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ScenarioModel());
+
+    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+        .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
   @override
@@ -47,6 +51,21 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (currentUserLocationValue == null) {
+      return Container(
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        child: Center(
+          child: SizedBox(
+            width: 50.0,
+            height: 50.0,
+            child: CircularProgressIndicator(
+              color: FlutterFlowTheme.of(context).primaryColor,
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       key: scaffoldKey,
       resizeToAvoidBottomInset: false,
@@ -333,7 +352,13 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                         .secondaryBackground,
                                   ),
                                   child: Container(
-                                    child: custom_widgets.PolyMap(),
+                                    width: 500.0,
+                                    height: 500.0,
+                                    child: custom_widgets.PolyMap(
+                                      width: 500.0,
+                                      height: 500.0,
+                                      location: currentUserLocationValue,
+                                    ),
                                   ),
                                 ),
                                 Container(
