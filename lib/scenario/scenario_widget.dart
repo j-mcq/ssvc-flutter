@@ -457,10 +457,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         .map((d) =>
                                                             d.responseItemName)
                                                         .toList(),
-                                                barWidth: 25.0,
+                                                barWidth: 100.0,
                                                 barBorderRadius:
                                                     BorderRadius.circular(0.0),
-                                                groupSpace: 5.0,
+                                                groupSpace: 15.0,
+                                                alignment: BarChartAlignment
+                                                    .spaceEvenly,
                                                 chartStylingInfo:
                                                     ChartStylingInfo(
                                                   enableTooltip: true,
