@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -190,8 +191,24 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                             ],
                                           ),
                                           FFButtonWidget(
-                                            onPressed: () {
-                                              print('Button pressed ...');
+                                            onPressed: () async {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('hi'),
+                                                    content: Text('bye'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
                                             },
                                             text: 'Add Scenario',
                                             icon: Icon(
@@ -315,30 +332,35 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
                                   ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 8.0, 8.0, 8.0),
-                                    child: FlutterFlowGoogleMap(
-                                      controller: _model.googleMapsController,
-                                      onCameraIdle: (latLng) =>
-                                          _model.googleMapsCenter = latLng,
-                                      initialLocation:
-                                          _model.googleMapsCenter ??= LatLng(
-                                              53.36575961890024,
-                                              -3.0673733657249733),
-                                      markerColor: GoogleMarkerColor.green,
-                                      mapType: MapType.normal,
-                                      style: GoogleMapStyle.retro,
-                                      initialZoom: 14.0,
-                                      allowInteraction: true,
-                                      allowZoom: true,
-                                      showZoomControls: true,
-                                      showLocation: true,
-                                      showCompass: false,
-                                      showMapToolbar: true,
-                                      showTraffic: false,
-                                      centerMapOnMarkerTap: true,
-                                    ),
+                                  child: Container(
+                                    child: custom_widgets.PolyMap(),
+                                  ),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  height: 500.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                  ),
+                                  child: FlutterFlowGoogleMap(
+                                    controller: _model.googleMapsController,
+                                    onCameraIdle: (latLng) =>
+                                        _model.googleMapsCenter = latLng,
+                                    initialLocation: _model.googleMapsCenter ??=
+                                        LatLng(13.106061, -59.613158),
+                                    markerColor: GoogleMarkerColor.violet,
+                                    mapType: MapType.normal,
+                                    style: GoogleMapStyle.standard,
+                                    initialZoom: 14.0,
+                                    allowInteraction: true,
+                                    allowZoom: true,
+                                    showZoomControls: true,
+                                    showLocation: true,
+                                    showCompass: false,
+                                    showMapToolbar: false,
+                                    showTraffic: false,
+                                    centerMapOnMarkerTap: true,
                                   ),
                                 ),
                                 Padding(
