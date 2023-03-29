@@ -1063,7 +1063,52 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 16.0, 0.0, 0.0),
+                                        12.0, 12.0, 12.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Address',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2,
+                                            ),
+                                          ),
+                                        ),
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          phone: false,
+                                          tablet: false,
+                                        ))
+                                          Expanded(
+                                            child: Text(
+                                              'PSR Group',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2,
+                                            ),
+                                          ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            'Response Item Required',
+                                            textAlign: TextAlign.end,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 16.0, 16.0, 0.0),
                                     child: StreamBuilder<
                                         List<ScenarioResultsCustomersRecord>>(
                                       stream:
@@ -1210,7 +1255,15 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
                                                                       .end,
-                                                              children: [],
+                                                              children: [
+                                                                Text(
+                                                                  listViewScenarioResultsCustomersRecord
+                                                                      .item!,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1,
+                                                                ),
+                                                              ],
                                                             ),
                                                           ],
                                                         ),
