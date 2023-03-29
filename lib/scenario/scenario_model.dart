@@ -3,7 +3,6 @@ import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,9 @@ class ScenarioModel extends FlutterFlowModel {
 
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
+  // State field(s) for itemName widget.
+  TextEditingController? itemNameController;
+  String? Function(BuildContext, String?)? itemNameControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -24,6 +26,7 @@ class ScenarioModel extends FlutterFlowModel {
 
   void dispose() {
     sideBarNavModel.dispose();
+    itemNameController?.dispose();
   }
 
   /// Additional helper methods are added here.
