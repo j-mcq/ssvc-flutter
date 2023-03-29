@@ -812,7 +812,10 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             FFBarChartData(
                                                               yData: chartScenarioResultsCustomersRecordList
                                                                   .where((e) =>
-                                                                      e != null)
+                                                                      e.name !=
+                                                                          null &&
+                                                                      e.name !=
+                                                                          '')
                                                                   .toList()
                                                                   .map((d) => d
                                                                       .numberImpacted)
@@ -831,14 +834,15 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   .secondaryColor,
                                                             )
                                                           ],
-                                                          xLabels:
-                                                              chartScenarioResultsCustomersRecordList
-                                                                  .where((e) =>
-                                                                      e != null)
-                                                                  .toList()
-                                                                  .map((d) => d
-                                                                      .psrGroupName)
-                                                                  .toList(),
+                                                          xLabels: chartScenarioResultsCustomersRecordList
+                                                              .where((e) =>
+                                                                  e.name !=
+                                                                      null &&
+                                                                  e.name != '')
+                                                              .toList()
+                                                              .map((d) => d
+                                                                  .psrGroupName)
+                                                              .toList(),
                                                           barWidth: 55.0,
                                                           barBorderRadius:
                                                               BorderRadius
