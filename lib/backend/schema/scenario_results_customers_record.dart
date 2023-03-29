@@ -24,6 +24,9 @@ abstract class ScenarioResultsCustomersRecord
   @BuiltValueField(wireName: 'number_impacted')
   int? get numberImpacted;
 
+  @BuiltValueField(wireName: 'number_responded_to')
+  int? get numberRespondedTo;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -32,7 +35,8 @@ abstract class ScenarioResultsCustomersRecord
           ScenarioResultsCustomersRecordBuilder builder) =>
       builder
         ..psrGroupName = ''
-        ..numberImpacted = 0;
+        ..numberImpacted = 0
+        ..numberRespondedTo = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('scenario_results_customers');
@@ -63,6 +67,7 @@ Map<String, dynamic> createScenarioResultsCustomersRecordData({
   String? psrGroupName,
   DocumentReference? psrGroup,
   int? numberImpacted,
+  int? numberRespondedTo,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioResultsCustomersRecord.serializer,
@@ -71,7 +76,8 @@ Map<String, dynamic> createScenarioResultsCustomersRecordData({
         ..scenario = scenario
         ..psrGroupName = psrGroupName
         ..psrGroup = psrGroup
-        ..numberImpacted = numberImpacted,
+        ..numberImpacted = numberImpacted
+        ..numberRespondedTo = numberRespondedTo,
     ),
   );
 

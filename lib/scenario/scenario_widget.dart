@@ -773,7 +773,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         FFBarChartData(
                                                           yData: chartScenarioResultsCustomersRecordList
                                                               .map((d) => d
-                                                                  .numberImpacted)
+                                                                  .numberRespondedTo)
                                                               .toList(),
                                                           color: FlutterFlowTheme
                                                                   .of(context)
