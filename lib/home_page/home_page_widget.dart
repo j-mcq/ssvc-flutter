@@ -179,7 +179,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       4.0, 4.0, 8.0, 4.0),
                                   child: Container(
-                                    height: 280.0,
+                                    height: 255.0,
                                     constraints: BoxConstraints(
                                       maxWidth:
                                           MediaQuery.of(context).size.width *
@@ -440,7 +440,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Total Number of PSR customers ',
+                                                    'Percentage of Response Items with Customers',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .title3
@@ -463,38 +463,64 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                   Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 4.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      '% of scenarios that are fully covered by the current stock levels.',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1Family,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .white70,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodyText1Family),
-                                                              ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 12.0,
                                                                 0.0, 0.0),
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
-                                                      children: [],
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      12.0),
+                                                          child:
+                                                              LinearPercentIndicator(
+                                                            percent: 0.22,
+                                                            width: 535.0,
+                                                            lineHeight: 24.0,
+                                                            animation: true,
+                                                            progressColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryColor,
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .lineColor,
+                                                            center: Text(
+                                                              '93%',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Outfit',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .tertiaryColor,
+                                                                    fontSize:
+                                                                        14.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyText1Family),
+                                                                  ),
+                                                            ),
+                                                            barRadius:
+                                                                Radius.circular(
+                                                                    12.0),
+                                                            padding:
+                                                                EdgeInsets.zero,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],
@@ -967,7 +993,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           0.0, 16.0, 0.0, 0.0),
                                       child:
                                           StreamBuilder<List<ScenarioRecord>>(
-                                        stream: queryScenarioRecord(),
+                                        stream: queryScenarioRecord(
+                                          queryBuilder: (scenarioRecord) =>
+                                              scenarioRecord.orderBy('name'),
+                                        ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
@@ -1157,7 +1186,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                         context)
                                                                     .lineColor,
                                                             center: Text(
-                                                              '100%',
+                                                              (double
+                                                                  inputValue) {
+                                                                return (inputValue *
+                                                                            100)
+                                                                        .toString() +
+                                                                    '%';
+                                                              }(listViewScenarioRecord
+                                                                  .percentageCoverered!),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyText1,
