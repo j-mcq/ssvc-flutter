@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/enter_radius_widget.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
@@ -54,6 +55,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -454,6 +456,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                           width: 500.0,
                                           height: 500.0,
                                           location: currentUserLocationValue,
+                                          isPolygon: _model.isPolygon,
+                                          isCircle: _model.isCircle,
+                                          polygon: _model.polygon,
+                                          circle: _model.circle,
+                                          radius: _model.radius,
                                         ),
                                       ),
                                     ),
@@ -484,6 +491,206 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 16.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 8.0, 0.0),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () {
+                                                      print(
+                                                          'Button pressed ...');
+                                                    },
+                                                    text: 'Reset',
+                                                    options: FFButtonOptions(
+                                                      width: 130.0,
+                                                      height: 40.0,
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2Family,
+                                                                color: Colors
+                                                                    .white,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .subtitle2Family),
+                                                              ),
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 8.0, 0.0),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () async {
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled:
+                                                            true,
+                                                        enableDrag: false,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return Padding(
+                                                            padding:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets,
+                                                            child:
+                                                                EnterRadiusWidget(),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          setState(() {}));
+
+                                                      setState(() {
+                                                        _model.isCircle = true;
+                                                        _model.isPolygon =
+                                                            false;
+                                                        _model.radius =
+                                                            FFAppState()
+                                                                .impactRadius;
+                                                      });
+                                                    },
+                                                    text: 'Add Circle',
+                                                    options: FFButtonOptions(
+                                                      width: 130.0,
+                                                      height: 40.0,
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2Family,
+                                                                color: Colors
+                                                                    .white,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .subtitle2Family),
+                                                              ),
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                FFButtonWidget(
+                                                  onPressed: () async {
+                                                    setState(() {
+                                                      _model.isCircle = false;
+                                                      _model.isPolygon = true;
+                                                      _model.radius = null;
+                                                    });
+                                                  },
+                                                  text: 'Add Polygon',
+                                                  options: FFButtonOptions(
+                                                    width: 130.0,
+                                                    height: 40.0,
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    iconPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2Family,
+                                                          color: Colors.white,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle2Family),
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50.0),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(

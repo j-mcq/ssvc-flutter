@@ -12,18 +12,26 @@ import 'package:google_maps_flutter/google_maps_flutter.dart' as gmf;
 import 'dart:collection';
 
 class PolyMap extends StatefulWidget {
-  //PolyMap({Key key}) : super(key: key);
-
-  PolyMap({
+  const PolyMap({
     Key? key,
     this.width,
     this.height,
     this.location,
+    this.isPolygon,
+    this.isCircle,
+    this.polygon,
+    this.circle,
+    this.radius,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final LatLng? location;
+  final bool? isPolygon;
+  final bool? isCircle;
+  final String? polygon;
+  final String? circle;
+  final double? radius;
 
   @override
   _PolyMapState createState() => _PolyMapState();
