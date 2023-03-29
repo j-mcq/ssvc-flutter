@@ -1,4 +1,6 @@
+import '/backend/backend.dart';
 import '/components/side_bar_nav_widget.dart';
+import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -197,7 +199,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     .fromSTEB(
                                                         0.0, 4.0, 0.0, 0.0),
                                                 child: Text(
-                                                  'Below you will find a summary of your courses.',
+                                                  'Outage scenario details',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText2,
@@ -324,7 +326,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             .fromSTEB(0.0, 4.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      'Below you will find a summary of your courses.',
+                                                      'Location information and properties impacted',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -400,6 +402,184 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
+                                                    'Customers Impacted',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .title3,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 4.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      'Summary of the types of PSR customers impacted by the scenario',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 1.0, 0.0, 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 0.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .lineColor,
+                                          offset: Offset(0.0, 0.0),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(0.0),
+                                        bottomRight: Radius.circular(0.0),
+                                        topLeft: Radius.circular(16.0),
+                                        topRight: Radius.circular(16.0),
+                                      ),
+                                    ),
+                                    child: FutureBuilder<
+                                        List<ScenarioResultsCustomersRecord>>(
+                                      future:
+                                          queryScenarioResultsCustomersRecordOnce(),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: CircularProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<ScenarioResultsCustomersRecord>
+                                            chartScenarioResultsCustomersRecordList =
+                                            snapshot.data!;
+                                        return Container(
+                                          width: 300.0,
+                                          height: 300.0,
+                                          child: FlutterFlowBarChart(
+                                            barData: [
+                                              FFBarChartData(
+                                                yData:
+                                                    chartScenarioResultsCustomersRecordList
+                                                        .where((e) => e != null)
+                                                        .toList()
+                                                        .map((d) =>
+                                                            d.numberImpacted)
+                                                        .toList(),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryColor,
+                                              )
+                                            ],
+                                            xLabels:
+                                                chartScenarioResultsCustomersRecordList
+                                                    .where((e) => e != null)
+                                                    .toList()
+                                                    .map((d) => d.psrGroupName)
+                                                    .toList(),
+                                            barWidth: 55.0,
+                                            barBorderRadius:
+                                                BorderRadius.circular(0.0),
+                                            groupSpace: 5.0,
+                                            alignment:
+                                                BarChartAlignment.spaceEvenly,
+                                            chartStylingInfo: ChartStylingInfo(
+                                              enableTooltip: true,
+                                              backgroundColor: Colors.white,
+                                              showGrid: true,
+                                              borderColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .lineColor,
+                                              borderWidth: 1.0,
+                                            ),
+                                            axisBounds: AxisBounds(),
+                                            xAxisLabelInfo: AxisLabelInfo(
+                                              title: 'PRS Group',
+                                              titleTextStyle: TextStyle(
+                                                fontSize: 14.0,
+                                              ),
+                                              showLabels: true,
+                                              labelInterval: 10.0,
+                                            ),
+                                            yAxisLabelInfo: AxisLabelInfo(
+                                              title:
+                                                  'Number of Customers Impacted',
+                                              titleTextStyle: TextStyle(
+                                                fontSize: 14.0,
+                                              ),
+                                              showLabels: true,
+                                              labelInterval: 10.0,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 1.0, 0.0, 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 0.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .lineColor,
+                                          offset: Offset(0.0, 0.0),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(0.0),
+                                        bottomRight: Radius.circular(0.0),
+                                        topLeft: Radius.circular(16.0),
+                                        topRight: Radius.circular(16.0),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 16.0, 16.0, 16.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
                                                     'Response Items Required',
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -411,7 +591,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             .fromSTEB(0.0, 4.0,
                                                                 0.0, 0.0),
                                                     child: Text(
-                                                      'Below you will find a summary of your courses.',
+                                                      'Summary of the equipment required to respond to this scenario.',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -421,6 +601,171 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                 ],
                                               ),
                                             ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 1.0, 0.0, 0.0),
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 0.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .lineColor,
+                                          offset: Offset(0.0, 0.0),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(0.0),
+                                        bottomRight: Radius.circular(0.0),
+                                        topLeft: Radius.circular(16.0),
+                                        topRight: Radius.circular(16.0),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 1.0, 0.0, 0.0),
+                                          child: Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 0.0,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .lineColor,
+                                                  offset: Offset(0.0, 0.0),
+                                                )
+                                              ],
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft:
+                                                    Radius.circular(0.0),
+                                                bottomRight:
+                                                    Radius.circular(0.0),
+                                                topLeft: Radius.circular(16.0),
+                                                topRight: Radius.circular(16.0),
+                                              ),
+                                            ),
+                                            child: FutureBuilder<
+                                                List<
+                                                    ScenarioResultsCustomersRecord>>(
+                                              future:
+                                                  queryScenarioResultsCustomersRecordOnce(),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<ScenarioResultsCustomersRecord>
+                                                    chartScenarioResultsCustomersRecordList =
+                                                    snapshot.data!;
+                                                return Container(
+                                                  width: 300.0,
+                                                  height: 300.0,
+                                                  child: FlutterFlowBarChart(
+                                                    barData: [
+                                                      FFBarChartData(
+                                                        yData: chartScenarioResultsCustomersRecordList
+                                                            .where((e) =>
+                                                                e != null)
+                                                            .toList()
+                                                            .map((d) => d
+                                                                .numberImpacted)
+                                                            .toList(),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                      ),
+                                                      FFBarChartData(
+                                                        yData: chartScenarioResultsCustomersRecordList
+                                                            .map((d) => d
+                                                                .numberImpacted)
+                                                            .toList(),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryColor,
+                                                      )
+                                                    ],
+                                                    xLabels:
+                                                        chartScenarioResultsCustomersRecordList
+                                                            .where((e) =>
+                                                                e != null)
+                                                            .toList()
+                                                            .map((d) =>
+                                                                d.psrGroupName)
+                                                            .toList(),
+                                                    barWidth: 55.0,
+                                                    barBorderRadius:
+                                                        BorderRadius.circular(
+                                                            0.0),
+                                                    barSpace: 0.0,
+                                                    groupSpace: 5.0,
+                                                    alignment: BarChartAlignment
+                                                        .spaceEvenly,
+                                                    chartStylingInfo:
+                                                        ChartStylingInfo(
+                                                      enableTooltip: true,
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      showGrid: true,
+                                                      borderColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .lineColor,
+                                                      borderWidth: 1.0,
+                                                    ),
+                                                    axisBounds: AxisBounds(),
+                                                    xAxisLabelInfo:
+                                                        AxisLabelInfo(
+                                                      title: 'Response Item',
+                                                      titleTextStyle: TextStyle(
+                                                        fontSize: 14.0,
+                                                      ),
+                                                      showLabels: true,
+                                                      labelInterval: 10.0,
+                                                    ),
+                                                    yAxisLabelInfo:
+                                                        AxisLabelInfo(
+                                                      title: 'Items Number',
+                                                      titleTextStyle: TextStyle(
+                                                        fontSize: 14.0,
+                                                      ),
+                                                      showLabels: true,
+                                                      labelInterval: 10.0,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
                                           ),
                                         ),
                                       ],

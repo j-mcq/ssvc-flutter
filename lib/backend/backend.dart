@@ -10,6 +10,8 @@ import 'schema/response_items_record.dart';
 import 'schema/scenario_record.dart';
 import 'schema/scenario_results_record.dart';
 import 'schema/depot_record.dart';
+import 'schema/scenario_results_customers_record.dart';
+import 'schema/psr_groups_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -22,6 +24,8 @@ export 'schema/response_items_record.dart';
 export 'schema/scenario_record.dart';
 export 'schema/scenario_results_record.dart';
 export 'schema/depot_record.dart';
+export 'schema/scenario_results_customers_record.dart';
+export 'schema/psr_groups_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -277,6 +281,113 @@ Future<FFFirestorePage<DepotRecord>> queryDepotRecordPage({
     queryCollectionPage(
       DepotRecord.collection,
       DepotRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query ScenarioResultsCustomersRecords (as a Stream and as a Future).
+Future<int> queryScenarioResultsCustomersRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ScenarioResultsCustomersRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ScenarioResultsCustomersRecord>>
+    queryScenarioResultsCustomersRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+        queryCollection(
+          ScenarioResultsCustomersRecord.collection,
+          ScenarioResultsCustomersRecord.serializer,
+          queryBuilder: queryBuilder,
+          limit: limit,
+          singleRecord: singleRecord,
+        );
+
+Future<List<ScenarioResultsCustomersRecord>>
+    queryScenarioResultsCustomersRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+        queryCollectionOnce(
+          ScenarioResultsCustomersRecord.collection,
+          ScenarioResultsCustomersRecord.serializer,
+          queryBuilder: queryBuilder,
+          limit: limit,
+          singleRecord: singleRecord,
+        );
+
+Future<FFFirestorePage<ScenarioResultsCustomersRecord>>
+    queryScenarioResultsCustomersRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          ScenarioResultsCustomersRecord.collection,
+          ScenarioResultsCustomersRecord.serializer,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
+
+/// Functions to query PsrGroupsRecords (as a Stream and as a Future).
+Future<int> queryPsrGroupsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      PsrGroupsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<PsrGroupsRecord>> queryPsrGroupsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      PsrGroupsRecord.collection,
+      PsrGroupsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<PsrGroupsRecord>> queryPsrGroupsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      PsrGroupsRecord.collection,
+      PsrGroupsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<PsrGroupsRecord>> queryPsrGroupsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      PsrGroupsRecord.collection,
+      PsrGroupsRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

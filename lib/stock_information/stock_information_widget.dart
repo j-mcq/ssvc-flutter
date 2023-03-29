@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -477,19 +478,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                     Expanded(
                                       flex: 1,
                                       child: Text(
-                                        'Number in storage',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2,
-                                      ),
-                                    ),
-                                  if (responsiveVisibility(
-                                    context: context,
-                                    phone: false,
-                                    tablet: false,
-                                  ))
-                                    Expanded(
-                                      child: Text(
-                                        'Total number',
+                                        'Number in stock',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2,
                                       ),
@@ -621,7 +610,8 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                   Expanded(
                                                     flex: 1,
                                                     child: Text(
-                                                      'CH1 2PX',
+                                                      listViewResponseItemsRecord
+                                                          .depotName!,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -635,39 +625,15 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                   Expanded(
                                                     flex: 1,
                                                     child: Text(
-                                                      '10',
+                                                      listViewResponseItemsRecord
+                                                          .stock!
+                                                          .toString(),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyText1,
                                                     ),
                                                   ),
-                                                Expanded(
-                                                  child: LinearPercentIndicator(
-                                                    percent: 1.0,
-                                                    width: 80.0,
-                                                    lineHeight: 18.0,
-                                                    animation: true,
-                                                    progressColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryColor,
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .lineColor,
-                                                    center: Text(
-                                                      '100%',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1,
-                                                    ),
-                                                    barRadius:
-                                                        Radius.circular(8.0),
-                                                    padding: EdgeInsets.zero,
-                                                  ),
-                                                ),
                                                 Expanded(
                                                   child: Column(
                                                     mainAxisSize:
@@ -700,6 +666,115 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                     },
                                   );
                                 },
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 1.0, 0.0, 0.0),
+                              child: Container(
+                                width: double.infinity,
+                                height: 400.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 0.0,
+                                      color: FlutterFlowTheme.of(context)
+                                          .lineColor,
+                                      offset: Offset(0.0, 0.0),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(0.0),
+                                    bottomRight: Radius.circular(0.0),
+                                    topLeft: Radius.circular(16.0),
+                                    topRight: Radius.circular(16.0),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 32.0, 0.0, 0.0),
+                                  child:
+                                      FutureBuilder<List<ResponseItemsRecord>>(
+                                    future: queryResponseItemsRecordOnce(),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<ResponseItemsRecord>
+                                          chartResponseItemsRecordList =
+                                          snapshot.data!;
+                                      return Container(
+                                        width: 300.0,
+                                        height: 300.0,
+                                        child: FlutterFlowBarChart(
+                                          barData: [
+                                            FFBarChartData(
+                                              yData:
+                                                  chartResponseItemsRecordList
+                                                      .where((e) => e != null)
+                                                      .toList()
+                                                      .map((d) => d.stock)
+                                                      .toList(),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                            )
+                                          ],
+                                          xLabels: chartResponseItemsRecordList
+                                              .where((e) => e != null)
+                                              .toList()
+                                              .map((d) => d.name)
+                                              .toList(),
+                                          barWidth: 55.0,
+                                          barBorderRadius:
+                                              BorderRadius.circular(0.0),
+                                          groupSpace: 5.0,
+                                          alignment:
+                                              BarChartAlignment.spaceEvenly,
+                                          chartStylingInfo: ChartStylingInfo(
+                                            enableTooltip: true,
+                                            backgroundColor: Colors.white,
+                                            showGrid: true,
+                                            borderColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .lineColor,
+                                            borderWidth: 1.0,
+                                          ),
+                                          axisBounds: AxisBounds(),
+                                          xAxisLabelInfo: AxisLabelInfo(
+                                            title: 'Response Item',
+                                            titleTextStyle: TextStyle(
+                                              fontSize: 14.0,
+                                            ),
+                                            showLabels: true,
+                                            labelInterval: 10.0,
+                                          ),
+                                          yAxisLabelInfo: AxisLabelInfo(
+                                            title: 'Items in Stock',
+                                            titleTextStyle: TextStyle(
+                                              fontSize: 14.0,
+                                            ),
+                                            showLabels: true,
+                                            labelInterval: 10.0,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
                               ),
                             ),
                           ],

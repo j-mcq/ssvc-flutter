@@ -75,6 +75,13 @@ class _$ResponseItemsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.depotName;
+    if (value != null) {
+      result
+        ..add('depot_name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -128,6 +135,10 @@ class _$ResponseItemsRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'depot_name':
+          result.depotName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -157,6 +168,8 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
   @override
   final DocumentReference<Object?>? depot;
   @override
+  final String? depotName;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ResponseItemsRecord(
@@ -171,6 +184,7 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
       this.unitPrice,
       this.stock,
       this.depot,
+      this.depotName,
       this.ffRef})
       : super._();
 
@@ -194,6 +208,7 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
         unitPrice == other.unitPrice &&
         stock == other.stock &&
         depot == other.depot &&
+        depotName == other.depotName &&
         ffRef == other.ffRef;
   }
 
@@ -207,6 +222,7 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
     _$hash = $jc(_$hash, unitPrice.hashCode);
     _$hash = $jc(_$hash, stock.hashCode);
     _$hash = $jc(_$hash, depot.hashCode);
+    _$hash = $jc(_$hash, depotName.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -222,6 +238,7 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
           ..add('unitPrice', unitPrice)
           ..add('stock', stock)
           ..add('depot', depot)
+          ..add('depotName', depotName)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -259,6 +276,10 @@ class ResponseItemsRecordBuilder
   DocumentReference<Object?>? get depot => _$this._depot;
   set depot(DocumentReference<Object?>? depot) => _$this._depot = depot;
 
+  String? _depotName;
+  String? get depotName => _$this._depotName;
+  set depotName(String? depotName) => _$this._depotName = depotName;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -277,6 +298,7 @@ class ResponseItemsRecordBuilder
       _unitPrice = $v.unitPrice;
       _stock = $v.stock;
       _depot = $v.depot;
+      _depotName = $v.depotName;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -307,6 +329,7 @@ class ResponseItemsRecordBuilder
             unitPrice: unitPrice,
             stock: stock,
             depot: depot,
+            depotName: depotName,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

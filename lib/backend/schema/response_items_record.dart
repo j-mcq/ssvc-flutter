@@ -28,6 +28,9 @@ abstract class ResponseItemsRecord
 
   DocumentReference? get depot;
 
+  @BuiltValueField(wireName: 'depot_name')
+  String? get depotName;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -37,7 +40,8 @@ abstract class ResponseItemsRecord
     ..description = ''
     ..imageLink = ''
     ..unitPrice = 0.0
-    ..stock = 0.0;
+    ..stock = 0.0
+    ..depotName = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('response_items');
@@ -69,6 +73,7 @@ Map<String, dynamic> createResponseItemsRecordData({
   double? unitPrice,
   double? stock,
   DocumentReference? depot,
+  String? depotName,
 }) {
   final firestoreData = serializers.toFirestore(
     ResponseItemsRecord.serializer,
@@ -80,7 +85,8 @@ Map<String, dynamic> createResponseItemsRecordData({
         ..imageLink = imageLink
         ..unitPrice = unitPrice
         ..stock = stock
-        ..depot = depot,
+        ..depot = depot
+        ..depotName = depotName,
     ),
   );
 
