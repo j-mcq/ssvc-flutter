@@ -450,10 +450,15 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
                                       child: Container(
-                                        width: 500.0,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1.0,
                                         height: 500.0,
                                         child: custom_widgets.PolyMap(
-                                          width: 500.0,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              1.0,
                                           height: 500.0,
                                           location: currentUserLocationValue,
                                           isPolygon: _model.isPolygon,

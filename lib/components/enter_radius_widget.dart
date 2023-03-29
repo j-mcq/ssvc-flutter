@@ -47,7 +47,8 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
         child: Container(
-          width: double.infinity,
+          width: 400.0,
+          height: 250.0,
           constraints: BoxConstraints(
             maxWidth: 570.0,
           ),
