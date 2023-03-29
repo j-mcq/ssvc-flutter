@@ -24,6 +24,10 @@ abstract class ResponseItemsRecord
   @BuiltValueField(wireName: 'unit_price')
   double? get unitPrice;
 
+  double? get stock;
+
+  DocumentReference? get depot;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -32,7 +36,8 @@ abstract class ResponseItemsRecord
     ..name = ''
     ..description = ''
     ..imageLink = ''
-    ..unitPrice = 0.0;
+    ..unitPrice = 0.0
+    ..stock = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('response_items');
@@ -62,6 +67,8 @@ Map<String, dynamic> createResponseItemsRecordData({
   DateTime? dateAdded,
   String? imageLink,
   double? unitPrice,
+  double? stock,
+  DocumentReference? depot,
 }) {
   final firestoreData = serializers.toFirestore(
     ResponseItemsRecord.serializer,
@@ -71,7 +78,9 @@ Map<String, dynamic> createResponseItemsRecordData({
         ..description = description
         ..dateAdded = dateAdded
         ..imageLink = imageLink
-        ..unitPrice = unitPrice,
+        ..unitPrice = unitPrice
+        ..stock = stock
+        ..depot = depot,
     ),
   );
 

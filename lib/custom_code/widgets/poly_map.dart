@@ -7,12 +7,14 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:location/location.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../flutter_flow/flutter_flow_theme.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart' as gmf;
 import 'dart:collection';
 
 class PolyMap extends StatefulWidget {
-  const PolyMap({
+  //PolyMap({Key key}) : super(key: key);
+
+  PolyMap({
     Key? key,
     this.width,
     this.height,
@@ -31,12 +33,12 @@ class _PolyMapState extends State<PolyMap> {
   // Location
 
   // Maps
-  Set<Marker> _markers = HashSet<Marker>();
-  Set<Polygon> _polygons = HashSet<Polygon>();
-  Set<Circle> _circles = HashSet<Circle>();
-  late GoogleMapController _googleMapController;
-  late BitmapDescriptor _markerIcon;
-  List<LatLng> polygonLatLngs = <LatLng>[];
+  Set<gmf.Marker> _markers = HashSet<gmf.Marker>();
+  Set<gmf.Polygon> _polygons = HashSet<gmf.Polygon>();
+  Set<gmf.Circle> _circles = HashSet<gmf.Circle>();
+  late gmf.GoogleMapController _googleMapController;
+  late gmf.BitmapDescriptor _markerIcon;
+  List<gmf.LatLng> polygonLatLngs = <gmf.LatLng>[];
   late double radius;
 
   //ids
@@ -56,15 +58,15 @@ class _PolyMapState extends State<PolyMap> {
 
   // This function is to change the marker icon
   void _setMarkerIcon() async {
-    _markerIcon = await BitmapDescriptor.fromAssetImage(
+    _markerIcon = await gmf.BitmapDescriptor.fromAssetImage(
         ImageConfiguration(), 'assets/farm.png');
   }
 
   // Draw Polygon to the map
   void _setPolygon() {
     final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
-    _polygons.add(Polygon(
-      polygonId: PolygonId(polygonIdVal),
+    _polygons.add(gmf.Polygon(
+      polygonId: gmf.PolygonId(polygonIdVal),
       points: polygonLatLngs,
       strokeWidth: 2,
       strokeColor: Colors.yellow,
@@ -73,13 +75,13 @@ class _PolyMapState extends State<PolyMap> {
   }
 
   // Set circles as points to the map
-  void _setCircles(LatLng point) {
+  void _setCircles(gmf.LatLng point) {
     final String circleIdVal = 'circle_id_$_circleIdCounter';
     _circleIdCounter++;
     print(
         'Circle | Latitude: ${point.latitude}  Longitude: ${point.longitude}  Radius: $radius');
-    _circles.add(Circle(
-        circleId: CircleId(circleIdVal),
+    _circles.add(gmf.Circle(
+        circleId: gmf.CircleId(circleIdVal),
         center: point,
         radius: radius,
         fillColor: Colors.redAccent.withOpacity(0.5),
@@ -88,15 +90,15 @@ class _PolyMapState extends State<PolyMap> {
   }
 
   // Set Markers to the map
-  void _setMarkers(LatLng point) {
+  void _setMarkers(gmf.LatLng point) {
     final String markerIdVal = 'marker_id_$_markerIdCounter';
     _markerIdCounter++;
     setState(() {
       print(
           'Marker | Latitude: ${point.latitude}  Longitude: ${point.longitude}');
       _markers.add(
-        Marker(
-          markerId: MarkerId(markerIdVal),
+        gmf.Marker(
+          markerId: gmf.MarkerId(markerIdVal),
           position: point,
         ),
       );
@@ -104,16 +106,18 @@ class _PolyMapState extends State<PolyMap> {
   }
 
   // Start the map with this marker setted up
-  void _onMapCreated(GoogleMapController controller) {
+  void _onMapCreated(gmf.GoogleMapController controller) {
     _googleMapController = controller;
 
     setState(() {
       _markers.add(
-        Marker(
-          markerId: MarkerId('0'),
-          position: LatLng(-20.131886, -47.484488),
-          infoWindow:
-              InfoWindow(title: 'Roça', snippet: 'Um bom lugar para estar'),
+        gmf.Marker(
+          markerId: gmf.MarkerId('0'),
+          position:
+              gmf.LatLng(widget.location!.latitude, widget.location!.longitude),
+          infoWindow: gmf.InfoWindow(
+              title: 'Outage Loaction',
+              snippet: 'Center of the outage location'),
           //icon: _markerIcon,
         ),
       );
@@ -137,22 +141,17 @@ class _PolyMapState extends State<PolyMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Studying Maps - Zeh'),
-          centerTitle: true,
-          backgroundColor: Colors.grey[900],
-        ),
         floatingActionButton:
             polygonLatLngs.length > 0 && _isPolygon ? _fabPolygon() : null,
         body: Stack(
           children: <Widget>[
-            GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: LatLng(
+            gmf.GoogleMap(
+              initialCameraPosition: gmf.CameraPosition(
+                target: gmf.LatLng(
                     widget.location!.latitude, widget.location!.longitude),
                 zoom: 16,
               ),
-              mapType: MapType.hybrid,
+              mapType: gmf.MapType.hybrid,
               markers: _markers,
               circles: _circles,
               polygons: _polygons,
@@ -180,155 +179,81 @@ class _PolyMapState extends State<PolyMap> {
               alignment: Alignment.bottomCenter,
               child: Row(
                 children: <Widget>[
-                  FFButtonWidget(
-                    onPressed: () {
-                      _isPolygon = true;
-                      _isMarker = false;
-                      _isCircle = false;
-                    },
-                    text: 'Polygon',
-                    icon: Icon(
-                      Icons.add_rounded,
-                      size: 15.0,
-                    ),
-                    options: FFButtonOptions(
-                      width: 150.0,
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .subtitle2
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).subtitle2Family,
-                            color: Colors.white,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).subtitle2Family),
-                          ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                  ),
-                  FFButtonWidget(
-                    onPressed: () {
-                      _isPolygon = false;
-                      _isMarker = true;
-                      _isCircle = false;
-                    },
-                    text: 'Marker',
-                    icon: Icon(
-                      Icons.add_rounded,
-                      size: 15.0,
-                    ),
-                    options: FFButtonOptions(
-                      width: 150.0,
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .subtitle2
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).subtitle2Family,
-                            color: Colors.white,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).subtitle2Family),
-                          ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                  ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              backgroundColor: Colors.grey[900],
-                              title: Text(
-                                'Choose the radius (m)',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              content: Padding(
-                                  padding: EdgeInsets.all(8),
-                                  child: Material(
-                                    color: Colors.black,
-                                    child: TextField(
-                                      style: TextStyle(
-                                          fontSize: 16, color: Colors.white),
-                                      decoration: InputDecoration(
-                                        icon: Icon(Icons.zoom_out_map),
-                                        hintText: 'Ex: 100',
-                                        suffixText: 'meters',
-                                      ),
-                                      keyboardType:
-                                          TextInputType.numberWithOptions(),
-                                      onChanged: (input) {
-                                        setState(() {
-                                          radius = double.parse(input);
-                                        });
-                                      },
-                                    ),
-                                  )),
-                              actions: [
-                                TextButton(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: Text(
-                                      'Ok',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                  ElevatedButton(
+                      onPressed: () {
+                        _isPolygon = true;
+                        _isMarker = false;
+                        _isCircle = false;
+                      },
+                      child: Text(
+                        'Polygon',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      )),
+                  ElevatedButton(
+                      onPressed: () {
+                        _isPolygon = false;
+                        _isMarker = true;
+                        _isCircle = false;
+                      },
+                      child: Text('Marker',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white))),
+                  ElevatedButton(
+                      onPressed: () async {
+                        _isPolygon = false;
+                        _isMarker = false;
+                        _isCircle = true;
+                        radius = 50;
+                        await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                backgroundColor: Colors.grey[900],
+                                title: Text(
+                                  'Enter the impact radius (m)',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                content: Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Material(
+                                      color: Colors.black,
+                                      child: TextField(
+                                        style: TextStyle(
+                                            fontSize: 16, color: Colors.white),
+                                        decoration: InputDecoration(
+                                          hintText: 'Ex: 100',
+                                          suffixText: 'meters',
+                                        ),
+                                        keyboardType:
+                                            TextInputType.numberWithOptions(),
+                                        onChanged: (input) {
+                                          setState(() {
+                                            radius = double.parse(input);
+                                          });
+                                        },
                                       ),
                                     )),
-                              ],
-                            );
-                          });
-                    },
-                    text: 'Circle',
-                    icon: Icon(
-                      Icons.add_rounded,
-                      size: 15.0,
-                    ),
-                    options: FFButtonOptions(
-                      width: 150.0,
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .subtitle2
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).subtitle2Family,
-                            color: Colors.white,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).subtitle2Family),
-                          ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                  ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text(
+                                        'Ok',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )),
+                                ],
+                              );
+                            });
+                      },
+                      child: Text('Circle',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white))),
                 ],
               ),
             )

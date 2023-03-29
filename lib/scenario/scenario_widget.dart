@@ -1,7 +1,4 @@
-import '/backend/backend.dart';
 import '/components/side_bar_nav_widget.dart';
-import '/flutter_flow/flutter_flow_charts.dart';
-import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -68,7 +65,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      resizeToAvoidBottomInset: false,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
@@ -361,33 +357,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  width: double.infinity,
-                                  height: 500.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                  ),
-                                  child: FlutterFlowGoogleMap(
-                                    controller: _model.googleMapsController,
-                                    onCameraIdle: (latLng) =>
-                                        _model.googleMapsCenter = latLng,
-                                    initialLocation: _model.googleMapsCenter ??=
-                                        LatLng(13.106061, -59.613158),
-                                    markerColor: GoogleMarkerColor.violet,
-                                    mapType: MapType.normal,
-                                    style: GoogleMapStyle.standard,
-                                    initialZoom: 14.0,
-                                    allowInteraction: true,
-                                    allowZoom: true,
-                                    showZoomControls: true,
-                                    showLocation: true,
-                                    showCompass: false,
-                                    showMapToolbar: false,
-                                    showTraffic: false,
-                                    centerMapOnMarkerTap: true,
-                                  ),
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 1.0, 0.0, 0.0),
@@ -453,90 +422,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               ),
                                             ],
                                           ),
-                                        ),
-                                        StreamBuilder<
-                                            List<ScenarioResultsRecord>>(
-                                          stream: queryScenarioResultsRecord(
-                                            queryBuilder:
-                                                (scenarioResultsRecord) =>
-                                                    scenarioResultsRecord.where(
-                                                        'scenario',
-                                                        isEqualTo: widget
-                                                            .scenarioReference),
-                                          ),
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 50.0,
-                                                  height: 50.0,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                            List<ScenarioResultsRecord>
-                                                chartScenarioResultsRecordList =
-                                                snapshot.data!;
-                                            return Container(
-                                              width: double.infinity,
-                                              height: 400.0,
-                                              child: FlutterFlowBarChart(
-                                                barData: [
-                                                  FFBarChartData(
-                                                    yData:
-                                                        chartScenarioResultsRecordList
-                                                            .map((d) => d
-                                                                .numberRequired)
-                                                            .toList(),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .tertiaryColor,
-                                                  )
-                                                ],
-                                                xLabels:
-                                                    chartScenarioResultsRecordList
-                                                        .map((d) =>
-                                                            d.responseItemName)
-                                                        .toList(),
-                                                barWidth: 100.0,
-                                                barBorderRadius:
-                                                    BorderRadius.circular(0.0),
-                                                groupSpace: 15.0,
-                                                alignment: BarChartAlignment
-                                                    .spaceEvenly,
-                                                chartStylingInfo:
-                                                    ChartStylingInfo(
-                                                  enableTooltip: true,
-                                                  backgroundColor: Colors.white,
-                                                  showGrid: true,
-                                                  showBorder: false,
-                                                ),
-                                                axisBounds: AxisBounds(),
-                                                xAxisLabelInfo: AxisLabelInfo(
-                                                  title: 'Item',
-                                                  titleTextStyle: TextStyle(
-                                                    fontSize: 14.0,
-                                                  ),
-                                                  showLabels: true,
-                                                  labelInterval: 10.0,
-                                                ),
-                                                yAxisLabelInfo: AxisLabelInfo(
-                                                  title: 'Number Required',
-                                                  titleTextStyle: TextStyle(
-                                                    fontSize: 14.0,
-                                                  ),
-                                                  showLabels: true,
-                                                  labelInterval: 10.0,
-                                                ),
-                                              ),
-                                            );
-                                          },
                                         ),
                                       ],
                                     ),

@@ -60,6 +60,21 @@ class _$ResponseItemsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.stock;
+    if (value != null) {
+      result
+        ..add('stock')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.depot;
+    if (value != null) {
+      result
+        ..add('depot')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -103,6 +118,16 @@ class _$ResponseItemsRecordSerializer
           result.unitPrice = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
+        case 'stock':
+          result.stock = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'depot':
+          result.depot = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -128,6 +153,10 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
   @override
   final double? unitPrice;
   @override
+  final double? stock;
+  @override
+  final DocumentReference<Object?>? depot;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ResponseItemsRecord(
@@ -140,6 +169,8 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
       this.dateAdded,
       this.imageLink,
       this.unitPrice,
+      this.stock,
+      this.depot,
       this.ffRef})
       : super._();
 
@@ -161,6 +192,8 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
         dateAdded == other.dateAdded &&
         imageLink == other.imageLink &&
         unitPrice == other.unitPrice &&
+        stock == other.stock &&
+        depot == other.depot &&
         ffRef == other.ffRef;
   }
 
@@ -172,6 +205,8 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
     _$hash = $jc(_$hash, dateAdded.hashCode);
     _$hash = $jc(_$hash, imageLink.hashCode);
     _$hash = $jc(_$hash, unitPrice.hashCode);
+    _$hash = $jc(_$hash, stock.hashCode);
+    _$hash = $jc(_$hash, depot.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -185,6 +220,8 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
           ..add('dateAdded', dateAdded)
           ..add('imageLink', imageLink)
           ..add('unitPrice', unitPrice)
+          ..add('stock', stock)
+          ..add('depot', depot)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -214,6 +251,14 @@ class ResponseItemsRecordBuilder
   double? get unitPrice => _$this._unitPrice;
   set unitPrice(double? unitPrice) => _$this._unitPrice = unitPrice;
 
+  double? _stock;
+  double? get stock => _$this._stock;
+  set stock(double? stock) => _$this._stock = stock;
+
+  DocumentReference<Object?>? _depot;
+  DocumentReference<Object?>? get depot => _$this._depot;
+  set depot(DocumentReference<Object?>? depot) => _$this._depot = depot;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -230,6 +275,8 @@ class ResponseItemsRecordBuilder
       _dateAdded = $v.dateAdded;
       _imageLink = $v.imageLink;
       _unitPrice = $v.unitPrice;
+      _stock = $v.stock;
+      _depot = $v.depot;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -258,6 +305,8 @@ class ResponseItemsRecordBuilder
             dateAdded: dateAdded,
             imageLink: imageLink,
             unitPrice: unitPrice,
+            stock: stock,
+            depot: depot,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

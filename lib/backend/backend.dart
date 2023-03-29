@@ -9,6 +9,7 @@ import 'schema/users_record.dart';
 import 'schema/response_items_record.dart';
 import 'schema/scenario_record.dart';
 import 'schema/scenario_results_record.dart';
+import 'schema/depot_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -20,6 +21,7 @@ export 'schema/users_record.dart';
 export 'schema/response_items_record.dart';
 export 'schema/scenario_record.dart';
 export 'schema/scenario_results_record.dart';
+export 'schema/depot_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -223,6 +225,58 @@ Future<FFFirestorePage<ScenarioResultsRecord>> queryScenarioResultsRecordPage({
     queryCollectionPage(
       ScenarioResultsRecord.collection,
       ScenarioResultsRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query DepotRecords (as a Stream and as a Future).
+Future<int> queryDepotRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DepotRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<DepotRecord>> queryDepotRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DepotRecord.collection,
+      DepotRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DepotRecord>> queryDepotRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DepotRecord.collection,
+      DepotRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<DepotRecord>> queryDepotRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      DepotRecord.collection,
+      DepotRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

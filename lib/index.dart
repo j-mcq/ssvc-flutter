@@ -7,5 +7,8 @@ export '/forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export '/phone_verify/phone_verify_widget.dart' show PhoneVerifyWidget;
 export '/home_page/home_page_widget.dart' show HomePageWidget;
 export '/scenario/scenario_widget.dart' show ScenarioWidget;
-export '/profile_page/profile_page_widget.dart' show ProfilePageWidget;
+export '/stock_information/stock_information_widget.dart'
+    show StockInformationWidget;
 export '/scenario_copy/scenario_copy_widget.dart' show ScenarioCopyWidget;
+export '/stock_item_details/stock_item_details_widget.dart'
+    show StockItemDetailsWidget;

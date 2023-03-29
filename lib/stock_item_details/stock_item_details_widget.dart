@@ -2,25 +2,24 @@ import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'profile_page_model.dart';
-export 'profile_page_model.dart';
+import 'stock_item_details_model.dart';
+export 'stock_item_details_model.dart';
 
-class ProfilePageWidget extends StatefulWidget {
-  const ProfilePageWidget({Key? key}) : super(key: key);
+class StockItemDetailsWidget extends StatefulWidget {
+  const StockItemDetailsWidget({Key? key}) : super(key: key);
 
   @override
-  _ProfilePageWidgetState createState() => _ProfilePageWidgetState();
+  _StockItemDetailsWidgetState createState() => _StockItemDetailsWidgetState();
 }
 
-class _ProfilePageWidgetState extends State<ProfilePageWidget>
+class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
     with TickerProviderStateMixin {
-  late ProfilePageModel _model;
+  late StockItemDetailsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -58,7 +57,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProfilePageModel());
+    _model = createModel(context, () => StockItemDetailsModel());
 
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -199,7 +198,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'Your Courses',
+                                              'Stock Item Detais',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .title3,
@@ -215,51 +214,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                               ),
                                             ),
                                           ],
-                                        ),
-                                        FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
-                                          },
-                                          text: 'Add Course',
-                                          icon: Icon(
-                                            Icons.add_rounded,
-                                            size: 15.0,
-                                          ),
-                                          options: FFButtonOptions(
-                                            width: 150.0,
-                                            height: 40.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2Family,
-                                                      color: Colors.white,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .subtitle2Family),
-                                                    ),
-                                            elevation: 3.0,
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(50.0),
-                                          ),
                                         ),
                                       ],
                                     ),
@@ -287,14 +241,14 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                           setDarkModeSetting(
                                               context, ThemeMode.dark);
                                           if (animationsMap[
-                                                  'containerOnActionTriggerAnimation2'] !=
+                                                  'containerOnActionTriggerAnimation'] !=
                                               null) {
                                             setState(() =>
-                                                hasContainerTriggered2 = true);
+                                                hasContainerTriggered = true);
                                             SchedulerBinding.instance
                                                 .addPostFrameCallback((_) async =>
                                                     await animationsMap[
-                                                            'containerOnActionTriggerAnimation2']!
+                                                            'containerOnActionTriggerAnimation']!
                                                         .controller
                                                         .forward(from: 0.0));
                                           }
@@ -424,18 +378,6 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                         onTap: () async {
                                           setDarkModeSetting(
                                               context, ThemeMode.light);
-                                          if (animationsMap[
-                                                  'containerOnActionTriggerAnimation1'] !=
-                                              null) {
-                                            setState(() =>
-                                                hasContainerTriggered1 = true);
-                                            SchedulerBinding.instance
-                                                .addPostFrameCallback((_) async =>
-                                                    await animationsMap[
-                                                            'containerOnActionTriggerAnimation1']!
-                                                        .controller
-                                                        .forward(from: 0.0));
-                                          }
                                         },
                                         child: Container(
                                           width: MediaQuery.of(context)

@@ -121,8 +121,9 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'homePage': HomePageWidget(),
       'scenario': ScenarioWidget(),
-      'profilePage': ProfilePageWidget(),
+      'stockInformation': StockInformationWidget(),
       'scenarioCopy': ScenarioCopyWidget(),
+      'stockItemDetails': StockItemDetailsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
@@ -173,6 +174,14 @@ class _NavBarPageState extends State<NavBarPage> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.school_outlined,
+                size: 24.0,
+              ),
+              label: '•',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle_outlined,
                 size: 24.0,
               ),
               label: '•',

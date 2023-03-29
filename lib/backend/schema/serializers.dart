@@ -5,6 +5,7 @@ import 'users_record.dart';
 import 'response_items_record.dart';
 import 'scenario_record.dart';
 import 'scenario_results_record.dart';
+import 'depot_record.dart';
 
 import 'index.dart';
 
@@ -19,6 +20,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   ResponseItemsRecord,
   ScenarioRecord,
   ScenarioResultsRecord,
+  DepotRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

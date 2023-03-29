@@ -175,7 +175,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
               child: InkWell(
                 onTap: () async {
                   context.pushNamed(
-                    'profilePage',
+                    'stockInformation',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,

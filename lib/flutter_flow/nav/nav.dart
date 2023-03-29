@@ -125,11 +125,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
             ),
             FFRoute(
-              name: 'profilePage',
-              path: 'profilePage',
+              name: 'stockInformation',
+              path: 'stockInformation',
               builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'profilePage')
-                  : ProfilePageWidget(),
+                  ? NavBarPage(initialPage: 'stockInformation')
+                  : StockInformationWidget(),
             ),
             FFRoute(
               name: 'scenarioCopy',
@@ -137,6 +137,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'scenarioCopy')
                   : ScenarioCopyWidget(),
+            ),
+            FFRoute(
+              name: 'stockItemDetails',
+              path: 'stockItemDetails',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'stockItemDetails')
+                  : StockItemDetailsWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
