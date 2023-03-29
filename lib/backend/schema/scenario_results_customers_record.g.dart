@@ -55,6 +55,12 @@ class _$ScenarioResultsCustomersRecordSerializer
         ..add('number_impacted')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.numberRespondedTo;
+    if (value != null) {
+      result
+        ..add('number_responded_to')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -98,6 +104,10 @@ class _$ScenarioResultsCustomersRecordSerializer
           result.numberImpacted = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'number_responded_to':
+          result.numberRespondedTo = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -121,6 +131,8 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
   @override
   final int? numberImpacted;
   @override
+  final int? numberRespondedTo;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ScenarioResultsCustomersRecord(
@@ -132,6 +144,7 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
       this.psrGroupName,
       this.psrGroup,
       this.numberImpacted,
+      this.numberRespondedTo,
       this.ffRef})
       : super._();
 
@@ -152,6 +165,7 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
         psrGroupName == other.psrGroupName &&
         psrGroup == other.psrGroup &&
         numberImpacted == other.numberImpacted &&
+        numberRespondedTo == other.numberRespondedTo &&
         ffRef == other.ffRef;
   }
 
@@ -162,6 +176,7 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
     _$hash = $jc(_$hash, psrGroupName.hashCode);
     _$hash = $jc(_$hash, psrGroup.hashCode);
     _$hash = $jc(_$hash, numberImpacted.hashCode);
+    _$hash = $jc(_$hash, numberRespondedTo.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -174,6 +189,7 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
           ..add('psrGroupName', psrGroupName)
           ..add('psrGroup', psrGroup)
           ..add('numberImpacted', numberImpacted)
+          ..add('numberRespondedTo', numberRespondedTo)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -204,6 +220,11 @@ class ScenarioResultsCustomersRecordBuilder
   set numberImpacted(int? numberImpacted) =>
       _$this._numberImpacted = numberImpacted;
 
+  int? _numberRespondedTo;
+  int? get numberRespondedTo => _$this._numberRespondedTo;
+  set numberRespondedTo(int? numberRespondedTo) =>
+      _$this._numberRespondedTo = numberRespondedTo;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -219,6 +240,7 @@ class ScenarioResultsCustomersRecordBuilder
       _psrGroupName = $v.psrGroupName;
       _psrGroup = $v.psrGroup;
       _numberImpacted = $v.numberImpacted;
+      _numberRespondedTo = $v.numberRespondedTo;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -246,6 +268,7 @@ class ScenarioResultsCustomersRecordBuilder
             psrGroupName: psrGroupName,
             psrGroup: psrGroup,
             numberImpacted: numberImpacted,
+            numberRespondedTo: numberRespondedTo,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

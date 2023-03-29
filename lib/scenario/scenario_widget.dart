@@ -756,80 +756,130 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   return Container(
                                                     width: 300.0,
                                                     height: 300.0,
-                                                    child: FlutterFlowBarChart(
-                                                      barData: [
-                                                        FFBarChartData(
-                                                          yData: chartScenarioResultsCustomersRecordList
-                                                              .where((e) =>
-                                                                  e != null)
-                                                              .toList()
-                                                              .map((d) => d
-                                                                  .numberImpacted)
-                                                              .toList(),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryColor,
+                                                    child: Stack(
+                                                      children: [
+                                                        FlutterFlowBarChart(
+                                                          barData: [
+                                                            FFBarChartData(
+                                                              yData: chartScenarioResultsCustomersRecordList
+                                                                  .where((e) =>
+                                                                      e != null)
+                                                                  .toList()
+                                                                  .map((d) => d
+                                                                      .numberImpacted)
+                                                                  .toList(),
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryColor,
+                                                            ),
+                                                            FFBarChartData(
+                                                              yData: chartScenarioResultsCustomersRecordList
+                                                                  .map((d) => d
+                                                                      .numberRespondedTo)
+                                                                  .toList(),
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryColor,
+                                                            )
+                                                          ],
+                                                          xLabels:
+                                                              chartScenarioResultsCustomersRecordList
+                                                                  .where((e) =>
+                                                                      e != null)
+                                                                  .toList()
+                                                                  .map((d) => d
+                                                                      .psrGroupName!)
+                                                                  .toList(),
+                                                          barWidth: 55.0,
+                                                          barBorderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      0.0),
+                                                          barSpace: 0.0,
+                                                          groupSpace: 5.0,
+                                                          alignment:
+                                                              BarChartAlignment
+                                                                  .spaceEvenly,
+                                                          chartStylingInfo:
+                                                              ChartStylingInfo(
+                                                            enableTooltip: true,
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            showGrid: true,
+                                                            borderColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .lineColor,
+                                                            borderWidth: 1.0,
+                                                          ),
+                                                          axisBounds:
+                                                              AxisBounds(),
+                                                          xAxisLabelInfo:
+                                                              AxisLabelInfo(
+                                                            title:
+                                                                'Response Item',
+                                                            titleTextStyle:
+                                                                TextStyle(
+                                                              fontSize: 14.0,
+                                                            ),
+                                                            showLabels: true,
+                                                            labelInterval: 10.0,
+                                                          ),
+                                                          yAxisLabelInfo:
+                                                              AxisLabelInfo(
+                                                            title:
+                                                                'Items Number',
+                                                            titleTextStyle:
+                                                                TextStyle(
+                                                              fontSize: 14.0,
+                                                            ),
+                                                            showLabels: true,
+                                                            labelInterval: 10.0,
+                                                          ),
                                                         ),
-                                                        FFBarChartData(
-                                                          yData: chartScenarioResultsCustomersRecordList
-                                                              .map((d) => d
-                                                                  .numberRespondedTo)
-                                                              .toList(),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryColor,
-                                                        )
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  -0.9, -0.9),
+                                                          child:
+                                                              FlutterFlowChartLegendWidget(
+                                                            entries: [
+                                                              LegendEntry(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                                  'Required'),
+                                                              LegendEntry(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryColor,
+                                                                  'In Stock'),
+                                                            ],
+                                                            width: 100.0,
+                                                            height: 50.0,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1,
+                                                            textPadding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5.0,
+                                                                        0.0,
+                                                                        5.0,
+                                                                        0.0),
+                                                            borderWidth: 1.0,
+                                                            indicatorSize: 10.0,
+                                                          ),
+                                                        ),
                                                       ],
-                                                      xLabels:
-                                                          chartScenarioResultsCustomersRecordList
-                                                              .where((e) =>
-                                                                  e != null)
-                                                              .toList()
-                                                              .map((d) => d
-                                                                  .psrGroupName!)
-                                                              .toList(),
-                                                      barWidth: 55.0,
-                                                      barBorderRadius:
-                                                          BorderRadius.circular(
-                                                              0.0),
-                                                      barSpace: 0.0,
-                                                      groupSpace: 5.0,
-                                                      alignment:
-                                                          BarChartAlignment
-                                                              .spaceEvenly,
-                                                      chartStylingInfo:
-                                                          ChartStylingInfo(
-                                                        enableTooltip: true,
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        showGrid: true,
-                                                        borderColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .lineColor,
-                                                        borderWidth: 1.0,
-                                                      ),
-                                                      axisBounds: AxisBounds(),
-                                                      xAxisLabelInfo:
-                                                          AxisLabelInfo(
-                                                        title: 'Response Item',
-                                                        titleTextStyle:
-                                                            TextStyle(
-                                                          fontSize: 14.0,
-                                                        ),
-                                                        showLabels: true,
-                                                        labelInterval: 10.0,
-                                                      ),
-                                                      yAxisLabelInfo:
-                                                          AxisLabelInfo(
-                                                        title: 'Items Number',
-                                                        titleTextStyle:
-                                                            TextStyle(
-                                                          fontSize: 14.0,
-                                                        ),
-                                                        showLabels: true,
-                                                        labelInterval: 10.0,
-                                                      ),
                                                     ),
                                                   );
                                                 },
