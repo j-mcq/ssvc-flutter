@@ -13,6 +13,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ScenarioRecord.serializer)
       ..add(ScenarioResultsCustomersRecord.serializer)
       ..add(ScenarioResultsRecord.serializer)
+      ..add(StockDepotMappingRecord.serializer)
       ..add(UsersRecord.serializer))
     .build();
 

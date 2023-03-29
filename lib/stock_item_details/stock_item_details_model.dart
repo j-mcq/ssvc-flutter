@@ -38,9 +38,6 @@ class StockItemDetailsModel extends FlutterFlowModel {
   // State field(s) for itemName widget.
   TextEditingController? itemNameController2;
   String? Function(BuildContext, String?)? itemNameController2Validator;
-  // State field(s) for itemName widget.
-  TextEditingController? itemNameController3;
-  String? Function(BuildContext, String?)? itemNameController3Validator;
 
   /// Initialization and disposal methods.
 
@@ -53,7 +50,6 @@ class StockItemDetailsModel extends FlutterFlowModel {
     itemNameController1?.dispose();
     myBioController?.dispose();
     itemNameController2?.dispose();
-    itemNameController3?.dispose();
   }
 
   /// Additional helper methods are added here.

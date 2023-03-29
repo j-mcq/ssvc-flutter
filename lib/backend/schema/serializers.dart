@@ -8,6 +8,7 @@ import 'scenario_results_record.dart';
 import 'depot_record.dart';
 import 'scenario_results_customers_record.dart';
 import 'psr_groups_record.dart';
+import 'stock_depot_mapping_record.dart';
 
 import 'index.dart';
 
@@ -25,6 +26,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   DepotRecord,
   ScenarioResultsCustomersRecord,
   PsrGroupsRecord,
+  StockDepotMappingRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

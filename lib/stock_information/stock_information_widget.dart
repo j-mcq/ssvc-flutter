@@ -648,10 +648,17 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                             MainAxisAlignment
                                                                 .end,
                                                         children: [
-                                                          Icon(
-                                                            Icons.edit,
-                                                            color: Colors.black,
-                                                            size: 24.0,
+                                                          InkWell(
+                                                            onTap: () async {
+                                                              context.pushNamed(
+                                                                  'stockItemDetails');
+                                                            },
+                                                            child: Icon(
+                                                              Icons.edit,
+                                                              color:
+                                                                  Colors.black,
+                                                              size: 24.0,
+                                                            ),
                                                           ),
                                                         ],
                                                       ),

@@ -12,6 +12,7 @@ import 'schema/scenario_results_record.dart';
 import 'schema/depot_record.dart';
 import 'schema/scenario_results_customers_record.dart';
 import 'schema/psr_groups_record.dart';
+import 'schema/stock_depot_mapping_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -26,6 +27,7 @@ export 'schema/scenario_results_record.dart';
 export 'schema/depot_record.dart';
 export 'schema/scenario_results_customers_record.dart';
 export 'schema/psr_groups_record.dart';
+export 'schema/stock_depot_mapping_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -393,6 +395,59 @@ Future<FFFirestorePage<PsrGroupsRecord>> queryPsrGroupsRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
+
+/// Functions to query StockDepotMappingRecords (as a Stream and as a Future).
+Future<int> queryStockDepotMappingRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      StockDepotMappingRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<StockDepotMappingRecord>> queryStockDepotMappingRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      StockDepotMappingRecord.collection,
+      StockDepotMappingRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<StockDepotMappingRecord>> queryStockDepotMappingRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      StockDepotMappingRecord.collection,
+      StockDepotMappingRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<StockDepotMappingRecord>>
+    queryStockDepotMappingRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          StockDepotMappingRecord.collection,
+          StockDepotMappingRecord.serializer,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
 
 Future<int> queryCollectionCount(
   Query collection, {

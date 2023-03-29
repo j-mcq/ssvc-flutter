@@ -56,7 +56,6 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
     _model.itemNameController1 ??= TextEditingController();
     _model.myBioController ??= TextEditingController();
     _model.itemNameController2 ??= TextEditingController();
-    _model.itemNameController3 ??= TextEditingController();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -471,7 +470,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                       controller: _model.itemNameController1,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Item Name',
+                                        labelText: 'Bluetti AC50s',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .bodyText2,
                                         hintStyle: FlutterFlowTheme.of(context)
@@ -675,65 +674,6 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                       controller: _model.itemNameController2,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Number in Stock',
-                                        labelStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
-                                        hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            width: 2.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 2.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 2.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0x00000000),
-                                            width: 2.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
-                                        ),
-                                        filled: true,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        contentPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                20.0, 24.0, 0.0, 24.0),
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
-                                      validator: _model
-                                          .itemNameController2Validator
-                                          .asValidator(context),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 0.0, 20.0, 16.0),
-                                    child: TextFormField(
-                                      controller: _model.itemNameController3,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
                                         labelText: 'Unit Price',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .bodyText2,
@@ -782,7 +722,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1,
                                       validator: _model
-                                          .itemNameController3Validator
+                                          .itemNameController2Validator
                                           .asValidator(context),
                                     ),
                                   ),
@@ -901,8 +841,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: StreamBuilder<
-                                              List<ResponseItemsRecord>>(
-                                            stream: queryResponseItemsRecord(),
+                                              List<StockDepotMappingRecord>>(
+                                            stream:
+                                                queryStockDepotMappingRecord(),
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
                                               if (!snapshot.hasData) {
@@ -920,20 +861,20 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                   ),
                                                 );
                                               }
-                                              List<ResponseItemsRecord>
-                                                  listViewResponseItemsRecordList =
+                                              List<StockDepotMappingRecord>
+                                                  listViewStockDepotMappingRecordList =
                                                   snapshot.data!;
                                               return ListView.builder(
                                                 padding: EdgeInsets.zero,
                                                 shrinkWrap: true,
                                                 scrollDirection: Axis.vertical,
                                                 itemCount:
-                                                    listViewResponseItemsRecordList
+                                                    listViewStockDepotMappingRecordList
                                                         .length,
                                                 itemBuilder:
                                                     (context, listViewIndex) {
-                                                  final listViewResponseItemsRecord =
-                                                      listViewResponseItemsRecordList[
+                                                  final listViewStockDepotMappingRecord =
+                                                      listViewStockDepotMappingRecordList[
                                                           listViewIndex];
                                                   return Padding(
                                                     padding:
@@ -985,8 +926,8 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                                             .start,
                                                                     children: [
                                                                       AutoSizeText(
-                                                                        listViewResponseItemsRecord
-                                                                            .name!
+                                                                        listViewStockDepotMappingRecord
+                                                                            .depotName!
                                                                             .maybeHandleOverflow(
                                                                           maxChars:
                                                                               32,
@@ -1029,7 +970,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                               Expanded(
                                                                 flex: 1,
                                                                 child: Text(
-                                                                  '10',
+                                                                  listViewStockDepotMappingRecord
+                                                                      .numberInStock!
+                                                                      .toString(),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1,
