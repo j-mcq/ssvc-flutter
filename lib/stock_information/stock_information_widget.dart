@@ -743,7 +743,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                           xLabels: chartResponseItemsRecordList
                                               .where((e) => e != null)
                                               .toList()
-                                              .map((d) => d.name)
+                                              .map((d) => d.name!)
                                               .toList(),
                                           barWidth: 55.0,
                                           barBorderRadius:
