@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
+import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
@@ -17,6 +18,9 @@ class ScenarioModel extends FlutterFlowModel {
   // State field(s) for itemName widget.
   TextEditingController? itemNameController;
   String? Function(BuildContext, String?)? itemNameControllerValidator;
+  // State field(s) for GoogleMap widget.
+  LatLng? googleMapsCenter;
+  final googleMapsController = Completer<GoogleMapController>();
 
   /// Initialization and disposal methods.
 
