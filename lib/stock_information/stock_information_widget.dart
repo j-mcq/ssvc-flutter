@@ -101,7 +101,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                   threeColor: FlutterFlowTheme.of(context).primaryBackground,
                   threeIcon: Icon(
                     Icons.account_circle_outlined,
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primary,
                   ),
                 ),
               ),
@@ -194,7 +194,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                               'Stock Information',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .title3,
+                                                      .headlineSmall,
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -203,7 +203,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                 '',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                             ),
                                           ],
@@ -227,22 +227,22 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
+                                                .primary,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .subtitle2
+                                                    .titleSmall
                                                     .override(
                                                       fontFamily:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .subtitle2Family,
+                                                              .titleSmallFamily,
                                                       color: Colors.white,
                                                       useGoogleFonts: GoogleFonts
                                                               .asMap()
                                                           .containsKey(
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .subtitle2Family),
+                                                                  .titleSmallFamily),
                                                     ),
                                             elevation: 3.0,
                                             borderSide: BorderSide(
@@ -301,7 +301,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                 'Switch to Light Mode',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                               Container(
                                                 width: 80.0,
@@ -427,7 +427,8 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       16.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     'Response Items',
-                                    style: FlutterFlowTheme.of(context).title3,
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineSmall,
                                   ),
                                 ),
                                 Padding(
@@ -455,7 +456,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       child: Text(
                                         '',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                       ),
                                     ),
                                   ),
@@ -469,7 +470,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       child: Text(
                                         'Depot',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                       ),
                                     ),
                                   if (responsiveVisibility(
@@ -482,7 +483,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       child: Text(
                                         'Number in stock',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                       ),
                                     ),
                                   Expanded(
@@ -491,7 +492,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       'Actions',
                                       textAlign: TextAlign.end,
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText2,
+                                          .bodySmall,
                                     ),
                                   ),
                                 ],
@@ -511,7 +512,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                         height: 50.0,
                                         child: CircularProgressIndicator(
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
+                                              .primary,
                                         ),
                                       ),
                                     );
@@ -576,7 +577,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .subtitle1,
+                                                                .titleMedium,
                                                           ),
                                                           if (responsiveVisibility(
                                                             context: context,
@@ -596,7 +597,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                 'user@domainname.com',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyText2,
+                                                                    .bodySmall,
                                                               ),
                                                             ),
                                                         ],
@@ -617,7 +618,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1,
+                                                              .bodyMedium,
                                                     ),
                                                   ),
                                                 if (responsiveVisibility(
@@ -633,7 +634,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1,
+                                                              .bodyMedium,
                                                     ),
                                                   ),
                                                 Expanded(
@@ -717,7 +718,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                             child: CircularProgressIndicator(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                                      .primary,
                                             ),
                                           ),
                                         );
@@ -739,7 +740,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       .toList(),
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                                      .primary,
                                             )
                                           ],
                                           xLabels: chartResponseItemsRecordList

@@ -68,7 +68,7 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
               ),
               title: Text(
                 'Confirm your Code',
-                style: FlutterFlowTheme.of(context).title3,
+                style: FlutterFlowTheme.of(context).headlineSmall,
               ),
               actions: [],
               centerTitle: false,
@@ -126,7 +126,7 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                             ),
                             Text(
                               'Confirm your Code',
-                              style: FlutterFlowTheme.of(context).title3,
+                              style: FlutterFlowTheme.of(context).headlineSmall,
                             ),
                           ],
                         ),
@@ -137,7 +137,7 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                       child: Text(
                         'This code helps keep your account safe and secure.',
                         textAlign: TextAlign.start,
-                        style: FlutterFlowTheme.of(context).bodyText2,
+                        style: FlutterFlowTheme.of(context).bodySmall,
                       ),
                     ),
                     Padding(
@@ -147,19 +147,20 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                         appContext: context,
                         length: 6,
                         textStyle: FlutterFlowTheme.of(context)
-                            .subtitle2
+                            .titleSmall
                             .override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).subtitle2Family,
-                              color: FlutterFlowTheme.of(context).primaryColor,
+                                  FlutterFlowTheme.of(context).titleSmallFamily,
+                              color: FlutterFlowTheme.of(context).primary,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).subtitle2Family),
+                                  FlutterFlowTheme.of(context)
+                                      .titleSmallFamily),
                             ),
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         enableActiveFill: false,
                         autoFocus: true,
                         showCursor: true,
-                        cursorColor: FlutterFlowTheme.of(context).primaryColor,
+                        cursorColor: FlutterFlowTheme.of(context).primary,
                         obscureText: false,
                         hintCharacter: '-',
                         pinTheme: PinTheme(
@@ -168,14 +169,12 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                           borderWidth: 2.0,
                           borderRadius: BorderRadius.circular(60.0),
                           shape: PinCodeFieldShape.box,
-                          activeColor:
-                              FlutterFlowTheme.of(context).primaryColor,
+                          activeColor: FlutterFlowTheme.of(context).primary,
                           inactiveColor:
                               FlutterFlowTheme.of(context).primaryBackground,
                           selectedColor:
                               FlutterFlowTheme.of(context).secondaryText,
-                          activeFillColor:
-                              FlutterFlowTheme.of(context).primaryColor,
+                          activeFillColor: FlutterFlowTheme.of(context).primary,
                           inactiveFillColor:
                               FlutterFlowTheme.of(context).primaryBackground,
                           selectedFillColor:
@@ -218,17 +217,17 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                          color: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
-                              .subtitle2
+                              .titleSmall
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .subtitle2Family,
+                                    .titleSmallFamily,
                                 color:
                                     FlutterFlowTheme.of(context).primaryBtnText,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .subtitle2Family),
+                                        .titleSmallFamily),
                               ),
                           elevation: 2.0,
                           borderSide: BorderSide(

@@ -116,7 +116,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   oneBG: FlutterFlowTheme.of(context).primaryBackground,
                   oneIcon: Icon(
                     Icons.bar_chart_rounded,
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primary,
                   ),
                   twoBG: FlutterFlowTheme.of(context).secondaryBackground,
                   twoIcon: Icon(
@@ -147,14 +147,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                         children: [
                           Text(
                             'Dashboard',
-                            style: FlutterFlowTheme.of(context).title3,
+                            style: FlutterFlowTheme.of(context).headlineSmall,
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 4.0, 0.0, 0.0),
                             child: Text(
                               '',
-                              style: FlutterFlowTheme.of(context).bodyText2,
+                              style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
                         ],
@@ -213,7 +213,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           Text(
                                             'Scenario Summary',
                                             style: FlutterFlowTheme.of(context)
-                                                .title3,
+                                                .headlineSmall,
                                           ),
                                           Padding(
                                             padding:
@@ -223,7 +223,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               'An overview of historic and current scenarios',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2,
+                                                      .bodySmall,
                                             ),
                                           ),
                                           Expanded(
@@ -272,7 +272,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               '66%',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1
+                                                                  .bodyMedium
                                                                   .override(
                                                                     fontFamily:
                                                                         'Outfit',
@@ -287,7 +287,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     useGoogleFonts: GoogleFonts
                                                                             .asMap()
                                                                         .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyText1Family),
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                   ),
                                                             ),
                                                           ),
@@ -306,7 +306,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                 .center,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText2,
+                                                                .bodySmall,
                                                           ),
                                                         ),
                                                       ],
@@ -336,7 +336,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             progressColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .tertiaryColor,
+                                                                    .tertiary,
                                                             backgroundColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
@@ -345,13 +345,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               '93%',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1
+                                                                  .bodyMedium
                                                                   .override(
                                                                     fontFamily:
                                                                         'Outfit',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .tertiaryColor,
+                                                                        .tertiary,
                                                                     fontSize:
                                                                         14.0,
                                                                     fontWeight:
@@ -360,7 +360,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     useGoogleFonts: GoogleFonts
                                                                             .asMap()
                                                                         .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyText1Family),
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                   ),
                                                             ),
                                                           ),
@@ -377,7 +377,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             'Percentage of user defined scenarios that are covered by the current stock levels',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText2,
+                                                                .bodySmall,
                                                           ),
                                                         ),
                                                       ],
@@ -417,7 +417,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                                      .primary,
                                               boxShadow: [
                                                 BoxShadow(
                                                   blurRadius: 0.0,
@@ -445,12 +445,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     'Percentage of Response Items with Customers',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .title3
+                                                        .headlineSmall
                                                         .override(
                                                           fontFamily:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .title3Family,
+                                                                  .headlineSmallFamily,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryBtnText,
@@ -459,7 +459,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .containsKey(
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .title3Family),
+                                                                      .headlineSmallFamily),
                                                         ),
                                                   ),
                                                   Padding(
@@ -488,7 +488,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             progressColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .secondaryColor,
+                                                                    .secondary,
                                                             backgroundColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
@@ -497,13 +497,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               '93%',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1
+                                                                  .bodyMedium
                                                                   .override(
                                                                     fontFamily:
                                                                         'Outfit',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .tertiaryColor,
+                                                                        .tertiary,
                                                                     fontSize:
                                                                         14.0,
                                                                     fontWeight:
@@ -512,7 +512,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     useGoogleFonts: GoogleFonts
                                                                             .asMap()
                                                                         .containsKey(
-                                                                            FlutterFlowTheme.of(context).bodyText1Family),
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                   ),
                                                             ),
                                                             barRadius:
@@ -564,7 +564,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     textAlign: TextAlign.start,
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .title3,
+                                                        .headlineSmall,
                                                   ),
                                                   Padding(
                                                     padding:
@@ -578,7 +578,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText2,
+                                                              .bodySmall,
                                                     ),
                                                   ),
                                                   Container(
@@ -604,7 +604,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .supervisor_account_rounded,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryColor,
+                                                              .primary,
                                                           size: 44.0,
                                                         ),
                                                         Padding(
@@ -621,7 +621,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                 .center,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .title1,
+                                                                .displaySmall,
                                                           ),
                                                         ),
                                                       ],
@@ -658,7 +658,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       width: double.infinity,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                            .primary,
                                         boxShadow: [
                                           BoxShadow(
                                             blurRadius: 0.0,
@@ -683,12 +683,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               'Active Users',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .title3
+                                                      .headlineSmall
                                                       .override(
                                                         fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .title3Family,
+                                                                .headlineSmallFamily,
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -698,7 +698,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .title3Family),
+                                                                    .headlineSmallFamily),
                                                       ),
                                             ),
                                             Padding(
@@ -708,12 +708,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 'A small summary of your users base',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1
+                                                        .bodyMedium
                                                         .override(
                                                           fontFamily:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyText1Family,
+                                                                  .bodyMediumFamily,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .white70,
@@ -722,7 +722,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .containsKey(
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1Family),
+                                                                      .bodyMediumFamily),
                                                         ),
                                               ),
                                             ),
@@ -789,7 +789,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               'Total User Count',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .title3,
+                                                      .headlineSmall,
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -800,7 +800,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 textAlign: TextAlign.center,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                             ),
                                             Container(
@@ -820,7 +820,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         .supervisor_account_rounded,
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryColor,
+                                                        .primary,
                                                     size: 44.0,
                                                   ),
                                                   Padding(
@@ -835,7 +835,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .title1,
+                                                              .displaySmall,
                                                     ),
                                                   ),
                                                 ],
@@ -890,7 +890,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           child: Text(
                                             'Scenarios',
                                             style: FlutterFlowTheme.of(context)
-                                                .title3,
+                                                .headlineSmall,
                                           ),
                                         ),
                                         Padding(
@@ -920,7 +920,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 '',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                             ),
                                           ),
@@ -935,7 +935,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 'Location',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                             ),
                                           if (responsiveVisibility(
@@ -949,7 +949,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 'Properties Impacted',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                             ),
                                           if (responsiveVisibility(
@@ -961,7 +961,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 'Outage Duration',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                             ),
                                           if (responsiveVisibility(
@@ -974,7 +974,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 'Response Coverage',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                             ),
                                           Expanded(
@@ -984,7 +984,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               textAlign: TextAlign.end,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2,
+                                                      .bodySmall,
                                             ),
                                           ),
                                         ],
@@ -1010,7 +1010,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     CircularProgressIndicator(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryColor,
+                                                      .primary,
                                                 ),
                                               ),
                                             );
@@ -1090,7 +1090,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .subtitle1,
+                                                                        .titleMedium,
                                                                   ),
                                                                   if (responsiveVisibility(
                                                                     context:
@@ -1110,7 +1110,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                           Text(
                                                                         'user@domainname.com',
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .bodyText2,
+                                                                            .bodySmall,
                                                                       ),
                                                                     ),
                                                                 ],
@@ -1130,7 +1130,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   .locationName!,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1,
+                                                                  .bodyMedium,
                                                             ),
                                                           ),
                                                         if (responsiveVisibility(
@@ -1145,7 +1145,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   .toString(),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1,
+                                                                  .bodyMedium,
                                                             ),
                                                           ),
                                                         if (responsiveVisibility(
@@ -1167,7 +1167,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               )} Days',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1,
+                                                                  .bodyMedium,
                                                             ),
                                                           ),
                                                         Expanded(
@@ -1182,7 +1182,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             progressColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .primaryColor,
+                                                                    .primary,
                                                             backgroundColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
@@ -1198,7 +1198,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   .percentageCoverered!),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1,
+                                                                  .bodyMedium,
                                                             ),
                                                             barRadius:
                                                                 Radius.circular(
@@ -1289,19 +1289,18 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         0.0, 0.0, 0.0, 0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
+                                        .titleSmall
                                         .override(
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
-                                                  .subtitle2Family,
+                                                  .titleSmallFamily,
                                           color: Colors.white,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle2Family),
+                                                      .titleSmallFamily),
                                         ),
                                     elevation: 3.0,
                                     borderSide: BorderSide(

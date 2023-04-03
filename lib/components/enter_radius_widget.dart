@@ -74,13 +74,16 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
                         child: Text(
                           'Impact Radius (m)',
-                          style: FlutterFlowTheme.of(context).title3.override(
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
                                 fontFamily: 'Outfit',
                                 color: Color(0xFF101213),
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w500,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context).title3Family),
+                                    FlutterFlowTheme.of(context)
+                                        .headlineSmallFamily),
                               ),
                         ),
                       ),
@@ -103,9 +106,9 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                             decoration: InputDecoration(
                               labelText: 'Radus',
                               labelStyle:
-                                  FlutterFlowTheme.of(context).bodyText2,
+                                  FlutterFlowTheme.of(context).bodySmall,
                               hintText: 'Enter radius in meters',
-                              hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                              hintStyle: FlutterFlowTheme.of(context).bodySmall,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -141,7 +144,7 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                               contentPadding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 24.0, 0.0, 24.0),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyText1,
+                            style: FlutterFlowTheme.of(context).bodyMedium,
                             validator: _model.radiusControllerValidator
                                 .asValidator(context),
                           ),
@@ -169,7 +172,7 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                               0.0, 0.0, 0.0, 0.0),
                           color: Colors.white,
                           textStyle: FlutterFlowTheme.of(context)
-                              .bodyText2
+                              .bodySmall
                               .override(
                                 fontFamily: 'Outfit',
                                 color: Color(0xFF57636C),
@@ -177,7 +180,7 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                                 fontWeight: FontWeight.normal,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .bodyText2Family),
+                                        .bodySmallFamily),
                               ),
                           elevation: 0.0,
                           borderSide: BorderSide(
@@ -186,9 +189,6 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                           hoverColor: Color(0xFFF1F4F8),
-                          hoverBorderSide: BorderSide(
-                            width: 2.0,
-                          ),
                           hoverTextColor: Color(0xFF101213),
                         ),
                       ),
@@ -208,9 +208,9 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                          color: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
-                              .subtitle2
+                              .titleSmall
                               .override(
                                 fontFamily: 'Outfit',
                                 color: Colors.white,
@@ -218,7 +218,7 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                                 fontWeight: FontWeight.w500,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .subtitle2Family),
+                                        .titleSmallFamily),
                               ),
                           elevation: 3.0,
                           borderSide: BorderSide(
@@ -227,9 +227,6 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                           hoverColor: Color(0xFF2B16ED),
-                          hoverBorderSide: BorderSide(
-                            width: 1.0,
-                          ),
                           hoverTextColor: Colors.white,
                         ),
                       ),

@@ -100,7 +100,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
               ),
               title: Text(
                 'Forgot Password',
-                style: FlutterFlowTheme.of(context).title3,
+                style: FlutterFlowTheme.of(context).headlineSmall,
               ),
               actions: [],
               centerTitle: false,
@@ -158,7 +158,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                             ),
                             Text(
                               'Forgot Password',
-                              style: FlutterFlowTheme.of(context).title3,
+                              style: FlutterFlowTheme.of(context).headlineSmall,
                             ),
                           ],
                         ),
@@ -172,7 +172,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                 16.0, 8.0, 16.0, 0.0),
                             child: Text(
                               'We will send you an email with a link to reset your password, please enter the email associated with your account below.',
-                              style: FlutterFlowTheme.of(context).bodyText2,
+                              style: FlutterFlowTheme.of(context).bodySmall,
                             ).animateOnPageLoad(
                                 animationsMap['textOnPageLoadAnimation']!),
                           ),
@@ -188,9 +188,9 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: 'Your email',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                          labelStyle: FlutterFlowTheme.of(context).bodySmall,
                           hintText: 'Enter your email to recieve a linke...',
-                          hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                          hintStyle: FlutterFlowTheme.of(context).bodySmall,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context)
@@ -226,12 +226,13 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 24.0, 20.0, 24.0),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).bodyText1Family,
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
                               color: Color(0xFF0F1113),
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
                             ),
                         keyboardType: TextInputType.phone,
                         validator: _model.emailAddressControllerValidator
@@ -266,16 +267,16 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                          color: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
-                              .subtitle2
+                              .titleSmall
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .subtitle2Family,
+                                    .titleSmallFamily,
                                 color: Colors.white,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .subtitle2Family),
+                                        .titleSmallFamily),
                               ),
                           elevation: 3.0,
                           borderSide: BorderSide(

@@ -104,7 +104,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
             ),
             Text(
               'Menu',
-              style: FlutterFlowTheme.of(context).bodyText2,
+              style: FlutterFlowTheme.of(context).bodySmall,
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
@@ -131,7 +131,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                         ),
                         Text(
                           'Home',
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],
                     ),
@@ -164,7 +164,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                         ),
                         Text(
                           'Scenario',
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],
                     ),
@@ -206,7 +206,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                         ),
                         Text(
                           'Stock Information',
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],
                     ),
