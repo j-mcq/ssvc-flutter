@@ -165,7 +165,7 @@ class _PolyMapState extends State<PolyMap> {
               polygons: _polygons,
               myLocationEnabled: true,
               onTap: (point) {
-                if (widget.isPolygon!) {
+                if (_isPolygon) {
                   setState(() {
                     polygonLatLngs.add(point);
                     _setPolygon();
@@ -175,7 +175,7 @@ class _PolyMapState extends State<PolyMap> {
                     _markers.clear();
                     _setMarkers(point);
                   });
-                } else if (widget.isCircle!) {
+                } else if (_isCircle) {
                   setState(() {
                     _circles.clear();
                     _setCircles(point);

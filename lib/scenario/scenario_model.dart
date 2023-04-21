@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/enter_radius_widget.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
@@ -14,6 +15,18 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ScenarioModel extends FlutterFlowModel {
+  ///  Local state fields for this page.
+
+  bool? isCircle;
+
+  bool? isPolygon;
+
+  double? radius;
+
+  String? polygon;
+
+  String? circle;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for sideBarNav component.

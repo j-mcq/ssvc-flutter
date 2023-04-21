@@ -1057,17 +1057,15 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   .secondary,
                                                             )
                                                           ],
-                                                          xLabels:
-                                                              chartScenarioResultsCustomersRecordList
-                                                                  .where((e) =>
-                                                                      e.name !=
-                                                                          null &&
-                                                                      e.name !=
-                                                                          '')
-                                                                  .toList()
-                                                                  .map((d) =>
-                                                                      d.name!)
-                                                                  .toList(),
+                                                          xLabels: chartScenarioResultsCustomersRecordList
+                                                              .where((e) =>
+                                                                  e.name !=
+                                                                      null &&
+                                                                  e.name != '')
+                                                              .toList()
+                                                              .map((d) => d
+                                                                  .psrGroupName!)
+                                                              .toList(),
                                                           barWidth: 55.0,
                                                           barBorderRadius:
                                                               BorderRadius
