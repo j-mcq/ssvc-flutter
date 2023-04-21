@@ -41,14 +41,6 @@ class _$ScenarioResultsCustomersRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.psrGroup;
-    if (value != null) {
-      result
-        ..add('psr_group')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType.nullable(Object)])));
-    }
     value = object.numberImpacted;
     if (value != null) {
       result
@@ -108,12 +100,6 @@ class _$ScenarioResultsCustomersRecordSerializer
           result.psrGroupName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'psr_group':
-          result.psrGroup = serializers.deserialize(value,
-              specifiedType: const FullType(DocumentReference, const [
-                const FullType.nullable(Object)
-              ])) as DocumentReference<Object?>?;
-          break;
         case 'number_impacted':
           result.numberImpacted = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
@@ -149,8 +135,6 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
   @override
   final String? psrGroupName;
   @override
-  final DocumentReference<Object?>? psrGroup;
-  @override
   final int? numberImpacted;
   @override
   final int? numberRespondedTo;
@@ -168,7 +152,6 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
   _$ScenarioResultsCustomersRecord._(
       {this.scenario,
       this.psrGroupName,
-      this.psrGroup,
       this.numberImpacted,
       this.numberRespondedTo,
       this.name,
@@ -191,7 +174,6 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
     return other is ScenarioResultsCustomersRecord &&
         scenario == other.scenario &&
         psrGroupName == other.psrGroupName &&
-        psrGroup == other.psrGroup &&
         numberImpacted == other.numberImpacted &&
         numberRespondedTo == other.numberRespondedTo &&
         name == other.name &&
@@ -204,7 +186,6 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
     var _$hash = 0;
     _$hash = $jc(_$hash, scenario.hashCode);
     _$hash = $jc(_$hash, psrGroupName.hashCode);
-    _$hash = $jc(_$hash, psrGroup.hashCode);
     _$hash = $jc(_$hash, numberImpacted.hashCode);
     _$hash = $jc(_$hash, numberRespondedTo.hashCode);
     _$hash = $jc(_$hash, name.hashCode);
@@ -219,7 +200,6 @@ class _$ScenarioResultsCustomersRecord extends ScenarioResultsCustomersRecord {
     return (newBuiltValueToStringHelper(r'ScenarioResultsCustomersRecord')
           ..add('scenario', scenario)
           ..add('psrGroupName', psrGroupName)
-          ..add('psrGroup', psrGroup)
           ..add('numberImpacted', numberImpacted)
           ..add('numberRespondedTo', numberRespondedTo)
           ..add('name', name)
@@ -243,11 +223,6 @@ class ScenarioResultsCustomersRecordBuilder
   String? _psrGroupName;
   String? get psrGroupName => _$this._psrGroupName;
   set psrGroupName(String? psrGroupName) => _$this._psrGroupName = psrGroupName;
-
-  DocumentReference<Object?>? _psrGroup;
-  DocumentReference<Object?>? get psrGroup => _$this._psrGroup;
-  set psrGroup(DocumentReference<Object?>? psrGroup) =>
-      _$this._psrGroup = psrGroup;
 
   int? _numberImpacted;
   int? get numberImpacted => _$this._numberImpacted;
@@ -280,7 +255,6 @@ class ScenarioResultsCustomersRecordBuilder
     if ($v != null) {
       _scenario = $v.scenario;
       _psrGroupName = $v.psrGroupName;
-      _psrGroup = $v.psrGroup;
       _numberImpacted = $v.numberImpacted;
       _numberRespondedTo = $v.numberRespondedTo;
       _name = $v.name;
@@ -310,7 +284,6 @@ class ScenarioResultsCustomersRecordBuilder
         new _$ScenarioResultsCustomersRecord._(
             scenario: scenario,
             psrGroupName: psrGroupName,
-            psrGroup: psrGroup,
             numberImpacted: numberImpacted,
             numberRespondedTo: numberRespondedTo,
             name: name,

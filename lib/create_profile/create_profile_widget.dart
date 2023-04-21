@@ -53,7 +53,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
               automaticallyImplyLeading: false,
               title: Text(
                 'Create Profile',
-                style: FlutterFlowTheme.of(context).title2,
+                style: FlutterFlowTheme.of(context).headlineMedium,
               ),
               actions: [],
               centerTitle: false,
@@ -90,7 +90,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           children: [
                             Text(
                               'Create Profile',
-                              style: FlutterFlowTheme.of(context).title3,
+                              style: FlutterFlowTheme.of(context).headlineSmall,
                             ),
                           ],
                         ),
@@ -121,8 +121,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: 'Your Name',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText2,
-                          hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                          labelStyle: FlutterFlowTheme.of(context).bodySmall,
+                          hintStyle: FlutterFlowTheme.of(context).bodySmall,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context)
@@ -158,7 +158,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 24.0, 0.0, 24.0),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
+                        style: FlutterFlowTheme.of(context).bodyMedium,
                         validator: _model.yourNameControllerValidator
                             .asValidator(context),
                       ),
@@ -171,8 +171,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: 'Your City',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText2,
-                          hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                          labelStyle: FlutterFlowTheme.of(context).bodySmall,
+                          hintStyle: FlutterFlowTheme.of(context).bodySmall,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context)
@@ -190,14 +190,14 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           ),
                           errorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primaryColor,
+                              color: FlutterFlowTheme.of(context).primary,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primaryColor,
+                              color: FlutterFlowTheme.of(context).primary,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -208,7 +208,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 24.0, 0.0, 24.0),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
+                        style: FlutterFlowTheme.of(context).bodyMedium,
                         validator:
                             _model.cityControllerValidator.asValidator(context),
                       ),
@@ -217,7 +217,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 12.0),
                       child: FlutterFlowDropDown<String>(
-                        controller: _model.stateController ??=
+                        controller: _model.stateValueController ??=
                             FormFieldController<String>(
                           _model.stateValue ??= 'State',
                         ),
@@ -278,7 +278,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                             setState(() => _model.stateValue = val),
                         width: double.infinity,
                         height: 56.0,
-                        textStyle: FlutterFlowTheme.of(context).bodyText1,
+                        textStyle: FlutterFlowTheme.of(context).bodyMedium,
                         hintText: 'Select State',
                         icon: Icon(
                           Icons.keyboard_arrow_down_rounded,
@@ -305,9 +305,9 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                         controller: _model.myBioController,
                         obscureText: false,
                         decoration: InputDecoration(
-                          labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                          labelStyle: FlutterFlowTheme.of(context).bodySmall,
                           hintText: 'Your bio',
-                          hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                          hintStyle: FlutterFlowTheme.of(context).bodySmall,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context)
@@ -343,7 +343,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 24.0, 0.0, 24.0),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
+                        style: FlutterFlowTheme.of(context).bodyMedium,
                         textAlign: TextAlign.start,
                         maxLines: 3,
                         validator: _model.myBioControllerValidator
@@ -367,17 +367,17 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primaryColor,
+                            color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
-                                .subtitle1
+                                .titleMedium
                                 .override(
                                   fontFamily: FlutterFlowTheme.of(context)
-                                      .subtitle1Family,
+                                      .titleMediumFamily,
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBtnText,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
-                                          .subtitle1Family),
+                                          .titleMediumFamily),
                                 ),
                             elevation: 2.0,
                             borderSide: BorderSide(

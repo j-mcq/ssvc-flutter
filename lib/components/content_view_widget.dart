@@ -72,7 +72,7 @@ class _ContentViewWidgetState extends State<ContentViewWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                 child: Text(
                   'Edit Profile',
-                  style: FlutterFlowTheme.of(context).bodyText2,
+                  style: FlutterFlowTheme.of(context).bodySmall,
                 ),
               ),
               Expanded(

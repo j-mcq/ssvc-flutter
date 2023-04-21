@@ -1,23 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'psr_groups_record.dart';
+part of 'psr_category_options_record.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<PsrGroupsRecord> _$psrGroupsRecordSerializer =
-    new _$PsrGroupsRecordSerializer();
+Serializer<PsrCategoryOptionsRecord> _$psrCategoryOptionsRecordSerializer =
+    new _$PsrCategoryOptionsRecordSerializer();
 
-class _$PsrGroupsRecordSerializer
-    implements StructuredSerializer<PsrGroupsRecord> {
+class _$PsrCategoryOptionsRecordSerializer
+    implements StructuredSerializer<PsrCategoryOptionsRecord> {
   @override
-  final Iterable<Type> types = const [PsrGroupsRecord, _$PsrGroupsRecord];
+  final Iterable<Type> types = const [
+    PsrCategoryOptionsRecord,
+    _$PsrCategoryOptionsRecord
+  ];
   @override
-  final String wireName = 'PsrGroupsRecord';
+  final String wireName = 'PsrCategoryOptionsRecord';
 
   @override
-  Iterable<Object?> serialize(Serializers serializers, PsrGroupsRecord object,
+  Iterable<Object?> serialize(
+      Serializers serializers, PsrCategoryOptionsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
@@ -27,6 +31,14 @@ class _$PsrGroupsRecordSerializer
         ..add('name')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.psrGroup;
+    if (value != null) {
+      result
+        ..add('psr_group')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.ffRef;
     if (value != null) {
@@ -40,10 +52,10 @@ class _$PsrGroupsRecordSerializer
   }
 
   @override
-  PsrGroupsRecord deserialize(
+  PsrCategoryOptionsRecord deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new PsrGroupsRecordBuilder();
+    final result = new PsrCategoryOptionsRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -54,6 +66,12 @@ class _$PsrGroupsRecordSerializer
         case 'name':
           result.name = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
+          break;
+        case 'psr_group':
+          result.psrGroup = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
@@ -68,30 +86,36 @@ class _$PsrGroupsRecordSerializer
   }
 }
 
-class _$PsrGroupsRecord extends PsrGroupsRecord {
+class _$PsrCategoryOptionsRecord extends PsrCategoryOptionsRecord {
   @override
   final String? name;
   @override
+  final DocumentReference<Object?>? psrGroup;
+  @override
   final DocumentReference<Object?>? ffRef;
 
-  factory _$PsrGroupsRecord([void Function(PsrGroupsRecordBuilder)? updates]) =>
-      (new PsrGroupsRecordBuilder()..update(updates))._build();
+  factory _$PsrCategoryOptionsRecord(
+          [void Function(PsrCategoryOptionsRecordBuilder)? updates]) =>
+      (new PsrCategoryOptionsRecordBuilder()..update(updates))._build();
 
-  _$PsrGroupsRecord._({this.name, this.ffRef}) : super._();
+  _$PsrCategoryOptionsRecord._({this.name, this.psrGroup, this.ffRef})
+      : super._();
 
   @override
-  PsrGroupsRecord rebuild(void Function(PsrGroupsRecordBuilder) updates) =>
+  PsrCategoryOptionsRecord rebuild(
+          void Function(PsrCategoryOptionsRecordBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  PsrGroupsRecordBuilder toBuilder() =>
-      new PsrGroupsRecordBuilder()..replace(this);
+  PsrCategoryOptionsRecordBuilder toBuilder() =>
+      new PsrCategoryOptionsRecordBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is PsrGroupsRecord &&
+    return other is PsrCategoryOptionsRecord &&
         name == other.name &&
+        psrGroup == other.psrGroup &&
         ffRef == other.ffRef;
   }
 
@@ -99,6 +123,7 @@ class _$PsrGroupsRecord extends PsrGroupsRecord {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, psrGroup.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -106,33 +131,41 @@ class _$PsrGroupsRecord extends PsrGroupsRecord {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'PsrGroupsRecord')
+    return (newBuiltValueToStringHelper(r'PsrCategoryOptionsRecord')
           ..add('name', name)
+          ..add('psrGroup', psrGroup)
           ..add('ffRef', ffRef))
         .toString();
   }
 }
 
-class PsrGroupsRecordBuilder
-    implements Builder<PsrGroupsRecord, PsrGroupsRecordBuilder> {
-  _$PsrGroupsRecord? _$v;
+class PsrCategoryOptionsRecordBuilder
+    implements
+        Builder<PsrCategoryOptionsRecord, PsrCategoryOptionsRecordBuilder> {
+  _$PsrCategoryOptionsRecord? _$v;
 
   String? _name;
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
+  DocumentReference<Object?>? _psrGroup;
+  DocumentReference<Object?>? get psrGroup => _$this._psrGroup;
+  set psrGroup(DocumentReference<Object?>? psrGroup) =>
+      _$this._psrGroup = psrGroup;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
-  PsrGroupsRecordBuilder() {
-    PsrGroupsRecord._initializeBuilder(this);
+  PsrCategoryOptionsRecordBuilder() {
+    PsrCategoryOptionsRecord._initializeBuilder(this);
   }
 
-  PsrGroupsRecordBuilder get _$this {
+  PsrCategoryOptionsRecordBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _name = $v.name;
+      _psrGroup = $v.psrGroup;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -140,21 +173,23 @@ class PsrGroupsRecordBuilder
   }
 
   @override
-  void replace(PsrGroupsRecord other) {
+  void replace(PsrCategoryOptionsRecord other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$PsrGroupsRecord;
+    _$v = other as _$PsrCategoryOptionsRecord;
   }
 
   @override
-  void update(void Function(PsrGroupsRecordBuilder)? updates) {
+  void update(void Function(PsrCategoryOptionsRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  PsrGroupsRecord build() => _build();
+  PsrCategoryOptionsRecord build() => _build();
 
-  _$PsrGroupsRecord _build() {
-    final _$result = _$v ?? new _$PsrGroupsRecord._(name: name, ffRef: ffRef);
+  _$PsrCategoryOptionsRecord _build() {
+    final _$result = _$v ??
+        new _$PsrCategoryOptionsRecord._(
+            name: name, psrGroup: psrGroup, ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

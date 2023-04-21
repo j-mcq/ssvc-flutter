@@ -18,7 +18,7 @@ class CreateProfileModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? cityControllerValidator;
   // State field(s) for state widget.
   String? stateValue;
-  FormFieldController<String>? stateController;
+  FormFieldController<String>? stateValueController;
   // State field(s) for myBio widget.
   TextEditingController? myBioController;
   String? Function(BuildContext, String?)? myBioControllerValidator;

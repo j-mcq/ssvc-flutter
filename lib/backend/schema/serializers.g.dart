@@ -8,7 +8,10 @@ part of 'serializers.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(DepotRecord.serializer)
-      ..add(PsrGroupsRecord.serializer)
+      ..add(PsrCategoriesRecord.serializer)
+      ..add(PsrCategoryGroupOptionsRecord.serializer)
+      ..add(PsrCategoryOptionsRecord.serializer)
+      ..add(PsrRecord.serializer)
       ..add(ResponseItemsRecord.serializer)
       ..add(ScenarioRecord.serializer)
       ..add(ScenarioResultsCustomersRecord.serializer)

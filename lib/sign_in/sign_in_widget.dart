@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -42,12 +42,14 @@ class _SignInWidgetState extends State<SignInWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, -1.0),
             child: SingleChildScrollView(
@@ -101,14 +103,14 @@ class _SignInWidgetState extends State<SignInWidget> {
                             ),
                             Text(
                               'Welcome Back!',
-                              style: FlutterFlowTheme.of(context).title1,
+                              style: FlutterFlowTheme.of(context).displaySmall,
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 4.0, 0.0, 0.0),
                               child: Text(
                                 'Use the form below to access your account.',
-                                style: FlutterFlowTheme.of(context).bodyText2,
+                                style: FlutterFlowTheme.of(context).bodySmall,
                               ),
                             ),
                             Padding(
@@ -130,11 +132,11 @@ class _SignInWidgetState extends State<SignInWidget> {
                                           labelText: 'Email Address',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText2,
+                                                  .bodySmall,
                                           hintText: 'Enter your email here...',
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText2,
+                                                  .bodySmall,
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -179,7 +181,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                                   16.0, 24.0, 0.0, 24.0),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
+                                            .bodyMedium,
                                         validator: _model
                                             .emailAddressControllerValidator
                                             .asValidator(context),
@@ -203,10 +205,10 @@ class _SignInWidgetState extends State<SignInWidget> {
                                       decoration: InputDecoration(
                                         labelText: 'Password',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                         hintText: 'Enter your email here...',
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -227,7 +229,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
+                                                .primary,
                                             width: 2.0,
                                           ),
                                           borderRadius:
@@ -236,7 +238,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
+                                                .primary,
                                             width: 2.0,
                                           ),
                                           borderRadius:
@@ -266,7 +268,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         ),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyMedium,
                                       validator: _model
                                           .passwordControllerValidator
                                           .asValidator(context),
@@ -299,7 +301,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                               0.0, 0.0, 0.0, 0.0),
                                       color: Color(0x00FFFFFF),
                                       textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText2,
+                                          .bodySmall,
                                       elevation: 0.0,
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
@@ -308,10 +310,15 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     ),
                                   ),
                                   InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       GoRouter.of(context).prepareAuthEvent();
 
-                                      final user = await signInWithEmail(
+                                      final user =
+                                          await authManager.signInWithEmail(
                                         context,
                                         _model.emailAddressController.text,
                                         _model.passwordController.text,
@@ -326,7 +333,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                       width: 150.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                            .primary,
                                         borderRadius:
                                             BorderRadius.circular(50.0),
                                       ),
@@ -337,20 +344,19 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         child: Text(
                                           'Sign In',
                                           style: FlutterFlowTheme.of(context)
-                                              .title3
+                                              .headlineSmall
                                               .override(
                                                 fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .title3Family,
+                                                        .headlineSmallFamily,
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBtnText,
-                                                useGoogleFonts:
-                                                    GoogleFonts.asMap()
-                                                        .containsKey(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .title3Family),
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(FlutterFlowTheme
+                                                            .of(context)
+                                                        .headlineSmallFamily),
                                               ),
                                         ),
                                       ),
@@ -380,8 +386,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     ),
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInWithGoogle(context);
+                                      final user = await authManager
+                                          .signInWithGoogle(context);
                                       if (user == null) {
                                         return;
                                       }
@@ -407,33 +413,13 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     ),
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInWithApple(context);
+                                      final user = await authManager
+                                          .signInWithApple(context);
                                       if (user == null) {
                                         return;
                                       }
 
                                       context.goNamedAuth('homePage', mounted);
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 8.0, 8.0),
-                                  child: FlutterFlowIconButton(
-                                    borderColor:
-                                        FlutterFlowTheme.of(context).lineColor,
-                                    borderRadius: 12.0,
-                                    borderWidth: 1.0,
-                                    buttonSize: 44.0,
-                                    icon: Icon(
-                                      Icons.phone_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 20.0,
-                                    ),
-                                    onPressed: () async {
-                                      context.pushNamed('phoneSignIn');
                                     },
                                   ),
                                 ),
@@ -443,6 +429,10 @@ class _SignInWidgetState extends State<SignInWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 24.0, 0.0, 24.0),
                               child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
                                 onTap: () async {
                                   context.pushNamed(
                                     'signUp',
@@ -466,7 +456,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                       child: Text(
                                         'Don\'t have an account?',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
+                                            .bodyMedium,
                                       ),
                                     ),
                                     Padding(
@@ -475,20 +465,20 @@ class _SignInWidgetState extends State<SignInWidget> {
                                       child: Text(
                                         'Create Account',
                                         style: FlutterFlowTheme.of(context)
-                                            .subtitle2
+                                            .titleSmall
                                             .override(
                                               fontFamily:
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle2Family,
+                                                      .titleSmallFamily,
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .tertiaryColor,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2Family),
+                                                      .tertiary,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmallFamily),
                                             ),
                                       ),
                                     ),
@@ -506,8 +496,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInAnonymously(context);
+                                      final user = await authManager
+                                          .signInAnonymously(context);
                                       if (user == null) {
                                         return;
                                       }
@@ -526,7 +516,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                       color: FlutterFlowTheme.of(context)
                                           .lineColor,
                                       textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle1,
+                                          .titleMedium,
                                       elevation: 0.0,
                                       borderSide: BorderSide(
                                         color: Colors.transparent,

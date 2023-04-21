@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -97,7 +97,7 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
               ),
               title: Text(
                 'Phone Sign In',
-                style: FlutterFlowTheme.of(context).title3,
+                style: FlutterFlowTheme.of(context).headlineSmall,
               ),
               actions: [],
               centerTitle: false,
@@ -153,7 +153,7 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
                           ),
                           Text(
                             'Phone Sign In',
-                            style: FlutterFlowTheme.of(context).title3,
+                            style: FlutterFlowTheme.of(context).headlineSmall,
                           ),
                         ],
                       ),
@@ -167,7 +167,7 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
                               16.0, 8.0, 16.0, 0.0),
                           child: Text(
                             'Type in your phone number below to register.',
-                            style: FlutterFlowTheme.of(context).bodyText2,
+                            style: FlutterFlowTheme.of(context).bodySmall,
                           ).animateOnPageLoad(
                               animationsMap['textOnPageLoadAnimation']!),
                         ),
@@ -183,9 +183,9 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Your Phone Number',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                        labelStyle: FlutterFlowTheme.of(context).bodySmall,
                         hintText: 'Please enter a valid number...',
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                        hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color:
@@ -221,12 +221,12 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
                         contentPadding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 24.0, 20.0, 24.0),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
-                                FlutterFlowTheme.of(context).bodyText1Family,
+                                FlutterFlowTheme.of(context).bodyMediumFamily,
                             color: Color(0xFF0F1113),
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyText1Family),
+                                FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                       keyboardType: TextInputType.phone,
                       validator: _model.phoneNumberControllerValidator
@@ -251,7 +251,7 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
                           );
                           return;
                         }
-                        await beginPhoneAuth(
+                        await authManager.beginPhoneAuth(
                           context: context,
                           phoneNumber: phoneNumberVal,
                           onCodeSent: () async {
@@ -271,15 +271,16 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primaryColor,
+                        color: FlutterFlowTheme.of(context).primary,
                         textStyle: FlutterFlowTheme.of(context)
-                            .subtitle2
+                            .titleSmall
                             .override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).subtitle2Family,
+                                  FlutterFlowTheme.of(context).titleSmallFamily,
                               color: Colors.white,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).subtitle2Family),
+                                  FlutterFlowTheme.of(context)
+                                      .titleSmallFamily),
                             ),
                         elevation: 3.0,
                         borderSide: BorderSide(

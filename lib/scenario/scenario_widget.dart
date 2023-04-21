@@ -64,20 +64,20 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
             width: 50.0,
             height: 50.0,
             child: CircularProgressIndicator(
-              color: FlutterFlowTheme.of(context).primaryColor,
+              color: FlutterFlowTheme.of(context).primary,
             ),
           ),
         ),
       );
     }
 
-    return Scaffold(
-      key: scaffoldKey,
-      resizeToAvoidBottomInset: false,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Row(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -98,7 +98,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                   twoBG: FlutterFlowTheme.of(context).primaryBackground,
                   twoIcon: Icon(
                     Icons.school_outlined,
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primary,
                   ),
                   threeColor: FlutterFlowTheme.of(context).secondaryBackground,
                   threeIcon: Icon(
@@ -201,7 +201,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   'Scenario',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .title3,
+                                                      .headlineSmall,
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
@@ -211,7 +211,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     'Outage scenario details',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                                   ),
                                                 ),
                                               ],
@@ -251,10 +251,10 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                 labelText: 'Outage Duration',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                                 enabledBorder:
                                                     OutlineInputBorder(
                                                   borderSide: BorderSide(
@@ -307,7 +307,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText1,
+                                                      .bodyMedium,
                                               validator: _model
                                                   .itemNameControllerValidator
                                                   .asValidator(context),
@@ -366,7 +366,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .title3,
+                                                              .headlineSmall,
                                                     ),
                                                     Padding(
                                                       padding:
@@ -381,7 +381,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyText2,
+                                                                .bodySmall,
                                                       ),
                                                     ),
                                                   ],
@@ -405,22 +405,22 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                 0.0, 0.0),
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryColor,
+                                                        .primary,
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
-                                                        .subtitle2
+                                                        .titleSmall
                                                         .override(
                                                           fontFamily:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .subtitle2Family,
+                                                                  .titleSmallFamily,
                                                           color: Colors.white,
                                                           useGoogleFonts: GoogleFonts
                                                                   .asMap()
                                                               .containsKey(
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle2Family),
+                                                                      .titleSmallFamily),
                                                         ),
                                                     elevation: 3.0,
                                                     borderSide: BorderSide(
@@ -450,10 +450,15 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
                                       child: Container(
-                                        width: 500.0,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                1.0,
                                         height: 500.0,
                                         child: custom_widgets.PolyMap(
-                                          width: 500.0,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              1.0,
                                           height: 500.0,
                                           location: currentUserLocationValue,
                                           isPolygon: _model.isPolygon,
@@ -530,23 +535,24 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
+                                                              .primary,
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .subtitle2
+                                                              .titleSmall
                                                               .override(
                                                                 fontFamily: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2Family,
+                                                                    .titleSmallFamily,
                                                                 color: Colors
                                                                     .white,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(
                                                                         FlutterFlowTheme.of(context)
-                                                                            .subtitle2Family),
+                                                                            .titleSmallFamily),
                                                               ),
+                                                      elevation: 2.0,
                                                       borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent,
@@ -567,16 +573,24 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       await showModalBottomSheet(
                                                         isScrollControlled:
                                                             true,
+                                                        backgroundColor:
+                                                            Colors.white,
                                                         enableDrag: false,
                                                         context: context,
-                                                        builder: (context) {
-                                                          return Padding(
-                                                            padding:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .viewInsets,
-                                                            child:
-                                                                EnterRadiusWidget(),
+                                                        builder:
+                                                            (bottomSheetContext) {
+                                                          return GestureDetector(
+                                                            onTap: () => FocusScope
+                                                                    .of(context)
+                                                                .requestFocus(
+                                                                    _unfocusNode),
+                                                            child: Padding(
+                                                              padding: MediaQuery.of(
+                                                                      bottomSheetContext)
+                                                                  .viewInsets,
+                                                              child:
+                                                                  EnterRadiusWidget(),
+                                                            ),
                                                           );
                                                         },
                                                       ).then((value) =>
@@ -612,23 +626,24 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
+                                                              .primary,
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .subtitle2
+                                                              .titleSmall
                                                               .override(
                                                                 fontFamily: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2Family,
+                                                                    .titleSmallFamily,
                                                                 color: Colors
                                                                     .white,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(
                                                                         FlutterFlowTheme.of(context)
-                                                                            .subtitle2Family),
+                                                                            .titleSmallFamily),
                                                               ),
+                                                      elevation: 2.0,
                                                       borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent,
@@ -662,23 +677,24 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                 0.0, 0.0),
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryColor,
+                                                        .primary,
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
-                                                        .subtitle2
+                                                        .titleSmall
                                                         .override(
                                                           fontFamily:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .subtitle2Family,
+                                                                  .titleSmallFamily,
                                                           color: Colors.white,
                                                           useGoogleFonts: GoogleFonts
                                                                   .asMap()
                                                               .containsKey(
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle2Family),
+                                                                      .titleSmallFamily),
                                                         ),
+                                                    elevation: 2.0,
                                                     borderSide: BorderSide(
                                                       color: Colors.transparent,
                                                       width: 1.0,
@@ -714,7 +730,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .title3,
+                                                              .headlineSmall,
                                                     ),
                                                     Padding(
                                                       padding:
@@ -729,7 +745,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyText2,
+                                                                .bodySmall,
                                                       ),
                                                     ),
                                                   ],
@@ -779,7 +795,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     CircularProgressIndicator(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryColor,
+                                                      .primary,
                                                 ),
                                               ),
                                             );
@@ -803,7 +819,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                           .toList(),
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryColor,
+                                                      .secondary,
                                                 )
                                               ],
                                               xLabels:
@@ -902,7 +918,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .title3,
+                                                              .headlineSmall,
                                                     ),
                                                     Padding(
                                                       padding:
@@ -917,7 +933,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyText2,
+                                                                .bodySmall,
                                                       ),
                                                     ),
                                                   ],
@@ -1001,7 +1017,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             CircularProgressIndicator(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryColor,
+                                                              .primary,
                                                         ),
                                                       ),
                                                     );
@@ -1029,7 +1045,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   .toList(),
                                                               color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .primaryColor,
+                                                                  .primary,
                                                             ),
                                                             FFBarChartData(
                                                               yData: chartScenarioResultsCustomersRecordList
@@ -1038,7 +1054,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   .toList(),
                                                               color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .secondaryColor,
+                                                                  .secondary,
                                                             )
                                                           ],
                                                           xLabels:
@@ -1109,12 +1125,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                               LegendEntry(
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primaryColor,
+                                                                      .primary,
                                                                   'Required'),
                                                               LegendEntry(
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .secondaryColor,
+                                                                      .secondary,
                                                                   'In Stock'),
                                                             ],
                                                             width: 100.0,
@@ -1122,7 +1138,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             textStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyText1,
+                                                                    .bodyMedium,
                                                             textPadding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -1201,7 +1217,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .title3,
+                                                              .headlineSmall,
                                                     ),
                                                     Padding(
                                                       padding:
@@ -1216,7 +1232,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyText2,
+                                                                .bodySmall,
                                                       ),
                                                     ),
                                                   ],
@@ -1240,22 +1256,22 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                 0.0, 0.0),
                                                     color: FlutterFlowTheme.of(
                                                             context)
-                                                        .primaryColor,
+                                                        .primary,
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
-                                                        .subtitle2
+                                                        .titleSmall
                                                         .override(
                                                           fontFamily:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .subtitle2Family,
+                                                                  .titleSmallFamily,
                                                           color: Colors.white,
                                                           useGoogleFonts: GoogleFonts
                                                                   .asMap()
                                                               .containsKey(
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle2Family),
+                                                                      .titleSmallFamily),
                                                         ),
                                                     elevation: 3.0,
                                                     borderSide: BorderSide(
@@ -1290,7 +1306,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               'Address',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2,
+                                                      .bodySmall,
                                             ),
                                           ),
                                         ),
@@ -1304,7 +1320,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               'PSR Group',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2,
+                                                      .bodySmall,
                                             ),
                                           ),
                                         Expanded(
@@ -1313,7 +1329,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                             'Response Item Required',
                                             textAlign: TextAlign.end,
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2,
+                                                .bodySmall,
                                           ),
                                         ),
                                       ],
@@ -1336,7 +1352,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               child: CircularProgressIndicator(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primaryColor,
+                                                        .primary,
                                               ),
                                             ),
                                           );
@@ -1409,7 +1425,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle1,
+                                                                      .titleMedium,
                                                                 ),
                                                                 if (responsiveVisibility(
                                                                   context:
@@ -1430,7 +1446,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       'user@domainname.com',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .bodyText2,
+                                                                          .bodySmall,
                                                                     ),
                                                                   ),
                                                               ],
@@ -1450,7 +1466,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                 .psrGroupName!,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1,
+                                                                .bodyMedium,
                                                           ),
                                                         ),
                                                       Expanded(
@@ -1474,7 +1490,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       .item!,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1,
+                                                                      .bodyMedium,
                                                                 ),
                                                               ],
                                                             ),

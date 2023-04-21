@@ -74,12 +74,14 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Row(
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -105,7 +107,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                   threeColor: FlutterFlowTheme.of(context).primaryBackground,
                   threeIcon: Icon(
                     Icons.account_circle_outlined,
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primary,
                   ),
                 ),
               ),
@@ -198,7 +200,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               'Stock Item Detais',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .title3,
+                                                      .headlineSmall,
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -207,7 +209,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                 '',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                             ),
                                           ],
@@ -260,7 +262,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                 'Switch to Light Mode',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                               ),
                                               Container(
                                                 width: 80.0,
@@ -356,6 +358,10 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                           MainAxisAlignment.start,
                                       children: [
                                         InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
                                           onTap: () async {
                                             final selectedMedia =
                                                 await selectMediaWithSourceBottomSheet(
@@ -401,6 +407,8 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                               width: m
                                                                   .dimensions
                                                                   ?.width,
+                                                              blurHash:
+                                                                  m.blurHash,
                                                             ))
                                                         .toList();
 
@@ -472,9 +480,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                       decoration: InputDecoration(
                                         labelText: 'Bluetti AC50s',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -516,7 +524,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                 20.0, 24.0, 0.0, 24.0),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyMedium,
                                       validator: _model
                                           .itemNameController1Validator
                                           .asValidator(context),
@@ -530,10 +538,10 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                         hintText: 'Item Description',
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -575,7 +583,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                 20.0, 24.0, 0.0, 24.0),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyMedium,
                                       textAlign: TextAlign.start,
                                       maxLines: 3,
                                       validator: _model.myBioControllerValidator
@@ -586,8 +594,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         20.0, 0.0, 20.0, 12.0),
                                     child: FlutterFlowDropDown<String>(
-                                      controller: _model.stateController ??=
-                                          FormFieldController<String>(null),
+                                      controller:
+                                          _model.stateValueController ??=
+                                              FormFieldController<String>(null),
                                       options: [
                                         'State',
                                         'Alabama',
@@ -646,7 +655,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                       width: double.infinity,
                                       height: 56.0,
                                       textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyMedium,
                                       hintText: 'Select Category',
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
@@ -676,9 +685,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                       decoration: InputDecoration(
                                         labelText: 'Unit Price',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -720,7 +729,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                 20.0, 24.0, 0.0, 24.0),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyMedium,
                                       validator: _model
                                           .itemNameController2Validator
                                           .asValidator(context),
@@ -760,7 +769,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                   'Stock Location Detais',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .title3,
+                                                      .headlineSmall,
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
@@ -770,7 +779,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                     '',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                                   ),
                                                 ),
                                               ],
@@ -805,7 +814,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                     'Depot',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                                   ),
                                                 ),
                                               ),
@@ -820,7 +829,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                     'Number in storage',
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyText2,
+                                                        .bodySmall,
                                                   ),
                                                 ),
                                               Expanded(
@@ -830,7 +839,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                   textAlign: TextAlign.end,
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText2,
+                                                      .bodySmall,
                                                 ),
                                               ),
                                             ],
@@ -856,7 +865,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
+                                                              .primary,
                                                     ),
                                                   ),
                                                 );
@@ -935,7 +944,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                                               '…',
                                                                         ),
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .subtitle1,
+                                                                            .titleMedium,
                                                                       ),
                                                                       if (responsiveVisibility(
                                                                         context:
@@ -955,7 +964,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                                               Text(
                                                                             'user@domainname.com',
                                                                             style:
-                                                                                FlutterFlowTheme.of(context).bodyText2,
+                                                                                FlutterFlowTheme.of(context).bodySmall,
                                                                           ),
                                                                         ),
                                                                     ],
@@ -975,7 +984,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                                       .toString(),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1,
+                                                                      .bodyMedium,
                                                                 ),
                                                               ),
                                                             Expanded(
@@ -1041,14 +1050,14 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
+                                              .primary,
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
-                                              .subtitle1
+                                              .titleMedium
                                               .override(
                                                 fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle1Family,
+                                                        .titleMediumFamily,
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBtnText,
@@ -1057,7 +1066,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                     .containsKey(
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .subtitle1Family),
+                                                            .titleMediumFamily),
                                               ),
                                           elevation: 2.0,
                                           borderSide: BorderSide(

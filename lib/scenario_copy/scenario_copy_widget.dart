@@ -90,12 +90,14 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Row(
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -116,7 +118,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                   twoBG: FlutterFlowTheme.of(context).primaryBackground,
                   twoIcon: Icon(
                     Icons.school_outlined,
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primary,
                   ),
                   threeColor: FlutterFlowTheme.of(context).secondaryBackground,
                   threeIcon: Icon(
@@ -217,7 +219,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                 'Scenario',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .title3,
+                                                        .headlineSmall,
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
@@ -227,7 +229,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                   'Below you will find a summary of your courses.',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyText2,
+                                                      .bodySmall,
                                                 ),
                                               ),
                                             ],
@@ -250,22 +252,22 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                                      .primary,
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle2
+                                                      .titleSmall
                                                       .override(
                                                         fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .subtitle2Family,
+                                                                .titleSmallFamily,
                                                         color: Colors.white,
                                                         useGoogleFonts: GoogleFonts
                                                                 .asMap()
                                                             .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2Family),
+                                                                    .titleSmallFamily),
                                                       ),
                                               elevation: 3.0,
                                               borderSide: BorderSide(
@@ -287,7 +289,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                   child: Text(
                                     'Your Top Classes',
                                     style:
-                                        FlutterFlowTheme.of(context).subtitle2,
+                                        FlutterFlowTheme.of(context).titleSmall,
                                   ),
                                 ),
                                 Container(
@@ -337,7 +339,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .tertiaryColor,
+                                                              .tertiary,
                                                       borderRadius:
                                                           BorderRadius.only(
                                                         bottomLeft:
@@ -399,7 +401,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                             'No-Code Platform Design',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .subtitle1
+                                                                .titleMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Outfit',
@@ -414,14 +416,14 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .subtitle1Family),
+                                                                              .titleMediumFamily),
                                                                 ),
                                                           ),
                                                           Text(
                                                             '12 Projects',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1
+                                                                .bodyMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Outfit',
@@ -436,7 +438,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family),
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                           ),
                                                         ],
@@ -552,7 +554,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                             '21 students',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1
+                                                                .bodyMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Outfit',
@@ -567,7 +569,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family),
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                           ),
                                                         ),
@@ -588,7 +590,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                       progressColor:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .tertiaryColor,
+                                                              .tertiary,
                                                       backgroundColor:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -635,7 +637,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
+                                                              .primary,
                                                       borderRadius:
                                                           BorderRadius.only(
                                                         bottomLeft:
@@ -697,7 +699,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                             'Code for no-coders',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .subtitle1
+                                                                .titleMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Outfit',
@@ -712,7 +714,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .subtitle1Family),
+                                                                              .titleMediumFamily),
                                                                 ),
                                                           ),
                                                           Row(
@@ -724,7 +726,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                                 '12 Projects',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyText1
+                                                                    .bodyMedium
                                                                     .override(
                                                                       fontFamily:
                                                                           'Outfit',
@@ -738,7 +740,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                                       useGoogleFonts: GoogleFonts
                                                                               .asMap()
                                                                           .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyText1Family),
+                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                     ),
                                                               ),
                                                             ],
@@ -856,7 +858,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                             '16 students',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1
+                                                                .bodyMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Outfit',
@@ -871,7 +873,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family),
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                           ),
                                                         ),
@@ -892,7 +894,7 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
                                                       progressColor:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
+                                                              .primary,
                                                       backgroundColor:
                                                           FlutterFlowTheme.of(
                                                                   context)

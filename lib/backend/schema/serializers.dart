@@ -7,8 +7,11 @@ import 'scenario_record.dart';
 import 'scenario_results_record.dart';
 import 'depot_record.dart';
 import 'scenario_results_customers_record.dart';
-import 'psr_groups_record.dart';
 import 'stock_depot_mapping_record.dart';
+import 'psr_record.dart';
+import 'psr_categories_record.dart';
+import 'psr_category_options_record.dart';
+import 'psr_category_group_options_record.dart';
 
 import 'index.dart';
 
@@ -25,8 +28,11 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   ScenarioResultsRecord,
   DepotRecord,
   ScenarioResultsCustomersRecord,
-  PsrGroupsRecord,
   StockDepotMappingRecord,
+  PsrRecord,
+  PsrCategoriesRecord,
+  PsrCategoryOptionsRecord,
+  PsrCategoryGroupOptionsRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
@@ -211,6 +217,9 @@ Map<String, dynamic> mapToFirestore(Map<String, dynamic> data) =>
       }
       return MapEntry(key, value);
     });
+
+List<GeoPoint>? convertToGeoPointList(List<LatLng>? list) =>
+    list?.map((e) => e.toGeoPoint()).toList();
 
 extension GeoPointExtension on LatLng {
   GeoPoint toGeoPoint() => GeoPoint(latitude, longitude);
