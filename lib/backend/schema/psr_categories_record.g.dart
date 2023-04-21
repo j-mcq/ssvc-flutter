@@ -25,10 +25,10 @@ class _$PsrCategoriesRecordSerializer
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
-    value = object.psrGroup;
+    value = object.psrCategory;
     if (value != null) {
       result
-        ..add('psr_group')
+        ..add('psr_category')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
@@ -56,8 +56,8 @@ class _$PsrCategoriesRecordSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'psr_group':
-          result.psrGroup = serializers.deserialize(value,
+        case 'psr_category':
+          result.psrCategory = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
@@ -77,7 +77,7 @@ class _$PsrCategoriesRecordSerializer
 
 class _$PsrCategoriesRecord extends PsrCategoriesRecord {
   @override
-  final DocumentReference<Object?>? psrGroup;
+  final DocumentReference<Object?>? psrCategory;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -85,7 +85,7 @@ class _$PsrCategoriesRecord extends PsrCategoriesRecord {
           [void Function(PsrCategoriesRecordBuilder)? updates]) =>
       (new PsrCategoriesRecordBuilder()..update(updates))._build();
 
-  _$PsrCategoriesRecord._({this.psrGroup, this.ffRef}) : super._();
+  _$PsrCategoriesRecord._({this.psrCategory, this.ffRef}) : super._();
 
   @override
   PsrCategoriesRecord rebuild(
@@ -100,14 +100,14 @@ class _$PsrCategoriesRecord extends PsrCategoriesRecord {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is PsrCategoriesRecord &&
-        psrGroup == other.psrGroup &&
+        psrCategory == other.psrCategory &&
         ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, psrGroup.hashCode);
+    _$hash = $jc(_$hash, psrCategory.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -116,7 +116,7 @@ class _$PsrCategoriesRecord extends PsrCategoriesRecord {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'PsrCategoriesRecord')
-          ..add('psrGroup', psrGroup)
+          ..add('psrCategory', psrCategory)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -126,10 +126,10 @@ class PsrCategoriesRecordBuilder
     implements Builder<PsrCategoriesRecord, PsrCategoriesRecordBuilder> {
   _$PsrCategoriesRecord? _$v;
 
-  DocumentReference<Object?>? _psrGroup;
-  DocumentReference<Object?>? get psrGroup => _$this._psrGroup;
-  set psrGroup(DocumentReference<Object?>? psrGroup) =>
-      _$this._psrGroup = psrGroup;
+  DocumentReference<Object?>? _psrCategory;
+  DocumentReference<Object?>? get psrCategory => _$this._psrCategory;
+  set psrCategory(DocumentReference<Object?>? psrCategory) =>
+      _$this._psrCategory = psrCategory;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -142,7 +142,7 @@ class PsrCategoriesRecordBuilder
   PsrCategoriesRecordBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _psrGroup = $v.psrGroup;
+      _psrCategory = $v.psrCategory;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -164,8 +164,8 @@ class PsrCategoriesRecordBuilder
   PsrCategoriesRecord build() => _build();
 
   _$PsrCategoriesRecord _build() {
-    final _$result =
-        _$v ?? new _$PsrCategoriesRecord._(psrGroup: psrGroup, ffRef: ffRef);
+    final _$result = _$v ??
+        new _$PsrCategoriesRecord._(psrCategory: psrCategory, ffRef: ffRef);
     replace(_$result);
     return _$result;
   }
