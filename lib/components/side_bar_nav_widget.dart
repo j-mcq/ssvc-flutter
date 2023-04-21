@@ -109,6 +109,10 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
               child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 onTap: () async {
                   context.pushNamed('homePage');
                 },
@@ -142,6 +146,10 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
               child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 onTap: () async {
                   context.pushNamed('scenario');
                 },
@@ -175,6 +183,10 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
               child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 onTap: () async {
                   context.pushNamed(
                     'stockInformation',

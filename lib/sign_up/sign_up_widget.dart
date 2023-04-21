@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -45,12 +45,12 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, -1.0),
             child: SingleChildScrollView(
@@ -286,10 +286,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       GoRouter.of(context).prepareAuthEvent();
 
-                                      final user = await createAccountWithEmail(
+                                      final user = await authManager
+                                          .createAccountWithEmail(
                                         context,
                                         _model.emailAddressController.text,
                                         _model.passwordController.text,
@@ -374,8 +379,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                     ),
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInWithGoogle(context);
+                                      final user = await authManager
+                                          .signInWithGoogle(context);
                                       if (user == null) {
                                         return;
                                       }
@@ -402,8 +407,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                     ),
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInWithApple(context);
+                                      final user = await authManager
+                                          .signInWithApple(context);
                                       if (user == null) {
                                         return;
                                       }
@@ -419,6 +424,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 24.0, 0.0, 24.0),
                               child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
                                 onTap: () async {
                                   context.pushNamed('signIn');
                                 },
@@ -472,8 +481,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInAnonymously(context);
+                                      final user = await authManager
+                                          .signInAnonymously(context);
                                       if (user == null) {
                                         return;
                                       }

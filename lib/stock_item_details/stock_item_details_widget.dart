@@ -76,12 +76,12 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Row(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -358,6 +358,10 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                           MainAxisAlignment.start,
                                       children: [
                                         InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
                                           onTap: () async {
                                             final selectedMedia =
                                                 await selectMediaWithSourceBottomSheet(
@@ -403,6 +407,8 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                               width: m
                                                                   .dimensions
                                                                   ?.width,
+                                                              blurHash:
+                                                                  m.blurHash,
                                                             ))
                                                         .toList();
 
@@ -588,8 +594,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         20.0, 0.0, 20.0, 12.0),
                                     child: FlutterFlowDropDown<String>(
-                                      controller: _model.stateController ??=
-                                          FormFieldController<String>(null),
+                                      controller:
+                                          _model.stateValueController ??=
+                                              FormFieldController<String>(null),
                                       options: [
                                         'State',
                                         'Alabama',

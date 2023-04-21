@@ -34,7 +34,7 @@ class StockItemDetailsModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? myBioControllerValidator;
   // State field(s) for state widget.
   String? stateValue;
-  FormFieldController<String>? stateController;
+  FormFieldController<String>? stateValueController;
   // State field(s) for itemName widget.
   TextEditingController? itemNameController2;
   String? Function(BuildContext, String?)? itemNameController2Validator;

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -44,12 +44,12 @@ class _SignInWidgetState extends State<SignInWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, -1.0),
             child: SingleChildScrollView(
@@ -310,10 +310,15 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     ),
                                   ),
                                   InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       GoRouter.of(context).prepareAuthEvent();
 
-                                      final user = await signInWithEmail(
+                                      final user =
+                                          await authManager.signInWithEmail(
                                         context,
                                         _model.emailAddressController.text,
                                         _model.passwordController.text,
@@ -381,8 +386,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     ),
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInWithGoogle(context);
+                                      final user = await authManager
+                                          .signInWithGoogle(context);
                                       if (user == null) {
                                         return;
                                       }
@@ -408,8 +413,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     ),
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInWithApple(context);
+                                      final user = await authManager
+                                          .signInWithApple(context);
                                       if (user == null) {
                                         return;
                                       }
@@ -424,6 +429,10 @@ class _SignInWidgetState extends State<SignInWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 24.0, 0.0, 24.0),
                               child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
                                 onTap: () async {
                                   context.pushNamed(
                                     'signUp',
@@ -487,8 +496,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInAnonymously(context);
+                                      final user = await authManager
+                                          .signInAnonymously(context);
                                       if (user == null) {
                                         return;
                                       }

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -41,43 +41,44 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      appBar: responsiveVisibility(
-        context: context,
-        tabletLandscape: false,
-        desktop: false,
-      )
-          ? AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-              automaticallyImplyLeading: false,
-              leading: FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30.0,
-                borderWidth: 1.0,
-                buttonSize: 60.0,
-                icon: Icon(
-                  Icons.arrow_back_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  size: 30.0,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: responsiveVisibility(
+          context: context,
+          tabletLandscape: false,
+          desktop: false,
+        )
+            ? AppBar(
+                backgroundColor:
+                    FlutterFlowTheme.of(context).secondaryBackground,
+                automaticallyImplyLeading: false,
+                leading: FlutterFlowIconButton(
+                  borderColor: Colors.transparent,
+                  borderRadius: 30.0,
+                  borderWidth: 1.0,
+                  buttonSize: 60.0,
+                  icon: Icon(
+                    Icons.arrow_back_rounded,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 30.0,
+                  ),
+                  onPressed: () async {
+                    context.pop();
+                  },
                 ),
-                onPressed: () async {
-                  context.pop();
-                },
-              ),
-              title: Text(
-                'Confirm your Code',
-                style: FlutterFlowTheme.of(context).headlineSmall,
-              ),
-              actions: [],
-              centerTitle: false,
-              elevation: 0.0,
-            )
-          : null,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Align(
+                title: Text(
+                  'Confirm your Code',
+                  style: FlutterFlowTheme.of(context).headlineSmall,
+                ),
+                actions: [],
+                centerTitle: false,
+                elevation: 0.0,
+              )
+            : null,
+        body: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -144,6 +145,7 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 0.0),
                       child: PinCodeTextField(
+                        autoDisposeControllers: false,
                         appContext: context,
                         length: 6,
                         textStyle: FlutterFlowTheme.of(context)
@@ -159,6 +161,8 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         enableActiveFill: false,
                         autoFocus: true,
+                        enablePinAutofill: true,
+                        errorTextSpace: 16.0,
                         showCursor: true,
                         cursorColor: FlutterFlowTheme.of(context).primary,
                         obscureText: false,
@@ -181,7 +185,10 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                               FlutterFlowTheme.of(context).secondaryText,
                         ),
                         controller: _model.pinCodeController,
-                        onChanged: (_) => {},
+                        onChanged: (_) {},
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: _model.pinCodeControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                     Padding(
@@ -199,7 +206,8 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                             );
                             return;
                           }
-                          final phoneVerifiedUser = await verifySmsCode(
+                          final phoneVerifiedUser =
+                              await authManager.verifySmsCode(
                             context: context,
                             smsCode: smsCodeVal,
                           );

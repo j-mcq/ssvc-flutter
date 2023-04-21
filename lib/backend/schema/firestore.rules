@@ -43,14 +43,40 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /psr_groups/{document} {
+    match /stock_depot_mapping/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
       allow delete: if false;
     }
 
-    match /stock_depot_mapping/{document} {
+    match /psr/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /psr/{parent}/psr_categories/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /{path=**}/psr_categories/{document} {
+      allow read: if true;
+    }
+
+
+    match /psr_category_options/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /psr_category_group_options/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;

@@ -18,9 +18,6 @@ abstract class ScenarioResultsCustomersRecord
   @BuiltValueField(wireName: 'psr_group_name')
   String? get psrGroupName;
 
-  @BuiltValueField(wireName: 'psr_group')
-  DocumentReference? get psrGroup;
-
   @BuiltValueField(wireName: 'number_impacted')
   int? get numberImpacted;
 
@@ -71,7 +68,6 @@ abstract class ScenarioResultsCustomersRecord
 Map<String, dynamic> createScenarioResultsCustomersRecordData({
   DocumentReference? scenario,
   String? psrGroupName,
-  DocumentReference? psrGroup,
   int? numberImpacted,
   int? numberRespondedTo,
   String? name,
@@ -83,7 +79,6 @@ Map<String, dynamic> createScenarioResultsCustomersRecordData({
       (s) => s
         ..scenario = scenario
         ..psrGroupName = psrGroupName
-        ..psrGroup = psrGroup
         ..numberImpacted = numberImpacted
         ..numberRespondedTo = numberRespondedTo
         ..name = name

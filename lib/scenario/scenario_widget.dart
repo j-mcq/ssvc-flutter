@@ -71,13 +71,13 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
       );
     }
 
-    return Scaffold(
-      key: scaffoldKey,
-      resizeToAvoidBottomInset: false,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Row(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -577,14 +577,20 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             Colors.white,
                                                         enableDrag: false,
                                                         context: context,
-                                                        builder: (context) {
-                                                          return Padding(
-                                                            padding:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .viewInsets,
-                                                            child:
-                                                                EnterRadiusWidget(),
+                                                        builder:
+                                                            (bottomSheetContext) {
+                                                          return GestureDetector(
+                                                            onTap: () => FocusScope
+                                                                    .of(context)
+                                                                .requestFocus(
+                                                                    _unfocusNode),
+                                                            child: Padding(
+                                                              padding: MediaQuery.of(
+                                                                      bottomSheetContext)
+                                                                  .viewInsets,
+                                                              child:
+                                                                  EnterRadiusWidget(),
+                                                            ),
                                                           );
                                                         },
                                                       ).then((value) =>

@@ -219,7 +219,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 12.0),
                       child: FlutterFlowDropDown<String>(
-                        controller: _model.stateController ??=
+                        controller: _model.stateValueController ??=
                             FormFieldController<String>(
                           _model.stateValue ??= 'State',
                         ),
