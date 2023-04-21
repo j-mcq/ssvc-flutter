@@ -1,37 +1,30 @@
-// Automatic FlutterFlow imports
-import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
+import 'dart:collection';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-// Begin custom widget code
-// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
-
+import 'package:google_maps_flutter/google_maps_flutter.dart' as gmf;
+import 'package:flutter/material.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
+import 'package:flutter/cupertino.dart';
+import '../../flutter_flow/lat_lng.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gmf;
 import 'dart:collection';
 
+import 'package:google_fonts/google_fonts.dart';
+
 class PolyMap extends StatefulWidget {
-  const PolyMap({
+  //PolyMap({Key key}) : super(key: key);
+
+  PolyMap({
     Key? key,
     this.width,
     this.height,
     this.location,
-    this.isPolygon,
-    this.isCircle,
-    this.polygon,
-    this.circle,
-    this.radius,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final LatLng? location;
-  final bool? isPolygon;
-  final bool? isCircle;
-  final String? polygon;
-  final String? circle;
-  final double? radius;
 
   @override
   _PolyMapState createState() => _PolyMapState();
@@ -165,7 +158,7 @@ class _PolyMapState extends State<PolyMap> {
               polygons: _polygons,
               myLocationEnabled: true,
               onTap: (point) {
-                if (widget.isPolygon!) {
+                if (_isPolygon) {
                   setState(() {
                     polygonLatLngs.add(point);
                     _setPolygon();
@@ -175,7 +168,7 @@ class _PolyMapState extends State<PolyMap> {
                     _markers.clear();
                     _setMarkers(point);
                   });
-                } else if (widget.isCircle!) {
+                } else if (_isCircle) {
                   setState(() {
                     _circles.clear();
                     _setCircles(point);
@@ -220,7 +213,7 @@ class _PolyMapState extends State<PolyMap> {
                               return AlertDialog(
                                 backgroundColor: Colors.grey[900],
                                 title: Text(
-                                  'Enter the impact radius (m)',
+                                  'Choose the radius (m)',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
