@@ -16,6 +16,8 @@ import 'schema/psr_record.dart';
 import 'schema/psr_categories_record.dart';
 import 'schema/psr_category_options_record.dart';
 import 'schema/psr_category_group_options_record.dart';
+import 'schema/polygon_points_record.dart';
+import 'schema/circles_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -34,6 +36,8 @@ export 'schema/psr_record.dart';
 export 'schema/psr_categories_record.dart';
 export 'schema/psr_category_options_record.dart';
 export 'schema/psr_category_group_options_record.dart';
+export 'schema/polygon_points_record.dart';
+export 'schema/circles_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -617,6 +621,118 @@ Future<FFFirestorePage<PsrCategoryGroupOptionsRecord>>
           pageSize: pageSize,
           isStream: isStream,
         );
+
+/// Functions to query PolygonPointsRecords (as a Stream and as a Future).
+Future<int> queryPolygonPointsRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      PolygonPointsRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<PolygonPointsRecord>> queryPolygonPointsRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      PolygonPointsRecord.collection(parent),
+      PolygonPointsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<PolygonPointsRecord>> queryPolygonPointsRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      PolygonPointsRecord.collection(parent),
+      PolygonPointsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<PolygonPointsRecord>> queryPolygonPointsRecordPage({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      PolygonPointsRecord.collection(parent),
+      PolygonPointsRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query CirclesRecords (as a Stream and as a Future).
+Future<int> queryCirclesRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CirclesRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CirclesRecord>> queryCirclesRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CirclesRecord.collection(parent),
+      CirclesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CirclesRecord>> queryCirclesRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CirclesRecord.collection(parent),
+      CirclesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<CirclesRecord>> queryCirclesRecordPage({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      CirclesRecord.collection(parent),
+      CirclesRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
 
 Future<int> queryCollectionCount(
   Query collection, {

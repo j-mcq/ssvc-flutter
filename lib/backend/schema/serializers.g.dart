@@ -7,7 +7,9 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(CirclesRecord.serializer)
       ..add(DepotRecord.serializer)
+      ..add(PolygonPointsRecord.serializer)
       ..add(PsrCategoriesRecord.serializer)
       ..add(PsrCategoryGroupOptionsRecord.serializer)
       ..add(PsrCategoryOptionsRecord.serializer)

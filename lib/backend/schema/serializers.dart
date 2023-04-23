@@ -12,6 +12,8 @@ import 'psr_record.dart';
 import 'psr_categories_record.dart';
 import 'psr_category_options_record.dart';
 import 'psr_category_group_options_record.dart';
+import 'polygon_points_record.dart';
+import 'circles_record.dart';
 
 import 'index.dart';
 
@@ -33,6 +35,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   PsrCategoriesRecord,
   PsrCategoryOptionsRecord,
   PsrCategoryGroupOptionsRecord,
+  PolygonPointsRecord,
+  CirclesRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

@@ -130,6 +130,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'stockInformation': StockInformationWidget(),
       'scenarioCopy': ScenarioCopyWidget(),
       'stockItemDetails': StockItemDetailsWidget(),
+      'scenarios': ScenariosWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
@@ -188,6 +189,14 @@ class _NavBarPageState extends State<NavBarPage> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_circle_outlined,
+                size: 24.0,
+              ),
+              label: '•',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add_business_rounded,
                 size: 24.0,
               ),
               label: '•',
