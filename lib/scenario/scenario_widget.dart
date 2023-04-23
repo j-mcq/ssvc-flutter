@@ -465,6 +465,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                           polygon: _model.polygon,
                                           circle: _model.circle,
                                           radius: _model.radius,
+                                          scenario: widget.scenarioReference,
                                         ),
                                       ),
                                     ),
