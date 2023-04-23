@@ -1,4 +1,8 @@
 // Automatic FlutterFlow imports
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ssvc/components/enter_radius_widget.dart';
+import 'package:ssvc/flutter_flow/flutter_flow_widgets.dart';
+
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,6 +14,7 @@ import 'package:flutter/material.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gmf;
 import 'dart:collection';
+import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
 
 class PolyMap extends StatefulWidget {
   const PolyMap({
@@ -22,6 +27,7 @@ class PolyMap extends StatefulWidget {
     this.polygon,
     this.circle,
     this.radius,
+    this.scenario,
   }) : super(key: key);
 
   final double? width;
@@ -32,12 +38,14 @@ class PolyMap extends StatefulWidget {
   final String? polygon;
   final String? circle;
   final double? radius;
+  final DocumentReference? scenario;
 
   @override
   _PolyMapState createState() => _PolyMapState();
 }
 
 class _PolyMapState extends State<PolyMap> {
+  final _unfocusNode = FocusNode();
   // Location
 
   // Maps
@@ -58,10 +66,36 @@ class _PolyMapState extends State<PolyMap> {
   bool _isPolygon = true; //Default
   bool _isMarker = false;
   bool _isCircle = false;
+  String _lastItemType = 'polygon';
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _unfocusNode.dispose();
+  }
+
+  // Start the map with this marker setted up
+  void _onMapCreated(gmf.GoogleMapController controller) {
+    _googleMapController = controller;
+
+    setState(() {
+      _setMarkerIcon();
+      _markers.add(
+        gmf.Marker(
+          markerId: gmf.MarkerId('0'),
+          position:
+              gmf.LatLng(widget.location!.latitude, widget.location!.longitude),
+          infoWindow: gmf.InfoWindow(
+              title: 'Outage Loaction',
+              snippet: 'Center of the outage location'),
+          //icon: _markerIcon,
+        ),
+      );
+    });
   }
 
   // This function is to change the marker icon
@@ -70,6 +104,7 @@ class _PolyMapState extends State<PolyMap> {
         ImageConfiguration(), 'assets/farm.png');
   }
 
+  void _loadData() async {}
   // Draw Polygon to the map
   void _setPolygon() {
     final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
@@ -104,168 +139,383 @@ class _PolyMapState extends State<PolyMap> {
     setState(() {
       print(
           'Marker | Latitude: ${point.latitude}  Longitude: ${point.longitude}');
-      _markers.add(
-        gmf.Marker(
-          markerId: gmf.MarkerId(markerIdVal),
-          position: point,
-        ),
-      );
+
+      _markers.add(gmf.Marker(
+        markerId: gmf.MarkerId(markerIdVal),
+        position: point,
+      ));
     });
   }
 
-  // Start the map with this marker setted up
-  void _onMapCreated(gmf.GoogleMapController controller) {
-    _googleMapController = controller;
-
+  // Remove last polygon point
+  void _removeLastItemAdded() {
     setState(() {
-      _markers.add(
-        gmf.Marker(
-          markerId: gmf.MarkerId('0'),
-          position:
-              gmf.LatLng(widget.location!.latitude, widget.location!.longitude),
-          infoWindow: gmf.InfoWindow(
-              title: 'Outage Loaction',
-              snippet: 'Center of the outage location'),
-          //icon: _markerIcon,
-        ),
-      );
+      if (_lastItemType == 'polygon') {
+        // Remove last polygon point
+        if (polygonLatLngs.length > 0) {
+          polygonLatLngs.removeLast();
+        }
+        // remove associated marker
+        if (_markers.length > 0) {
+          _markers.remove(_markers.last);
+        }
+      } else if (_lastItemType == 'circle') {
+        if (_circles.length > 0) {
+          _circles.remove(_circles.last);
+        }
+      }
     });
   }
 
-  Widget _fabPolygon() {
-    return FloatingActionButton.extended(
-      onPressed: () {
-        //Remove the last point setted at the polygon
-        setState(() {
-          polygonLatLngs.removeLast();
-        });
-      },
-      icon: Icon(Icons.undo),
-      label: Text('Undo point'),
-      backgroundColor: Colors.orange,
-    );
+  bool checkLocationIsInOutagArea(mtk.LatLng? propertyLocation) {
+    // convert to maps_toolkit LatLng
+
+    mtk.LatLng propertyLocationMtk = mtk.LatLng(
+        _markers.first.position.latitude, _markers.first.position.longitude);
+
+    propertyLocation = propertyLocationMtk;
+    final polygonLatLngsMtk =
+        polygonLatLngs.map((e) => mtk.LatLng(e.latitude, e.longitude)).toList();
+
+    final isInPolygon = mtk.PolygonUtil.containsLocation(
+        propertyLocation, polygonLatLngsMtk, true);
+    return isInPolygon;
+  }
+
+  bool saveData(mtk.LatLng? propertyLocation) {
+    // convert to maps_toolkit LatLng
+
+    mtk.LatLng propertyLocationMtk = mtk.LatLng(
+        _markers.first.position.latitude, _markers.first.position.longitude);
+
+    propertyLocation = propertyLocationMtk;
+    final polygonLatLngsMtk =
+        polygonLatLngs.map((e) => mtk.LatLng(e.latitude, e.longitude)).toList();
+
+    final isInPolygon = mtk.PolygonUtil.containsLocation(
+        propertyLocation, polygonLatLngsMtk, true);
+    return isInPolygon;
+  }
+
+  bool rayCastIntersect(LatLng tap, LatLng vertA, LatLng vertB) {
+    double aY = vertA.latitude;
+    double bY = vertB.latitude;
+    double aX = vertA.longitude;
+    double bX = vertB.longitude;
+    double pY = tap.latitude;
+    double pX = tap.longitude;
+
+    if ((aY > pY && bY > pY) || (aY < pY && bY < pY) || (aX < pX && bX < pX)) {
+      return false; // a and b can't both be above or below pt.y, and a or
+      // b must be east of pt.x
+    }
+
+    double m = (aY - bY) / (aX - bX); // Rise over run
+    double bee = (-aX) * m + aY; // y = mx + b
+    double x = (pY - bee) / m; // algebra is neat!
+
+    return x > pX;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        floatingActionButton:
-            polygonLatLngs.length > 0 && _isPolygon ? _fabPolygon() : null,
-        body: Stack(
-          children: <Widget>[
-            gmf.GoogleMap(
-              initialCameraPosition: gmf.CameraPosition(
-                target: gmf.LatLng(
-                    widget.location!.latitude, widget.location!.longitude),
-                zoom: 16,
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width - 294,
+              height: 500,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).primary,
               ),
-              mapType: gmf.MapType.hybrid,
-              markers: _markers,
-              circles: _circles,
-              polygons: _polygons,
-              myLocationEnabled: true,
-              onTap: (point) {
-                if (_isPolygon) {
-                  setState(() {
-                    polygonLatLngs.add(point);
-                    _setPolygon();
-                  });
-                } else if (_isMarker) {
-                  setState(() {
-                    _markers.clear();
-                    _setMarkers(point);
-                  });
-                } else if (_isCircle) {
-                  setState(() {
-                    _circles.clear();
-                    _setCircles(point);
-                  });
-                }
-              },
+              child: gmf.GoogleMap(
+                initialCameraPosition: gmf.CameraPosition(
+                  target: gmf.LatLng(
+                      widget.location!.latitude, widget.location!.longitude),
+                  zoom: 16,
+                ),
+                mapType: gmf.MapType.hybrid,
+                markers: _markers,
+                onMapCreated: _onMapCreated,
+                circles: _circles,
+                polygons: _polygons,
+                myLocationEnabled: true,
+                onTap: (point) {
+                  if (_isPolygon) {
+                    setState(() {
+                      _lastItemType = 'polygon';
+                      polygonLatLngs.add(point);
+                      _setMarkers(point);
+                      _setPolygon();
+                    });
+                  } else if (_isMarker) {
+                    setState(() {
+                      _markers.clear();
+                      _setMarkers(point);
+                    });
+                  } else if (_isCircle) {
+                    setState(() {
+                      _circles.clear();
+                      _lastItemType = 'circle';
+                      _setCircles(point);
+                    });
+                  }
+                },
+              ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                children: <Widget>[
-                  ElevatedButton(
-                      onPressed: () {
-                        _isPolygon = true;
-                        _isMarker = false;
-                        _isCircle = false;
-                      },
-                      child: Text(
-                        'Polygon',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
-                      )),
-                  ElevatedButton(
-                      onPressed: () {
-                        _isPolygon = false;
-                        _isMarker = true;
-                        _isCircle = false;
-                      },
-                      child: Text('Marker',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white))),
-                  ElevatedButton(
-                      onPressed: () async {
-                        _isPolygon = false;
-                        _isMarker = false;
-                        _isCircle = true;
-                        radius = 50;
-                        await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                backgroundColor: Colors.grey[900],
-                                title: Text(
-                                  'Enter the impact radius (m)',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                                content: Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Material(
-                                      color: Colors.black,
-                                      child: TextField(
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.white),
-                                        decoration: InputDecoration(
-                                          hintText: 'Ex: 100',
-                                          suffixText: 'meters',
-                                        ),
-                                        keyboardType:
-                                            TextInputType.numberWithOptions(),
-                                        onChanged: (input) {
-                                          setState(() {
-                                            radius = double.parse(input);
-                                          });
-                                        },
-                                      ),
-                                    )),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text(
-                                        'Ok',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )),
-                                ],
-                              );
-                            });
-                      },
-                      child: Text('Circle',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white))),
-                ],
-              ),
-            )
           ],
-        ));
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width - 294,
+          height: 100,
+          decoration: BoxDecoration(),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () {
+                    //Remove the last point setted at the polygon
+                    _removeLastItemAdded();
+                  },
+                  text: 'Remove Last',
+                  options: FFButtonOptions(
+                    width: 130.0,
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.white,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.white,
+                      enableDrag: false,
+                      context: context,
+                      builder: (bottomSheetContext) {
+                        return GestureDetector(
+                          onTap: () =>
+                              FocusScope.of(context).requestFocus(_unfocusNode),
+                          child: Padding(
+                            padding:
+                                MediaQuery.of(bottomSheetContext).viewInsets,
+                            child: EnterRadiusWidget(),
+                          ),
+                        );
+                      },
+                    ).then((value) => setState(() {}));
+
+                    setState(() {
+                      _isPolygon = false;
+                      _isMarker = false;
+                      _isCircle = true;
+                      radius = FFAppState().impactRadius;
+                    });
+                  },
+                  text: 'Add Circle',
+                  options: FFButtonOptions(
+                    width: 130.0,
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.white,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    setState(() {
+                      _isPolygon = true;
+                      _isMarker = false;
+                      _isCircle = false;
+                    });
+                  },
+                  text: 'Add Polygon',
+                  options: FFButtonOptions(
+                    width: 130.0,
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.white,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    checkLocationIsInOutagArea(null);
+                  },
+                  text: 'Calculate Response',
+                  options: FFButtonOptions(
+                    width: 130.0,
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.white,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+
+    // Stack(
+    //   children: <Widget>[
+    //
+    //     Align(
+    //       alignment: Alignment.bottomCenter,
+    //       child: Row(
+    //         children: <Widget>[
+    //           ElevatedButton(
+    //               onPressed: () {
+    // _isPolygon = true;
+    // _isMarker = false;
+    // _isCircle = false;
+    //               },
+    //               child: Text(
+    //                 'Polygon',
+    //                 style: TextStyle(
+    //                     fontWeight: FontWeight.bold, color: Colors.white),
+    //               )),
+    //           ElevatedButton(
+    //               onPressed: () {
+    //                 _isPolygon = false;
+    //                 _isMarker = true;
+    //                 _isCircle = false;
+    //               },
+    //               child: Text('Marker',
+    //                   style: TextStyle(
+    //                       fontWeight: FontWeight.bold,
+    //                       color: Colors.white))),
+    //           ElevatedButton(
+    //               onPressed: () async {
+    //                 _isPolygon = false;
+    //                 _isMarker = false;
+    //                 _isCircle = true;
+    //                 radius = 50;
+    //                 await showDialog(
+    //                     context: context,
+    //                     builder: (alertDialogContext) {
+    //                       return AlertDialog(
+    //                         backgroundColor: Colors.grey[900],
+    //                         title: Text(
+    //                           'Enter the impact radius (m)',
+    //                           style: TextStyle(
+    //                               fontWeight: FontWeight.bold,
+    //                               color: Colors.white),
+    //                         ),
+    //                         content: Padding(
+    //                             padding: EdgeInsets.all(8),
+    //                             child: Material(
+    //                               color: Colors.black,
+    //                               child: TextField(
+    //                                 style: TextStyle(
+    //                                     fontSize: 16, color: Colors.white),
+    //                                 decoration: InputDecoration(
+    //                                   hintText: 'Ex: 100',
+    //                                   suffixText: 'meters',
+    //                                 ),
+    //                                 keyboardType:
+    //                                     TextInputType.numberWithOptions(),
+    //                                 onChanged: (input) {
+    //                                   setState(() {
+    //                                     radius = double.parse(input);
+    //                                   });
+    //                                 },
+    //                               ),
+    //                             )),
+    //                         actions: [
+    //                           TextButton(
+    //                               onPressed: () => Navigator.pop(context),
+    //                               child: Text(
+    //                                 'Ok',
+    //                                 style: TextStyle(
+    //                                   fontWeight: FontWeight.bold,
+    //                                 ),
+    //                               )),
+    //                         ],
+    //                       );
+    //                     });
+    //               },
+    //               child: Text('Circle',
+    //                   style: TextStyle(
+    //                       fontWeight: FontWeight.bold,
+    //                       color: Colors.white))),
+    //         ],
+    //       ),
+    //     )
+    //   ],
+    // ));
   }
 }

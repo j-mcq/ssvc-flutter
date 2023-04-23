@@ -440,8 +440,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                     ),
                                   ),
                                   Container(
+                                    height: 800.0,
                                     width: double.infinity,
-                                    height: 500.0,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
@@ -450,16 +450,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
                                       child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                1.0,
-                                        height: 500.0,
                                         child: custom_widgets.PolyMap(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
                                               1.0,
-                                          height: 500.0,
+                                          height: 400.0,
                                           location: currentUserLocationValue,
                                           isPolygon: _model.isPolygon,
                                           isCircle: _model.isCircle,
