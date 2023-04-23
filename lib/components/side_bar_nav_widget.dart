@@ -151,7 +151,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.pushNamed('scenario');
+                  context.pushNamed('scenarios');
                 },
                 child: Container(
                   width: double.infinity,
@@ -171,7 +171,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                           child: widget.twoIcon!,
                         ),
                         Text(
-                          'Scenario',
+                          'Scenarios',
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],
