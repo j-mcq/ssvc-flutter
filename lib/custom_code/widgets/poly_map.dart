@@ -21,24 +21,16 @@ class PolyMap extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    this.location,
-    this.isPolygon,
-    this.isCircle,
-    this.polygon,
-    this.circle,
-    this.radius,
-    this.scenario,
+    required this.scenario,
+    this.currentLocation,
+    this.mapCenterLocation,
   }) : super(key: key);
 
   final double? width;
   final double? height;
-  final LatLng? location;
-  final bool? isPolygon;
-  final bool? isCircle;
-  final String? polygon;
-  final String? circle;
-  final double? radius;
   final DocumentReference? scenario;
+  final LatLng? currentLocation;
+  final LatLng? mapCenterLocation;
 
   @override
   _PolyMapState createState() => _PolyMapState();
@@ -63,10 +55,11 @@ class _PolyMapState extends State<PolyMap> {
   int _markerIdCounter = 1;
 
   // Type controllers
-  bool _isPolygon = true; //Default
+  bool _isPolygon = true; // Default
   bool _isMarker = false;
   bool _isCircle = false;
-  String _lastItemType = 'polygon';
+  String _lastItemType = 'polygon'; // Default
+  double _zoomLevel = 16; // Default
 
   @override
   void initState() {
@@ -87,8 +80,7 @@ class _PolyMapState extends State<PolyMap> {
       _markers.add(
         gmf.Marker(
           markerId: gmf.MarkerId('0'),
-          position:
-              gmf.LatLng(widget.location!.latitude, widget.location!.longitude),
+          position: _getStartingMapLocation(),
           infoWindow: gmf.InfoWindow(
               title: 'Outage Loaction',
               snippet: 'Center of the outage location'),
@@ -98,13 +90,79 @@ class _PolyMapState extends State<PolyMap> {
     });
   }
 
+  gmf.LatLng _getStartingMapLocation() {
+    if (widget.mapCenterLocation != null) {
+      return gmf.LatLng(widget.mapCenterLocation!.latitude,
+          widget.mapCenterLocation!.longitude);
+    }
+
+    if (widget.currentLocation != null) {
+      return gmf.LatLng(
+          widget.currentLocation!.latitude, widget.currentLocation!.longitude);
+    }
+    // else retun center of SPEN location
+    _zoomLevel = 10;
+    return gmf.LatLng(53.178703, -2.994242);
+  }
+
   // This function is to change the marker icon
   void _setMarkerIcon() async {
     _markerIcon = await gmf.BitmapDescriptor.fromAssetImage(
         ImageConfiguration(), 'assets/farm.png');
   }
 
-  void _loadData() async {}
+  void _loadData() async {
+    if (widget.scenario != null) {
+      final polygonPoints =
+          await queryPolygonPointsRecordOnce(parent: widget.scenario!);
+      final circles = await queryCirclesRecordOnce(parent: widget.scenario!);
+// if there are polygonPoints then iterate through and add to _polygons
+      if (polygonPoints.isNotEmpty) {
+        polygonPoints.forEach((element) {
+          polygonLatLngs.add(gmf.LatLng(element.latitude!, element.longitude!));
+        });
+        _setPolygon();
+      }
+      // if there are circles then iterate through and add to _circles
+      if (circles.isNotEmpty) {
+        circles.forEach((element) {
+          _setCircles(gmf.LatLng(element.latitude!, element.longitude!));
+        });
+      }
+    }
+  }
+
+  void _saveData() async {
+    if (widget.scenario != null) {
+      // for each point in polygonLatLngs save to the database
+      polygonLatLngs.forEach((element) async {
+        final polygonPointsRecordData = createPolygonPointsRecordData(
+          latitude: element.latitude,
+          longitude: element.longitude,
+        );
+        await PolygonPointsRecord.createDoc(widget.scenario!)
+            .set(polygonPointsRecordData);
+      });
+
+      final polygonPoints =
+          await queryPolygonPointsRecordOnce(parent: widget.scenario!);
+      final circles = await queryCirclesRecordOnce(parent: widget.scenario!);
+// if there are polygonPoints then iterate through and add to _polygons
+      if (polygonPoints.isNotEmpty) {
+        polygonPoints.forEach((element) {
+          polygonLatLngs.add(gmf.LatLng(element.latitude!, element.longitude!));
+        });
+        _setPolygon();
+      }
+      // if there are circles then iterate through and add to _circles
+      if (circles.isNotEmpty) {
+        circles.forEach((element) {
+          _setCircles(gmf.LatLng(element.latitude!, element.longitude!));
+        });
+      }
+    }
+  }
+
   // Draw Polygon to the map
   void _setPolygon() {
     final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
@@ -233,9 +291,8 @@ class _PolyMapState extends State<PolyMap> {
               ),
               child: gmf.GoogleMap(
                 initialCameraPosition: gmf.CameraPosition(
-                  target: gmf.LatLng(
-                      widget.location!.latitude, widget.location!.longitude),
-                  zoom: 16,
+                  target: _getStartingMapLocation(),
+                  zoom: _zoomLevel,
                 ),
                 mapType: gmf.MapType.hybrid,
                 markers: _markers,
@@ -402,7 +459,7 @@ class _PolyMapState extends State<PolyMap> {
                   },
                   text: 'Calculate Response',
                   options: FFButtonOptions(
-                    width: 130.0,
+                    width: 160.0,
                     height: 40.0,
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     iconPadding:
