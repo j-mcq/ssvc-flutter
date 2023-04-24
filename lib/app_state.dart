@@ -66,6 +66,12 @@ class FFAppState extends ChangeNotifier {
   set circleLatLng(LatLng? _value) {
     _circleLatLng = _value;
   }
+
+  DocumentReference? _scenarioReference;
+  DocumentReference? get scenarioReference => _scenarioReference;
+  set scenarioReference(DocumentReference? _value) {
+    _scenarioReference = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
