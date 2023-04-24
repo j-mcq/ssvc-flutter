@@ -542,8 +542,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     _model.outCalculationResult =
                                                         await actions
                                                             .calculateScenarioResponse(
-                                                      FFAppState()
-                                                          .scenarioReference,
+                                                      widget.scenarioReference,
                                                       double.tryParse(_model
                                                           .itemNameController
                                                           .text),
