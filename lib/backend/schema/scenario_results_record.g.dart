@@ -54,6 +54,25 @@ class _$ScenarioResultsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.householdsImpacted;
+    if (value != null) {
+      result
+        ..add('households_impacted')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.psrHouseholdsImpacted;
+    if (value != null) {
+      result
+        ..add('psr_households_impacted')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.responseCoverage;
+    if (value != null) {
+      result
+        ..add('response_coverage')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -97,6 +116,18 @@ class _$ScenarioResultsRecordSerializer
           result.responseItemName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'households_impacted':
+          result.householdsImpacted = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'psr_households_impacted':
+          result.psrHouseholdsImpacted = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'response_coverage':
+          result.responseCoverage = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -120,6 +151,12 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
   @override
   final String? responseItemName;
   @override
+  final int? householdsImpacted;
+  @override
+  final int? psrHouseholdsImpacted;
+  @override
+  final double? responseCoverage;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ScenarioResultsRecord(
@@ -131,6 +168,9 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
       this.responseItem,
       this.numberRequired,
       this.responseItemName,
+      this.householdsImpacted,
+      this.psrHouseholdsImpacted,
+      this.responseCoverage,
       this.ffRef})
       : super._();
 
@@ -151,6 +191,9 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
         responseItem == other.responseItem &&
         numberRequired == other.numberRequired &&
         responseItemName == other.responseItemName &&
+        householdsImpacted == other.householdsImpacted &&
+        psrHouseholdsImpacted == other.psrHouseholdsImpacted &&
+        responseCoverage == other.responseCoverage &&
         ffRef == other.ffRef;
   }
 
@@ -161,6 +204,9 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
     _$hash = $jc(_$hash, responseItem.hashCode);
     _$hash = $jc(_$hash, numberRequired.hashCode);
     _$hash = $jc(_$hash, responseItemName.hashCode);
+    _$hash = $jc(_$hash, householdsImpacted.hashCode);
+    _$hash = $jc(_$hash, psrHouseholdsImpacted.hashCode);
+    _$hash = $jc(_$hash, responseCoverage.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -173,6 +219,9 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
           ..add('responseItem', responseItem)
           ..add('numberRequired', numberRequired)
           ..add('responseItemName', responseItemName)
+          ..add('householdsImpacted', householdsImpacted)
+          ..add('psrHouseholdsImpacted', psrHouseholdsImpacted)
+          ..add('responseCoverage', responseCoverage)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -202,6 +251,21 @@ class ScenarioResultsRecordBuilder
   set responseItemName(String? responseItemName) =>
       _$this._responseItemName = responseItemName;
 
+  int? _householdsImpacted;
+  int? get householdsImpacted => _$this._householdsImpacted;
+  set householdsImpacted(int? householdsImpacted) =>
+      _$this._householdsImpacted = householdsImpacted;
+
+  int? _psrHouseholdsImpacted;
+  int? get psrHouseholdsImpacted => _$this._psrHouseholdsImpacted;
+  set psrHouseholdsImpacted(int? psrHouseholdsImpacted) =>
+      _$this._psrHouseholdsImpacted = psrHouseholdsImpacted;
+
+  double? _responseCoverage;
+  double? get responseCoverage => _$this._responseCoverage;
+  set responseCoverage(double? responseCoverage) =>
+      _$this._responseCoverage = responseCoverage;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -217,6 +281,9 @@ class ScenarioResultsRecordBuilder
       _responseItem = $v.responseItem;
       _numberRequired = $v.numberRequired;
       _responseItemName = $v.responseItemName;
+      _householdsImpacted = $v.householdsImpacted;
+      _psrHouseholdsImpacted = $v.psrHouseholdsImpacted;
+      _responseCoverage = $v.responseCoverage;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -244,6 +311,9 @@ class ScenarioResultsRecordBuilder
             responseItem: responseItem,
             numberRequired: numberRequired,
             responseItemName: responseItemName,
+            householdsImpacted: householdsImpacted,
+            psrHouseholdsImpacted: psrHouseholdsImpacted,
+            responseCoverage: responseCoverage,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
