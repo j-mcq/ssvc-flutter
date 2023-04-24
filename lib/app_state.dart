@@ -72,6 +72,18 @@ class FFAppState extends ChangeNotifier {
   set scenarioReference(DocumentReference? _value) {
     _scenarioReference = _value;
   }
+
+  LatLng? _mapCenterLocation;
+  LatLng? get mapCenterLocation => _mapCenterLocation;
+  set mapCenterLocation(LatLng? _value) {
+    _mapCenterLocation = _value;
+  }
+
+  double _mapZoomLevel = 0.0;
+  double get mapZoomLevel => _mapZoomLevel;
+  set mapZoomLevel(double _value) {
+    _mapZoomLevel = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
