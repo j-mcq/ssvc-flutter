@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gmf;
 import 'dart:collection';
-import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
+//import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class PolyMap extends StatefulWidget {
@@ -158,6 +158,11 @@ class _PolyMapState extends State<PolyMap> {
       _polygons.first.points.clear();
       _polygons.first.points
           .addAll(polygonLatLngs.map((e) => e.latLng).toList());
+
+      FFAppState().polygonLatLngList.clear();
+      FFAppState().polygonLatLngList.addAll(polygonLatLngs
+          .map((e) => LatLng(e.latLng.latitude, e.latLng.longitude))
+          .toList());
     }
   }
 
@@ -174,6 +179,9 @@ class _PolyMapState extends State<PolyMap> {
         fillColor: Colors.redAccent.withOpacity(0.5),
         strokeWidth: 3,
         strokeColor: Colors.redAccent));
+
+    FFAppState().circleLatLng = LatLng(point.latitude, point.longitude);
+    FFAppState().circleRadius = radius;
   }
 
   // Set Markers to the map
@@ -201,7 +209,7 @@ class _PolyMapState extends State<PolyMap> {
     });
   }
 
-  bool checkLocationIsInOutagArea(mtk.LatLng? propertyLocation) {
+  bool checkLocationIsInOutagArea() {
     // convert to maps_toolkit LatLng
 
     _saveData();
@@ -220,23 +228,24 @@ class _PolyMapState extends State<PolyMap> {
     return true;
   }
 
-  bool _calculateScenarioResults(mtk.LatLng? propertyLocation) {
-    // convert to maps_toolkit LatLng
+  // bool _calculateScenarioResults(mtk.LatLng? propertyLocation) {
+  //   // convert to maps_toolkit LatLng
 
-    mtk.LatLng propertyLocationMtk = mtk.LatLng(
-        _markers.first.position.latitude, _markers.first.position.longitude);
+  //   mtk.LatLng propertyLocationMtk = mtk.LatLng(
+  //       _markers.first.position.latitude, _markers.first.position.longitude);
 
-    propertyLocation = propertyLocationMtk;
-    final polygonLatLngsMtk = polygonLatLngs
-        .map((e) => mtk.LatLng(e.latLng.latitude, e.latLng.longitude))
-        .toList();
+  //   propertyLocation = propertyLocationMtk;
+  //   final polygonLatLngsMtk = polygonLatLngs
+  //       .map((e) => mtk.LatLng(e.latLng.latitude, e.latLng.longitude))
+  //       .toList();
 
-    final isInPolygon = mtk.PolygonUtil.containsLocation(
-        propertyLocation, polygonLatLngsMtk, true);
-    return isInPolygon;
-  }
+  //   final isInPolygon = mtk.PolygonUtil.containsLocation(
+  //       propertyLocation, polygonLatLngsMtk, true);
+  //   return isInPolygon;
+  // }
 
   void _saveData() async {
+    FFAppState().isSaving = true;
     DocumentReference scenarioReference;
     // create a new sceario is none exists
     if (widget.scenario == null) {
@@ -280,6 +289,7 @@ class _PolyMapState extends State<PolyMap> {
       );
       await CirclesRecord.createDoc(scenarioReference).set(circleRecordData);
     });
+    FFAppState().isSaving = false;
   }
 
   Future<void> deletePolygons() async {
@@ -522,47 +532,6 @@ class _PolyMapState extends State<PolyMap> {
             ],
           ),
         ),
-        Container(
-          width: MediaQuery.of(context).size.width - 294,
-          height: 100,
-          decoration: BoxDecoration(),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    checkLocationIsInOutagArea(null);
-                  },
-                  text: 'Calculate Scenario Response',
-                  options: FFButtonOptions(
-                    width: 220.0,
-                    height: 40.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.white,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        )
       ],
     );
   }
