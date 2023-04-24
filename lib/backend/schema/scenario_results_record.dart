@@ -22,17 +22,36 @@ abstract class ScenarioResultsRecord
   @BuiltValueField(wireName: 'response_item_name')
   String? get responseItemName;
 
+  @BuiltValueField(wireName: 'households_impacted')
+  int? get householdsImpacted;
+
+  @BuiltValueField(wireName: 'psr_households_impacted')
+  int? get psrHouseholdsImpacted;
+
+  @BuiltValueField(wireName: 'response_coverage')
+  double? get responseCoverage;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
 
+  DocumentReference get parentReference => reference.parent.parent!;
+
   static void _initializeBuilder(ScenarioResultsRecordBuilder builder) =>
       builder
         ..numberRequired = 0
-        ..responseItemName = '';
+        ..responseItemName = ''
+        ..householdsImpacted = 0
+        ..psrHouseholdsImpacted = 0
+        ..responseCoverage = 0.0;
 
-  static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('scenario_results');
+  static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
+      parent != null
+          ? parent.collection('scenario_results')
+          : FirebaseFirestore.instance.collectionGroup('scenario_results');
+
+  static DocumentReference createDoc(DocumentReference parent) =>
+      parent.collection('scenario_results').doc();
 
   static Stream<ScenarioResultsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
@@ -58,6 +77,9 @@ Map<String, dynamic> createScenarioResultsRecordData({
   DocumentReference? responseItem,
   int? numberRequired,
   String? responseItemName,
+  int? householdsImpacted,
+  int? psrHouseholdsImpacted,
+  double? responseCoverage,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioResultsRecord.serializer,
@@ -66,7 +88,10 @@ Map<String, dynamic> createScenarioResultsRecordData({
         ..scenario = scenario
         ..responseItem = responseItem
         ..numberRequired = numberRequired
-        ..responseItemName = responseItemName,
+        ..responseItemName = responseItemName
+        ..householdsImpacted = householdsImpacted
+        ..psrHouseholdsImpacted = psrHouseholdsImpacted
+        ..responseCoverage = responseCoverage,
     ),
   );
 

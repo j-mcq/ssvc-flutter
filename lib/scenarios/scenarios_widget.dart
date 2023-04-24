@@ -447,7 +447,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                             Expanded(
                                               flex: 1,
                                               child: Text(
-                                                'Location',
+                                                'Housholds Impacted',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
@@ -461,7 +461,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                             Expanded(
                                               flex: 1,
                                               child: Text(
-                                                'Properties Impacted',
+                                                'PSR Housholds Impacted',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
@@ -549,226 +549,323 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 2.0),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        blurRadius: 0.0,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .lineColor,
-                                                        offset:
-                                                            Offset(0.0, 1.0),
-                                                      )
-                                                    ],
+                                                child: StreamBuilder<
+                                                    List<
+                                                        ScenarioResultsRecord>>(
+                                                  stream:
+                                                      queryScenarioResultsRecord(
+                                                    parent:
+                                                        listViewScenarioRecord
+                                                            .reference,
+                                                    singleRecord: true,
                                                   ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                12.0,
-                                                                12.0,
-                                                                12.0,
-                                                                12.0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Expanded(
-                                                          flex: 1,
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Column(
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    List<ScenarioResultsRecord>
+                                                        containerScenarioResultsRecordList =
+                                                        snapshot.data!;
+                                                    // Return an empty Container when the item does not exist.
+                                                    if (snapshot
+                                                        .data!.isEmpty) {
+                                                      return Container();
+                                                    }
+                                                    final containerScenarioResultsRecord =
+                                                        containerScenarioResultsRecordList
+                                                                .isNotEmpty
+                                                            ? containerScenarioResultsRecordList
+                                                                .first
+                                                            : null;
+                                                    return Container(
+                                                      width: double.infinity,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            blurRadius: 0.0,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .lineColor,
+                                                            offset: Offset(
+                                                                0.0, 1.0),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    12.0,
+                                                                    12.0,
+                                                                    12.0,
+                                                                    12.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'scenario',
+                                                                    queryParams:
+                                                                        {
+                                                                      'scenarioReference':
+                                                                          serializeParam(
+                                                                        listViewScenarioRecord
+                                                                            .reference,
+                                                                        ParamType
+                                                                            .DocumentReference,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                  );
+                                                                },
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        AutoSizeText(
+                                                                          listViewScenarioRecord
+                                                                              .name!
+                                                                              .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                32,
+                                                                            replacement:
+                                                                                '…',
+                                                                          ),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).titleMedium,
+                                                                        ),
+                                                                        if (responsiveVisibility(
+                                                                          context:
+                                                                              context,
+                                                                          tabletLandscape:
+                                                                              false,
+                                                                          desktop:
+                                                                              false,
+                                                                        ))
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0.0,
+                                                                                2.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Text(
+                                                                              'user@domainname.com',
+                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                            ),
+                                                                          ),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                              tablet: false,
+                                                            ))
+                                                              Expanded(
+                                                                flex: 1,
+                                                                child: Text(
+                                                                  containerScenarioResultsRecord!
+                                                                      .householdsImpacted!
+                                                                      .toString(),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
+                                                                ),
+                                                              ),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                            ))
+                                                              Expanded(
+                                                                flex: 1,
+                                                                child: Text(
+                                                                  containerScenarioResultsRecord!
+                                                                      .psrHouseholdsImpacted!
+                                                                      .toString(),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
+                                                                ),
+                                                              ),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                            ))
+                                                              Expanded(
+                                                                flex: 1,
+                                                                child: Text(
+                                                                  '${formatNumber(
+                                                                    listViewScenarioRecord
+                                                                        .outageDuration,
+                                                                    formatType:
+                                                                        FormatType
+                                                                            .decimal,
+                                                                    decimalType:
+                                                                        DecimalType
+                                                                            .automatic,
+                                                                  )} Days',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
+                                                                ),
+                                                              ),
+                                                            Expanded(
+                                                              child:
+                                                                  LinearPercentIndicator(
+                                                                percent:
+                                                                    containerScenarioResultsRecord!
+                                                                        .responseCoverage!,
+                                                                width: 80.0,
+                                                                lineHeight:
+                                                                    18.0,
+                                                                animation: true,
+                                                                progressColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .lineColor,
+                                                                center: Text(
+                                                                  (double
+                                                                      inputValue) {
+                                                                    return (inputValue *
+                                                                                100)
+                                                                            .toString() +
+                                                                        '%';
+                                                                  }(containerScenarioResultsRecord!
+                                                                      .responseCoverage!),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
+                                                                ),
+                                                                barRadius: Radius
+                                                                    .circular(
+                                                                        8.0),
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Column(
                                                                 mainAxisSize:
                                                                     MainAxisSize
                                                                         .max,
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  AutoSizeText(
-                                                                    listViewScenarioRecord
-                                                                        .name!
-                                                                        .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          32,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleMedium,
-                                                                  ),
-                                                                  if (responsiveVisibility(
-                                                                    context:
-                                                                        context,
-                                                                    tabletLandscape:
-                                                                        false,
-                                                                    desktop:
-                                                                        false,
-                                                                  ))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          0.0,
-                                                                          2.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        'user@domainname.com',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodySmall,
-                                                                      ),
-                                                                    ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        if (responsiveVisibility(
-                                                          context: context,
-                                                          phone: false,
-                                                          tablet: false,
-                                                        ))
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              listViewScenarioRecord
-                                                                  .locationName!,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
-                                                            ),
-                                                          ),
-                                                        if (responsiveVisibility(
-                                                          context: context,
-                                                          phone: false,
-                                                        ))
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              listViewScenarioRecord
-                                                                  .propertiesImpacted!
-                                                                  .toString(),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
-                                                            ),
-                                                          ),
-                                                        if (responsiveVisibility(
-                                                          context: context,
-                                                          phone: false,
-                                                        ))
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              '${formatNumber(
-                                                                listViewScenarioRecord
-                                                                    .outageDuration,
-                                                                formatType:
-                                                                    FormatType
-                                                                        .decimal,
-                                                                decimalType:
-                                                                    DecimalType
-                                                                        .automatic,
-                                                              )} Days',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
-                                                            ),
-                                                          ),
-                                                        Expanded(
-                                                          child:
-                                                              LinearPercentIndicator(
-                                                            percent:
-                                                                listViewScenarioRecord
-                                                                    .percentageCoverered!,
-                                                            width: 80.0,
-                                                            lineHeight: 18.0,
-                                                            animation: true,
-                                                            progressColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                            backgroundColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .lineColor,
-                                                            center: Text(
-                                                              (double
-                                                                  inputValue) {
-                                                                return (inputValue *
-                                                                            100)
-                                                                        .toString() +
-                                                                    '%';
-                                                              }(listViewScenarioRecord
-                                                                  .percentageCoverered!),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium,
-                                                            ),
-                                                            barRadius:
-                                                                Radius.circular(
-                                                                    8.0),
-                                                            padding:
-                                                                EdgeInsets.zero,
-                                                          ),
-                                                        ),
-                                                        Expanded(
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
                                                                         .end,
                                                                 children: [
-                                                                  Icon(
-                                                                    Icons.edit,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .end,
+                                                                    children: [
+                                                                      InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {
+                                                                          context
+                                                                              .pushNamed(
+                                                                            'scenario',
+                                                                            queryParams:
+                                                                                {
+                                                                              'scenarioReference': serializeParam(
+                                                                                listViewScenarioRecord.reference,
+                                                                                ParamType.DocumentReference,
+                                                                              ),
+                                                                            }.withoutNulls,
+                                                                          );
+                                                                        },
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .edit,
+                                                                          color:
+                                                                              Colors.black,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             16.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .bar_chart,
-                                                                      color: Colors
-                                                                          .black,
-                                                                      size:
-                                                                          24.0,
-                                                                    ),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .bar_chart,
+                                                                          color:
+                                                                              Colors.black,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ],
                                                               ),
-                                                            ],
-                                                          ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
                                               );
                                             },
