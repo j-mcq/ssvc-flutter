@@ -1,6 +1,7 @@
-// Automatic FlutterFlow imports
+/// Automatic FlutterFlow imports
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ssvc/components/enter_radius_widget.dart';
+import 'package:ssvc/flutter_flow/flutter_flow_google_map.dart';
 import 'package:ssvc/flutter_flow/flutter_flow_widgets.dart';
 import 'package:ssvc/scenario/scenario_model.dart';
 
@@ -16,6 +17,7 @@ import '../../flutter_flow/flutter_flow_theme.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gmf;
 import 'dart:collection';
 import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class PolyMap extends StatefulWidget {
   const PolyMap({
@@ -45,7 +47,7 @@ class _PolyMapState extends State<PolyMap> {
   Set<gmf.Circle> _circles = HashSet<gmf.Circle>();
   late gmf.GoogleMapController _googleMapController;
   late gmf.BitmapDescriptor _markerIcon;
-  List<gmf.LatLng> polygonLatLngs = <gmf.LatLng>[];
+  List<PolygonLatLng> polygonLatLngs = <PolygonLatLng>[];
   late double radius;
 
   //ids
@@ -57,9 +59,10 @@ class _PolyMapState extends State<PolyMap> {
   bool _isPolygon = true; // Default
   bool _isMarker = false;
   bool _isCircle = false;
+  bool _isDataLoaded = false;
   String _lastItemType = 'polygon'; // Default
   double _zoomLevel = 16; // Default
-  gmf.LatLng _default_map_location = gmf.LatLng(53.178703, -2.994242);
+  gmf.LatLng _map_center_location = gmf.LatLng(53.178703, -2.994242);
 
   @override
   void initState() {
@@ -76,38 +79,32 @@ class _PolyMapState extends State<PolyMap> {
     _googleMapController = controller;
 
     setState(() async {
+      _loadMapData();
       _setMarkerIcon();
-      _markers.add(
-        gmf.Marker(
-          markerId: gmf.MarkerId('0'),
-          position: await _getStartingMapLocation(),
-          infoWindow: gmf.InfoWindow(
-              title: 'Outage Loaction',
-              snippet: 'Center of the outage location'),
-          //icon: _markerIcon,
-        ),
-      );
     });
   }
 
-  Future<gmf.LatLng> _getStartingMapLocation() async {
+  Future<bool> _getStartingMapLocation() async {
     if (widget.scenario != null) {
       final scenarioRecord =
           await ScenarioRecord.getDocumentOnce(widget.scenario!);
 
       if (scenarioRecord.mapCenterLocation != null) {
-        return gmf.LatLng(scenarioRecord.mapCenterLocation!.latitude,
+        _map_center_location = gmf.LatLng(
+            scenarioRecord.mapCenterLocation!.latitude,
             scenarioRecord.mapCenterLocation!.longitude);
       }
-    }
-
-    if (widget.currentLocation != null) {
-      return gmf.LatLng(
+      if (scenarioRecord.mapZoomLevel != null) {
+        _zoomLevel = scenarioRecord.mapZoomLevel!;
+      }
+    } else if (widget.currentLocation != null) {
+      _map_center_location = gmf.LatLng(
           widget.currentLocation!.latitude, widget.currentLocation!.longitude);
     }
-    // else retun center of SPEN location
-    _zoomLevel = 10;
-    return _default_map_location;
+    if (_polygons.length == 0) {
+      await _loadMapData();
+    }
+    return true;
   }
 
   // This function is to change the marker icon
@@ -116,68 +113,52 @@ class _PolyMapState extends State<PolyMap> {
         ImageConfiguration(), 'assets/farm.png');
   }
 
-  void _loadData() async {
-    if (widget.scenario != null) {
-      final polygonPoints =
-          await queryPolygonPointsRecordOnce(parent: widget.scenario!);
-      final circles = await queryCirclesRecordOnce(parent: widget.scenario!);
-// if there are polygonPoints then iterate through and add to _polygons
-      if (polygonPoints.isNotEmpty) {
-        polygonPoints.forEach((element) {
-          polygonLatLngs.add(gmf.LatLng(element.latitude!, element.longitude!));
-        });
-        _setPolygon();
-      }
-      // if there are circles then iterate through and add to _circles
-      if (circles.isNotEmpty) {
-        circles.forEach((element) {
-          _setCircles(gmf.LatLng(element.latitude!, element.longitude!));
-        });
+  Future<void> _loadMapData() async {
+    if (_isDataLoaded == false) {
+      if (widget.scenario != null) {
+        final polygonPoints = await queryPolygonPointsRecordOnce(
+            parent: widget.scenario!,
+            queryBuilder: (query) => query.orderBy('index'));
+        final circles = await queryCirclesRecordOnce(parent: widget.scenario!);
+
+        // if there are polygonPoints then iterate through and add to _polygons
+        if (polygonPoints.isNotEmpty) {
+          polygonPoints.forEach((element) {
+            // create a new polyLatLng and add to the list
+            polygonLatLngs.add(PolygonLatLng(
+                latLng: gmf.LatLng(element.latitude!, element.longitude!),
+                polygonReference: element.reference));
+          });
+
+          _setPolygon();
+        }
+        // if there are circles then iterate through and add to _circles
+        if (circles.isNotEmpty) {
+          circles.forEach((element) {
+            _setCircles(gmf.LatLng(element.latitude!, element.longitude!));
+          });
+        }
       }
     }
-  }
-
-  void _saveData() async {
-    if (widget.scenario != null) {
-      // for each point in polygonLatLngs save to the database
-      polygonLatLngs.forEach((element) async {
-        final polygonPointsRecordData = createPolygonPointsRecordData(
-          latitude: element.latitude,
-          longitude: element.longitude,
-        );
-        await PolygonPointsRecord.createDoc(widget.scenario!)
-            .set(polygonPointsRecordData);
-      });
-
-      final polygonPoints =
-          await queryPolygonPointsRecordOnce(parent: widget.scenario!);
-      final circles = await queryCirclesRecordOnce(parent: widget.scenario!);
-// if there are polygonPoints then iterate through and add to _polygons
-      if (polygonPoints.isNotEmpty) {
-        polygonPoints.forEach((element) {
-          polygonLatLngs.add(gmf.LatLng(element.latitude!, element.longitude!));
-        });
-        _setPolygon();
-      }
-      // if there are circles then iterate through and add to _circles
-      if (circles.isNotEmpty) {
-        circles.forEach((element) {
-          _setCircles(gmf.LatLng(element.latitude!, element.longitude!));
-        });
-      }
-    }
+    _isDataLoaded = true;
   }
 
   // Draw Polygon to the map
   void _setPolygon() {
-    final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
-    _polygons.add(gmf.Polygon(
-      polygonId: gmf.PolygonId(polygonIdVal),
-      points: polygonLatLngs,
-      strokeWidth: 2,
-      strokeColor: Colors.yellow,
-      fillColor: Colors.yellow.withOpacity(0.15),
-    ));
+    if (_polygons.length == 0) {
+      final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
+      _polygons.add(gmf.Polygon(
+        polygonId: gmf.PolygonId(polygonIdVal),
+        points: polygonLatLngs.map((e) => e.latLng).toList(),
+        strokeWidth: 2,
+        strokeColor: Colors.yellow,
+        fillColor: Colors.yellow.withOpacity(0.15),
+      ));
+    } else {
+      _polygons.first.points.clear();
+      _polygons.first.points
+          .addAll(polygonLatLngs.map((e) => e.latLng).toList());
+    }
   }
 
   // Set circles as points to the map
@@ -211,53 +192,111 @@ class _PolyMapState extends State<PolyMap> {
   }
 
   // Remove last polygon point
-  void _removeLastItemAdded() {
+  void _clearAll() {
     setState(() {
-      if (_lastItemType == 'polygon') {
-        // Remove last polygon point
-        if (polygonLatLngs.length > 0) {
-          polygonLatLngs.removeLast();
-        }
-        // remove associated marker
-        if (_markers.length > 0) {
-          _markers.remove(_markers.last);
-        }
-      } else if (_lastItemType == 'circle') {
-        if (_circles.length > 0) {
-          _circles.remove(_circles.last);
-        }
-      }
+      _polygons.clear();
+      _circles.clear();
+      _markers.clear();
+      polygonLatLngs.clear();
     });
   }
 
   bool checkLocationIsInOutagArea(mtk.LatLng? propertyLocation) {
     // convert to maps_toolkit LatLng
 
-    mtk.LatLng propertyLocationMtk = mtk.LatLng(
-        _markers.first.position.latitude, _markers.first.position.longitude);
+    _saveData();
 
-    propertyLocation = propertyLocationMtk;
-    final polygonLatLngsMtk =
-        polygonLatLngs.map((e) => mtk.LatLng(e.latitude, e.longitude)).toList();
+    // mtk.LatLng propertyLocationMtk = mtk.LatLng(
+    //     _markers.first.position.latitude, _markers.first.position.longitude);
 
-    final isInPolygon = mtk.PolygonUtil.containsLocation(
-        propertyLocation, polygonLatLngsMtk, true);
-    return isInPolygon;
+    // propertyLocation = propertyLocationMtk;
+    // final polygonLatLngsMtk =
+    //     polygonLatLngs.map((e) => mtk.LatLng(e.latitude, e.longitude)).toList();
+
+    // final isInPolygon = mtk.PolygonUtil.containsLocation(
+    //     propertyLocation, polygonLatLngsMtk, true);
+    // return isInPolygon;
+
+    return true;
   }
 
-  bool saveData(mtk.LatLng? propertyLocation) {
+  bool _calculateScenarioResults(mtk.LatLng? propertyLocation) {
     // convert to maps_toolkit LatLng
 
     mtk.LatLng propertyLocationMtk = mtk.LatLng(
         _markers.first.position.latitude, _markers.first.position.longitude);
 
     propertyLocation = propertyLocationMtk;
-    final polygonLatLngsMtk =
-        polygonLatLngs.map((e) => mtk.LatLng(e.latitude, e.longitude)).toList();
+    final polygonLatLngsMtk = polygonLatLngs
+        .map((e) => mtk.LatLng(e.latLng.latitude, e.latLng.longitude))
+        .toList();
 
     final isInPolygon = mtk.PolygonUtil.containsLocation(
         propertyLocation, polygonLatLngsMtk, true);
     return isInPolygon;
+  }
+
+  void _saveData() async {
+    DocumentReference scenarioReference;
+    // create a new sceario is none exists
+    if (widget.scenario == null) {
+      final scenarioCreateData = createScenarioRecordData();
+      var scenarioRecordReference = ScenarioRecord.collection.doc();
+      await scenarioRecordReference.set(scenarioCreateData);
+      scenarioReference = ScenarioRecord.getDocumentFromData(
+              scenarioCreateData, scenarioRecordReference)
+          .reference;
+    } else {
+      scenarioReference = widget.scenario!;
+    }
+
+    final updatedScenarioData = createScenarioRecordData(
+        mapCenterLocation: LatLng(
+            _map_center_location.latitude, _map_center_location.longitude),
+        mapZoomLevel: _zoomLevel);
+    await scenarioReference.update(updatedScenarioData);
+
+    // remove all previous polygons and circles associated with this scenario before saving the new ones
+    await deletePolygons();
+    // add newly created polygons and circles to the database
+    if (polygonLatLngs.isNotEmpty) {
+      polygonLatLngs.asMap().forEach((index, element) async {
+        final polygonPointsRecordData = createPolygonPointsRecordData(
+            latitude: element.latLng.latitude,
+            longitude: element.latLng.longitude,
+            index: index);
+        await PolygonPointsRecord.createDoc(scenarioReference)
+            .set(polygonPointsRecordData);
+      });
+    }
+
+    await deleteCircles();
+
+    _circles.forEach((element) async {
+      final circleRecordData = createCirclesRecordData(
+        latitude: element.center.latitude,
+        longitude: element.center.longitude,
+        radius: element.radius,
+      );
+      await CirclesRecord.createDoc(scenarioReference).set(circleRecordData);
+    });
+  }
+
+  Future<void> deletePolygons() async {
+    final polygonPoints =
+        await queryPolygonPointsRecordOnce(parent: widget.scenario!);
+
+    for (var polygonPoint in polygonPoints) {
+      await polygonPoint.reference.delete();
+    }
+  }
+
+  Future<void> deleteCircles() async {
+    final circles = await queryCirclesRecordOnce(parent: widget.scenario!);
+
+    for (var circle in circles) {
+      await circle.reference.delete();
+    }
   }
 
   bool rayCastIntersect(LatLng tap, LatLng vertA, LatLng vertB) {
@@ -284,95 +323,255 @@ class _PolyMapState extends State<PolyMap> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.max,
-      children: [],
-    );
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width - 294,
+              height: 500,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).primary,
+              ),
+              child: FutureBuilder<bool>(
+                future: _getStartingMapLocation(),
+                builder: (context, snapshot) {
+                  //   Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: SpinKitFoldingCube(
+                          color: FlutterFlowTheme.of(context).secondary,
+                          size: 50.0,
+                        ),
+                      ),
+                    );
+                  }
+                  return gmf.GoogleMap(
+                    initialCameraPosition: gmf.CameraPosition(
+                      target: _map_center_location,
+                      zoom: _zoomLevel,
+                    ),
+                    mapType: gmf.MapType.hybrid,
+                    markers: _markers,
+                    onMapCreated: _onMapCreated,
+                    circles: _circles,
+                    polygons: _polygons,
+                    myLocationEnabled: true,
+                    onCameraMove: (CameraPosition cp) {
+                      _zoomLevel = cp.zoom;
+                      _map_center_location = cp.target;
+                    },
+                    onTap: (point) {
+                      if (_isPolygon) {
+                        setState(() {
+                          _lastItemType = 'polygon';
 
-    // Stack(
-    //   children: <Widget>[
-    //
-    //     Align(
-    //       alignment: Alignment.bottomCenter,
-    //       child: Row(
-    //         children: <Widget>[
-    //           ElevatedButton(
-    //               onPressed: () {
-    // _isPolygon = true;
-    // _isMarker = false;
-    // _isCircle = false;
-    //               },
-    //               child: Text(
-    //                 'Polygon',
-    //                 style: TextStyle(
-    //                     fontWeight: FontWeight.bold, color: Colors.white),
-    //               )),
-    //           ElevatedButton(
-    //               onPressed: () {
-    //                 _isPolygon = false;
-    //                 _isMarker = true;
-    //                 _isCircle = false;
-    //               },
-    //               child: Text('Marker',
-    //                   style: TextStyle(
-    //                       fontWeight: FontWeight.bold,
-    //                       color: Colors.white))),
-    //           ElevatedButton(
-    //               onPressed: () async {
-    //                 _isPolygon = false;
-    //                 _isMarker = false;
-    //                 _isCircle = true;
-    //                 radius = 50;
-    //                 await showDialog(
-    //                     context: context,
-    //                     builder: (alertDialogContext) {
-    //                       return AlertDialog(
-    //                         backgroundColor: Colors.grey[900],
-    //                         title: Text(
-    //                           'Enter the impact radius (m)',
-    //                           style: TextStyle(
-    //                               fontWeight: FontWeight.bold,
-    //                               color: Colors.white),
-    //                         ),
-    //                         content: Padding(
-    //                             padding: EdgeInsets.all(8),
-    //                             child: Material(
-    //                               color: Colors.black,
-    //                               child: TextField(
-    //                                 style: TextStyle(
-    //                                     fontSize: 16, color: Colors.white),
-    //                                 decoration: InputDecoration(
-    //                                   hintText: 'Ex: 100',
-    //                                   suffixText: 'meters',
-    //                                 ),
-    //                                 keyboardType:
-    //                                     TextInputType.numberWithOptions(),
-    //                                 onChanged: (input) {
-    //                                   setState(() {
-    //                                     radius = double.parse(input);
-    //                                   });
-    //                                 },
-    //                               ),
-    //                             )),
-    //                         actions: [
-    //                           TextButton(
-    //                               onPressed: () => Navigator.pop(context),
-    //                               child: Text(
-    //                                 'Ok',
-    //                                 style: TextStyle(
-    //                                   fontWeight: FontWeight.bold,
-    //                                 ),
-    //                               )),
-    //                         ],
-    //                       );
-    //                     });
-    //               },
-    //               child: Text('Circle',
-    //                   style: TextStyle(
-    //                       fontWeight: FontWeight.bold,
-    //                       color: Colors.white))),
-    //         ],
-    //       ),
-    //     )
-    //   ],
-    // ));
+                          polygonLatLngs.add(PolygonLatLng(
+                              latLng: point, polygonReference: null));
+                          _setMarkers(point);
+                          _setPolygon();
+                        });
+                      } else if (_isMarker) {
+                        setState(() {
+                          _markers.clear();
+                          _setMarkers(point);
+                        });
+                      } else if (_isCircle) {
+                        setState(() {
+                          _circles.clear();
+                          _lastItemType = 'circle';
+                          _setCircles(point);
+                        });
+                      }
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width - 294,
+          height: 100,
+          decoration: BoxDecoration(),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () {
+                    //Remove the last point setted at the polygon
+                    _clearAll();
+                  },
+                  text: 'Clear All',
+                  options: FFButtonOptions(
+                    width: 130.0,
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.white,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.white,
+                      enableDrag: false,
+                      context: context,
+                      builder: (bottomSheetContext) {
+                        return GestureDetector(
+                          onTap: () =>
+                              FocusScope.of(context).requestFocus(_unfocusNode),
+                          child: Padding(
+                            padding:
+                                MediaQuery.of(bottomSheetContext).viewInsets,
+                            child: EnterRadiusWidget(),
+                          ),
+                        );
+                      },
+                    ).then((value) => setState(() {}));
+
+                    setState(() {
+                      _isPolygon = false;
+                      _isMarker = false;
+                      _isCircle = true;
+                      radius = FFAppState().impactRadius;
+                    });
+                  },
+                  text: 'Add Circle',
+                  options: FFButtonOptions(
+                    width: 130.0,
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.white,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    setState(() {
+                      _isPolygon = true;
+                      _isMarker = false;
+                      _isCircle = false;
+                    });
+                  },
+                  text: 'Add Polygon',
+                  options: FFButtonOptions(
+                    width: 130.0,
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.white,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width - 294,
+          height: 100,
+          decoration: BoxDecoration(),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    checkLocationIsInOutagArea(null);
+                  },
+                  text: 'Calculate Scenario Response',
+                  options: FFButtonOptions(
+                    width: 220.0,
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.white,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
   }
+}
+
+// create a class with latlngs and reference
+class PolygonLatLng {
+  late gmf.LatLng latLng;
+  late DocumentReference<Object?>? polygonReference;
+  // create a constructor
+  PolygonLatLng({required this.latLng, this.polygonReference});
 }
