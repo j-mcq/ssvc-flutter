@@ -846,8 +846,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   chartScenarioResultsCustomersRecordList
                                                       .where((e) => e != null)
                                                       .toList()
-                                                      .map((d) =>
-                                                          d.numberImpacted)
+                                                      .map(
+                                                          (d) => d.psrGroupName)
                                                       .toList(),
                                               barWidth: 55.0,
                                               barBorderRadius:
@@ -1084,7 +1084,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   e.name != '')
                                                               .toList()
                                                               .map((d) => d
-                                                                  .numberImpacted)
+                                                                  .psrGroupName)
                                                               .toList(),
                                                           barWidth: 55.0,
                                                           barBorderRadius:
