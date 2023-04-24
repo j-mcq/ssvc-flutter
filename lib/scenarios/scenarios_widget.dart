@@ -510,10 +510,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                           0.0, 16.0, 0.0, 0.0),
                                       child:
                                           StreamBuilder<List<ScenarioRecord>>(
-                                        stream: queryScenarioRecord(
-                                          queryBuilder: (scenarioRecord) =>
-                                              scenarioRecord.orderBy('name'),
-                                        ),
+                                        stream: queryScenarioRecord(),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
