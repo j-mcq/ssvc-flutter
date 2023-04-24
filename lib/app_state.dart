@@ -61,9 +61,9 @@ class FFAppState extends ChangeNotifier {
     _circleRadius = _value;
   }
 
-  double _circleLatLng = 0.0;
-  double get circleLatLng => _circleLatLng;
-  set circleLatLng(double _value) {
+  LatLng? _circleLatLng;
+  LatLng? get circleLatLng => _circleLatLng;
+  set circleLatLng(LatLng? _value) {
     _circleLatLng = _value;
   }
 }
