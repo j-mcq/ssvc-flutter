@@ -2,6 +2,7 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ssvc/components/enter_radius_widget.dart';
 import 'package:ssvc/flutter_flow/flutter_flow_widgets.dart';
+import 'package:ssvc/scenario/scenario_model.dart';
 
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -21,16 +22,14 @@ class PolyMap extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    required this.scenario,
+    this.scenario,
     this.currentLocation,
-    this.mapCenterLocation,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final DocumentReference? scenario;
   final LatLng? currentLocation;
-  final LatLng? mapCenterLocation;
 
   @override
   _PolyMapState createState() => _PolyMapState();
@@ -60,6 +59,7 @@ class _PolyMapState extends State<PolyMap> {
   bool _isCircle = false;
   String _lastItemType = 'polygon'; // Default
   double _zoomLevel = 16; // Default
+  gmf.LatLng _default_map_location = gmf.LatLng(53.178703, -2.994242);
 
   @override
   void initState() {
@@ -75,12 +75,12 @@ class _PolyMapState extends State<PolyMap> {
   void _onMapCreated(gmf.GoogleMapController controller) {
     _googleMapController = controller;
 
-    setState(() {
+    setState(() async {
       _setMarkerIcon();
       _markers.add(
         gmf.Marker(
           markerId: gmf.MarkerId('0'),
-          position: _getStartingMapLocation(),
+          position: await _getStartingMapLocation(),
           infoWindow: gmf.InfoWindow(
               title: 'Outage Loaction',
               snippet: 'Center of the outage location'),
@@ -90,10 +90,15 @@ class _PolyMapState extends State<PolyMap> {
     });
   }
 
-  gmf.LatLng _getStartingMapLocation() {
-    if (widget.mapCenterLocation != null) {
-      return gmf.LatLng(widget.mapCenterLocation!.latitude,
-          widget.mapCenterLocation!.longitude);
+  Future<gmf.LatLng> _getStartingMapLocation() async {
+    if (widget.scenario != null) {
+      final scenarioRecord =
+          await ScenarioRecord.getDocumentOnce(widget.scenario!);
+
+      if (scenarioRecord.mapCenterLocation != null) {
+        return gmf.LatLng(scenarioRecord.mapCenterLocation!.latitude,
+            scenarioRecord.mapCenterLocation!.longitude);
+      }
     }
 
     if (widget.currentLocation != null) {
@@ -102,7 +107,7 @@ class _PolyMapState extends State<PolyMap> {
     }
     // else retun center of SPEN location
     _zoomLevel = 10;
-    return gmf.LatLng(53.178703, -2.994242);
+    return _default_map_location;
   }
 
   // This function is to change the marker icon
@@ -279,212 +284,7 @@ class _PolyMapState extends State<PolyMap> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.max,
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width - 294,
-              height: 500,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primary,
-              ),
-              child: gmf.GoogleMap(
-                initialCameraPosition: gmf.CameraPosition(
-                  target: _getStartingMapLocation(),
-                  zoom: _zoomLevel,
-                ),
-                mapType: gmf.MapType.hybrid,
-                markers: _markers,
-                onMapCreated: _onMapCreated,
-                circles: _circles,
-                polygons: _polygons,
-                myLocationEnabled: true,
-                onTap: (point) {
-                  if (_isPolygon) {
-                    setState(() {
-                      _lastItemType = 'polygon';
-                      polygonLatLngs.add(point);
-                      _setMarkers(point);
-                      _setPolygon();
-                    });
-                  } else if (_isMarker) {
-                    setState(() {
-                      _markers.clear();
-                      _setMarkers(point);
-                    });
-                  } else if (_isCircle) {
-                    setState(() {
-                      _circles.clear();
-                      _lastItemType = 'circle';
-                      _setCircles(point);
-                    });
-                  }
-                },
-              ),
-            ),
-          ],
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width - 294,
-          height: 100,
-          decoration: BoxDecoration(),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () {
-                    //Remove the last point setted at the polygon
-                    _removeLastItemAdded();
-                  },
-                  text: 'Remove Last',
-                  options: FFButtonOptions(
-                    width: 130.0,
-                    height: 40.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.white,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.white,
-                      enableDrag: false,
-                      context: context,
-                      builder: (bottomSheetContext) {
-                        return GestureDetector(
-                          onTap: () =>
-                              FocusScope.of(context).requestFocus(_unfocusNode),
-                          child: Padding(
-                            padding:
-                                MediaQuery.of(bottomSheetContext).viewInsets,
-                            child: EnterRadiusWidget(),
-                          ),
-                        );
-                      },
-                    ).then((value) => setState(() {}));
-
-                    setState(() {
-                      _isPolygon = false;
-                      _isMarker = false;
-                      _isCircle = true;
-                      radius = FFAppState().impactRadius;
-                    });
-                  },
-                  text: 'Add Circle',
-                  options: FFButtonOptions(
-                    width: 130.0,
-                    height: 40.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.white,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    setState(() {
-                      _isPolygon = true;
-                      _isMarker = false;
-                      _isCircle = false;
-                    });
-                  },
-                  text: 'Add Polygon',
-                  options: FFButtonOptions(
-                    width: 130.0,
-                    height: 40.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.white,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    checkLocationIsInOutagArea(null);
-                  },
-                  text: 'Calculate Response',
-                  options: FFButtonOptions(
-                    width: 160.0,
-                    height: 40.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.white,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
+      children: [],
     );
 
     // Stack(
