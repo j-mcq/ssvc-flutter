@@ -12,16 +12,14 @@ class PolyMap extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    required this.scenario,
+    this.scenario,
     this.currentLocation,
-    this.mapCenterLocation,
   }) : super(key: key);
 
   final double? width;
   final double? height;
-  final DocumentReference scenario;
+  final DocumentReference? scenario;
   final LatLng? currentLocation;
-  final LatLng? mapCenterLocation;
 
   @override
   _PolyMapState createState() => _PolyMapState();
