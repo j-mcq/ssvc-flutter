@@ -43,12 +43,6 @@ class _$ScenarioRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
-    value = object.propertiesImpacted;
-    if (value != null) {
-      result
-        ..add('properties_impacted')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.outageDuration;
     if (value != null) {
       result
@@ -56,24 +50,10 @@ class _$ScenarioRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
-    value = object.percentageCoverered;
+    value = object.mapCenterLocation;
     if (value != null) {
       result
-        ..add('percentage_coverered')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(double)));
-    }
-    value = object.locationName;
-    if (value != null) {
-      result
-        ..add('location_name')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.location;
-    if (value != null) {
-      result
-        ..add('location')
+        ..add('map_center_location')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(LatLng)));
     }
@@ -114,24 +94,12 @@ class _$ScenarioRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
-        case 'properties_impacted':
-          result.propertiesImpacted = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
         case 'outage_duration':
           result.outageDuration = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
-        case 'percentage_coverered':
-          result.percentageCoverered = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double?;
-          break;
-        case 'location_name':
-          result.locationName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'location':
-          result.location = serializers.deserialize(value,
+        case 'map_center_location':
+          result.mapCenterLocation = serializers.deserialize(value,
               specifiedType: const FullType(LatLng)) as LatLng?;
           break;
         case 'Document__Reference__Field':
@@ -155,15 +123,9 @@ class _$ScenarioRecord extends ScenarioRecord {
   @override
   final DocumentReference<Object?>? createdBy;
   @override
-  final int? propertiesImpacted;
-  @override
   final double? outageDuration;
   @override
-  final double? percentageCoverered;
-  @override
-  final String? locationName;
-  @override
-  final LatLng? location;
+  final LatLng? mapCenterLocation;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -174,11 +136,8 @@ class _$ScenarioRecord extends ScenarioRecord {
       {this.name,
       this.timestamp,
       this.createdBy,
-      this.propertiesImpacted,
       this.outageDuration,
-      this.percentageCoverered,
-      this.locationName,
-      this.location,
+      this.mapCenterLocation,
       this.ffRef})
       : super._();
 
@@ -197,11 +156,8 @@ class _$ScenarioRecord extends ScenarioRecord {
         name == other.name &&
         timestamp == other.timestamp &&
         createdBy == other.createdBy &&
-        propertiesImpacted == other.propertiesImpacted &&
         outageDuration == other.outageDuration &&
-        percentageCoverered == other.percentageCoverered &&
-        locationName == other.locationName &&
-        location == other.location &&
+        mapCenterLocation == other.mapCenterLocation &&
         ffRef == other.ffRef;
   }
 
@@ -211,11 +167,8 @@ class _$ScenarioRecord extends ScenarioRecord {
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, timestamp.hashCode);
     _$hash = $jc(_$hash, createdBy.hashCode);
-    _$hash = $jc(_$hash, propertiesImpacted.hashCode);
     _$hash = $jc(_$hash, outageDuration.hashCode);
-    _$hash = $jc(_$hash, percentageCoverered.hashCode);
-    _$hash = $jc(_$hash, locationName.hashCode);
-    _$hash = $jc(_$hash, location.hashCode);
+    _$hash = $jc(_$hash, mapCenterLocation.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -227,11 +180,8 @@ class _$ScenarioRecord extends ScenarioRecord {
           ..add('name', name)
           ..add('timestamp', timestamp)
           ..add('createdBy', createdBy)
-          ..add('propertiesImpacted', propertiesImpacted)
           ..add('outageDuration', outageDuration)
-          ..add('percentageCoverered', percentageCoverered)
-          ..add('locationName', locationName)
-          ..add('location', location)
+          ..add('mapCenterLocation', mapCenterLocation)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -254,28 +204,15 @@ class ScenarioRecordBuilder
   set createdBy(DocumentReference<Object?>? createdBy) =>
       _$this._createdBy = createdBy;
 
-  int? _propertiesImpacted;
-  int? get propertiesImpacted => _$this._propertiesImpacted;
-  set propertiesImpacted(int? propertiesImpacted) =>
-      _$this._propertiesImpacted = propertiesImpacted;
-
   double? _outageDuration;
   double? get outageDuration => _$this._outageDuration;
   set outageDuration(double? outageDuration) =>
       _$this._outageDuration = outageDuration;
 
-  double? _percentageCoverered;
-  double? get percentageCoverered => _$this._percentageCoverered;
-  set percentageCoverered(double? percentageCoverered) =>
-      _$this._percentageCoverered = percentageCoverered;
-
-  String? _locationName;
-  String? get locationName => _$this._locationName;
-  set locationName(String? locationName) => _$this._locationName = locationName;
-
-  LatLng? _location;
-  LatLng? get location => _$this._location;
-  set location(LatLng? location) => _$this._location = location;
+  LatLng? _mapCenterLocation;
+  LatLng? get mapCenterLocation => _$this._mapCenterLocation;
+  set mapCenterLocation(LatLng? mapCenterLocation) =>
+      _$this._mapCenterLocation = mapCenterLocation;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -291,11 +228,8 @@ class ScenarioRecordBuilder
       _name = $v.name;
       _timestamp = $v.timestamp;
       _createdBy = $v.createdBy;
-      _propertiesImpacted = $v.propertiesImpacted;
       _outageDuration = $v.outageDuration;
-      _percentageCoverered = $v.percentageCoverered;
-      _locationName = $v.locationName;
-      _location = $v.location;
+      _mapCenterLocation = $v.mapCenterLocation;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -322,11 +256,8 @@ class ScenarioRecordBuilder
             name: name,
             timestamp: timestamp,
             createdBy: createdBy,
-            propertiesImpacted: propertiesImpacted,
             outageDuration: outageDuration,
-            percentageCoverered: percentageCoverered,
-            locationName: locationName,
-            location: location,
+            mapCenterLocation: mapCenterLocation,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

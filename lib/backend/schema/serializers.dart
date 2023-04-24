@@ -4,7 +4,6 @@ import 'package:from_css_color/from_css_color.dart';
 import 'users_record.dart';
 import 'response_items_record.dart';
 import 'scenario_record.dart';
-import 'scenario_results_record.dart';
 import 'depot_record.dart';
 import 'scenario_results_customers_record.dart';
 import 'stock_depot_mapping_record.dart';
@@ -14,6 +13,7 @@ import 'psr_category_options_record.dart';
 import 'psr_category_group_options_record.dart';
 import 'polygon_points_record.dart';
 import 'circles_record.dart';
+import 'scenario_results_record.dart';
 
 import 'index.dart';
 
@@ -27,7 +27,6 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   UsersRecord,
   ResponseItemsRecord,
   ScenarioRecord,
-  ScenarioResultsRecord,
   DepotRecord,
   ScenarioResultsCustomersRecord,
   StockDepotMappingRecord,
@@ -37,6 +36,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   PsrCategoryGroupOptionsRecord,
   PolygonPointsRecord,
   CirclesRecord,
+  ScenarioResultsRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

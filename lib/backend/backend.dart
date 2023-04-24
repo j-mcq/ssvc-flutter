@@ -8,7 +8,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/users_record.dart';
 import 'schema/response_items_record.dart';
 import 'schema/scenario_record.dart';
-import 'schema/scenario_results_record.dart';
 import 'schema/depot_record.dart';
 import 'schema/scenario_results_customers_record.dart';
 import 'schema/stock_depot_mapping_record.dart';
@@ -18,6 +17,7 @@ import 'schema/psr_category_options_record.dart';
 import 'schema/psr_category_group_options_record.dart';
 import 'schema/polygon_points_record.dart';
 import 'schema/circles_record.dart';
+import 'schema/scenario_results_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -28,7 +28,6 @@ export 'schema/serializers.dart';
 export 'schema/users_record.dart';
 export 'schema/response_items_record.dart';
 export 'schema/scenario_record.dart';
-export 'schema/scenario_results_record.dart';
 export 'schema/depot_record.dart';
 export 'schema/scenario_results_customers_record.dart';
 export 'schema/stock_depot_mapping_record.dart';
@@ -38,6 +37,7 @@ export 'schema/psr_category_options_record.dart';
 export 'schema/psr_category_group_options_record.dart';
 export 'schema/polygon_points_record.dart';
 export 'schema/circles_record.dart';
+export 'schema/scenario_results_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -189,58 +189,6 @@ Future<FFFirestorePage<ScenarioRecord>> queryScenarioRecordPage({
     queryCollectionPage(
       ScenarioRecord.collection,
       ScenarioRecord.serializer,
-      queryBuilder: queryBuilder,
-      nextPageMarker: nextPageMarker,
-      pageSize: pageSize,
-      isStream: isStream,
-    );
-
-/// Functions to query ScenarioResultsRecords (as a Stream and as a Future).
-Future<int> queryScenarioResultsRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      ScenarioResultsRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<ScenarioResultsRecord>> queryScenarioResultsRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      ScenarioResultsRecord.collection,
-      ScenarioResultsRecord.serializer,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<ScenarioResultsRecord>> queryScenarioResultsRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      ScenarioResultsRecord.collection,
-      ScenarioResultsRecord.serializer,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<FFFirestorePage<ScenarioResultsRecord>> queryScenarioResultsRecordPage({
-  Query Function(Query)? queryBuilder,
-  DocumentSnapshot? nextPageMarker,
-  required int pageSize,
-  required bool isStream,
-}) =>
-    queryCollectionPage(
-      ScenarioResultsRecord.collection,
-      ScenarioResultsRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
@@ -728,6 +676,62 @@ Future<FFFirestorePage<CirclesRecord>> queryCirclesRecordPage({
     queryCollectionPage(
       CirclesRecord.collection(parent),
       CirclesRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query ScenarioResultsRecords (as a Stream and as a Future).
+Future<int> queryScenarioResultsRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ScenarioResultsRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ScenarioResultsRecord>> queryScenarioResultsRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ScenarioResultsRecord.collection(parent),
+      ScenarioResultsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ScenarioResultsRecord>> queryScenarioResultsRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ScenarioResultsRecord.collection(parent),
+      ScenarioResultsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<ScenarioResultsRecord>> queryScenarioResultsRecordPage({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      ScenarioResultsRecord.collection(parent),
+      ScenarioResultsRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

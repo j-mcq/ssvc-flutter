@@ -18,19 +18,11 @@ abstract class ScenarioRecord
   @BuiltValueField(wireName: 'created_by')
   DocumentReference? get createdBy;
 
-  @BuiltValueField(wireName: 'properties_impacted')
-  int? get propertiesImpacted;
-
   @BuiltValueField(wireName: 'outage_duration')
   double? get outageDuration;
 
-  @BuiltValueField(wireName: 'percentage_coverered')
-  double? get percentageCoverered;
-
-  @BuiltValueField(wireName: 'location_name')
-  String? get locationName;
-
-  LatLng? get location;
+  @BuiltValueField(wireName: 'map_center_location')
+  LatLng? get mapCenterLocation;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -38,10 +30,7 @@ abstract class ScenarioRecord
 
   static void _initializeBuilder(ScenarioRecordBuilder builder) => builder
     ..name = ''
-    ..propertiesImpacted = 0
-    ..outageDuration = 0.0
-    ..percentageCoverered = 0.0
-    ..locationName = '';
+    ..outageDuration = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('scenario');
@@ -68,11 +57,8 @@ Map<String, dynamic> createScenarioRecordData({
   String? name,
   DateTime? timestamp,
   DocumentReference? createdBy,
-  int? propertiesImpacted,
   double? outageDuration,
-  double? percentageCoverered,
-  String? locationName,
-  LatLng? location,
+  LatLng? mapCenterLocation,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioRecord.serializer,
@@ -81,11 +67,8 @@ Map<String, dynamic> createScenarioRecordData({
         ..name = name
         ..timestamp = timestamp
         ..createdBy = createdBy
-        ..propertiesImpacted = propertiesImpacted
         ..outageDuration = outageDuration
-        ..percentageCoverered = percentageCoverered
-        ..locationName = locationName
-        ..location = location,
+        ..mapCenterLocation = mapCenterLocation,
     ),
   );
 
