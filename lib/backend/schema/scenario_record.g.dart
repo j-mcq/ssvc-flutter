@@ -57,6 +57,13 @@ class _$ScenarioRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(LatLng)));
     }
+    value = object.mapZoomLevel;
+    if (value != null) {
+      result
+        ..add('map_zoom_level')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -102,6 +109,10 @@ class _$ScenarioRecordSerializer
           result.mapCenterLocation = serializers.deserialize(value,
               specifiedType: const FullType(LatLng)) as LatLng?;
           break;
+        case 'map_zoom_level':
+          result.mapZoomLevel = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -127,6 +138,8 @@ class _$ScenarioRecord extends ScenarioRecord {
   @override
   final LatLng? mapCenterLocation;
   @override
+  final double? mapZoomLevel;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ScenarioRecord([void Function(ScenarioRecordBuilder)? updates]) =>
@@ -138,6 +151,7 @@ class _$ScenarioRecord extends ScenarioRecord {
       this.createdBy,
       this.outageDuration,
       this.mapCenterLocation,
+      this.mapZoomLevel,
       this.ffRef})
       : super._();
 
@@ -158,6 +172,7 @@ class _$ScenarioRecord extends ScenarioRecord {
         createdBy == other.createdBy &&
         outageDuration == other.outageDuration &&
         mapCenterLocation == other.mapCenterLocation &&
+        mapZoomLevel == other.mapZoomLevel &&
         ffRef == other.ffRef;
   }
 
@@ -169,6 +184,7 @@ class _$ScenarioRecord extends ScenarioRecord {
     _$hash = $jc(_$hash, createdBy.hashCode);
     _$hash = $jc(_$hash, outageDuration.hashCode);
     _$hash = $jc(_$hash, mapCenterLocation.hashCode);
+    _$hash = $jc(_$hash, mapZoomLevel.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -182,6 +198,7 @@ class _$ScenarioRecord extends ScenarioRecord {
           ..add('createdBy', createdBy)
           ..add('outageDuration', outageDuration)
           ..add('mapCenterLocation', mapCenterLocation)
+          ..add('mapZoomLevel', mapZoomLevel)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -214,6 +231,10 @@ class ScenarioRecordBuilder
   set mapCenterLocation(LatLng? mapCenterLocation) =>
       _$this._mapCenterLocation = mapCenterLocation;
 
+  double? _mapZoomLevel;
+  double? get mapZoomLevel => _$this._mapZoomLevel;
+  set mapZoomLevel(double? mapZoomLevel) => _$this._mapZoomLevel = mapZoomLevel;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -230,6 +251,7 @@ class ScenarioRecordBuilder
       _createdBy = $v.createdBy;
       _outageDuration = $v.outageDuration;
       _mapCenterLocation = $v.mapCenterLocation;
+      _mapZoomLevel = $v.mapZoomLevel;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -258,6 +280,7 @@ class ScenarioRecordBuilder
             createdBy: createdBy,
             outageDuration: outageDuration,
             mapCenterLocation: mapCenterLocation,
+            mapZoomLevel: mapZoomLevel,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
