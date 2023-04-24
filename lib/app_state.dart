@@ -37,10 +37,34 @@ class FFAppState extends ChangeNotifier {
     _isSaving = _value;
   }
 
-  String _savingMessage = '';
-  String get savingMessage => _savingMessage;
-  set savingMessage(String _value) {
-    _savingMessage = _value;
+  List<LatLng> _polygonLatLngList = [];
+  List<LatLng> get polygonLatLngList => _polygonLatLngList;
+  set polygonLatLngList(List<LatLng> _value) {
+    _polygonLatLngList = _value;
+  }
+
+  void addToPolygonLatLngList(LatLng _value) {
+    _polygonLatLngList.add(_value);
+  }
+
+  void removeFromPolygonLatLngList(LatLng _value) {
+    _polygonLatLngList.remove(_value);
+  }
+
+  void removeAtIndexFromPolygonLatLngList(int _index) {
+    _polygonLatLngList.removeAt(_index);
+  }
+
+  double _circleRadius = 0.0;
+  double get circleRadius => _circleRadius;
+  set circleRadius(double _value) {
+    _circleRadius = _value;
+  }
+
+  double _circleLatLng = 0.0;
+  double get circleLatLng => _circleLatLng;
+  set circleLatLng(double _value) {
+    _circleLatLng = _value;
   }
 }
 
