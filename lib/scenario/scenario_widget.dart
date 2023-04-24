@@ -218,15 +218,29 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                             ),
                                             FFButtonWidget(
                                               onPressed: () async {
+                                                final scenarioCreateData =
+                                                    createScenarioRecordData();
+                                                var scenarioRecordReference =
+                                                    ScenarioRecord.collection
+                                                        .doc();
+                                                await scenarioRecordReference
+                                                    .set(scenarioCreateData);
+                                                _model.outNewSceario =
+                                                    ScenarioRecord
+                                                        .getDocumentFromData(
+                                                            scenarioCreateData,
+                                                            scenarioRecordReference);
+
                                                 final polygonPointsCreateData =
-                                                    createPolygonPointsRecordData(
-                                                  latitude: 22.0,
-                                                );
+                                                    createPolygonPointsRecordData();
                                                 await PolygonPointsRecord
-                                                        .createDoc(widget
-                                                            .scenarioReference!)
+                                                        .createDoc(_model
+                                                            .outNewSceario!
+                                                            .reference)
                                                     .set(
                                                         polygonPointsCreateData);
+
+                                                setState(() {});
                                               },
                                               text: 'Save Scenario',
                                               options: FFButtonOptions(
@@ -446,7 +460,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                   ),
                                   Container(
                                     width: double.infinity,
-                                    height: 500.0,
+                                    height: 600.0,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
