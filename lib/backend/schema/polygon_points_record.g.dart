@@ -39,6 +39,12 @@ class _$PolygonPointsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.index;
+    if (value != null) {
+      result
+        ..add('index')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -70,6 +76,10 @@ class _$PolygonPointsRecordSerializer
           result.longitude = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
+        case 'index':
+          result.index = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -89,13 +99,16 @@ class _$PolygonPointsRecord extends PolygonPointsRecord {
   @override
   final double? longitude;
   @override
+  final int? index;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$PolygonPointsRecord(
           [void Function(PolygonPointsRecordBuilder)? updates]) =>
       (new PolygonPointsRecordBuilder()..update(updates))._build();
 
-  _$PolygonPointsRecord._({this.latitude, this.longitude, this.ffRef})
+  _$PolygonPointsRecord._(
+      {this.latitude, this.longitude, this.index, this.ffRef})
       : super._();
 
   @override
@@ -113,6 +126,7 @@ class _$PolygonPointsRecord extends PolygonPointsRecord {
     return other is PolygonPointsRecord &&
         latitude == other.latitude &&
         longitude == other.longitude &&
+        index == other.index &&
         ffRef == other.ffRef;
   }
 
@@ -121,6 +135,7 @@ class _$PolygonPointsRecord extends PolygonPointsRecord {
     var _$hash = 0;
     _$hash = $jc(_$hash, latitude.hashCode);
     _$hash = $jc(_$hash, longitude.hashCode);
+    _$hash = $jc(_$hash, index.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -131,6 +146,7 @@ class _$PolygonPointsRecord extends PolygonPointsRecord {
     return (newBuiltValueToStringHelper(r'PolygonPointsRecord')
           ..add('latitude', latitude)
           ..add('longitude', longitude)
+          ..add('index', index)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -148,6 +164,10 @@ class PolygonPointsRecordBuilder
   double? get longitude => _$this._longitude;
   set longitude(double? longitude) => _$this._longitude = longitude;
 
+  int? _index;
+  int? get index => _$this._index;
+  set index(int? index) => _$this._index = index;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -161,6 +181,7 @@ class PolygonPointsRecordBuilder
     if ($v != null) {
       _latitude = $v.latitude;
       _longitude = $v.longitude;
+      _index = $v.index;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -184,7 +205,10 @@ class PolygonPointsRecordBuilder
   _$PolygonPointsRecord _build() {
     final _$result = _$v ??
         new _$PolygonPointsRecord._(
-            latitude: latitude, longitude: longitude, ffRef: ffRef);
+            latitude: latitude,
+            longitude: longitude,
+            index: index,
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }
