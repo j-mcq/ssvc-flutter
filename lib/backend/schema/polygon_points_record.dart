@@ -15,6 +15,8 @@ abstract class PolygonPointsRecord
 
   double? get longitude;
 
+  int? get index;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -23,7 +25,8 @@ abstract class PolygonPointsRecord
 
   static void _initializeBuilder(PolygonPointsRecordBuilder builder) => builder
     ..latitude = 0.0
-    ..longitude = 0.0;
+    ..longitude = 0.0
+    ..index = 0;
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -55,13 +58,15 @@ abstract class PolygonPointsRecord
 Map<String, dynamic> createPolygonPointsRecordData({
   double? latitude,
   double? longitude,
+  int? index,
 }) {
   final firestoreData = serializers.toFirestore(
     PolygonPointsRecord.serializer,
     PolygonPointsRecord(
       (p) => p
         ..latitude = latitude
-        ..longitude = longitude,
+        ..longitude = longitude
+        ..index = index,
     ),
   );
 
