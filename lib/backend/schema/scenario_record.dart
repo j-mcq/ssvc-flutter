@@ -24,13 +24,17 @@ abstract class ScenarioRecord
   @BuiltValueField(wireName: 'map_center_location')
   LatLng? get mapCenterLocation;
 
+  @BuiltValueField(wireName: 'map_zoom_level')
+  double? get mapZoomLevel;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(ScenarioRecordBuilder builder) => builder
     ..name = ''
-    ..outageDuration = 0.0;
+    ..outageDuration = 0.0
+    ..mapZoomLevel = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('scenario');
@@ -59,6 +63,7 @@ Map<String, dynamic> createScenarioRecordData({
   DocumentReference? createdBy,
   double? outageDuration,
   LatLng? mapCenterLocation,
+  double? mapZoomLevel,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioRecord.serializer,
@@ -68,7 +73,8 @@ Map<String, dynamic> createScenarioRecordData({
         ..timestamp = timestamp
         ..createdBy = createdBy
         ..outageDuration = outageDuration
-        ..mapCenterLocation = mapCenterLocation,
+        ..mapCenterLocation = mapCenterLocation
+        ..mapZoomLevel = mapZoomLevel,
     ),
   );
 
