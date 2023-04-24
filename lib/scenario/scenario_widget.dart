@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -470,7 +471,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                   ),
                                   Container(
                                     width: double.infinity,
-                                    height: 700.0,
+                                    height: 600.0,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
@@ -496,6 +497,110 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                           currentLocation:
                                               currentUserLocationValue,
                                         ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 1.0, 0.0, 0.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 0.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .lineColor,
+                                            offset: Offset(0.0, 1.0),
+                                          )
+                                        ],
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(0.0),
+                                          bottomRight: Radius.circular(0.0),
+                                          topLeft: Radius.circular(16.0),
+                                          topRight: Radius.circular(16.0),
+                                        ),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 16.0, 16.0, 16.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                FFButtonWidget(
+                                                  onPressed: () async {
+                                                    _model.outCalculationResult =
+                                                        await actions
+                                                            .calculateScenarioResponse(
+                                                      FFAppState()
+                                                          .scenarioReference,
+                                                      double.tryParse(_model
+                                                          .itemNameController
+                                                          .text),
+                                                      FFAppState()
+                                                          .polygonLatLngList
+                                                          .toList(),
+                                                      FFAppState().circleLatLng,
+                                                      FFAppState().circleRadius,
+                                                    );
+
+                                                    setState(() {});
+                                                  },
+                                                  text:
+                                                      'Calculate Scenario Response',
+                                                  options: FFButtonOptions(
+                                                    width: 250.0,
+                                                    height: 40.0,
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    iconPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily,
+                                                          color: Colors.white,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily),
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
@@ -741,8 +846,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   chartScenarioResultsCustomersRecordList
                                                       .where((e) => e != null)
                                                       .toList()
-                                                      .map(
-                                                          (d) => d.psrGroupName)
+                                                      .map((d) =>
+                                                          d.numberImpacted)
                                                       .toList(),
                                               barWidth: 55.0,
                                               barBorderRadius:
@@ -979,7 +1084,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   e.name != '')
                                                               .toList()
                                                               .map((d) => d
-                                                                  .psrGroupName)
+                                                                  .numberImpacted)
                                                               .toList(),
                                                           barWidth: 55.0,
                                                           barBorderRadius:

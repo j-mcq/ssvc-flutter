@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -38,6 +39,8 @@ class ScenarioModel extends FlutterFlowModel {
   // State field(s) for itemName widget.
   TextEditingController? itemNameController;
   String? Function(BuildContext, String?)? itemNameControllerValidator;
+  // Stores action output result for [Custom Action - calculateScenarioResponse] action in Button widget.
+  String? outCalculationResult;
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
