@@ -30,6 +30,18 @@ class FFAppState extends ChangeNotifier {
   set impactRadius(double _value) {
     _impactRadius = _value;
   }
+
+  bool _isSaving = false;
+  bool get isSaving => _isSaving;
+  set isSaving(bool _value) {
+    _isSaving = _value;
+  }
+
+  String _savingMessage = '';
+  String get savingMessage => _savingMessage;
+  set savingMessage(String _value) {
+    _savingMessage = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

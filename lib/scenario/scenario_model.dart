@@ -33,6 +33,8 @@ class ScenarioModel extends FlutterFlowModel {
   late SideBarNavModel sideBarNavModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   ScenarioRecord? outNewSceario;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  PolygonPointsRecord? outPolyPoints;
   // State field(s) for itemName widget.
   TextEditingController? itemNameController;
   String? Function(BuildContext, String?)? itemNameControllerValidator;
