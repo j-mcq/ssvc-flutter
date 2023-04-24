@@ -233,12 +233,22 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
 
                                                 final polygonPointsCreateData =
                                                     createPolygonPointsRecordData();
-                                                await PolygonPointsRecord
+                                                var polygonPointsRecordReference =
+                                                    PolygonPointsRecord
                                                         .createDoc(_model
                                                             .outNewSceario!
-                                                            .reference)
+                                                            .reference);
+                                                await polygonPointsRecordReference
                                                     .set(
                                                         polygonPointsCreateData);
+                                                _model.outPolyPoints =
+                                                    PolygonPointsRecord
+                                                        .getDocumentFromData(
+                                                            polygonPointsCreateData,
+                                                            polygonPointsRecordReference);
+                                                await _model
+                                                    .outPolyPoints!.reference
+                                                    .delete();
 
                                                 setState(() {});
                                               },
@@ -472,13 +482,13 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 1.0,
-                                        height: 500.0,
+                                        height: 700.0,
                                         child: custom_widgets.PolyMap(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
                                               1.0,
-                                          height: 500.0,
+                                          height: 700.0,
                                           scenario:
                                               widget.scenarioReference != null
                                                   ? widget.scenarioReference
