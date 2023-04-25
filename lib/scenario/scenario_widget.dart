@@ -240,6 +240,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                 await _model
                                                     .outPolyPoints!.reference
                                                     .delete();
+                                                setState(() {
+                                                  FFAppState().circleLatLng =
+                                                      null;
+                                                  FFAppState().circleRadius =
+                                                      0.0;
+                                                });
 
                                                 setState(() {});
                                               },
@@ -410,7 +416,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   .outageDurationController,
                                               obscureText: false,
                                               decoration: InputDecoration(
-                                                labelText: 'Outage Duration',
+                                                labelText:
+                                                    'Estimated Outage Duration (hours)',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,

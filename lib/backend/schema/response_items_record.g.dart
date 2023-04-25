@@ -82,6 +82,34 @@ class _$ResponseItemsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.totalEnergyStorageCapacity;
+    if (value != null) {
+      result
+        ..add('total_energy_storage_capacity')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.surgePower;
+    if (value != null) {
+      result
+        ..add('surge_power')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.weight;
+    if (value != null) {
+      result
+        ..add('weight')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.baselinePower;
+    if (value != null) {
+      result
+        ..add('baseline_power')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -139,6 +167,22 @@ class _$ResponseItemsRecordSerializer
           result.depotName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'total_energy_storage_capacity':
+          result.totalEnergyStorageCapacity = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'surge_power':
+          result.surgePower = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'weight':
+          result.weight = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'baseline_power':
+          result.baselinePower = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -170,6 +214,14 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
   @override
   final String? depotName;
   @override
+  final double? totalEnergyStorageCapacity;
+  @override
+  final double? surgePower;
+  @override
+  final double? weight;
+  @override
+  final double? baselinePower;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ResponseItemsRecord(
@@ -185,6 +237,10 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
       this.stock,
       this.depot,
       this.depotName,
+      this.totalEnergyStorageCapacity,
+      this.surgePower,
+      this.weight,
+      this.baselinePower,
       this.ffRef})
       : super._();
 
@@ -209,6 +265,10 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
         stock == other.stock &&
         depot == other.depot &&
         depotName == other.depotName &&
+        totalEnergyStorageCapacity == other.totalEnergyStorageCapacity &&
+        surgePower == other.surgePower &&
+        weight == other.weight &&
+        baselinePower == other.baselinePower &&
         ffRef == other.ffRef;
   }
 
@@ -223,6 +283,10 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
     _$hash = $jc(_$hash, stock.hashCode);
     _$hash = $jc(_$hash, depot.hashCode);
     _$hash = $jc(_$hash, depotName.hashCode);
+    _$hash = $jc(_$hash, totalEnergyStorageCapacity.hashCode);
+    _$hash = $jc(_$hash, surgePower.hashCode);
+    _$hash = $jc(_$hash, weight.hashCode);
+    _$hash = $jc(_$hash, baselinePower.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -239,6 +303,10 @@ class _$ResponseItemsRecord extends ResponseItemsRecord {
           ..add('stock', stock)
           ..add('depot', depot)
           ..add('depotName', depotName)
+          ..add('totalEnergyStorageCapacity', totalEnergyStorageCapacity)
+          ..add('surgePower', surgePower)
+          ..add('weight', weight)
+          ..add('baselinePower', baselinePower)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -280,6 +348,24 @@ class ResponseItemsRecordBuilder
   String? get depotName => _$this._depotName;
   set depotName(String? depotName) => _$this._depotName = depotName;
 
+  double? _totalEnergyStorageCapacity;
+  double? get totalEnergyStorageCapacity => _$this._totalEnergyStorageCapacity;
+  set totalEnergyStorageCapacity(double? totalEnergyStorageCapacity) =>
+      _$this._totalEnergyStorageCapacity = totalEnergyStorageCapacity;
+
+  double? _surgePower;
+  double? get surgePower => _$this._surgePower;
+  set surgePower(double? surgePower) => _$this._surgePower = surgePower;
+
+  double? _weight;
+  double? get weight => _$this._weight;
+  set weight(double? weight) => _$this._weight = weight;
+
+  double? _baselinePower;
+  double? get baselinePower => _$this._baselinePower;
+  set baselinePower(double? baselinePower) =>
+      _$this._baselinePower = baselinePower;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -299,6 +385,10 @@ class ResponseItemsRecordBuilder
       _stock = $v.stock;
       _depot = $v.depot;
       _depotName = $v.depotName;
+      _totalEnergyStorageCapacity = $v.totalEnergyStorageCapacity;
+      _surgePower = $v.surgePower;
+      _weight = $v.weight;
+      _baselinePower = $v.baselinePower;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -330,6 +420,10 @@ class ResponseItemsRecordBuilder
             stock: stock,
             depot: depot,
             depotName: depotName,
+            totalEnergyStorageCapacity: totalEnergyStorageCapacity,
+            surgePower: surgePower,
+            weight: weight,
+            baselinePower: baselinePower,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
