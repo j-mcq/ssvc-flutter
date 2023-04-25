@@ -9,12 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
 
 Future<String?> calculateScenarioResponse(
-  DocumentReference? scenarioReference,
-  double? duration,
-  List<LatLng>? polygonPointList,
-  LatLng? circleLatLng,
-  double? circleRadius,
-) async {
+    DocumentReference? scenarioReference) async {
   // Add your function code here!
   _saveData(scenarioReference);
   return '';
