@@ -9,7 +9,6 @@ import 'schema/users_record.dart';
 import 'schema/response_items_record.dart';
 import 'schema/scenario_record.dart';
 import 'schema/depot_record.dart';
-import 'schema/scenario_results_customers_record.dart';
 import 'schema/stock_depot_mapping_record.dart';
 import 'schema/psr_record.dart';
 import 'schema/psr_categories_record.dart';
@@ -30,7 +29,6 @@ export 'schema/users_record.dart';
 export 'schema/response_items_record.dart';
 export 'schema/scenario_record.dart';
 export 'schema/depot_record.dart';
-export 'schema/scenario_results_customers_record.dart';
 export 'schema/stock_depot_mapping_record.dart';
 export 'schema/psr_record.dart';
 export 'schema/psr_categories_record.dart';
@@ -248,61 +246,6 @@ Future<FFFirestorePage<DepotRecord>> queryDepotRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
-
-/// Functions to query ScenarioResultsCustomersRecords (as a Stream and as a Future).
-Future<int> queryScenarioResultsCustomersRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      ScenarioResultsCustomersRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<ScenarioResultsCustomersRecord>>
-    queryScenarioResultsCustomersRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-        queryCollection(
-          ScenarioResultsCustomersRecord.collection,
-          ScenarioResultsCustomersRecord.serializer,
-          queryBuilder: queryBuilder,
-          limit: limit,
-          singleRecord: singleRecord,
-        );
-
-Future<List<ScenarioResultsCustomersRecord>>
-    queryScenarioResultsCustomersRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-        queryCollectionOnce(
-          ScenarioResultsCustomersRecord.collection,
-          ScenarioResultsCustomersRecord.serializer,
-          queryBuilder: queryBuilder,
-          limit: limit,
-          singleRecord: singleRecord,
-        );
-
-Future<FFFirestorePage<ScenarioResultsCustomersRecord>>
-    queryScenarioResultsCustomersRecordPage({
-  Query Function(Query)? queryBuilder,
-  DocumentSnapshot? nextPageMarker,
-  required int pageSize,
-  required bool isStream,
-}) =>
-        queryCollectionPage(
-          ScenarioResultsCustomersRecord.collection,
-          ScenarioResultsCustomersRecord.serializer,
-          queryBuilder: queryBuilder,
-          nextPageMarker: nextPageMarker,
-          pageSize: pageSize,
-          isStream: isStream,
-        );
 
 /// Functions to query StockDepotMappingRecords (as a Stream and as a Future).
 Future<int> queryStockDepotMappingRecordCount({

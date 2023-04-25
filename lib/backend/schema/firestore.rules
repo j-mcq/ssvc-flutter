@@ -29,13 +29,6 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /scenario_results_customers/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if false;
-      allow delete: if false;
-    }
-
     match /stock_depot_mapping/{document} {
       allow create: if true;
       allow read: if true;
