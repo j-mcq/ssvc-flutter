@@ -720,7 +720,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8.0),
+                                                            50.0),
                                                   ),
                                                 ),
                                               ],

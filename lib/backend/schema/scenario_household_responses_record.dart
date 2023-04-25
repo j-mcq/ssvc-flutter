@@ -23,6 +23,9 @@ abstract class ScenarioHouseholdResponsesRecord
 
   DocumentReference? get scenario;
 
+  @BuiltValueField(wireName: 'power_required')
+  double? get powerRequired;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -33,7 +36,8 @@ abstract class ScenarioHouseholdResponsesRecord
           ScenarioHouseholdResponsesRecordBuilder builder) =>
       builder
         ..cost = 0.0
-        ..responseItemName = '';
+        ..responseItemName = ''
+        ..powerRequired = 0.0;
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -70,6 +74,7 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
   double? cost,
   String? responseItemName,
   DocumentReference? scenario,
+  double? powerRequired,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioHouseholdResponsesRecord.serializer,
@@ -78,7 +83,8 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
         ..responseItem = responseItem
         ..cost = cost
         ..responseItemName = responseItemName
-        ..scenario = scenario,
+        ..scenario = scenario
+        ..powerRequired = powerRequired,
     ),
   );
 
