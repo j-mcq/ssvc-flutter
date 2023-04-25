@@ -16,10 +16,10 @@ abstract class ScenarioHouseholdResponsesRecord
   @BuiltValueField(wireName: 'response_item')
   DocumentReference? get responseItem;
 
-  @BuiltValueField(wireName: 'response_item_name')
-  int? get responseItemName;
-
   double? get cost;
+
+  @BuiltValueField(wireName: 'response_item_name')
+  String? get responseItemName;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -30,8 +30,8 @@ abstract class ScenarioHouseholdResponsesRecord
   static void _initializeBuilder(
           ScenarioHouseholdResponsesRecordBuilder builder) =>
       builder
-        ..responseItemName = 0
-        ..cost = 0.0;
+        ..cost = 0.0
+        ..responseItemName = '';
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -65,16 +65,16 @@ abstract class ScenarioHouseholdResponsesRecord
 
 Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
   DocumentReference? responseItem,
-  int? responseItemName,
   double? cost,
+  String? responseItemName,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioHouseholdResponsesRecord.serializer,
     ScenarioHouseholdResponsesRecord(
       (s) => s
         ..responseItem = responseItem
-        ..responseItemName = responseItemName
-        ..cost = cost,
+        ..cost = cost
+        ..responseItemName = responseItemName,
     ),
   );
 

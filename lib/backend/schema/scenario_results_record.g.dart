@@ -46,6 +46,20 @@ class _$ScenarioResultsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.totalCost;
+    if (value != null) {
+      result
+        ..add('total_cost')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.numberOfResponseItems;
+    if (value != null) {
+      result
+        ..add('number_of_response_items')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -83,6 +97,14 @@ class _$ScenarioResultsRecordSerializer
           result.responseCoverage = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
+        case 'total_cost':
+          result.totalCost = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'number_of_response_items':
+          result.numberOfResponseItems = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -104,6 +126,10 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
   @override
   final double? responseCoverage;
   @override
+  final double? totalCost;
+  @override
+  final double? numberOfResponseItems;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ScenarioResultsRecord(
@@ -114,6 +140,8 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
       {this.scenario,
       this.psrHouseholdsImpacted,
       this.responseCoverage,
+      this.totalCost,
+      this.numberOfResponseItems,
       this.ffRef})
       : super._();
 
@@ -133,6 +161,8 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
         scenario == other.scenario &&
         psrHouseholdsImpacted == other.psrHouseholdsImpacted &&
         responseCoverage == other.responseCoverage &&
+        totalCost == other.totalCost &&
+        numberOfResponseItems == other.numberOfResponseItems &&
         ffRef == other.ffRef;
   }
 
@@ -142,6 +172,8 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
     _$hash = $jc(_$hash, scenario.hashCode);
     _$hash = $jc(_$hash, psrHouseholdsImpacted.hashCode);
     _$hash = $jc(_$hash, responseCoverage.hashCode);
+    _$hash = $jc(_$hash, totalCost.hashCode);
+    _$hash = $jc(_$hash, numberOfResponseItems.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -153,6 +185,8 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
           ..add('scenario', scenario)
           ..add('psrHouseholdsImpacted', psrHouseholdsImpacted)
           ..add('responseCoverage', responseCoverage)
+          ..add('totalCost', totalCost)
+          ..add('numberOfResponseItems', numberOfResponseItems)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -177,6 +211,15 @@ class ScenarioResultsRecordBuilder
   set responseCoverage(double? responseCoverage) =>
       _$this._responseCoverage = responseCoverage;
 
+  double? _totalCost;
+  double? get totalCost => _$this._totalCost;
+  set totalCost(double? totalCost) => _$this._totalCost = totalCost;
+
+  double? _numberOfResponseItems;
+  double? get numberOfResponseItems => _$this._numberOfResponseItems;
+  set numberOfResponseItems(double? numberOfResponseItems) =>
+      _$this._numberOfResponseItems = numberOfResponseItems;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -191,6 +234,8 @@ class ScenarioResultsRecordBuilder
       _scenario = $v.scenario;
       _psrHouseholdsImpacted = $v.psrHouseholdsImpacted;
       _responseCoverage = $v.responseCoverage;
+      _totalCost = $v.totalCost;
+      _numberOfResponseItems = $v.numberOfResponseItems;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -217,6 +262,8 @@ class ScenarioResultsRecordBuilder
             scenario: scenario,
             psrHouseholdsImpacted: psrHouseholdsImpacted,
             responseCoverage: responseCoverage,
+            totalCost: totalCost,
+            numberOfResponseItems: numberOfResponseItems,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

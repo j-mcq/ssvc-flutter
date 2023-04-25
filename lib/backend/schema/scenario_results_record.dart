@@ -19,6 +19,12 @@ abstract class ScenarioResultsRecord
   @BuiltValueField(wireName: 'response_coverage')
   double? get responseCoverage;
 
+  @BuiltValueField(wireName: 'total_cost')
+  double? get totalCost;
+
+  @BuiltValueField(wireName: 'number_of_response_items')
+  double? get numberOfResponseItems;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -28,7 +34,9 @@ abstract class ScenarioResultsRecord
   static void _initializeBuilder(ScenarioResultsRecordBuilder builder) =>
       builder
         ..psrHouseholdsImpacted = 0
-        ..responseCoverage = 0.0;
+        ..responseCoverage = 0.0
+        ..totalCost = 0.0
+        ..numberOfResponseItems = 0.0;
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -61,6 +69,8 @@ Map<String, dynamic> createScenarioResultsRecordData({
   DocumentReference? scenario,
   int? psrHouseholdsImpacted,
   double? responseCoverage,
+  double? totalCost,
+  double? numberOfResponseItems,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioResultsRecord.serializer,
@@ -68,7 +78,9 @@ Map<String, dynamic> createScenarioResultsRecordData({
       (s) => s
         ..scenario = scenario
         ..psrHouseholdsImpacted = psrHouseholdsImpacted
-        ..responseCoverage = responseCoverage,
+        ..responseCoverage = responseCoverage
+        ..totalCost = totalCost
+        ..numberOfResponseItems = numberOfResponseItems,
     ),
   );
 
