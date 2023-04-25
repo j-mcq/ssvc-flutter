@@ -65,9 +65,10 @@ void _saveData(DocumentReference<Object?>? scenarioReference) async {
   }
 
   final updatedScenarioData = createScenarioRecordData(
-      mapCenterLocation: FFAppState().mapCenterLocation,
-      mapZoomLevel: FFAppState().mapZoomLevel,
-      name: name);
+    mapCenterLocation: FFAppState().mapCenterLocation,
+    mapZoomLevel: FFAppState().mapZoomLevel,
+  );
+  // name: name);
 
   await scenarioReference.update(updatedScenarioData);
 
