@@ -47,6 +47,13 @@ class _$ScenarioResponseItemsRecordSerializer
         ..add('number_required')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.imagePath;
+    if (value != null) {
+      result
+        ..add('image_path')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -84,6 +91,10 @@ class _$ScenarioResponseItemsRecordSerializer
           result.numberRequired = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'image_path':
+          result.imagePath = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -105,6 +116,8 @@ class _$ScenarioResponseItemsRecord extends ScenarioResponseItemsRecord {
   @override
   final int? numberRequired;
   @override
+  final String? imagePath;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ScenarioResponseItemsRecord(
@@ -112,7 +125,11 @@ class _$ScenarioResponseItemsRecord extends ScenarioResponseItemsRecord {
       (new ScenarioResponseItemsRecordBuilder()..update(updates))._build();
 
   _$ScenarioResponseItemsRecord._(
-      {this.name, this.responseItem, this.numberRequired, this.ffRef})
+      {this.name,
+      this.responseItem,
+      this.numberRequired,
+      this.imagePath,
+      this.ffRef})
       : super._();
 
   @override
@@ -131,6 +148,7 @@ class _$ScenarioResponseItemsRecord extends ScenarioResponseItemsRecord {
         name == other.name &&
         responseItem == other.responseItem &&
         numberRequired == other.numberRequired &&
+        imagePath == other.imagePath &&
         ffRef == other.ffRef;
   }
 
@@ -140,6 +158,7 @@ class _$ScenarioResponseItemsRecord extends ScenarioResponseItemsRecord {
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, responseItem.hashCode);
     _$hash = $jc(_$hash, numberRequired.hashCode);
+    _$hash = $jc(_$hash, imagePath.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -151,6 +170,7 @@ class _$ScenarioResponseItemsRecord extends ScenarioResponseItemsRecord {
           ..add('name', name)
           ..add('responseItem', responseItem)
           ..add('numberRequired', numberRequired)
+          ..add('imagePath', imagePath)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -176,6 +196,10 @@ class ScenarioResponseItemsRecordBuilder
   set numberRequired(int? numberRequired) =>
       _$this._numberRequired = numberRequired;
 
+  String? _imagePath;
+  String? get imagePath => _$this._imagePath;
+  set imagePath(String? imagePath) => _$this._imagePath = imagePath;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -190,6 +214,7 @@ class ScenarioResponseItemsRecordBuilder
       _name = $v.name;
       _responseItem = $v.responseItem;
       _numberRequired = $v.numberRequired;
+      _imagePath = $v.imagePath;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -216,6 +241,7 @@ class ScenarioResponseItemsRecordBuilder
             name: name,
             responseItem: responseItem,
             numberRequired: numberRequired,
+            imagePath: imagePath,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
