@@ -43,7 +43,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
-    _model.itemNameController ??= TextEditingController();
+    _model.scenarioNameController ??= TextEditingController();
+    _model.outageDurationController ??= TextEditingController();
   }
 
   @override
@@ -321,7 +322,103 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     20.0, 16.0, 20.0, 16.0),
                                             child: TextFormField(
                                               controller:
-                                                  _model.itemNameController,
+                                                  _model.scenarioNameController,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                labelText: 'Scenario Name',
+                                                labelStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall,
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50.0),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50.0),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50.0),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                contentPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(20.0, 24.0,
+                                                            0.0, 24.0),
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                              validator: _model
+                                                  .scenarioNameControllerValidator
+                                                  .asValidator(context),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 1.0, 0.0, 0.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(0.0),
+                                          bottomRight: Radius.circular(0.0),
+                                          topLeft: Radius.circular(16.0),
+                                          topRight: Radius.circular(16.0),
+                                        ),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    20.0, 16.0, 20.0, 16.0),
+                                            child: TextFormField(
+                                              controller: _model
+                                                  .outageDurationController,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Outage Duration',
@@ -385,7 +482,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                               validator: _model
-                                                  .itemNameControllerValidator
+                                                  .outageDurationControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
@@ -544,13 +641,16 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             .calculateScenarioResponse(
                                                       widget.scenarioReference,
                                                       double.tryParse(_model
-                                                          .itemNameController
+                                                          .outageDurationController
                                                           .text),
                                                       FFAppState()
                                                           .polygonLatLngList
                                                           .toList(),
                                                       FFAppState().circleLatLng,
                                                       FFAppState().circleRadius,
+                                                      _model
+                                                          .scenarioNameController
+                                                          .text,
                                                     );
 
                                                     setState(() {});

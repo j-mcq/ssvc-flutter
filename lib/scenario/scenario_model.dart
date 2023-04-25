@@ -36,9 +36,12 @@ class ScenarioModel extends FlutterFlowModel {
   ScenarioRecord? outNewSceario;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   PolygonPointsRecord? outPolyPoints;
-  // State field(s) for itemName widget.
-  TextEditingController? itemNameController;
-  String? Function(BuildContext, String?)? itemNameControllerValidator;
+  // State field(s) for scenarioName widget.
+  TextEditingController? scenarioNameController;
+  String? Function(BuildContext, String?)? scenarioNameControllerValidator;
+  // State field(s) for outageDuration widget.
+  TextEditingController? outageDurationController;
+  String? Function(BuildContext, String?)? outageDurationControllerValidator;
   // Stores action output result for [Custom Action - calculateScenarioResponse] action in Button widget.
   String? outCalculationResult;
   // State field(s) for GoogleMap widget.
@@ -53,7 +56,8 @@ class ScenarioModel extends FlutterFlowModel {
 
   void dispose() {
     sideBarNavModel.dispose();
-    itemNameController?.dispose();
+    scenarioNameController?.dispose();
+    outageDurationController?.dispose();
   }
 
   /// Additional helper methods are added here.

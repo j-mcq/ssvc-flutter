@@ -13,7 +13,7 @@ Future<String?> calculateScenarioResponse(
   List<LatLng>? polygonPointList,
   LatLng? circleLatLng,
   double? circleRadius,
+  String name,
 ) async {
   // Add your function code here!
-  return '';
 }
