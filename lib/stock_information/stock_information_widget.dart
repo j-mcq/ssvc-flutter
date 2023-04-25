@@ -89,20 +89,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                 updateCallback: () => setState(() {}),
                 child: SideBarNavWidget(
                   oneBG: FlutterFlowTheme.of(context).secondaryBackground,
-                  oneIcon: Icon(
-                    Icons.bar_chart_rounded,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
                   twoBG: FlutterFlowTheme.of(context).secondaryBackground,
-                  twoIcon: Icon(
-                    Icons.school_outlined,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
                   threeColor: FlutterFlowTheme.of(context).primaryBackground,
-                  threeIcon: Icon(
-                    Icons.account_circle_outlined,
-                    color: FlutterFlowTheme.of(context).primary,
-                  ),
+                  fourColor: FlutterFlowTheme.of(context).primaryBackground,
                 ),
               ),
             Expanded(
