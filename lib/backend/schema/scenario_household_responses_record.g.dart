@@ -56,6 +56,13 @@ class _$ScenarioHouseholdResponsesRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.powerRequired;
+    if (value != null) {
+      result
+        ..add('power_required')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -99,6 +106,10 @@ class _$ScenarioHouseholdResponsesRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'power_required':
+          result.powerRequired = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -123,6 +134,8 @@ class _$ScenarioHouseholdResponsesRecord
   @override
   final DocumentReference<Object?>? scenario;
   @override
+  final double? powerRequired;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ScenarioHouseholdResponsesRecord(
@@ -134,6 +147,7 @@ class _$ScenarioHouseholdResponsesRecord
       this.cost,
       this.responseItemName,
       this.scenario,
+      this.powerRequired,
       this.ffRef})
       : super._();
 
@@ -154,6 +168,7 @@ class _$ScenarioHouseholdResponsesRecord
         cost == other.cost &&
         responseItemName == other.responseItemName &&
         scenario == other.scenario &&
+        powerRequired == other.powerRequired &&
         ffRef == other.ffRef;
   }
 
@@ -164,6 +179,7 @@ class _$ScenarioHouseholdResponsesRecord
     _$hash = $jc(_$hash, cost.hashCode);
     _$hash = $jc(_$hash, responseItemName.hashCode);
     _$hash = $jc(_$hash, scenario.hashCode);
+    _$hash = $jc(_$hash, powerRequired.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -176,6 +192,7 @@ class _$ScenarioHouseholdResponsesRecord
           ..add('cost', cost)
           ..add('responseItemName', responseItemName)
           ..add('scenario', scenario)
+          ..add('powerRequired', powerRequired)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -206,6 +223,11 @@ class ScenarioHouseholdResponsesRecordBuilder
   set scenario(DocumentReference<Object?>? scenario) =>
       _$this._scenario = scenario;
 
+  double? _powerRequired;
+  double? get powerRequired => _$this._powerRequired;
+  set powerRequired(double? powerRequired) =>
+      _$this._powerRequired = powerRequired;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -221,6 +243,7 @@ class ScenarioHouseholdResponsesRecordBuilder
       _cost = $v.cost;
       _responseItemName = $v.responseItemName;
       _scenario = $v.scenario;
+      _powerRequired = $v.powerRequired;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -248,6 +271,7 @@ class ScenarioHouseholdResponsesRecordBuilder
             cost: cost,
             responseItemName: responseItemName,
             scenario: scenario,
+            powerRequired: powerRequired,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
