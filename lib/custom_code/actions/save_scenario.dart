@@ -64,8 +64,17 @@ Future<DocumentReference> saveData(DocumentReference? scenarioReference,
     );
     await CirclesRecord.createDoc(scenarioReference).set(circleRecordData);
   }
-
+  clearAppState();
   return scenarioReference;
+}
+
+clearAppState() {
+  FFAppState().circleLatLng = null;
+  FFAppState().circleRadius = 0.0;
+  FFAppState().polygonLatLngList.clear();
+
+  FFAppState().mapCenterLocation = null;
+  FFAppState().mapZoomLevel = 16;
 }
 
 Future<void> deletePolygons(

@@ -117,6 +117,7 @@ class _PolyMapState extends State<PolyMap> {
 
   Future<void> _loadMapData() async {
     if (_isDataLoaded == false) {
+      clearAppState();
       if (widget.scenario != null) {
         final polygonPoints = await queryPolygonPointsRecordOnce(
             parent: widget.scenario!,
@@ -156,6 +157,15 @@ class _PolyMapState extends State<PolyMap> {
       }
     }
     _isDataLoaded = true;
+  }
+
+  clearAppState() {
+    FFAppState().circleLatLng = null;
+    FFAppState().circleRadius = 0.0;
+    FFAppState().polygonLatLngList.clear();
+
+    FFAppState().mapCenterLocation = null;
+    FFAppState().mapZoomLevel = 16;
   }
 
   // Draw Polygon to the map
