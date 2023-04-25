@@ -20,6 +20,13 @@ Future<String?> calculateScenarioResponse(
     final circleRecords =
         await queryCirclesRecordOnce(parent: scenarioReference);
 
+    final scenarioRecord =
+        await ScenarioRecord.getDocumentOnce(scenarioReference);
+    final outageDuration = scenarioRecord.outageDuration;
+
+    if (outageDuration == null) {
+      return 'Scenario duration is not set';
+    }
     var impactedPsrHouseholds = [];
 
     // check if households are in outage area
@@ -46,8 +53,14 @@ Future<String?> calculateScenarioResponse(
       }
     }
 
+    final psrCategoryOptionsRecords = await queryPsrCategoryOptionsRecordOnce();
+
     for (var psrHousehold in impactedPsrHouseholds) {
-      getResponseItems(psrHousehold);
+      final householdPowerConsumption = await calculatePowerConsumption(
+              psrHousehold, psrCategoryOptionsRecords) *
+          outageDuration;
+
+      calculateResponseItem(householdPowerConsumption);
     }
 
     saveScearioResults(scenarioReference, impactedPsrHouseholds);
@@ -59,7 +72,38 @@ Future<String?> calculateScenarioResponse(
   }
 }
 
-getResponseItems(psrHousehold) {}
+calculateResponseItem(double powerConsumption) async {
+  // get all available respone items
+  final responseItems = await queryResponseItemsRecordOnce( queryBuilder: (query) => query.orderBy('total_energy_storage_capacity'));
+
+
+for (var responseItem in responseItems){
+  if (responseItem.)
+}
+
+}
+
+Future<double> calculatePowerConsumption(PsrRecord psrHousehold,
+    List<PsrCategoryOptionsRecord> psrCategoryOptionsRecords) async {
+  final psrCategoriesRecords =
+      await queryPsrCategoriesRecordOnce(parent: psrHousehold.reference);
+
+  double totalPowerConsumption = 0.0;
+
+  for (PsrCategoriesRecord category in psrCategoriesRecords) {
+    final categoryData = psrCategoryOptionsRecords
+        .where((element) => element.reference == category.psrCategory)
+        .first;
+
+    if (categoryData != null) {
+      if (categoryData.powerConsumption != null) {
+        print(categoryData.name);
+        totalPowerConsumption += categoryData.powerConsumption!;
+      }
+    }
+  }
+  return totalPowerConsumption;
+}
 
 bool saveScearioResults(
     DocumentReference scenarioReference, impactedPsrHouseholds) {
@@ -90,22 +134,6 @@ bool checkLocationIsInCircle(
       mtk.PolygonUtil.containsLocation(propertyLocation, circleCenters, true);
   return isInPolygon;
 }
-
-// bool _calculateScenarioResults(mtk.LatLng? propertyLocation) {
-//   // convert to maps_toolkit LatLng
-
-//   mtk.LatLng propertyLocationMtk = mtk.LatLng(
-//       _markers.first.position.latitude, _markers.first.position.longitude);
-
-//   propertyLocation = propertyLocationMtk;
-//   final polygonLatLngsMtk = polygonLatLngs
-//       .map((e) => mtk.LatLng(e.latLng.latitude, e.latLng.longitude))
-//       .toList();
-
-//   final isInPolygon = mtk.PolygonUtil.containsLocation(
-//       propertyLocation, polygonLatLngsMtk, true);
-//   return isInPolygon;
-// }
 
 void _saveData(DocumentReference<Object?>? scenarioReference) async {
   FFAppState().isSaving = true;
