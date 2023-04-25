@@ -13,18 +13,6 @@ abstract class ScenarioResultsRecord
 
   DocumentReference? get scenario;
 
-  @BuiltValueField(wireName: 'response_item')
-  DocumentReference? get responseItem;
-
-  @BuiltValueField(wireName: 'number_required')
-  int? get numberRequired;
-
-  @BuiltValueField(wireName: 'response_item_name')
-  String? get responseItemName;
-
-  @BuiltValueField(wireName: 'households_impacted')
-  int? get householdsImpacted;
-
   @BuiltValueField(wireName: 'psr_households_impacted')
   int? get psrHouseholdsImpacted;
 
@@ -39,9 +27,6 @@ abstract class ScenarioResultsRecord
 
   static void _initializeBuilder(ScenarioResultsRecordBuilder builder) =>
       builder
-        ..numberRequired = 0
-        ..responseItemName = ''
-        ..householdsImpacted = 0
         ..psrHouseholdsImpacted = 0
         ..responseCoverage = 0.0;
 
@@ -74,10 +59,6 @@ abstract class ScenarioResultsRecord
 
 Map<String, dynamic> createScenarioResultsRecordData({
   DocumentReference? scenario,
-  DocumentReference? responseItem,
-  int? numberRequired,
-  String? responseItemName,
-  int? householdsImpacted,
   int? psrHouseholdsImpacted,
   double? responseCoverage,
 }) {
@@ -86,10 +67,6 @@ Map<String, dynamic> createScenarioResultsRecordData({
     ScenarioResultsRecord(
       (s) => s
         ..scenario = scenario
-        ..responseItem = responseItem
-        ..numberRequired = numberRequired
-        ..responseItemName = responseItemName
-        ..householdsImpacted = householdsImpacted
         ..psrHouseholdsImpacted = psrHouseholdsImpacted
         ..responseCoverage = responseCoverage,
     ),
