@@ -34,18 +34,19 @@ class _$ScenarioHouseholdResponsesRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
-    value = object.responseItemName;
-    if (value != null) {
-      result
-        ..add('response_item_name')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.cost;
     if (value != null) {
       result
         ..add('cost')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
+    }
+    value = object.responseItemName;
+    if (value != null) {
+      result
+        ..add('response_item_name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.ffRef;
     if (value != null) {
@@ -76,13 +77,13 @@ class _$ScenarioHouseholdResponsesRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
-        case 'response_item_name':
-          result.responseItemName = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
         case 'cost':
           result.cost = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
+          break;
+        case 'response_item_name':
+          result.responseItemName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
@@ -102,9 +103,9 @@ class _$ScenarioHouseholdResponsesRecord
   @override
   final DocumentReference<Object?>? responseItem;
   @override
-  final int? responseItemName;
-  @override
   final double? cost;
+  @override
+  final String? responseItemName;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -113,7 +114,7 @@ class _$ScenarioHouseholdResponsesRecord
       (new ScenarioHouseholdResponsesRecordBuilder()..update(updates))._build();
 
   _$ScenarioHouseholdResponsesRecord._(
-      {this.responseItem, this.responseItemName, this.cost, this.ffRef})
+      {this.responseItem, this.cost, this.responseItemName, this.ffRef})
       : super._();
 
   @override
@@ -130,8 +131,8 @@ class _$ScenarioHouseholdResponsesRecord
     if (identical(other, this)) return true;
     return other is ScenarioHouseholdResponsesRecord &&
         responseItem == other.responseItem &&
-        responseItemName == other.responseItemName &&
         cost == other.cost &&
+        responseItemName == other.responseItemName &&
         ffRef == other.ffRef;
   }
 
@@ -139,8 +140,8 @@ class _$ScenarioHouseholdResponsesRecord
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, responseItem.hashCode);
-    _$hash = $jc(_$hash, responseItemName.hashCode);
     _$hash = $jc(_$hash, cost.hashCode);
+    _$hash = $jc(_$hash, responseItemName.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -150,8 +151,8 @@ class _$ScenarioHouseholdResponsesRecord
   String toString() {
     return (newBuiltValueToStringHelper(r'ScenarioHouseholdResponsesRecord')
           ..add('responseItem', responseItem)
-          ..add('responseItemName', responseItemName)
           ..add('cost', cost)
+          ..add('responseItemName', responseItemName)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -168,14 +169,14 @@ class ScenarioHouseholdResponsesRecordBuilder
   set responseItem(DocumentReference<Object?>? responseItem) =>
       _$this._responseItem = responseItem;
 
-  int? _responseItemName;
-  int? get responseItemName => _$this._responseItemName;
-  set responseItemName(int? responseItemName) =>
-      _$this._responseItemName = responseItemName;
-
   double? _cost;
   double? get cost => _$this._cost;
   set cost(double? cost) => _$this._cost = cost;
+
+  String? _responseItemName;
+  String? get responseItemName => _$this._responseItemName;
+  set responseItemName(String? responseItemName) =>
+      _$this._responseItemName = responseItemName;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -189,8 +190,8 @@ class ScenarioHouseholdResponsesRecordBuilder
     final $v = _$v;
     if ($v != null) {
       _responseItem = $v.responseItem;
-      _responseItemName = $v.responseItemName;
       _cost = $v.cost;
+      _responseItemName = $v.responseItemName;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -215,8 +216,8 @@ class ScenarioHouseholdResponsesRecordBuilder
     final _$result = _$v ??
         new _$ScenarioHouseholdResponsesRecord._(
             responseItem: responseItem,
-            responseItemName: responseItemName,
             cost: cost,
+            responseItemName: responseItemName,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
