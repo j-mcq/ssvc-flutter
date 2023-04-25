@@ -1178,9 +1178,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               ),
                                               child: FutureBuilder<
                                                   List<
-                                                      ScenarioResultsCustomersRecord>>(
+                                                      ScenarioHouseholdResponsesRecord>>(
                                                 future:
-                                                    queryScenarioResultsCustomersRecordOnce(),
+                                                    queryScenarioHouseholdResponsesRecordOnce(
+                                                  parent:
+                                                      widget.scenarioReference,
+                                                ),
                                                 builder: (context, snapshot) {
                                                   // Customize what your widget looks like when it's loading.
                                                   if (!snapshot.hasData) {
@@ -1197,8 +1200,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       ),
                                                     );
                                                   }
-                                                  List<ScenarioResultsCustomersRecord>
-                                                      chartScenarioResultsCustomersRecordList =
+                                                  List<ScenarioHouseholdResponsesRecord>
+                                                      chartScenarioHouseholdResponsesRecordList =
                                                       snapshot.data!;
                                                   return Container(
                                                     width: 300.0,
@@ -1208,45 +1211,25 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         FlutterFlowBarChart(
                                                           barData: [
                                                             FFBarChartData(
-                                                              yData: chartScenarioResultsCustomersRecordList
-                                                                  .where((e) =>
-                                                                      e.name !=
-                                                                          null &&
-                                                                      e.name !=
-                                                                          '')
-                                                                  .toList()
+                                                              yData: chartScenarioHouseholdResponsesRecordList
                                                                   .map((d) => d
-                                                                      .numberImpacted)
+                                                                      .powerRequired)
                                                                   .toList(),
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .primary,
-                                                            ),
-                                                            FFBarChartData(
-                                                              yData: chartScenarioResultsCustomersRecordList
-                                                                  .map((d) => d
-                                                                      .numberRespondedTo)
-                                                                  .toList(),
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondary,
                                                             )
                                                           ],
-                                                          xLabels: chartScenarioResultsCustomersRecordList
-                                                              .where((e) =>
-                                                                  e.name !=
-                                                                      null &&
-                                                                  e.name != '')
-                                                              .toList()
-                                                              .map((d) => d
-                                                                  .psrGroupName)
-                                                              .toList(),
+                                                          xLabels:
+                                                              chartScenarioHouseholdResponsesRecordList
+                                                                  .map((d) => d
+                                                                      .responseItemName)
+                                                                  .toList(),
                                                           barWidth: 55.0,
                                                           barBorderRadius:
                                                               BorderRadius
                                                                   .circular(
                                                                       0.0),
-                                                          barSpace: 0.0,
                                                           groupSpace: 5.0,
                                                           alignment:
                                                               BarChartAlignment
@@ -1300,11 +1283,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                           context)
                                                                       .primary,
                                                                   'Required'),
-                                                              LegendEntry(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondary,
-                                                                  'In Stock'),
                                                             ],
                                                             width: 100.0,
                                                             height: 50.0,
@@ -1476,7 +1454,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Address',
+                                              'Resonse Item Name',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodySmall,
@@ -1490,7 +1468,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                         ))
                                           Expanded(
                                             child: Text(
-                                              'PSR Group',
+                                              'Power Required',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodySmall,
@@ -1512,9 +1490,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 16.0, 16.0, 0.0),
                                     child: StreamBuilder<
-                                        List<ScenarioResultsCustomersRecord>>(
+                                        List<ScenarioHouseholdResponsesRecord>>(
                                       stream:
-                                          queryScenarioResultsCustomersRecord(),
+                                          queryScenarioHouseholdResponsesRecord(
+                                        parent: widget.scenarioReference,
+                                      ),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
                                         if (!snapshot.hasData) {
@@ -1530,20 +1510,20 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                             ),
                                           );
                                         }
-                                        List<ScenarioResultsCustomersRecord>
-                                            listViewScenarioResultsCustomersRecordList =
+                                        List<ScenarioHouseholdResponsesRecord>
+                                            listViewScenarioHouseholdResponsesRecordList =
                                             snapshot.data!;
                                         return ListView.builder(
                                           padding: EdgeInsets.zero,
                                           shrinkWrap: true,
                                           scrollDirection: Axis.vertical,
                                           itemCount:
-                                              listViewScenarioResultsCustomersRecordList
+                                              listViewScenarioHouseholdResponsesRecordList
                                                   .length,
                                           itemBuilder:
                                               (context, listViewIndex) {
-                                            final listViewScenarioResultsCustomersRecord =
-                                                listViewScenarioResultsCustomersRecordList[
+                                            final listViewScenarioHouseholdResponsesRecord =
+                                                listViewScenarioHouseholdResponsesRecordList[
                                                     listViewIndex];
                                             return Padding(
                                               padding: EdgeInsetsDirectional
@@ -1588,8 +1568,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       .start,
                                                               children: [
                                                                 AutoSizeText(
-                                                                  listViewScenarioResultsCustomersRecord
-                                                                      .name!
+                                                                  listViewScenarioHouseholdResponsesRecord
+                                                                      .responseItemName!
                                                                       .maybeHandleOverflow(
                                                                     maxChars:
                                                                         32,
@@ -1635,8 +1615,9 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         Expanded(
                                                           flex: 1,
                                                           child: Text(
-                                                            listViewScenarioResultsCustomersRecord
-                                                                .psrGroupName!,
+                                                            listViewScenarioHouseholdResponsesRecord
+                                                                .powerRequired!
+                                                                .toString(),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium,
@@ -1659,8 +1640,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       .end,
                                                               children: [
                                                                 Text(
-                                                                  listViewScenarioResultsCustomersRecord
-                                                                      .item!,
+                                                                  listViewScenarioHouseholdResponsesRecord
+                                                                      .responseItemName!,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium,

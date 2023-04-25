@@ -63,6 +63,20 @@ class _$ScenarioHouseholdResponsesRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.postcode;
+    if (value != null) {
+      result
+        ..add('postcode')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.psrCategories;
+    if (value != null) {
+      result
+        ..add('psr_categories')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -110,6 +124,14 @@ class _$ScenarioHouseholdResponsesRecordSerializer
           result.powerRequired = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
+        case 'postcode':
+          result.postcode = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'psr_categories':
+          result.psrCategories = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -136,6 +158,10 @@ class _$ScenarioHouseholdResponsesRecord
   @override
   final double? powerRequired;
   @override
+  final String? postcode;
+  @override
+  final String? psrCategories;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ScenarioHouseholdResponsesRecord(
@@ -148,6 +174,8 @@ class _$ScenarioHouseholdResponsesRecord
       this.responseItemName,
       this.scenario,
       this.powerRequired,
+      this.postcode,
+      this.psrCategories,
       this.ffRef})
       : super._();
 
@@ -169,6 +197,8 @@ class _$ScenarioHouseholdResponsesRecord
         responseItemName == other.responseItemName &&
         scenario == other.scenario &&
         powerRequired == other.powerRequired &&
+        postcode == other.postcode &&
+        psrCategories == other.psrCategories &&
         ffRef == other.ffRef;
   }
 
@@ -180,6 +210,8 @@ class _$ScenarioHouseholdResponsesRecord
     _$hash = $jc(_$hash, responseItemName.hashCode);
     _$hash = $jc(_$hash, scenario.hashCode);
     _$hash = $jc(_$hash, powerRequired.hashCode);
+    _$hash = $jc(_$hash, postcode.hashCode);
+    _$hash = $jc(_$hash, psrCategories.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -193,6 +225,8 @@ class _$ScenarioHouseholdResponsesRecord
           ..add('responseItemName', responseItemName)
           ..add('scenario', scenario)
           ..add('powerRequired', powerRequired)
+          ..add('postcode', postcode)
+          ..add('psrCategories', psrCategories)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -228,6 +262,15 @@ class ScenarioHouseholdResponsesRecordBuilder
   set powerRequired(double? powerRequired) =>
       _$this._powerRequired = powerRequired;
 
+  String? _postcode;
+  String? get postcode => _$this._postcode;
+  set postcode(String? postcode) => _$this._postcode = postcode;
+
+  String? _psrCategories;
+  String? get psrCategories => _$this._psrCategories;
+  set psrCategories(String? psrCategories) =>
+      _$this._psrCategories = psrCategories;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -244,6 +287,8 @@ class ScenarioHouseholdResponsesRecordBuilder
       _responseItemName = $v.responseItemName;
       _scenario = $v.scenario;
       _powerRequired = $v.powerRequired;
+      _postcode = $v.postcode;
+      _psrCategories = $v.psrCategories;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -272,6 +317,8 @@ class ScenarioHouseholdResponsesRecordBuilder
             responseItemName: responseItemName,
             scenario: scenario,
             powerRequired: powerRequired,
+            postcode: postcode,
+            psrCategories: psrCategories,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
