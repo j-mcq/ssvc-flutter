@@ -875,20 +875,6 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                             Expanded(
                                               flex: 1,
                                               child: Text(
-                                                'Housholds Impacted',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                              ),
-                                            ),
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            phone: false,
-                                            tablet: false,
-                                          ))
-                                            Expanded(
-                                              flex: 1,
-                                              child: Text(
                                                 'PSR Housholds Impacted',
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -913,8 +899,22 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                             tablet: false,
                                           ))
                                             Expanded(
+                                              flex: 1,
                                               child: Text(
-                                                'Response Coverage',
+                                                'Response Items Required',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall,
+                                              ),
+                                            ),
+                                          if (responsiveVisibility(
+                                            context: context,
+                                            phone: false,
+                                            tablet: false,
+                                          ))
+                                            Expanded(
+                                              child: Text(
+                                                'Total Cost',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
@@ -1126,19 +1126,6 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                               Expanded(
                                                                 flex: 1,
                                                                 child: Text(
-                                                                  'CH1 2PX',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
-                                                                ),
-                                                              ),
-                                                            if (responsiveVisibility(
-                                                              context: context,
-                                                              phone: false,
-                                                            ))
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Text(
                                                                   containerScenarioResultsRecord !=
                                                                           null
                                                                       ? containerScenarioResultsRecord!
@@ -1166,51 +1153,48 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                     decimalType:
                                                                         DecimalType
                                                                             .automatic,
-                                                                  )} Days',
+                                                                  )} Hour(s)',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium,
                                                                 ),
                                                               ),
-                                                            Expanded(
-                                                              child:
-                                                                  LinearPercentIndicator(
-                                                                percent:
-                                                                    containerScenarioResultsRecord!
-                                                                        .responseCoverage!,
-                                                                width: 80.0,
-                                                                lineHeight:
-                                                                    18.0,
-                                                                animation: true,
-                                                                progressColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .lineColor,
-                                                                center: Text(
-                                                                  (double
-                                                                      inputValue) {
-                                                                    return (inputValue *
-                                                                                100)
-                                                                            .toString() +
-                                                                        '%';
-                                                                  }(containerScenarioResultsRecord!
-                                                                      .responseCoverage!),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                            ))
+                                                              Expanded(
+                                                                flex: 1,
+                                                                child: Text(
+                                                                  containerScenarioResultsRecord !=
+                                                                          null
+                                                                      ? containerScenarioResultsRecord!
+                                                                          .numberOfResponseItems!
+                                                                          .toString()
+                                                                      : '',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium,
                                                                 ),
-                                                                barRadius: Radius
-                                                                    .circular(
-                                                                        8.0),
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
                                                               ),
-                                                            ),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                            ))
+                                                              Expanded(
+                                                                flex: 1,
+                                                                child: Text(
+                                                                  containerScenarioResultsRecord !=
+                                                                          null
+                                                                      ? containerScenarioResultsRecord!
+                                                                          .totalCost!
+                                                                          .toString()
+                                                                      : '',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
+                                                                ),
+                                                              ),
                                                             Expanded(
                                                               child: Column(
                                                                 mainAxisSize:
@@ -1275,6 +1259,59 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                               Colors.black,
                                                                           size:
                                                                               24.0,
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            16.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            InkWell(
+                                                                          splashColor:
+                                                                              Colors.transparent,
+                                                                          focusColor:
+                                                                              Colors.transparent,
+                                                                          hoverColor:
+                                                                              Colors.transparent,
+                                                                          highlightColor:
+                                                                              Colors.transparent,
+                                                                          onTap:
+                                                                              () async {
+                                                                            var confirmDialogResponse = await showDialog<bool>(
+                                                                                  context: context,
+                                                                                  builder: (alertDialogContext) {
+                                                                                    return AlertDialog(
+                                                                                      title: Text('Delete Scenario'),
+                                                                                      content: Text('Are you sure you want to delete this scenario and the associated results?'),
+                                                                                      actions: [
+                                                                                        TextButton(
+                                                                                          onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                          child: Text('Cancel'),
+                                                                                        ),
+                                                                                        TextButton(
+                                                                                          onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                          child: Text('Confirm'),
+                                                                                        ),
+                                                                                      ],
+                                                                                    );
+                                                                                  },
+                                                                                ) ??
+                                                                                false;
+                                                                            if (confirmDialogResponse) {
+                                                                              await containerScenarioResultsRecord!.reference.delete();
+                                                                              await listViewScenarioRecord.reference.delete();
+                                                                            }
+                                                                          },
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.delete_outline,
+                                                                            color:
+                                                                                Colors.black,
+                                                                            size:
+                                                                                24.0,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ],
