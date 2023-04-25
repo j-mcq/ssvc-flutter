@@ -1058,9 +1058,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                     child: Text(
                                                                       containerScenarioResultsRecord !=
                                                                               null
-                                                                          ? containerScenarioResultsRecord!
-                                                                              .totalCost!
-                                                                              .toString()
+                                                                          ? formatNumber(
+                                                                              containerScenarioResultsRecord!.totalCost!,
+                                                                              formatType: FormatType.decimal,
+                                                                              decimalType: DecimalType.automatic,
+                                                                              currency: '£',
+                                                                            )
                                                                           : '',
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
@@ -1218,6 +1221,16 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                 flex: 1,
                                                 child: Text(
                                                   'Response Item Required',
+                                                  textAlign: TextAlign.start,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodySmall,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  'Unit Cost',
                                                   textAlign: TextAlign.start,
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -1423,6 +1436,42 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                 ],
                                                               ),
                                                             ),
+                                                            Expanded(
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        formatNumber(
+                                                                          listViewScenarioHouseholdResponsesRecord
+                                                                              .cost!,
+                                                                          formatType:
+                                                                              FormatType.decimal,
+                                                                          decimalType:
+                                                                              DecimalType.automatic,
+                                                                          currency:
+                                                                              '£',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium,
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
                                                           ],
                                                         ),
                                                       ),
@@ -1458,237 +1507,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                           topLeft: Radius.circular(16.0),
                                           topRight: Radius.circular(16.0),
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 1.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .lineColor,
-                                            offset: Offset(0.0, 0.0),
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 16.0, 16.0, 16.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Power Requirements Per PSR Household',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .headlineSmall,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  4.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        'Summary of the power required for each household',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 1.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .lineColor,
-                                            offset: Offset(0.0, 0.0),
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 1.0, 16.0, 0.0),
-                                            child: Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 0.0,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .lineColor,
-                                                    offset: Offset(0.0, 0.0),
-                                                  )
-                                                ],
-                                                borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(0.0),
-                                                  bottomRight:
-                                                      Radius.circular(0.0),
-                                                  topLeft:
-                                                      Radius.circular(16.0),
-                                                  topRight:
-                                                      Radius.circular(16.0),
-                                                ),
-                                              ),
-                                              child: FutureBuilder<
-                                                  List<
-                                                      ScenarioHouseholdResponsesRecord>>(
-                                                future:
-                                                    queryScenarioHouseholdResponsesRecordOnce(
-                                                  parent:
-                                                      widget.scenarioReference,
-                                                ),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50.0,
-                                                        height: 50.0,
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  List<ScenarioHouseholdResponsesRecord>
-                                                      chartScenarioHouseholdResponsesRecordList =
-                                                      snapshot.data!;
-                                                  return Container(
-                                                    width: 300.0,
-                                                    height: 300.0,
-                                                    child: FlutterFlowBarChart(
-                                                      barData: [
-                                                        FFBarChartData(
-                                                          yData: chartScenarioHouseholdResponsesRecordList
-                                                              .map((d) => d
-                                                                  .powerRequired)
-                                                              .toList(),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                        )
-                                                      ],
-                                                      xLabels:
-                                                          chartScenarioHouseholdResponsesRecordList
-                                                              .map((d) =>
-                                                                  d.postcode!)
-                                                              .toList(),
-                                                      barWidth: 55.0,
-                                                      barBorderRadius:
-                                                          BorderRadius.circular(
-                                                              0.0),
-                                                      groupSpace: 5.0,
-                                                      alignment:
-                                                          BarChartAlignment
-                                                              .spaceEvenly,
-                                                      chartStylingInfo:
-                                                          ChartStylingInfo(
-                                                        enableTooltip: true,
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        showGrid: true,
-                                                        borderColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .lineColor,
-                                                        borderWidth: 1.0,
-                                                      ),
-                                                      axisBounds: AxisBounds(),
-                                                      xAxisLabelInfo:
-                                                          AxisLabelInfo(
-                                                        title: 'Response Item',
-                                                        titleTextStyle:
-                                                            TextStyle(
-                                                          fontSize: 14.0,
-                                                        ),
-                                                        showLabels: true,
-                                                        labelInterval: 10.0,
-                                                      ),
-                                                      yAxisLabelInfo:
-                                                          AxisLabelInfo(
-                                                        title:
-                                                            'Power Capacity Required',
-                                                        titleTextStyle:
-                                                            TextStyle(
-                                                          fontSize: 14.0,
-                                                        ),
-                                                        showLabels: true,
-                                                        labelInterval: 100.0,
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        ],
                                       ),
                                     ),
                                   ),
@@ -1798,125 +1616,168 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 1.0, 16.0, 0.0),
-                                            child: Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 0.0,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .lineColor,
-                                                    offset: Offset(0.0, 0.0),
-                                                  )
-                                                ],
-                                                borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(0.0),
-                                                  bottomRight:
-                                                      Radius.circular(0.0),
-                                                  topLeft:
-                                                      Radius.circular(16.0),
-                                                  topRight:
-                                                      Radius.circular(16.0),
-                                                ),
-                                              ),
-                                              child: FutureBuilder<
-                                                  List<
-                                                      ScenarioResponseItemsRecord>>(
-                                                future:
-                                                    queryScenarioResponseItemsRecordOnce(
-                                                  parent:
-                                                      widget.scenarioReference,
-                                                ),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50.0,
-                                                        height: 50.0,
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  List<ScenarioResponseItemsRecord>
-                                                      chartScenarioResponseItemsRecordList =
-                                                      snapshot.data!;
-                                                  return Container(
-                                                    width: 300.0,
-                                                    height: 300.0,
-                                                    child: FlutterFlowBarChart(
-                                                      barData: [
-                                                        FFBarChartData(
-                                                          yData: chartScenarioResponseItemsRecordList
-                                                              .map((d) => d
-                                                                  .numberRequired)
-                                                              .toList(),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .tertiary,
-                                                        )
-                                                      ],
-                                                      xLabels:
-                                                          chartScenarioResponseItemsRecordList
-                                                              .map((d) =>
-                                                                  d.name!)
-                                                              .toList(),
-                                                      barWidth: 55.0,
-                                                      barBorderRadius:
-                                                          BorderRadius.circular(
-                                                              0.0),
-                                                      groupSpace: 5.0,
-                                                      alignment:
-                                                          BarChartAlignment
-                                                              .spaceEvenly,
-                                                      chartStylingInfo:
-                                                          ChartStylingInfo(
-                                                        enableTooltip: true,
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        showGrid: true,
-                                                        borderColor:
+                                            child: StreamBuilder<
+                                                List<ResponseItemsRecord>>(
+                                              stream:
+                                                  queryResponseItemsRecord(),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .lineColor,
-                                                        borderWidth: 1.0,
-                                                      ),
-                                                      axisBounds: AxisBounds(),
-                                                      xAxisLabelInfo:
-                                                          AxisLabelInfo(
-                                                        title: 'Response Item',
-                                                        titleTextStyle:
-                                                            TextStyle(
-                                                          fontSize: 14.0,
-                                                        ),
-                                                        showLabels: true,
-                                                        labelInterval: 10.0,
-                                                      ),
-                                                      yAxisLabelInfo:
-                                                          AxisLabelInfo(
-                                                        title:
-                                                            'Number Required',
-                                                        titleTextStyle:
-                                                            TextStyle(
-                                                          fontSize: 14.0,
-                                                        ),
-                                                        showLabels: true,
-                                                        labelInterval: 10.0,
+                                                                .primary,
                                                       ),
                                                     ),
                                                   );
-                                                },
-                                              ),
+                                                }
+                                                List<ResponseItemsRecord>
+                                                    containerResponseItemsRecordList =
+                                                    snapshot.data!;
+                                                return Container(
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryBackground,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        blurRadius: 0.0,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .lineColor,
+                                                        offset:
+                                                            Offset(0.0, 0.0),
+                                                      )
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(0.0),
+                                                      bottomRight:
+                                                          Radius.circular(0.0),
+                                                      topLeft:
+                                                          Radius.circular(16.0),
+                                                      topRight:
+                                                          Radius.circular(16.0),
+                                                    ),
+                                                  ),
+                                                  child: FutureBuilder<
+                                                      List<
+                                                          ScenarioResponseItemsRecord>>(
+                                                    future:
+                                                        queryScenarioResponseItemsRecordOnce(
+                                                      parent: widget
+                                                          .scenarioReference,
+                                                    ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      List<ScenarioResponseItemsRecord>
+                                                          chartScenarioResponseItemsRecordList =
+                                                          snapshot.data!;
+                                                      return Container(
+                                                        width: 300.0,
+                                                        height: 300.0,
+                                                        child:
+                                                            FlutterFlowBarChart(
+                                                          barData: [
+                                                            FFBarChartData(
+                                                              yData: chartScenarioResponseItemsRecordList
+                                                                  .map((d) => d
+                                                                      .numberRequired)
+                                                                  .toList(),
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .tertiary,
+                                                            ),
+                                                            FFBarChartData(
+                                                              yData: containerResponseItemsRecordList
+                                                                  .map((d) =>
+                                                                      d.stock)
+                                                                  .toList(),
+                                                              color: Color(
+                                                                  0xFF9418A8),
+                                                            )
+                                                          ],
+                                                          xLabels:
+                                                              chartScenarioResponseItemsRecordList
+                                                                  .map((d) =>
+                                                                      d.name!)
+                                                                  .toList(),
+                                                          barWidth: 55.0,
+                                                          barBorderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      0.0),
+                                                          barSpace: 0.0,
+                                                          groupSpace: 5.0,
+                                                          alignment:
+                                                              BarChartAlignment
+                                                                  .spaceEvenly,
+                                                          chartStylingInfo:
+                                                              ChartStylingInfo(
+                                                            enableTooltip: true,
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            showGrid: true,
+                                                            borderColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .lineColor,
+                                                            borderWidth: 1.0,
+                                                          ),
+                                                          axisBounds:
+                                                              AxisBounds(),
+                                                          xAxisLabelInfo:
+                                                              AxisLabelInfo(
+                                                            title:
+                                                                'Response Item',
+                                                            titleTextStyle:
+                                                                TextStyle(
+                                                              fontSize: 14.0,
+                                                            ),
+                                                            showLabels: true,
+                                                            labelInterval: 10.0,
+                                                          ),
+                                                          yAxisLabelInfo:
+                                                              AxisLabelInfo(
+                                                            title:
+                                                                'Number Required',
+                                                            titleTextStyle:
+                                                                TextStyle(
+                                                              fontSize: 14.0,
+                                                            ),
+                                                            showLabels: true,
+                                                            labelInterval: 10.0,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           ),
                                         ],
