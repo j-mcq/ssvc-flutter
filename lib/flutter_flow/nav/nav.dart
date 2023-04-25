@@ -143,7 +143,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'stockItemDetails',
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'stockItemDetails')
-                  : StockItemDetailsWidget(),
+                  : StockItemDetailsWidget(
+                      responseItemReference: params.getParam(
+                          'responseItemReference',
+                          ParamType.DocumentReference,
+                          false,
+                          ['response_items']),
+                    ),
             ),
             FFRoute(
               name: 'scenarios',

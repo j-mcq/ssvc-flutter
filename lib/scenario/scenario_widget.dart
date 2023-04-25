@@ -1512,7 +1512,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 1.0, 0.0, 0.0),
+                                        0.0, 16.0, 0.0, 0.0),
                                     child: Container(
                                       width: double.infinity,
                                       decoration: BoxDecoration(
@@ -1570,7 +1570,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        'Summary of the equipment required to respond to this scenario.',
+                                                        'Summary of the equipment required to respond to this scenario and the current stock levels.',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
