@@ -58,7 +58,6 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
     super.initState();
     _model = createModel(context, () => StockItemDetailsModel());
 
-    _model.descriptionController ??= TextEditingController();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -593,9 +592,15 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                   20.0, 0.0, 20.0, 12.0),
                                           child: TextFormField(
                                             controller:
-                                                _model.descriptionController,
+                                                _model.descriptionController ??=
+                                                    TextEditingController(
+                                              text:
+                                                  clipContainerResponseItemsRecord
+                                                      .description,
+                                            ),
                                             obscureText: false,
                                             decoration: InputDecoration(
+                                              labelText: 'Item Description',
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodySmall,
