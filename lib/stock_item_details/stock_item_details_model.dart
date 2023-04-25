@@ -17,6 +17,10 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class StockItemDetailsModel extends FlutterFlowModel {
+  ///  Local state fields for this page.
+
+  String? imagepath;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();

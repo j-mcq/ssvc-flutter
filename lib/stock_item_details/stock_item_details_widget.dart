@@ -490,6 +490,11 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                       return;
                                                     }
                                                   }
+
+                                                  setState(() {
+                                                    _model.imagepath =
+                                                        _model.uploadedFileUrl;
+                                                  });
                                                 },
                                                 child: Container(
                                                   width: 350.0,
@@ -501,8 +506,12 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                     shape: BoxShape.rectangle,
                                                   ),
                                                   child: Image.network(
-                                                    clipContainerResponseItemsRecord
-                                                        .imageLink!,
+                                                    _model.imagepath == null ||
+                                                            _model.imagepath ==
+                                                                ''
+                                                        ? clipContainerResponseItemsRecord
+                                                            .imageLink!
+                                                        : _model.imagepath!,
                                                     width: 714.8,
                                                     height: 500.0,
                                                     fit: BoxFit.cover,
@@ -1227,7 +1236,14 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                       dateAdded:
                                                           getCurrentTimestamp,
                                                       imageLink: _model
-                                                          .uploadedFileUrl,
+                                                                      .uploadedFileUrl !=
+                                                                  null &&
+                                                              _model.uploadedFileUrl !=
+                                                                  ''
+                                                          ? _model
+                                                              .uploadedFileUrl
+                                                          : clipContainerResponseItemsRecord
+                                                              .imageLink,
                                                       unitPrice:
                                                           double.tryParse(_model
                                                               .unitPriceController
