@@ -9,26 +9,26 @@ part 'psr_record.g.dart';
 abstract class PsrRecord implements Built<PsrRecord, PsrRecordBuilder> {
   static Serializer<PsrRecord> get serializer => _$psrRecordSerializer;
 
-  double? get latitude;
-
-  double? get longitude;
-
   String? get address1;
 
   String? get address2;
 
   String? get postcode;
 
+  double? get lattitude;
+
+  double? get longitude;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(PsrRecordBuilder builder) => builder
-    ..latitude = 0.0
-    ..longitude = 0.0
     ..address1 = ''
     ..address2 = ''
-    ..postcode = '';
+    ..postcode = ''
+    ..lattitude = 0.0
+    ..longitude = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('psr');
@@ -51,21 +51,21 @@ abstract class PsrRecord implements Built<PsrRecord, PsrRecordBuilder> {
 }
 
 Map<String, dynamic> createPsrRecordData({
-  double? latitude,
-  double? longitude,
   String? address1,
   String? address2,
   String? postcode,
+  double? lattitude,
+  double? longitude,
 }) {
   final firestoreData = serializers.toFirestore(
     PsrRecord.serializer,
     PsrRecord(
       (p) => p
-        ..latitude = latitude
-        ..longitude = longitude
         ..address1 = address1
         ..address2 = address2
-        ..postcode = postcode,
+        ..postcode = postcode
+        ..lattitude = lattitude
+        ..longitude = longitude,
     ),
   );
 

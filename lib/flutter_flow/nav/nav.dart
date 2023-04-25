@@ -151,6 +151,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'scenarios')
                   : ScenariosWidget(),
+            ),
+            FFRoute(
+              name: 'admin',
+              path: 'admin',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'admin')
+                  : AdminWidget(
+                      scenarioReference: params.getParam('scenarioReference',
+                          ParamType.DocumentReference, false, ['scenario']),
+                    ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
