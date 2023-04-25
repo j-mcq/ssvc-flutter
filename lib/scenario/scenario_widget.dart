@@ -1984,9 +1984,9 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               ),
                                               child: FutureBuilder<
                                                   List<
-                                                      ScenarioHouseholdResponsesRecord>>(
+                                                      ScenarioResponseItemsRecord>>(
                                                 future:
-                                                    queryScenarioHouseholdResponsesRecordOnce(
+                                                    queryScenarioResponseItemsRecordOnce(
                                                   parent:
                                                       widget.scenarioReference,
                                                 ),
@@ -2006,8 +2006,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       ),
                                                     );
                                                   }
-                                                  List<ScenarioHouseholdResponsesRecord>
-                                                      chartScenarioHouseholdResponsesRecordList =
+                                                  List<ScenarioResponseItemsRecord>
+                                                      chartScenarioResponseItemsRecordList =
                                                       snapshot.data!;
                                                   return Container(
                                                     width: 300.0,
@@ -2017,9 +2017,9 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         FlutterFlowBarChart(
                                                           barData: [
                                                             FFBarChartData(
-                                                              yData: chartScenarioHouseholdResponsesRecordList
+                                                              yData: chartScenarioResponseItemsRecordList
                                                                   .map((d) => d
-                                                                      .powerRequired)
+                                                                      .numberRequired)
                                                                   .toList(),
                                                               color: FlutterFlowTheme
                                                                       .of(context)
@@ -2027,9 +2027,9 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             )
                                                           ],
                                                           xLabels:
-                                                              chartScenarioHouseholdResponsesRecordList
-                                                                  .map((d) => d
-                                                                      .postcode)
+                                                              chartScenarioResponseItemsRecordList
+                                                                  .map((d) =>
+                                                                      d.name)
                                                                   .toList(),
                                                           barWidth: 55.0,
                                                           barBorderRadius:
@@ -2068,7 +2068,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                           yAxisLabelInfo:
                                                               AxisLabelInfo(
                                                             title:
-                                                                'Items Number',
+                                                                'Number Required',
                                                             titleTextStyle:
                                                                 TextStyle(
                                                               fontSize: 14.0,
