@@ -116,5 +116,17 @@ service cloud.firestore {
       allow read: if true;
     }
 
+
+    match /scenario/{parent}/scenario_response_items/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/scenario_response_items/{document} {
+      allow read: if true;
+    }
+
   }
 }
