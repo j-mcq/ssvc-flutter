@@ -1260,6 +1260,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                         .responseItemReference!
                                                         .update(
                                                             responseItemsUpdateData);
+
+                                                    context.pushNamed(
+                                                        'stockInformation');
                                                   },
                                                   text: 'Save Changes',
                                                   options: FFButtonOptions(
