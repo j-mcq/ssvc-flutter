@@ -11,6 +11,7 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -18,18 +19,14 @@ import 'package:provider/provider.dart';
 class ScenarioModel extends FlutterFlowModel {
   ///  Local state fields for this page.
 
-  bool? isCircle;
+  String? scenarioName;
 
-  bool? isPolygon;
-
-  double? radius;
-
-  String? polygon;
-
-  String? circle;
+  double? outageDuration;
 
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Custom Action - loadScenario] action in scenario widget.
+  ScenarioRecord? outLoadScenario;
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.

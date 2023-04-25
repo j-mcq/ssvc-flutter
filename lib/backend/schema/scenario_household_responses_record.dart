@@ -21,6 +21,8 @@ abstract class ScenarioHouseholdResponsesRecord
   @BuiltValueField(wireName: 'response_item_name')
   String? get responseItemName;
 
+  DocumentReference? get scenario;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -67,6 +69,7 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
   DocumentReference? responseItem,
   double? cost,
   String? responseItemName,
+  DocumentReference? scenario,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioHouseholdResponsesRecord.serializer,
@@ -74,7 +77,8 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
       (s) => s
         ..responseItem = responseItem
         ..cost = cost
-        ..responseItemName = responseItemName,
+        ..responseItemName = responseItemName
+        ..scenario = scenario,
     ),
   );
 

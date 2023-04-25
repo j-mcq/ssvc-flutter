@@ -11,6 +11,7 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +42,27 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
     super.initState();
     _model = createModel(context, () => ScenarioModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.outLoadScenario = await actions.loadScenario(
+        widget.scenarioReference != null ? widget.scenarioReference : null,
+      );
+      setState(() {
+        _model.scenarioName = _model.outLoadScenario!.reference != null
+            ? _model.outLoadScenario!.name
+            : null;
+        _model.outageDuration = _model.outLoadScenario!.reference != null
+            ? _model.outLoadScenario!.outageDuration
+            : null;
+      });
+    });
+
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
-    _model.scenarioNameController ??= TextEditingController();
-    _model.outageDurationController ??= TextEditingController();
+    _model.scenarioNameController ??=
+        TextEditingController(text: _model.scenarioName);
+    _model.outageDurationController ??=
+        TextEditingController(text: _model.outageDuration?.toString());
   }
 
   @override
@@ -308,85 +326,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                           topRight: Radius.circular(16.0),
                                         ),
                                       ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20.0, 16.0, 20.0, 16.0),
-                                            child: TextFormField(
-                                              controller:
-                                                  _model.scenarioNameController,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Scenario Name',
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                filled: true,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                contentPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(20.0, 24.0,
-                                                            0.0, 24.0),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                              validator: _model
-                                                  .scenarioNameControllerValidator
-                                                  .asValidator(context),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
                                     ),
                                   ),
                                   Padding(
@@ -407,6 +346,94 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        20.0, 16.0, 20.0, 16.0),
+                                                child: TextFormField(
+                                                  controller: _model
+                                                      .scenarioNameController,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Scenario Name',
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodySmall,
+                                                    hintStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodySmall,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Color(0x00000000),
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50.0),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Color(0x00000000),
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50.0),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Color(0x00000000),
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50.0),
+                                                    ),
+                                                    filled: true,
+                                                    fillColor: FlutterFlowTheme
+                                                            .of(context)
+                                                        .secondaryBackground,
+                                                    contentPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                20.0,
+                                                                24.0,
+                                                                0.0,
+                                                                24.0),
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  validator: _model
+                                                      .scenarioNameControllerValidator
+                                                      .asValidator(context),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
