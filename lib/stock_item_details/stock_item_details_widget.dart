@@ -1227,7 +1227,14 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                       dateAdded:
                                                           getCurrentTimestamp,
                                                       imageLink: _model
-                                                          .uploadedFileUrl,
+                                                                      .uploadedFileUrl !=
+                                                                  null &&
+                                                              _model.uploadedFileUrl !=
+                                                                  ''
+                                                          ? _model
+                                                              .uploadedFileUrl
+                                                          : clipContainerResponseItemsRecord
+                                                              .imageLink,
                                                       unitPrice:
                                                           double.tryParse(_model
                                                               .unitPriceController
