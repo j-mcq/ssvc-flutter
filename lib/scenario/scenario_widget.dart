@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
@@ -10,6 +11,7 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +41,27 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ScenarioModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (!(widget.scenarioReference != null)) {
+        final scenarioCreateData = createScenarioRecordData();
+        var scenarioRecordReference = ScenarioRecord.collection.doc();
+        await scenarioRecordReference.set(scenarioCreateData);
+        _model.outCreateScenario = ScenarioRecord.getDocumentFromData(
+            scenarioCreateData, scenarioRecordReference);
+
+        context.goNamed(
+          'scenario',
+          queryParams: {
+            'scenarioReference': serializeParam(
+              _model.outCreateScenario!.reference,
+              ParamType.DocumentReference,
+            ),
+          }.withoutNulls,
+        );
+      }
+    });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
