@@ -831,7 +831,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                             ),
                                             obscureText: false,
                                             decoration: InputDecoration(
-                                              labelText: 'Stock Level',
+                                              labelText: 'Total in Stock',
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodySmall,
