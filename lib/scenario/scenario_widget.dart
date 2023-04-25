@@ -636,21 +636,25 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               children: [
                                                 FFButtonWidget(
                                                   onPressed: () async {
-                                                    _model.outCalculationResult =
+                                                    _model.outSaveScenarioInputs =
                                                         await actions
-                                                            .calculateScenarioResponse(
-                                                      widget.scenarioReference,
+                                                            .saveScenario(
+                                                      widget.scenarioReference !=
+                                                              null
+                                                          ? widget
+                                                              .scenarioReference
+                                                          : null,
                                                       double.tryParse(_model
                                                           .outageDurationController
                                                           .text),
-                                                      FFAppState()
-                                                          .polygonLatLngList
-                                                          .toList(),
-                                                      FFAppState().circleLatLng,
-                                                      FFAppState().circleRadius,
                                                       _model
                                                           .scenarioNameController
                                                           .text,
+                                                    );
+                                                    await actions
+                                                        .calculateScenarioResponse(
+                                                      _model
+                                                          .outSaveScenarioInputs,
                                                     );
 
                                                     setState(() {});

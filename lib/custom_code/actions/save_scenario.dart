@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<String?> calculateScenarioResponse(
-    DocumentReference? scenarioReference) async {
+Future<DocumentReference?> saveScenario(
+  DocumentReference? scenarioReference,
+  double? scenarioDuration,
+  String scenarioName,
+) async {
   // Add your function code here!
 }

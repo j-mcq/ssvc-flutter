@@ -42,8 +42,8 @@ class ScenarioModel extends FlutterFlowModel {
   // State field(s) for outageDuration widget.
   TextEditingController? outageDurationController;
   String? Function(BuildContext, String?)? outageDurationControllerValidator;
-  // Stores action output result for [Custom Action - calculateScenarioResponse] action in Button widget.
-  String? outCalculationResult;
+  // Stores action output result for [Custom Action - saveScenario] action in Button widget.
+  DocumentReference? outSaveScenarioInputs;
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
