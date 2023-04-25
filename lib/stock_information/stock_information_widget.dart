@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -6,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -198,8 +200,33 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                           ],
                                         ),
                                         FFButtonWidget(
-                                          onPressed: () {
-                                            print('Button pressed ...');
+                                          onPressed: () async {
+                                            final responseItemsCreateData =
+                                                createResponseItemsRecordData();
+                                            var responseItemsRecordReference =
+                                                ResponseItemsRecord.collection
+                                                    .doc();
+                                            await responseItemsRecordReference
+                                                .set(responseItemsCreateData);
+                                            _model.outCreateResponseItem =
+                                                ResponseItemsRecord
+                                                    .getDocumentFromData(
+                                                        responseItemsCreateData,
+                                                        responseItemsRecordReference);
+
+                                            context.pushNamed(
+                                              'stockItemDetails',
+                                              queryParams: {
+                                                'responseItemReference':
+                                                    serializeParam(
+                                                  _model.outCreateResponseItem!
+                                                      .reference,
+                                                  ParamType.DocumentReference,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+
+                                            setState(() {});
                                           },
                                           text: 'Add Response Item',
                                           icon: Icon(
@@ -652,7 +679,17 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                     .transparent,
                                                             onTap: () async {
                                                               context.pushNamed(
-                                                                  'stockItemDetails');
+                                                                'stockItemDetails',
+                                                                queryParams: {
+                                                                  'responseItemReference':
+                                                                      serializeParam(
+                                                                    listViewResponseItemsRecord
+                                                                        .reference,
+                                                                    ParamType
+                                                                        .DocumentReference,
+                                                                  ),
+                                                                }.withoutNulls,
+                                                              );
                                                             },
                                                             child: Icon(
                                                               Icons.edit,
