@@ -643,7 +643,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     await actions
                                                         .calculateScenarioResponse(
                                                       _model
-                                                          .outSaveScenarioInputs,
+                                                          .outSaveScenarioInputs!,
                                                     );
 
                                                     setState(() {});

@@ -62,6 +62,7 @@ class _PolyMapState extends State<PolyMap> {
   bool _isCircle = false;
   bool _isDataLoaded = false;
   String _lastItemType = 'polygon'; // Default
+  bool _showPsrHouseholds = true;
   double _zoomLevel = 16; // Default
   gmf.LatLng _map_center_location = gmf.LatLng(53.178703, -2.994242);
 
@@ -139,6 +140,19 @@ class _PolyMapState extends State<PolyMap> {
             _setCircles(gmf.LatLng(element.latitude!, element.longitude!));
           });
         }
+
+        if (_showPsrHouseholds) {
+          final psrHouseholds = await queryPsrRecordOnce(
+              queryBuilder: (query) => query.orderBy('index'));
+        }
+      }
+      if (_showPsrHouseholds) {
+        final psrHouseholds = await queryPsrRecordOnce();
+
+        for (var psrHousehold in psrHouseholds) {
+          _setMarkers(
+              gmf.LatLng(psrHousehold.latitude!, psrHousehold.longitude!));
+        }
       }
     }
     _isDataLoaded = true;
@@ -196,6 +210,10 @@ class _PolyMapState extends State<PolyMap> {
       _markers.add(gmf.Marker(
         markerId: gmf.MarkerId(markerIdVal),
         position: point,
+        infoWindow: InfoWindow(
+            title: 'PSR Household',
+            snippet:
+                'latitude: ${point.latitude} longitude: ${point.longitude}'),
       ));
     });
   }
@@ -209,7 +227,7 @@ class _PolyMapState extends State<PolyMap> {
       _circles.clear();
       FFAppState().circleLatLng = null;
       FFAppState().circleRadius = 0.0;
-      _markers.clear();
+      // _markers.clear();
     });
   }
 
@@ -286,7 +304,6 @@ class _PolyMapState extends State<PolyMap> {
 
                           polygonLatLngs.add(PolygonLatLng(
                               latLng: point, polygonReference: null));
-                          _setMarkers(point);
                           _setPolygon();
                         });
                       } else if (_isMarker) {

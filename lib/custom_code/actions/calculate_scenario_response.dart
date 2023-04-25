@@ -52,8 +52,6 @@ Future<String?> calculateScenarioResponse(
 
     saveScearioResults(scenarioReference, impactedPsrHouseholds);
 
-    saveScearioResults(scenarioReference, impactedPsrHouseholds);
-
     return null;
   } catch (e) {
     print('Error calculating scenario response: ' + e.toString());
