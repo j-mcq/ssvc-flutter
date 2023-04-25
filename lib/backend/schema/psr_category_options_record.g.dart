@@ -40,6 +40,20 @@ class _$PsrCategoryOptionsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
+    value = object.resilienceScore;
+    if (value != null) {
+      result
+        ..add('resilience_score')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.powerConsumption;
+    if (value != null) {
+      result
+        ..add('power_consumption')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -73,6 +87,14 @@ class _$PsrCategoryOptionsRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
+        case 'resilience_score':
+          result.resilienceScore = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'power_consumption':
+          result.powerConsumption = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -92,13 +114,22 @@ class _$PsrCategoryOptionsRecord extends PsrCategoryOptionsRecord {
   @override
   final DocumentReference<Object?>? psrGroup;
   @override
+  final double? resilienceScore;
+  @override
+  final double? powerConsumption;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$PsrCategoryOptionsRecord(
           [void Function(PsrCategoryOptionsRecordBuilder)? updates]) =>
       (new PsrCategoryOptionsRecordBuilder()..update(updates))._build();
 
-  _$PsrCategoryOptionsRecord._({this.name, this.psrGroup, this.ffRef})
+  _$PsrCategoryOptionsRecord._(
+      {this.name,
+      this.psrGroup,
+      this.resilienceScore,
+      this.powerConsumption,
+      this.ffRef})
       : super._();
 
   @override
@@ -116,6 +147,8 @@ class _$PsrCategoryOptionsRecord extends PsrCategoryOptionsRecord {
     return other is PsrCategoryOptionsRecord &&
         name == other.name &&
         psrGroup == other.psrGroup &&
+        resilienceScore == other.resilienceScore &&
+        powerConsumption == other.powerConsumption &&
         ffRef == other.ffRef;
   }
 
@@ -124,6 +157,8 @@ class _$PsrCategoryOptionsRecord extends PsrCategoryOptionsRecord {
     var _$hash = 0;
     _$hash = $jc(_$hash, name.hashCode);
     _$hash = $jc(_$hash, psrGroup.hashCode);
+    _$hash = $jc(_$hash, resilienceScore.hashCode);
+    _$hash = $jc(_$hash, powerConsumption.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -134,6 +169,8 @@ class _$PsrCategoryOptionsRecord extends PsrCategoryOptionsRecord {
     return (newBuiltValueToStringHelper(r'PsrCategoryOptionsRecord')
           ..add('name', name)
           ..add('psrGroup', psrGroup)
+          ..add('resilienceScore', resilienceScore)
+          ..add('powerConsumption', powerConsumption)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -153,6 +190,16 @@ class PsrCategoryOptionsRecordBuilder
   set psrGroup(DocumentReference<Object?>? psrGroup) =>
       _$this._psrGroup = psrGroup;
 
+  double? _resilienceScore;
+  double? get resilienceScore => _$this._resilienceScore;
+  set resilienceScore(double? resilienceScore) =>
+      _$this._resilienceScore = resilienceScore;
+
+  double? _powerConsumption;
+  double? get powerConsumption => _$this._powerConsumption;
+  set powerConsumption(double? powerConsumption) =>
+      _$this._powerConsumption = powerConsumption;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -166,6 +213,8 @@ class PsrCategoryOptionsRecordBuilder
     if ($v != null) {
       _name = $v.name;
       _psrGroup = $v.psrGroup;
+      _resilienceScore = $v.resilienceScore;
+      _powerConsumption = $v.powerConsumption;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -189,7 +238,11 @@ class PsrCategoryOptionsRecordBuilder
   _$PsrCategoryOptionsRecord _build() {
     final _$result = _$v ??
         new _$PsrCategoryOptionsRecord._(
-            name: name, psrGroup: psrGroup, ffRef: ffRef);
+            name: name,
+            psrGroup: psrGroup,
+            resilienceScore: resilienceScore,
+            powerConsumption: powerConsumption,
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

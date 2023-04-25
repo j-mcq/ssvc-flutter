@@ -17,12 +17,21 @@ abstract class PsrCategoryOptionsRecord
   @BuiltValueField(wireName: 'psr_group')
   DocumentReference? get psrGroup;
 
+  @BuiltValueField(wireName: 'resilience_score')
+  double? get resilienceScore;
+
+  @BuiltValueField(wireName: 'power_consumption')
+  double? get powerConsumption;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(PsrCategoryOptionsRecordBuilder builder) =>
-      builder..name = '';
+      builder
+        ..name = ''
+        ..resilienceScore = 0.0
+        ..powerConsumption = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('psr_category_options');
@@ -50,13 +59,17 @@ abstract class PsrCategoryOptionsRecord
 Map<String, dynamic> createPsrCategoryOptionsRecordData({
   String? name,
   DocumentReference? psrGroup,
+  double? resilienceScore,
+  double? powerConsumption,
 }) {
   final firestoreData = serializers.toFirestore(
     PsrCategoryOptionsRecord.serializer,
     PsrCategoryOptionsRecord(
       (p) => p
         ..name = name
-        ..psrGroup = psrGroup,
+        ..psrGroup = psrGroup
+        ..resilienceScore = resilienceScore
+        ..powerConsumption = powerConsumption,
     ),
   );
 
