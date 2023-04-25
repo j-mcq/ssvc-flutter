@@ -12,7 +12,9 @@ Future<String?> calculateScenarioResponse(
     DocumentReference scenarioReference) async {
   // Add your function code here!
   try {
-    // get psr data
+    // delete previous scenario results
+    deletePreviousResults(scenarioReference);
+
     final psrRecords = await queryPsrRecordOnce();
 
     final polygonRecords =
@@ -27,7 +29,7 @@ Future<String?> calculateScenarioResponse(
     if (outageDuration == null) {
       return 'Scenario duration is not set';
     }
-    var impactedPsrHouseholds = [];
+    List<PsrRecord> impactedPsrHouseholds = [];
 
     // check if households are in outage area
     for (var household in psrRecords) {
@@ -55,16 +57,43 @@ Future<String?> calculateScenarioResponse(
 
     final psrCategoryOptionsRecords = await queryPsrCategoryOptionsRecordOnce();
 
+    var totalCost = 0.0;
+    var totalResponseItems = 0.0;
+
     for (var psrHousehold in impactedPsrHouseholds) {
-      final householdPowerConsumption = await calculatePowerConsumption(
-              psrHousehold, psrCategoryOptionsRecords) *
-          outageDuration;
+      final mappedPsrCategory = await calculatePowerConsumption(
+          psrHousehold, psrCategoryOptionsRecords);
 
-      calculateResponseItem(householdPowerConsumption);
+      final householdPowerConsumption =
+          mappedPsrCategory.powerConsumption * outageDuration;
+
+      final responseItem =
+          await calculateResponseItem(householdPowerConsumption);
+
+      if (responseItem != null) {
+        totalCost +=
+            responseItem.unitPrice != null ? responseItem.unitPrice! : 0;
+        totalResponseItems += 1;
+
+        final createScenarioHouseholdResponsesCreateData =
+            createScenarioHouseholdResponsesRecordData(
+                cost: responseItem.unitPrice,
+                responseItemName: responseItem.name,
+                responseItem: responseItem.reference,
+                postcode: psrHousehold.postcode,
+                psrCategories: mappedPsrCategory.names,
+                scenario: scenarioReference,
+                powerRequired: householdPowerConsumption);
+
+        var scenarioHouseholdResponsesRecordReference =
+            ScenarioHouseholdResponsesRecord.createDoc(scenarioReference);
+        await scenarioHouseholdResponsesRecordReference
+            .set(createScenarioHouseholdResponsesCreateData);
+      }
     }
-
-    saveScearioResults(scenarioReference, impactedPsrHouseholds);
-
+    await groupResponseItems(scenarioReference);
+    saveScenarioResults(scenarioReference, impactedPsrHouseholds.length,
+        totalCost, totalResponseItems);
     return null;
   } catch (e) {
     print('Error calculating scenario response: ' + e.toString());
@@ -72,22 +101,76 @@ Future<String?> calculateScenarioResponse(
   }
 }
 
-calculateResponseItem(double powerConsumption) async {
+groupResponseItems(DocumentReference scenarioReference) async {
+  final responseItemResults = await queryScenarioHouseholdResponsesRecordOnce(
+      parent: scenarioReference);
+  final responseItems = await queryResponseItemsRecordOnce();
+
+  for (var responseItem in responseItems) {
+    var itemCount = 0;
+    for (var responseItemResult in responseItemResults) {
+      if (responseItemResult.responseItem == responseItem.reference) {
+        itemCount += 1;
+      }
+    }
+    if (itemCount > 0) {
+      final createScenarioResponseItemsCreateData =
+          createScenarioResponseItemsRecordData(
+              numberRequired: itemCount,
+              name: responseItem.name,
+              responseItem: responseItem.reference,
+              imagePath: responseItem.imageLink);
+
+      var scenarioResponseItemsRecordReference =
+          ScenarioResponseItemsRecord.createDoc(scenarioReference);
+      await scenarioResponseItemsRecordReference
+          .set(createScenarioResponseItemsCreateData);
+    }
+  }
+}
+
+deletePreviousResults(DocumentReference scenarioReference) async {
+  // delete previous scenario results
+  final scenarioResultsRecords =
+      await queryScenarioResultsRecordOnce(parent: scenarioReference);
+  scenarioResultsRecords.forEach((element) {
+    element.reference.delete();
+  });
+
+  final scenarioHouseholdResponsesRecords =
+      await queryScenarioHouseholdResponsesRecordOnce(
+          parent: scenarioReference);
+  scenarioHouseholdResponsesRecords.forEach((element) {
+    element.reference.delete();
+  });
+
+  final scenarioResponseItemsRecords =
+      await queryScenarioResponseItemsRecordOnce(parent: scenarioReference);
+  scenarioResponseItemsRecords.forEach((element) {
+    element.reference.delete();
+  });
+}
+
+Future<ResponseItemsRecord?> calculateResponseItem(
+    double requiredBatteryCapacity) async {
   // get all available respone items
-  final responseItems = await queryResponseItemsRecordOnce( queryBuilder: (query) => query.orderBy('total_energy_storage_capacity'));
+  final responseItems = await queryResponseItemsRecordOnce(
+      queryBuilder: (query) => query.orderBy('total_energy_storage_capacity'));
 
-
-for (var responseItem in responseItems){
-  if (responseItem.)
+  for (var responseItem in responseItems) {
+    if (responseItem.totalEnergyStorageCapacity! >= requiredBatteryCapacity) {
+      return responseItem;
+    }
+  }
+  return null;
 }
 
-}
-
-Future<double> calculatePowerConsumption(PsrRecord psrHousehold,
+Future<MappedPsrCategory> calculatePowerConsumption(PsrRecord psrHousehold,
     List<PsrCategoryOptionsRecord> psrCategoryOptionsRecords) async {
   final psrCategoriesRecords =
       await queryPsrCategoriesRecordOnce(parent: psrHousehold.reference);
 
+  var categoryNames = '';
   double totalPowerConsumption = 0.0;
 
   for (PsrCategoriesRecord category in psrCategoriesRecords) {
@@ -98,19 +181,36 @@ Future<double> calculatePowerConsumption(PsrRecord psrHousehold,
     if (categoryData != null) {
       if (categoryData.powerConsumption != null) {
         print(categoryData.name);
-        totalPowerConsumption += categoryData.powerConsumption!;
+        totalPowerConsumption += categoryData.powerConsumption! / 24;
+        categoryNames += categoryData.name! + ', ';
       }
     }
   }
-  return totalPowerConsumption;
+  return MappedPsrCategory(categoryNames, totalPowerConsumption);
 }
 
-bool saveScearioResults(
-    DocumentReference scenarioReference, impactedPsrHouseholds) {
+class MappedPsrCategory {
+  final String names;
+  final double powerConsumption;
+
+  MappedPsrCategory(this.names, this.powerConsumption);
+}
+
+Future<bool> saveScenarioResults(
+    DocumentReference scenarioReference,
+    int totalPsrHomesImpacted,
+    double totalCost,
+    double totalResponseItems) async {
   // save scenario results
-  final scenarioResultsData = createScenarioResultsRecordData(
+  final scenarioResultsCreateData = createScenarioResultsRecordData(
       scenario: scenarioReference,
-      psrHouseholdsImpacted: impactedPsrHouseholds.length);
+      psrHouseholdsImpacted: totalPsrHomesImpacted,
+      totalCost: totalCost,
+      numberOfResponseItems: totalResponseItems);
+
+  var scenarioResultsRecordReference =
+      ScenarioResultsRecord.createDoc(scenarioReference);
+  await scenarioResultsRecordReference.set(scenarioResultsCreateData);
 
   return true;
 }
@@ -133,72 +233,4 @@ bool checkLocationIsInCircle(
   final isInPolygon =
       mtk.PolygonUtil.containsLocation(propertyLocation, circleCenters, true);
   return isInPolygon;
-}
-
-void _saveData(DocumentReference<Object?>? scenarioReference) async {
-  FFAppState().isSaving = true;
-
-  // create a new sceario is none exists
-  if (scenarioReference == null) {
-    final scenarioCreateData = createScenarioRecordData();
-    var scenarioRecordReference = ScenarioRecord.collection.doc();
-    await scenarioRecordReference.set(scenarioCreateData);
-    scenarioReference = ScenarioRecord.getDocumentFromData(
-            scenarioCreateData, scenarioRecordReference)
-        .reference;
-  }
-
-  final updatedScenarioData = createScenarioRecordData(
-    mapCenterLocation: FFAppState().mapCenterLocation,
-    mapZoomLevel: FFAppState().mapZoomLevel,
-  );
-  // name: name);
-
-  await scenarioReference.update(updatedScenarioData);
-
-  // remove all previous polygons and circles associated with this scenario before saving the new ones
-  await deletePolygons(scenarioReference);
-  // add newly created polygons and circles to the database
-  if (FFAppState().polygonLatLngList.isNotEmpty) {
-    FFAppState().polygonLatLngList.asMap().forEach((index, element) async {
-      final polygonPointsRecordData = createPolygonPointsRecordData(
-          latitude: element.latitude,
-          longitude: element.longitude,
-          index: index);
-      await PolygonPointsRecord.createDoc(scenarioReference!)
-          .set(polygonPointsRecordData);
-    });
-  }
-
-  await deleteCircles(scenarioReference);
-
-  if (FFAppState().circleLatLng != null) {
-    final circleRecordData = createCirclesRecordData(
-      latitude: FFAppState().circleLatLng!.latitude,
-      longitude: FFAppState().circleLatLng!.longitude,
-      radius: FFAppState().circleRadius,
-    );
-    await CirclesRecord.createDoc(scenarioReference).set(circleRecordData);
-  }
-  ;
-
-  FFAppState().isSaving = false;
-}
-
-Future<void> deletePolygons(
-    DocumentReference<Object?> scenarioReference) async {
-  final polygonPoints =
-      await queryPolygonPointsRecordOnce(parent: scenarioReference);
-
-  for (var polygonPoint in polygonPoints) {
-    await polygonPoint.reference.delete();
-  }
-}
-
-Future<void> deleteCircles(DocumentReference<Object?> scenarioReference) async {
-  final circles = await queryCirclesRecordOnce(parent: scenarioReference);
-
-  for (var circle in circles) {
-    await circle.reference.delete();
-  }
 }

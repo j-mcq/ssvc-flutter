@@ -141,11 +141,6 @@ class _PolyMapState extends State<PolyMap> {
             _setCircles(gmf.LatLng(element.latitude!, element.longitude!));
           });
         }
-
-        if (_showPsrHouseholds) {
-          final psrHouseholds = await queryPsrRecordOnce(
-              queryBuilder: (query) => query.orderBy('index'));
-        }
       }
       if (_showPsrHouseholds) {
         final psrHouseholds = await queryPsrRecordOnce();
@@ -351,59 +346,6 @@ class _PolyMapState extends State<PolyMap> {
                     _clearAll();
                   },
                   text: 'Clear All',
-                  options: FFButtonOptions(
-                    width: 130.0,
-                    height: 40.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.white,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.white,
-                      enableDrag: false,
-                      context: context,
-                      builder: (bottomSheetContext) {
-                        return GestureDetector(
-                          onTap: () =>
-                              FocusScope.of(context).requestFocus(_unfocusNode),
-                          child: Padding(
-                            padding:
-                                MediaQuery.of(bottomSheetContext).viewInsets,
-                            child: EnterRadiusWidget(),
-                          ),
-                        );
-                      },
-                    ).then((value) => setState(() {}));
-
-                    setState(() {
-                      _isPolygon = false;
-                      _isMarker = false;
-                      _isCircle = true;
-                      radius = FFAppState().impactRadius;
-                    });
-                  },
-                  text: 'Add Circle',
                   options: FFButtonOptions(
                     width: 130.0,
                     height: 40.0,

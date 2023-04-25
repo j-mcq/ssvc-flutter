@@ -43,7 +43,9 @@ Future<bool> importPsrData(String filePath) async {
       final psrCategoriesForHousehold = getPsrCategories(row, psrOptions);
 
       final psrCreateData = createPsrRecordData(
-          latitude: double.parse(row[11]), longitude: double.parse(row[12]));
+          latitude: double.parse(row[11]),
+          longitude: double.parse(row[12]),
+          postcode: row[10]);
 
       var psrRecordReference = PsrRecord.collection.doc();
       await psrRecordReference.set(psrCreateData);
