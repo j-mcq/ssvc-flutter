@@ -1955,7 +1955,26 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     ),
                                                   ),
                                                   Expanded(
-                                                    flex: 1,
+                                                    flex: 2,
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        '',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 2,
                                                     child: Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
@@ -2073,6 +2092,34 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
+                                                                          Image
+                                                                              .network(
+                                                                            listViewScenarioResponseItemsRecord.imagePath!,
+                                                                            width:
+                                                                                100.0,
+                                                                            height:
+                                                                                100.0,
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  flex: 2,
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
                                                                           AutoSizeText(
                                                                             listViewScenarioResponseItemsRecord.name!.maybeHandleOverflow(
                                                                               maxChars: 32,
@@ -2108,7 +2155,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   tablet: false,
                                                                 ))
                                                                   Expanded(
-                                                                    flex: 1,
+                                                                    flex: 2,
                                                                     child: Text(
                                                                       listViewScenarioResponseItemsRecord
                                                                           .numberRequired!

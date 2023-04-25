@@ -20,6 +20,9 @@ abstract class ScenarioResponseItemsRecord
   @BuiltValueField(wireName: 'number_required')
   int? get numberRequired;
 
+  @BuiltValueField(wireName: 'image_path')
+  String? get imagePath;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -29,7 +32,8 @@ abstract class ScenarioResponseItemsRecord
   static void _initializeBuilder(ScenarioResponseItemsRecordBuilder builder) =>
       builder
         ..name = ''
-        ..numberRequired = 0;
+        ..numberRequired = 0
+        ..imagePath = '';
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -65,6 +69,7 @@ Map<String, dynamic> createScenarioResponseItemsRecordData({
   String? name,
   DocumentReference? responseItem,
   int? numberRequired,
+  String? imagePath,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioResponseItemsRecord.serializer,
@@ -72,7 +77,8 @@ Map<String, dynamic> createScenarioResponseItemsRecordData({
       (s) => s
         ..name = name
         ..responseItem = responseItem
-        ..numberRequired = numberRequired,
+        ..numberRequired = numberRequired
+        ..imagePath = imagePath,
     ),
   );
 
