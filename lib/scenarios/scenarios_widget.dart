@@ -747,9 +747,16 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                 child: Text(
                                                                   containerScenarioResultsRecord !=
                                                                           null
-                                                                      ? containerScenarioResultsRecord!
-                                                                          .totalCost!
-                                                                          .toString()
+                                                                      ? formatNumber(
+                                                                          containerScenarioResultsRecord!
+                                                                              .totalCost!,
+                                                                          formatType:
+                                                                              FormatType.decimal,
+                                                                          decimalType:
+                                                                              DecimalType.automatic,
+                                                                          currency:
+                                                                              '£',
+                                                                        )
                                                                       : '',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
