@@ -17,22 +17,12 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ScenarioModel extends FlutterFlowModel {
-  ///  Local state fields for this page.
-
-  String? scenarioName;
-
-  double? outageDuration;
-
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - loadScenario] action in scenario widget.
-  ScenarioRecord? outLoadScenario;
+  // Stores action output result for [Backend Call - Create Document] action in scenario widget.
+  ScenarioRecord? outCreateScenario;
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  ScenarioRecord? outNewSceario;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  PolygonPointsRecord? outPolyPoints;
   // State field(s) for scenarioName widget.
   TextEditingController? scenarioNameController;
   String? Function(BuildContext, String?)? scenarioNameControllerValidator;
