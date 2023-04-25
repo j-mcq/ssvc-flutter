@@ -9,25 +9,88 @@ import 'package:flutter/material.dart';
 import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
 
 Future<String?> calculateScenarioResponse(
-    DocumentReference? scenarioReference) async {
+    DocumentReference scenarioReference) async {
   // Add your function code here!
-  _saveData(scenarioReference);
-  return '';
+  try {
+    // get psr data
+    final psrRecords = await queryPsrRecordOnce();
+
+    final polygonRecords =
+        await queryPolygonPointsRecordOnce(parent: scenarioReference);
+    final circleRecords =
+        await queryCirclesRecordOnce(parent: scenarioReference);
+
+    var impactedPsrHouseholds = [];
+
+    // check if households are in outage area
+    for (var household in psrRecords) {
+      if (household.latitude == null || household.longitude == null) {
+        continue;
+      }
+
+      if (polygonRecords.length > 0) {
+        final isInPolygon = checkLocationIsInPolygon(
+            mtk.LatLng(household.latitude!, household.longitude!),
+            polygonRecords);
+        if (isInPolygon) {
+          impactedPsrHouseholds.add(household);
+        }
+      }
+      if (circleRecords.length > 0) {
+        final isInPolygon = checkLocationIsInCircle(
+            mtk.LatLng(household.latitude!, household.longitude!),
+            circleRecords);
+        if (isInPolygon) {
+          impactedPsrHouseholds.add(household);
+        }
+      }
+    }
+
+    for (var psrHousehold in impactedPsrHouseholds) {
+      getResponseItems(psrHousehold);
+    }
+
+    saveScearioResults(scenarioReference, impactedPsrHouseholds);
+
+    saveScearioResults(scenarioReference, impactedPsrHouseholds);
+
+    return null;
+  } catch (e) {
+    print('Error calculating scenario response: ' + e.toString());
+    return 'Error calculating scenario response';
+  }
 }
 
-bool checkLocationIsInOutagArea() {
-  // mtk.LatLng propertyLocationMtk = mtk.LatLng(
-  //     _markers.first.position.latitude, _markers.first.position.longitude);
+getResponseItems(psrHousehold) {}
 
-  // propertyLocation = propertyLocationMtk;
-  // final polygonLatLngsMtk =
-  //     polygonLatLngs.map((e) => mtk.LatLng(e.latitude, e.longitude)).toList();
-
-  // final isInPolygon = mtk.PolygonUtil.containsLocation(
-  //     propertyLocation, polygonLatLngsMtk, true);
-  // return isInPolygon;
+bool saveScearioResults(
+    DocumentReference scenarioReference, impactedPsrHouseholds) {
+  // save scenario results
+  final scenarioResultsData = createScenarioResultsRecordData(
+      scenario: scenarioReference,
+      psrHouseholdsImpacted: impactedPsrHouseholds.length);
 
   return true;
+}
+
+bool checkLocationIsInPolygon(
+    mtk.LatLng propertyLocation, List<PolygonPointsRecord> polygonRecords) {
+  final polygonLatLngs =
+      polygonRecords.map((e) => mtk.LatLng(e.latitude!, e.longitude!)).toList();
+
+  final isInPolygon =
+      mtk.PolygonUtil.containsLocation(propertyLocation, polygonLatLngs, true);
+  return isInPolygon;
+}
+
+bool checkLocationIsInCircle(
+    mtk.LatLng propertyLocation, List<CirclesRecord> circleRecords) {
+  final circleCenters =
+      circleRecords.map((e) => mtk.LatLng(e.latitude!, e.longitude!)).toList();
+  final circleRadii = circleRecords.map((e) => e.radius);
+  final isInPolygon =
+      mtk.PolygonUtil.containsLocation(propertyLocation, circleCenters, true);
+  return isInPolygon;
 }
 
 // bool _calculateScenarioResults(mtk.LatLng? propertyLocation) {
