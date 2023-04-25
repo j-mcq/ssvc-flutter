@@ -13,3 +13,4 @@ export '/scenario_copy/scenario_copy_widget.dart' show ScenarioCopyWidget;
 export '/stock_item_details/stock_item_details_widget.dart'
     show StockItemDetailsWidget;
 export '/scenarios/scenarios_widget.dart' show ScenariosWidget;
+export '/admin/admin_widget.dart' show AdminWidget;
