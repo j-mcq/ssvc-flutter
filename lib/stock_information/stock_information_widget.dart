@@ -580,43 +580,93 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
                                                         children: [
-                                                          AutoSizeText(
+                                                          Image.network(
                                                             listViewResponseItemsRecord
-                                                                .name!
-                                                                .maybeHandleOverflow(
-                                                              maxChars: 32,
-                                                              replacement: '…',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .titleMedium,
+                                                                .imageLink!,
+                                                            width: 100.0,
+                                                            height: 100.0,
+                                                            fit: BoxFit.cover,
                                                           ),
-                                                          if (responsiveVisibility(
-                                                            context: context,
-                                                            tabletLandscape:
-                                                                false,
-                                                            desktop: false,
-                                                          ))
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          2.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                'user@domainname.com',
+                                                        ],
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    22.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                context
+                                                                    .pushNamed(
+                                                                  'stockItemDetails',
+                                                                  queryParams: {
+                                                                    'responseItemReference':
+                                                                        serializeParam(
+                                                                      listViewResponseItemsRecord
+                                                                          .reference,
+                                                                      ParamType
+                                                                          .DocumentReference,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                              child:
+                                                                  AutoSizeText(
+                                                                listViewResponseItemsRecord
+                                                                    .name!
+                                                                    .maybeHandleOverflow(
+                                                                  maxChars: 32,
+                                                                  replacement:
+                                                                      '…',
+                                                                ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodySmall,
+                                                                    .titleMedium,
                                                               ),
                                                             ),
-                                                        ],
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              tabletLandscape:
+                                                                  false,
+                                                              desktop: false,
+                                                            ))
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            2.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child: Text(
+                                                                  'user@domainname.com',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall,
+                                                                ),
+                                                              ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
