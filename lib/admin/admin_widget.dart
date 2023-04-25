@@ -1,3 +1,4 @@
+import '/backend/firebase_storage/storage.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -5,7 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
-import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,17 +30,11 @@ class _AdminWidgetState extends State<AdminWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
-  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => AdminModel());
-
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    _model.scenarioNameController ??= TextEditingController();
-    _model.outageDurationController ??= TextEditingController();
   }
 
   @override
@@ -54,20 +48,6 @@ class _AdminWidgetState extends State<AdminWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
-    if (currentUserLocationValue == null) {
-      return Container(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        child: Center(
-          child: SizedBox(
-            width: 50.0,
-            height: 50.0,
-            child: CircularProgressIndicator(
-              color: FlutterFlowTheme.of(context).primary,
-            ),
-          ),
-        ),
-      );
-    }
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
@@ -214,104 +194,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                 ),
                                               ],
                                             ),
-                                            FFButtonWidget(
-                                              onPressed: () async {
-                                                final selectedFile =
-                                                    await selectFile();
-                                                if (selectedFile != null) {
-                                                  setState(() => _model
-                                                      .isDataUploading = true);
-                                                  FFUploadedFile?
-                                                      selectedUploadedFile;
-
-                                                  try {
-                                                    showUploadMessage(
-                                                      context,
-                                                      'Uploading file...',
-                                                      showLoading: true,
-                                                    );
-                                                    selectedUploadedFile =
-                                                        FFUploadedFile(
-                                                      name: selectedFile
-                                                          .storagePath
-                                                          .split('/')
-                                                          .last,
-                                                      bytes: selectedFile.bytes,
-                                                    );
-                                                  } finally {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .hideCurrentSnackBar();
-                                                    _model.isDataUploading =
-                                                        false;
-                                                  }
-                                                  if (selectedUploadedFile !=
-                                                      null) {
-                                                    setState(() {
-                                                      _model.uploadedLocalFile =
-                                                          selectedUploadedFile!;
-                                                    });
-                                                    showUploadMessage(
-                                                      context,
-                                                      'Success!',
-                                                    );
-                                                  } else {
-                                                    setState(() {});
-                                                    showUploadMessage(
-                                                      context,
-                                                      'Failed to upload file',
-                                                    );
-                                                    return;
-                                                  }
-                                                }
-
-                                                _model.outImportPsrData =
-                                                    await actions.importPsrData(
-                                                  _model.outSaveScenarioInputs
-                                                      ?.id,
-                                                );
-
-                                                setState(() {});
-                                              },
-                                              text: 'Import PSR Data',
-                                              options: FFButtonOptions(
-                                                width: 200.0,
-                                                height: 40.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 0.0),
-                                                iconPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                elevation: 3.0,
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(50.0),
-                                              ),
-                                            ),
                                           ],
                                         ),
                                       ),
@@ -332,85 +214,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                           topRight: Radius.circular(16.0),
                                         ),
                                       ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20.0, 16.0, 20.0, 16.0),
-                                            child: TextFormField(
-                                              controller:
-                                                  _model.scenarioNameController,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Scenario Name',
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                filled: true,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                contentPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(20.0, 24.0,
-                                                            0.0, 24.0),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                              validator: _model
-                                                  .scenarioNameControllerValidator
-                                                  .asValidator(context),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
                                     ),
                                   ),
                                   Padding(
@@ -427,85 +230,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                           topLeft: Radius.circular(16.0),
                                           topRight: Radius.circular(16.0),
                                         ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20.0, 16.0, 20.0, 16.0),
-                                            child: TextFormField(
-                                              controller: _model
-                                                  .outageDurationController,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Outage Duration',
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                filled: true,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                contentPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(20.0, 24.0,
-                                                            0.0, 24.0),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                              validator: _model
-                                                  .outageDurationControllerValidator
-                                                  .asValidator(context),
-                                            ),
-                                          ),
-                                        ],
                                       ),
                                     ),
                                   ),
@@ -554,7 +278,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Location',
+                                                      'PSR Data',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -581,69 +305,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                               ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    height: 600.0,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 16.0, 0.0),
-                                      child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                1.0,
-                                        height: 700.0,
-                                        child: custom_widgets.PolyMap(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 700.0,
-                                          scenario:
-                                              widget.scenarioReference != null
-                                                  ? widget.scenarioReference
-                                                  : null,
-                                          currentLocation:
-                                              currentUserLocationValue,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 1.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .lineColor,
-                                            offset: Offset(0.0, 1.0),
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -651,37 +312,82 @@ class _AdminWidgetState extends State<AdminWidget> {
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.end,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 FFButtonWidget(
                                                   onPressed: () async {
-                                                    _model.outSaveScenarioInputs =
+                                                    final selectedFile =
+                                                        await selectFile();
+                                                    if (selectedFile != null) {
+                                                      setState(() => _model
+                                                              .isDataUploading =
+                                                          true);
+                                                      FFUploadedFile?
+                                                          selectedUploadedFile;
+                                                      String? downloadUrl;
+                                                      try {
+                                                        showUploadMessage(
+                                                          context,
+                                                          'Uploading file...',
+                                                          showLoading: true,
+                                                        );
+                                                        selectedUploadedFile =
+                                                            FFUploadedFile(
+                                                          name: selectedFile
+                                                              .storagePath
+                                                              .split('/')
+                                                              .last,
+                                                          bytes: selectedFile
+                                                              .bytes,
+                                                        );
+                                                        downloadUrl =
+                                                            await uploadData(
+                                                                selectedFile
+                                                                    .storagePath,
+                                                                selectedFile
+                                                                    .bytes);
+                                                      } finally {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .hideCurrentSnackBar();
+                                                        _model.isDataUploading =
+                                                            false;
+                                                      }
+                                                      if (selectedUploadedFile !=
+                                                              null &&
+                                                          downloadUrl != null) {
+                                                        setState(() {
+                                                          _model.uploadedLocalFile =
+                                                              selectedUploadedFile!;
+                                                          _model.uploadedFileUrl =
+                                                              downloadUrl!;
+                                                        });
+                                                        showUploadMessage(
+                                                          context,
+                                                          'Success!',
+                                                        );
+                                                      } else {
+                                                        setState(() {});
+                                                        showUploadMessage(
+                                                          context,
+                                                          'Failed to upload file',
+                                                        );
+                                                        return;
+                                                      }
+                                                    }
+
+                                                    _model.outImportPsrData =
                                                         await actions
-                                                            .saveScenario(
-                                                      widget.scenarioReference !=
-                                                              null
-                                                          ? widget
-                                                              .scenarioReference
-                                                          : null,
-                                                      double.tryParse(_model
-                                                          .outageDurationController
-                                                          .text),
-                                                      _model
-                                                          .scenarioNameController
-                                                          .text,
-                                                    );
-                                                    await actions
-                                                        .calculateScenarioResponse(
-                                                      _model
-                                                          .outSaveScenarioInputs,
+                                                            .importPsrData(
+                                                      _model.uploadedFileUrl,
                                                     );
 
                                                     setState(() {});
                                                   },
-                                                  text:
-                                                      'Calculate Scenario Response',
+                                                  text: 'Import PSR Data',
                                                   options: FFButtonOptions(
-                                                    width: 250.0,
+                                                    width: 200.0,
                                                     height: 40.0,
                                                     padding:
                                                         EdgeInsetsDirectional
@@ -710,19 +416,53 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                           context)
                                                                       .titleSmallFamily),
                                                         ),
+                                                    elevation: 3.0,
                                                     borderSide: BorderSide(
                                                       color: Colors.transparent,
                                                       width: 1.0,
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8.0),
+                                                            50.0),
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
                                         ],
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 600.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 1.0, 0.0, 0.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 0.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .lineColor,
+                                            offset: Offset(0.0, 1.0),
+                                          )
+                                        ],
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(0.0),
+                                          bottomRight: Radius.circular(0.0),
+                                          topLeft: Radius.circular(16.0),
+                                          topRight: Radius.circular(16.0),
+                                        ),
                                       ),
                                     ),
                                   ),
