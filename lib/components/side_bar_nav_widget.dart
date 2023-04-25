@@ -243,7 +243,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                 highlightColor: Colors.transparent,
                 onTap: () async {
                   context.pushNamed(
-                    'stockInformation',
+                    'admin',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
