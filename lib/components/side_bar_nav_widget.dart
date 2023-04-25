@@ -10,19 +10,15 @@ class SideBarNavWidget extends StatefulWidget {
   const SideBarNavWidget({
     Key? key,
     this.oneBG,
-    this.oneIcon,
     this.twoBG,
-    this.twoIcon,
     this.threeColor,
-    this.threeIcon,
+    this.fourColor,
   }) : super(key: key);
 
   final Color? oneBG;
-  final Widget? oneIcon;
   final Color? twoBG;
-  final Widget? twoIcon;
   final Color? threeColor;
-  final Widget? threeIcon;
+  final Color? fourColor;
 
   @override
   _SideBarNavWidgetState createState() => _SideBarNavWidgetState();
@@ -131,7 +127,11 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 12.0, 0.0),
-                          child: widget.oneIcon!,
+                          child: Icon(
+                            Icons.home_outlined,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
                         ),
                         Text(
                           'Home',
@@ -168,7 +168,11 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 12.0, 0.0),
-                          child: widget.twoIcon!,
+                          child: Icon(
+                            Icons.school_outlined,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
                         ),
                         Text(
                           'Scenarios',
@@ -214,10 +218,64 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 12.0, 0.0),
-                          child: widget.threeIcon!,
+                          child: Icon(
+                            Icons.store_outlined,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
                         ),
                         Text(
                           'Stock Information',
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  context.pushNamed(
+                    'stockInformation',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
+                      ),
+                    },
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 48.0,
+                  decoration: BoxDecoration(
+                    color: widget.fourColor,
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 4.0, 4.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 12.0, 0.0),
+                          child: Icon(
+                            Icons.admin_panel_settings_outlined,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
+                        ),
+                        Text(
+                          'Admin',
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],

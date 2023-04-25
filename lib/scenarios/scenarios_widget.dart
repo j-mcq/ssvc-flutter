@@ -94,21 +94,10 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                 model: _model.sideBarNavModel,
                 updateCallback: () => setState(() {}),
                 child: SideBarNavWidget(
-                  oneBG: FlutterFlowTheme.of(context).primaryBackground,
-                  oneIcon: Icon(
-                    Icons.bar_chart_rounded,
-                    color: FlutterFlowTheme.of(context).primary,
-                  ),
-                  twoBG: FlutterFlowTheme.of(context).secondaryBackground,
-                  twoIcon: Icon(
-                    Icons.science_outlined,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
+                  oneBG: FlutterFlowTheme.of(context).secondaryBackground,
+                  twoBG: FlutterFlowTheme.of(context).primaryBackground,
                   threeColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  threeIcon: Icon(
-                    Icons.all_inbox_sharp,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
+                  fourColor: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
               ),
             Expanded(

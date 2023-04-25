@@ -69,20 +69,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                 updateCallback: () => setState(() {}),
                 child: SideBarNavWidget(
                   oneBG: FlutterFlowTheme.of(context).secondaryBackground,
-                  oneIcon: Icon(
-                    Icons.bar_chart_rounded,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
-                  twoBG: FlutterFlowTheme.of(context).primaryBackground,
-                  twoIcon: Icon(
-                    Icons.school_outlined,
-                    color: FlutterFlowTheme.of(context).primary,
-                  ),
+                  twoBG: FlutterFlowTheme.of(context).secondaryBackground,
                   threeColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  threeIcon: Icon(
-                    Icons.account_circle_outlined,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
+                  fourColor: FlutterFlowTheme.of(context).primaryBackground,
                 ),
               ),
             Expanded(
