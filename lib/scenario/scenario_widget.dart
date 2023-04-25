@@ -1022,7 +1022,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               ),
                                               axisBounds: AxisBounds(),
                                               xAxisLabelInfo: AxisLabelInfo(
-                                                title: 'PRS Group',
+                                                title: 'PSR Group',
                                                 titleTextStyle: TextStyle(
                                                   fontSize: 14.0,
                                                 ),
@@ -1031,7 +1031,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               ),
                                               yAxisLabelInfo: AxisLabelInfo(
                                                 title:
-                                                    'Number of Customers Impacted',
+                                                    'Number of Customers in PSR Group',
                                                 titleTextStyle: TextStyle(
                                                   fontSize: 14.0,
                                                 ),
@@ -1223,7 +1223,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                           xLabels:
                                                               chartScenarioHouseholdResponsesRecordList
                                                                   .map((d) => d
-                                                                      .responseItemName)
+                                                                      .postcode)
                                                                   .toList(),
                                                           barWidth: 55.0,
                                                           barBorderRadius:
@@ -1364,7 +1364,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Prioritised Response List',
+                                                      ' Response List',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -1448,13 +1448,27 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Expanded(
-                                          flex: 2,
+                                          flex: 1,
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              'Resonse Item Name',
+                                              'Postcode',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'PSR Categories',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodySmall,
@@ -1468,7 +1482,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                         ))
                                           Expanded(
                                             child: Text(
-                                              'Power Required',
+                                              'Total Power Required',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodySmall,
@@ -1478,7 +1492,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                           flex: 1,
                                           child: Text(
                                             'Response Item Required',
-                                            textAlign: TextAlign.end,
+                                            textAlign: TextAlign.start,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodySmall,
                                           ),
@@ -1554,7 +1568,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         MainAxisSize.max,
                                                     children: [
                                                       Expanded(
-                                                        flex: 2,
+                                                        flex: 1,
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -1569,7 +1583,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                               children: [
                                                                 AutoSizeText(
                                                                   listViewScenarioHouseholdResponsesRecord
-                                                                      .responseItemName!
+                                                                      .postcode!
                                                                       .maybeHandleOverflow(
                                                                     maxChars:
                                                                         32,
@@ -1616,6 +1630,21 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                           flex: 1,
                                                           child: Text(
                                                             listViewScenarioHouseholdResponsesRecord
+                                                                .psrCategories!,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium,
+                                                          ),
+                                                        ),
+                                                      if (responsiveVisibility(
+                                                        context: context,
+                                                        phone: false,
+                                                        tablet: false,
+                                                      ))
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                            listViewScenarioHouseholdResponsesRecord
                                                                 .powerRequired!
                                                                 .toString(),
                                                             style: FlutterFlowTheme
@@ -1637,7 +1666,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       .max,
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
-                                                                      .end,
+                                                                      .start,
                                                               children: [
                                                                 Text(
                                                                   listViewScenarioHouseholdResponsesRecord
