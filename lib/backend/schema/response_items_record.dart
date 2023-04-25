@@ -31,6 +31,17 @@ abstract class ResponseItemsRecord
   @BuiltValueField(wireName: 'depot_name')
   String? get depotName;
 
+  @BuiltValueField(wireName: 'total_energy_storage_capacity')
+  double? get totalEnergyStorageCapacity;
+
+  @BuiltValueField(wireName: 'surge_power')
+  double? get surgePower;
+
+  double? get weight;
+
+  @BuiltValueField(wireName: 'baseline_power')
+  double? get baselinePower;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -41,7 +52,11 @@ abstract class ResponseItemsRecord
     ..imageLink = ''
     ..unitPrice = 0.0
     ..stock = 0.0
-    ..depotName = '';
+    ..depotName = ''
+    ..totalEnergyStorageCapacity = 0.0
+    ..surgePower = 0.0
+    ..weight = 0.0
+    ..baselinePower = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('response_items');
@@ -74,6 +89,10 @@ Map<String, dynamic> createResponseItemsRecordData({
   double? stock,
   DocumentReference? depot,
   String? depotName,
+  double? totalEnergyStorageCapacity,
+  double? surgePower,
+  double? weight,
+  double? baselinePower,
 }) {
   final firestoreData = serializers.toFirestore(
     ResponseItemsRecord.serializer,
@@ -86,7 +105,11 @@ Map<String, dynamic> createResponseItemsRecordData({
         ..unitPrice = unitPrice
         ..stock = stock
         ..depot = depot
-        ..depotName = depotName,
+        ..depotName = depotName
+        ..totalEnergyStorageCapacity = totalEnergyStorageCapacity
+        ..surgePower = surgePower
+        ..weight = weight
+        ..baselinePower = baselinePower,
     ),
   );
 
