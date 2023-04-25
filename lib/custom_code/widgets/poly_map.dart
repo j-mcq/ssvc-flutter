@@ -102,7 +102,7 @@ class _PolyMapState extends State<PolyMap> {
       _map_center_location = gmf.LatLng(
           widget.currentLocation!.latitude, widget.currentLocation!.longitude);
     }
-    if (_polygons.length == 0) {
+    if (_polygons.length == 0 && _circles.length == 0) {
       await _loadMapData();
     }
     return true;
@@ -161,10 +161,10 @@ class _PolyMapState extends State<PolyMap> {
           .addAll(polygonLatLngs.map((e) => e.latLng).toList());
 
       FFAppState().polygonLatLngList.clear();
-      FFAppState().polygonLatLngList.addAll(polygonLatLngs
-          .map((e) => LatLng(e.latLng.latitude, e.latLng.longitude))
-          .toList());
     }
+    FFAppState().polygonLatLngList.addAll(polygonLatLngs
+        .map((e) => LatLng(e.latLng.latitude, e.latLng.longitude))
+        .toList());
   }
 
   // Set circles as points to the map
@@ -204,110 +204,13 @@ class _PolyMapState extends State<PolyMap> {
   void _clearAll() {
     setState(() {
       _polygons.clear();
-      _circles.clear();
-      _markers.clear();
       polygonLatLngs.clear();
+      FFAppState().polygonLatLngList.clear();
+      _circles.clear();
+      FFAppState().circleLatLng = null;
+      FFAppState().circleRadius = 0.0;
+      _markers.clear();
     });
-  }
-
-  bool checkLocationIsInOutagArea() {
-    // convert to maps_toolkit LatLng
-
-    _saveData();
-
-    // mtk.LatLng propertyLocationMtk = mtk.LatLng(
-    //     _markers.first.position.latitude, _markers.first.position.longitude);
-
-    // propertyLocation = propertyLocationMtk;
-    // final polygonLatLngsMtk =
-    //     polygonLatLngs.map((e) => mtk.LatLng(e.latitude, e.longitude)).toList();
-
-    // final isInPolygon = mtk.PolygonUtil.containsLocation(
-    //     propertyLocation, polygonLatLngsMtk, true);
-    // return isInPolygon;
-
-    return true;
-  }
-
-  // bool _calculateScenarioResults(mtk.LatLng? propertyLocation) {
-  //   // convert to maps_toolkit LatLng
-
-  //   mtk.LatLng propertyLocationMtk = mtk.LatLng(
-  //       _markers.first.position.latitude, _markers.first.position.longitude);
-
-  //   propertyLocation = propertyLocationMtk;
-  //   final polygonLatLngsMtk = polygonLatLngs
-  //       .map((e) => mtk.LatLng(e.latLng.latitude, e.latLng.longitude))
-  //       .toList();
-
-  //   final isInPolygon = mtk.PolygonUtil.containsLocation(
-  //       propertyLocation, polygonLatLngsMtk, true);
-  //   return isInPolygon;
-  // }
-
-  void _saveData() async {
-    FFAppState().isSaving = true;
-    DocumentReference scenarioReference;
-    // create a new sceario is none exists
-    if (widget.scenario == null) {
-      final scenarioCreateData = createScenarioRecordData();
-      var scenarioRecordReference = ScenarioRecord.collection.doc();
-      await scenarioRecordReference.set(scenarioCreateData);
-      scenarioReference = ScenarioRecord.getDocumentFromData(
-              scenarioCreateData, scenarioRecordReference)
-          .reference;
-    } else {
-      scenarioReference = widget.scenario!;
-    }
-
-    final updatedScenarioData = createScenarioRecordData(
-        mapCenterLocation: LatLng(
-            _map_center_location.latitude, _map_center_location.longitude),
-        mapZoomLevel: _zoomLevel);
-    await scenarioReference.update(updatedScenarioData);
-
-    // remove all previous polygons and circles associated with this scenario before saving the new ones
-    await deletePolygons();
-    // add newly created polygons and circles to the database
-    if (polygonLatLngs.isNotEmpty) {
-      polygonLatLngs.asMap().forEach((index, element) async {
-        final polygonPointsRecordData = createPolygonPointsRecordData(
-            latitude: element.latLng.latitude,
-            longitude: element.latLng.longitude,
-            index: index);
-        await PolygonPointsRecord.createDoc(scenarioReference)
-            .set(polygonPointsRecordData);
-      });
-    }
-
-    await deleteCircles();
-
-    _circles.forEach((element) async {
-      final circleRecordData = createCirclesRecordData(
-        latitude: element.center.latitude,
-        longitude: element.center.longitude,
-        radius: element.radius,
-      );
-      await CirclesRecord.createDoc(scenarioReference).set(circleRecordData);
-    });
-    FFAppState().isSaving = false;
-  }
-
-  Future<void> deletePolygons() async {
-    final polygonPoints =
-        await queryPolygonPointsRecordOnce(parent: widget.scenario!);
-
-    for (var polygonPoint in polygonPoints) {
-      await polygonPoint.reference.delete();
-    }
-  }
-
-  Future<void> deleteCircles() async {
-    final circles = await queryCirclesRecordOnce(parent: widget.scenario!);
-
-    for (var circle in circles) {
-      await circle.reference.delete();
-    }
   }
 
   bool rayCastIntersect(LatLng tap, LatLng vertA, LatLng vertB) {
@@ -372,8 +275,9 @@ class _PolyMapState extends State<PolyMap> {
                     polygons: _polygons,
                     myLocationEnabled: true,
                     onCameraMove: (CameraPosition cp) {
-                      _zoomLevel = cp.zoom;
-                      _map_center_location = cp.target;
+                      FFAppState().mapZoomLevel = cp.zoom;
+                      FFAppState().mapCenterLocation =
+                          LatLng(cp.target.latitude, cp.target.longitude);
                     },
                     onTap: (point) {
                       if (_isPolygon) {
