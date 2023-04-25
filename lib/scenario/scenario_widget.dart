@@ -362,8 +362,9 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                               OutlineInputBorder(
                                                             borderSide:
                                                                 BorderSide(
-                                                              color: Color(
-                                                                  0x00000000),
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryBackground,
                                                               width: 2.0,
                                                             ),
                                                             borderRadius:
@@ -461,8 +462,9 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0x00000000),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
