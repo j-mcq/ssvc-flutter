@@ -1529,9 +1529,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                         ),
                                       ),
                                       child: FutureBuilder<
-                                          List<ScenarioResultsCustomersRecord>>(
+                                          List<
+                                              ScenarioHouseholdResponsesRecord>>(
                                         future:
-                                            queryScenarioResultsCustomersRecordOnce(),
+                                            queryScenarioHouseholdResponsesRecordOnce(
+                                          parent: widget.scenarioReference,
+                                        ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
@@ -1548,8 +1551,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               ),
                                             );
                                           }
-                                          List<ScenarioResultsCustomersRecord>
-                                              chartScenarioResultsCustomersRecordList =
+                                          List<ScenarioHouseholdResponsesRecord>
+                                              chartScenarioHouseholdResponsesRecordList =
                                               snapshot.data!;
                                           return Container(
                                             width: 300.0,
@@ -1558,12 +1561,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               barData: [
                                                 FFBarChartData(
                                                   yData:
-                                                      chartScenarioResultsCustomersRecordList
+                                                      chartScenarioHouseholdResponsesRecordList
                                                           .where(
                                                               (e) => e != null)
                                                           .toList()
                                                           .map((d) =>
-                                                              d.numberImpacted)
+                                                              d.powerRequired)
                                                           .toList(),
                                                   color: FlutterFlowTheme.of(
                                                           context)
@@ -1571,11 +1574,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                 )
                                               ],
                                               xLabels:
-                                                  chartScenarioResultsCustomersRecordList
+                                                  chartScenarioHouseholdResponsesRecordList
                                                       .where((e) => e != null)
                                                       .toList()
                                                       .map((d) =>
-                                                          d.psrGroupName!)
+                                                          d.psrCategories!)
                                                       .toList(),
                                               barWidth: 55.0,
                                               barBorderRadius:

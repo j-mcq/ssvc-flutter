@@ -5,7 +5,6 @@ import 'users_record.dart';
 import 'response_items_record.dart';
 import 'scenario_record.dart';
 import 'depot_record.dart';
-import 'scenario_results_customers_record.dart';
 import 'stock_depot_mapping_record.dart';
 import 'psr_record.dart';
 import 'psr_categories_record.dart';
@@ -29,7 +28,6 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   ResponseItemsRecord,
   ScenarioRecord,
   DepotRecord,
-  ScenarioResultsCustomersRecord,
   StockDepotMappingRecord,
   PsrRecord,
   PsrCategoriesRecord,
