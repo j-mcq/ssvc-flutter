@@ -502,6 +502,32 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                             .bodySmall,
                                       ),
                                     ),
+                                  if (responsiveVisibility(
+                                    context: context,
+                                    phone: false,
+                                    tablet: false,
+                                  ))
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        'Unit Cost',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodySmall,
+                                      ),
+                                    ),
+                                  if (responsiveVisibility(
+                                    context: context,
+                                    phone: false,
+                                    tablet: false,
+                                  ))
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        'Storage Capacity (Wh)',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodySmall,
+                                      ),
+                                    ),
                                   Expanded(
                                     flex: 1,
                                     child: Text(
@@ -696,6 +722,38 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                     child: Text(
                                                       listViewResponseItemsRecord
                                                           .stock!
+                                                          .toString(),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
+                                                  ),
+                                                if (responsiveVisibility(
+                                                  context: context,
+                                                  phone: false,
+                                                ))
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      listViewResponseItemsRecord
+                                                          .unitPrice!
+                                                          .toString(),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
+                                                  ),
+                                                if (responsiveVisibility(
+                                                  context: context,
+                                                  phone: false,
+                                                ))
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      listViewResponseItemsRecord
+                                                          .totalEnergyStorageCapacity!
                                                           .toString(),
                                                       style:
                                                           FlutterFlowTheme.of(
