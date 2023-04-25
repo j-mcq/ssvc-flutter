@@ -1783,7 +1783,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                           0xFF9418A8),
                                                                       'In Stock '),
                                                                 ],
-                                                                width: 100.0,
+                                                                width: 200.0,
                                                                 height: 50.0,
                                                                 textStyle: FlutterFlowTheme.of(
                                                                         context)
@@ -1803,7 +1803,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                             5.0,
                                                                             0.0),
                                                                 borderWidth:
-                                                                    1.0,
+                                                                    0.0,
                                                                 indicatorSize:
                                                                     10.0,
                                                               ),
