@@ -33,33 +33,6 @@ class _$ScenarioResultsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
     }
-    value = object.responseItem;
-    if (value != null) {
-      result
-        ..add('response_item')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType.nullable(Object)])));
-    }
-    value = object.numberRequired;
-    if (value != null) {
-      result
-        ..add('number_required')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
-    value = object.responseItemName;
-    if (value != null) {
-      result
-        ..add('response_item_name')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.householdsImpacted;
-    if (value != null) {
-      result
-        ..add('households_impacted')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.psrHouseholdsImpacted;
     if (value != null) {
       result
@@ -102,24 +75,6 @@ class _$ScenarioResultsRecordSerializer
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
           break;
-        case 'response_item':
-          result.responseItem = serializers.deserialize(value,
-              specifiedType: const FullType(DocumentReference, const [
-                const FullType.nullable(Object)
-              ])) as DocumentReference<Object?>?;
-          break;
-        case 'number_required':
-          result.numberRequired = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
-        case 'response_item_name':
-          result.responseItemName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'households_impacted':
-          result.householdsImpacted = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
         case 'psr_households_impacted':
           result.psrHouseholdsImpacted = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
@@ -145,14 +100,6 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
   @override
   final DocumentReference<Object?>? scenario;
   @override
-  final DocumentReference<Object?>? responseItem;
-  @override
-  final int? numberRequired;
-  @override
-  final String? responseItemName;
-  @override
-  final int? householdsImpacted;
-  @override
   final int? psrHouseholdsImpacted;
   @override
   final double? responseCoverage;
@@ -165,10 +112,6 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
 
   _$ScenarioResultsRecord._(
       {this.scenario,
-      this.responseItem,
-      this.numberRequired,
-      this.responseItemName,
-      this.householdsImpacted,
       this.psrHouseholdsImpacted,
       this.responseCoverage,
       this.ffRef})
@@ -188,10 +131,6 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
     if (identical(other, this)) return true;
     return other is ScenarioResultsRecord &&
         scenario == other.scenario &&
-        responseItem == other.responseItem &&
-        numberRequired == other.numberRequired &&
-        responseItemName == other.responseItemName &&
-        householdsImpacted == other.householdsImpacted &&
         psrHouseholdsImpacted == other.psrHouseholdsImpacted &&
         responseCoverage == other.responseCoverage &&
         ffRef == other.ffRef;
@@ -201,10 +140,6 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, scenario.hashCode);
-    _$hash = $jc(_$hash, responseItem.hashCode);
-    _$hash = $jc(_$hash, numberRequired.hashCode);
-    _$hash = $jc(_$hash, responseItemName.hashCode);
-    _$hash = $jc(_$hash, householdsImpacted.hashCode);
     _$hash = $jc(_$hash, psrHouseholdsImpacted.hashCode);
     _$hash = $jc(_$hash, responseCoverage.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
@@ -216,10 +151,6 @@ class _$ScenarioResultsRecord extends ScenarioResultsRecord {
   String toString() {
     return (newBuiltValueToStringHelper(r'ScenarioResultsRecord')
           ..add('scenario', scenario)
-          ..add('responseItem', responseItem)
-          ..add('numberRequired', numberRequired)
-          ..add('responseItemName', responseItemName)
-          ..add('householdsImpacted', householdsImpacted)
           ..add('psrHouseholdsImpacted', psrHouseholdsImpacted)
           ..add('responseCoverage', responseCoverage)
           ..add('ffRef', ffRef))
@@ -235,26 +166,6 @@ class ScenarioResultsRecordBuilder
   DocumentReference<Object?>? get scenario => _$this._scenario;
   set scenario(DocumentReference<Object?>? scenario) =>
       _$this._scenario = scenario;
-
-  DocumentReference<Object?>? _responseItem;
-  DocumentReference<Object?>? get responseItem => _$this._responseItem;
-  set responseItem(DocumentReference<Object?>? responseItem) =>
-      _$this._responseItem = responseItem;
-
-  int? _numberRequired;
-  int? get numberRequired => _$this._numberRequired;
-  set numberRequired(int? numberRequired) =>
-      _$this._numberRequired = numberRequired;
-
-  String? _responseItemName;
-  String? get responseItemName => _$this._responseItemName;
-  set responseItemName(String? responseItemName) =>
-      _$this._responseItemName = responseItemName;
-
-  int? _householdsImpacted;
-  int? get householdsImpacted => _$this._householdsImpacted;
-  set householdsImpacted(int? householdsImpacted) =>
-      _$this._householdsImpacted = householdsImpacted;
 
   int? _psrHouseholdsImpacted;
   int? get psrHouseholdsImpacted => _$this._psrHouseholdsImpacted;
@@ -278,10 +189,6 @@ class ScenarioResultsRecordBuilder
     final $v = _$v;
     if ($v != null) {
       _scenario = $v.scenario;
-      _responseItem = $v.responseItem;
-      _numberRequired = $v.numberRequired;
-      _responseItemName = $v.responseItemName;
-      _householdsImpacted = $v.householdsImpacted;
       _psrHouseholdsImpacted = $v.psrHouseholdsImpacted;
       _responseCoverage = $v.responseCoverage;
       _ffRef = $v.ffRef;
@@ -308,10 +215,6 @@ class ScenarioResultsRecordBuilder
     final _$result = _$v ??
         new _$ScenarioResultsRecord._(
             scenario: scenario,
-            responseItem: responseItem,
-            numberRequired: numberRequired,
-            responseItemName: responseItemName,
-            householdsImpacted: householdsImpacted,
             psrHouseholdsImpacted: psrHouseholdsImpacted,
             responseCoverage: responseCoverage,
             ffRef: ffRef);

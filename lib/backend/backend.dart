@@ -18,6 +18,7 @@ import 'schema/psr_category_group_options_record.dart';
 import 'schema/polygon_points_record.dart';
 import 'schema/circles_record.dart';
 import 'schema/scenario_results_record.dart';
+import 'schema/scenario_household_responses_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -38,6 +39,7 @@ export 'schema/psr_category_group_options_record.dart';
 export 'schema/polygon_points_record.dart';
 export 'schema/circles_record.dart';
 export 'schema/scenario_results_record.dart';
+export 'schema/scenario_household_responses_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -737,6 +739,65 @@ Future<FFFirestorePage<ScenarioResultsRecord>> queryScenarioResultsRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
+
+/// Functions to query ScenarioHouseholdResponsesRecords (as a Stream and as a Future).
+Future<int> queryScenarioHouseholdResponsesRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ScenarioHouseholdResponsesRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ScenarioHouseholdResponsesRecord>>
+    queryScenarioHouseholdResponsesRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+        queryCollection(
+          ScenarioHouseholdResponsesRecord.collection(parent),
+          ScenarioHouseholdResponsesRecord.serializer,
+          queryBuilder: queryBuilder,
+          limit: limit,
+          singleRecord: singleRecord,
+        );
+
+Future<List<ScenarioHouseholdResponsesRecord>>
+    queryScenarioHouseholdResponsesRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+        queryCollectionOnce(
+          ScenarioHouseholdResponsesRecord.collection(parent),
+          ScenarioHouseholdResponsesRecord.serializer,
+          queryBuilder: queryBuilder,
+          limit: limit,
+          singleRecord: singleRecord,
+        );
+
+Future<FFFirestorePage<ScenarioHouseholdResponsesRecord>>
+    queryScenarioHouseholdResponsesRecordPage({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          ScenarioHouseholdResponsesRecord.collection(parent),
+          ScenarioHouseholdResponsesRecord.serializer,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
 
 Future<int> queryCollectionCount(
   Query collection, {

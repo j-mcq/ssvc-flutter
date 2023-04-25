@@ -1126,12 +1126,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                               Expanded(
                                                                 flex: 1,
                                                                 child: Text(
-                                                                  containerScenarioResultsRecord !=
-                                                                          null
-                                                                      ? containerScenarioResultsRecord!
-                                                                          .householdsImpacted!
-                                                                          .toString()
-                                                                      : '',
+                                                                  'CH1 2PX',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium,
