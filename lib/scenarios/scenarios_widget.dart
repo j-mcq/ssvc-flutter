@@ -782,8 +782,9 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                               0.0),
                                                                           child:
                                                                               LinearPercentIndicator(
-                                                                            percent:
-                                                                                containerScenarioResultsRecord!.responseCoverage!,
+                                                                            percent: containerScenarioResultsRecord != null
+                                                                                ? containerScenarioResultsRecord!.responseCoverage!
+                                                                                : 0.0,
                                                                             lineHeight:
                                                                                 20.0,
                                                                             animation:
@@ -794,10 +795,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                                 FlutterFlowTheme.of(context).lineColor,
                                                                             center:
                                                                                 Text(
-                                                                              formatNumber(
-                                                                                containerScenarioResultsRecord!.responseCoverage!,
-                                                                                formatType: FormatType.percent,
-                                                                              ),
+                                                                              containerScenarioResultsRecord != null ? containerScenarioResultsRecord!.responseCoverage!.toString() : 'no data',
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
                                                                                     color: FlutterFlowTheme.of(context).primaryText,

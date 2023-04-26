@@ -1093,16 +1093,13 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                               child: Padding(
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 20.0, 0.0),
                                                                                 child: LinearPercentIndicator(
-                                                                                  percent: containerScenarioResultsRecord!.responseCoverage!,
+                                                                                  percent: containerScenarioResultsRecord != null ? containerScenarioResultsRecord!.responseCoverage! : 0.0,
                                                                                   lineHeight: 20.0,
                                                                                   animation: true,
                                                                                   progressColor: FlutterFlowTheme.of(context).primary,
                                                                                   backgroundColor: FlutterFlowTheme.of(context).lineColor,
                                                                                   center: Text(
-                                                                                    formatNumber(
-                                                                                      containerScenarioResultsRecord!.responseCoverage!,
-                                                                                      formatType: FormatType.percent,
-                                                                                    ),
+                                                                                    (containerScenarioResultsRecord != null ? containerScenarioResultsRecord!.responseCoverage! : 0.0).toString(),
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                           fontFamily: 'Outfit',
                                                                                           color: FlutterFlowTheme.of(context).primaryText,
