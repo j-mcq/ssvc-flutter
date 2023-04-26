@@ -1021,79 +1021,77 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                               )
                                                             ],
                                                           ),
-                                                          child: Visibility(
-                                                            visible:
-                                                                containerScenarioResultsRecord !=
-                                                                    null,
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          12.0,
-                                                                          12.0,
-                                                                          12.0,
-                                                                          12.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  if (responsiveVisibility(
-                                                                    context:
-                                                                        context,
-                                                                    phone:
-                                                                        false,
-                                                                    tablet:
-                                                                        false,
-                                                                  ))
-                                                                    Expanded(
-                                                                      flex: 1,
-                                                                      child:
-                                                                          Text(
-                                                                        containerScenarioResultsRecord !=
-                                                                                null
-                                                                            ? containerScenarioResultsRecord!.psrHouseholdsImpacted!.toString()
-                                                                            : '',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
-                                                                      ),
-                                                                    ),
-                                                                  if (responsiveVisibility(
-                                                                    context:
-                                                                        context,
-                                                                    phone:
-                                                                        false,
-                                                                  ))
-                                                                    Expanded(
-                                                                      flex: 1,
-                                                                      child:
-                                                                          Text(
-                                                                        containerScenarioResultsRecord !=
-                                                                                null
-                                                                            ? containerScenarioResultsRecord!.numberOfResponseItems!.toString()
-                                                                            : '',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
-                                                                      ),
-                                                                    ),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12.0,
+                                                                        12.0,
+                                                                        12.0,
+                                                                        12.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                if (responsiveVisibility(
+                                                                  context:
+                                                                      context,
+                                                                  phone: false,
+                                                                  tablet: false,
+                                                                ))
                                                                   Expanded(
                                                                     flex: 1,
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          children: [
+                                                                    child: Text(
+                                                                      containerScenarioResultsRecord !=
+                                                                              null
+                                                                          ? containerScenarioResultsRecord!
+                                                                              .psrHouseholdsImpacted!
+                                                                              .toString()
+                                                                          : '',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium,
+                                                                    ),
+                                                                  ),
+                                                                if (responsiveVisibility(
+                                                                  context:
+                                                                      context,
+                                                                  phone: false,
+                                                                ))
+                                                                  Expanded(
+                                                                    flex: 1,
+                                                                    child: Text(
+                                                                      containerScenarioResultsRecord !=
+                                                                              null
+                                                                          ? containerScenarioResultsRecord!
+                                                                              .numberOfResponseItems!
+                                                                              .toString()
+                                                                          : '',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium,
+                                                                    ),
+                                                                  ),
+                                                                Expanded(
+                                                                  flex: 1,
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          if (containerScenarioResultsRecord !=
+                                                                              null)
                                                                             Expanded(
                                                                               child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 20.0, 0.0),
                                                                                 child: LinearPercentIndicator(
                                                                                   percent: containerScenarioResultsRecord!.responseCoverage!,
                                                                                   lineHeight: 20.0,
@@ -1118,36 +1116,34 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 ),
                                                                               ),
                                                                             ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                if (responsiveVisibility(
+                                                                  context:
+                                                                      context,
+                                                                  phone: false,
+                                                                ))
+                                                                  Expanded(
+                                                                    flex: 1,
+                                                                    child: Text(
+                                                                      containerScenarioResultsRecord !=
+                                                                              null
+                                                                          ? formatNumber(
+                                                                              containerScenarioResultsRecord!.totalCost!,
+                                                                              formatType: FormatType.decimal,
+                                                                              decimalType: DecimalType.automatic,
+                                                                              currency: '£',
+                                                                            )
+                                                                          : '',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium,
                                                                     ),
                                                                   ),
-                                                                  if (responsiveVisibility(
-                                                                    context:
-                                                                        context,
-                                                                    phone:
-                                                                        false,
-                                                                  ))
-                                                                    Expanded(
-                                                                      flex: 1,
-                                                                      child:
-                                                                          Text(
-                                                                        containerScenarioResultsRecord !=
-                                                                                null
-                                                                            ? formatNumber(
-                                                                                containerScenarioResultsRecord!.totalCost!,
-                                                                                formatType: FormatType.decimal,
-                                                                                decimalType: DecimalType.automatic,
-                                                                                currency: '£',
-                                                                              )
-                                                                            : '',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
-                                                                      ),
-                                                                    ),
-                                                                ],
-                                                              ),
+                                                              ],
                                                             ),
                                                           ),
                                                         );
