@@ -474,6 +474,25 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                             tablet: false,
                                           ))
                                             Expanded(
+                                              flex: 1,
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        10.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  'Scenario Coverage',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodySmall,
+                                                ),
+                                              ),
+                                            ),
+                                          if (responsiveVisibility(
+                                            context: context,
+                                            phone: false,
+                                            tablet: false,
+                                          ))
+                                            Expanded(
                                               child: Text(
                                                 'Total Cost',
                                                 style:
@@ -738,6 +757,64 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                       .bodyMedium,
                                                                 ),
                                                               ),
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              10.0,
+                                                                              0.0,
+                                                                              10.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              LinearPercentIndicator(
+                                                                            percent:
+                                                                                containerScenarioResultsRecord!.responseCoverage!,
+                                                                            lineHeight:
+                                                                                20.0,
+                                                                            animation:
+                                                                                true,
+                                                                            progressColor:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            backgroundColor:
+                                                                                FlutterFlowTheme.of(context).lineColor,
+                                                                            center:
+                                                                                Text(
+                                                                              '93%',
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Outfit',
+                                                                                    color: FlutterFlowTheme.of(context).primaryText,
+                                                                                    fontSize: 14.0,
+                                                                                    fontWeight: FontWeight.normal,
+                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                  ),
+                                                                            ),
+                                                                            barRadius:
+                                                                                Radius.circular(12.0),
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
                                                             if (responsiveVisibility(
                                                               context: context,
                                                               phone: false,
