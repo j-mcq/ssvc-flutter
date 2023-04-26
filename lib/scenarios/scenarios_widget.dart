@@ -794,7 +794,10 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                                 FlutterFlowTheme.of(context).lineColor,
                                                                             center:
                                                                                 Text(
-                                                                              '93%',
+                                                                              formatNumber(
+                                                                                containerScenarioResultsRecord!.responseCoverage!,
+                                                                                formatType: FormatType.percent,
+                                                                              ),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
                                                                                     color: FlutterFlowTheme.of(context).primaryText,
