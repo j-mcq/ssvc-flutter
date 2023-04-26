@@ -61,8 +61,8 @@ Future<String?> calculateScenarioResponse(
     var totalResponseItems = 0.0;
 
     for (var psrHousehold in impactedPsrHouseholds) {
-      final mappedPsrCategory = await calculatePowerConsumption(
-          psrHousehold, psrCategoryOptionsRecords);
+      final mappedPsrCategory =
+          await getPsrCategoryData(psrHousehold, psrCategoryOptionsRecords);
 
       final householdPowerConsumption =
           mappedPsrCategory.powerConsumption * outageDuration;
@@ -83,7 +83,8 @@ Future<String?> calculateScenarioResponse(
                 postcode: psrHousehold.postcode,
                 psrCategories: mappedPsrCategory.names,
                 scenario: scenarioReference,
-                powerRequired: householdPowerConsumption);
+                powerRequired: householdPowerConsumption,
+                maxResilienceScore: mappedPsrCategory.maxResilienceScore);
 
         var scenarioHouseholdResponsesRecordReference =
             ScenarioHouseholdResponsesRecord.createDoc(scenarioReference);
@@ -91,9 +92,10 @@ Future<String?> calculateScenarioResponse(
             .set(createScenarioHouseholdResponsesCreateData);
       }
     }
-    await groupResponseItems(scenarioReference);
+
+    final responseCoverage = await groupResponseItems(scenarioReference);
     saveScenarioResults(scenarioReference, impactedPsrHouseholds.length,
-        totalCost, totalResponseItems);
+        totalCost, totalResponseItems, responseCoverage);
     return null;
   } catch (e) {
     print('Error calculating scenario response: ' + e.toString());
@@ -101,10 +103,12 @@ Future<String?> calculateScenarioResponse(
   }
 }
 
-groupResponseItems(DocumentReference scenarioReference) async {
+Future<double> groupResponseItems(DocumentReference scenarioReference) async {
   final responseItemResults = await queryScenarioHouseholdResponsesRecordOnce(
       parent: scenarioReference);
   final responseItems = await queryResponseItemsRecordOnce();
+
+  var responseCoverage = 0.0;
 
   for (var responseItem in responseItems) {
     var itemCount = 0;
@@ -125,8 +129,12 @@ groupResponseItems(DocumentReference scenarioReference) async {
           ScenarioResponseItemsRecord.createDoc(scenarioReference);
       await scenarioResponseItemsRecordReference
           .set(createScenarioResponseItemsCreateData);
+
+      responseCoverage = itemCount / responseItem.stock!;
     }
   }
+
+  return responseCoverage;
 }
 
 deletePreviousResults(DocumentReference scenarioReference) async {
@@ -165,14 +173,14 @@ Future<ResponseItemsRecord?> calculateResponseItem(
   return null;
 }
 
-Future<MappedPsrCategory> calculatePowerConsumption(PsrRecord psrHousehold,
+Future<MappedPsrCategory> getPsrCategoryData(PsrRecord psrHousehold,
     List<PsrCategoryOptionsRecord> psrCategoryOptionsRecords) async {
   final psrCategoriesRecords =
       await queryPsrCategoriesRecordOnce(parent: psrHousehold.reference);
 
   var categoryNames = '';
   double totalPowerConsumption = 0.0;
-
+  double maxResilienceScore = 0.0;
   for (PsrCategoriesRecord category in psrCategoriesRecords) {
     final categoryData = psrCategoryOptionsRecords
         .where((element) => element.reference == category.psrCategory)
@@ -180,33 +188,40 @@ Future<MappedPsrCategory> calculatePowerConsumption(PsrRecord psrHousehold,
 
     if (categoryData != null) {
       if (categoryData.powerConsumption != null) {
-        print(categoryData.name);
         totalPowerConsumption += categoryData.powerConsumption! / 24;
         categoryNames += categoryData.name! + ', ';
       }
+      if (categoryData.resilienceScore != null) {
+        if (categoryData.resilienceScore! > maxResilienceScore) {
+          maxResilienceScore = categoryData.resilienceScore!;
+        }
+      }
     }
   }
-  return MappedPsrCategory(categoryNames, totalPowerConsumption);
+  return MappedPsrCategory(
+      categoryNames, totalPowerConsumption, maxResilienceScore);
 }
 
 class MappedPsrCategory {
   final String names;
   final double powerConsumption;
-
-  MappedPsrCategory(this.names, this.powerConsumption);
+  final double maxResilienceScore;
+  MappedPsrCategory(this.names, this.powerConsumption, this.maxResilienceScore);
 }
 
 Future<bool> saveScenarioResults(
     DocumentReference scenarioReference,
     int totalPsrHomesImpacted,
     double totalCost,
-    double totalResponseItems) async {
+    double totalResponseItems,
+    double responseCoverage) async {
   // save scenario results
   final scenarioResultsCreateData = createScenarioResultsRecordData(
       scenario: scenarioReference,
       psrHouseholdsImpacted: totalPsrHomesImpacted,
       totalCost: totalCost,
-      numberOfResponseItems: totalResponseItems);
+      numberOfResponseItems: totalResponseItems,
+      responseCoverage: responseCoverage);
 
   var scenarioResultsRecordReference =
       ScenarioResultsRecord.createDoc(scenarioReference);
