@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -609,7 +610,18 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                         children: [
                                                           Image.network(
                                                             listViewResponseItemsRecord
-                                                                .imageLink!,
+                                                                            .imageLink !=
+                                                                        null &&
+                                                                    listViewResponseItemsRecord
+                                                                            .imageLink !=
+                                                                        ''
+                                                                ? listViewResponseItemsRecord
+                                                                    .imageLink!
+                                                                : random_data
+                                                                    .randomImageUrl(
+                                                                    0,
+                                                                    0,
+                                                                  ),
                                                             width: 100.0,
                                                             height: 100.0,
                                                             fit: BoxFit.cover,
