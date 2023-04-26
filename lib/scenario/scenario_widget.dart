@@ -1212,8 +1212,23 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                 tablet: false,
                                               ))
                                                 Expanded(
+                                                  flex: 1,
                                                   child: Text(
                                                     'Total Power Capacity Required (Wh)',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodySmall,
+                                                  ),
+                                                ),
+                                              if (responsiveVisibility(
+                                                context: context,
+                                                phone: false,
+                                                tablet: false,
+                                              ))
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    'Response Item Required',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodySmall,
@@ -1222,7 +1237,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               Expanded(
                                                 flex: 1,
                                                 child: Text(
-                                                  'Response Item Required',
+                                                  'Criticality Score',
                                                   textAlign: TextAlign.start,
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -1242,6 +1257,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                             stream:
                                                 queryScenarioHouseholdResponsesRecord(
                                               parent: widget.scenarioReference,
+                                              queryBuilder:
+                                                  (scenarioHouseholdResponsesRecord) =>
+                                                      scenarioHouseholdResponsesRecord
+                                                          .orderBy(
+                                                              'max_resilience_score',
+                                                              descending: true),
                                             ),
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
@@ -1400,6 +1421,21 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       .bodyMedium,
                                                                 ),
                                                               ),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                              tablet: false,
+                                                            ))
+                                                              Expanded(
+                                                                flex: 1,
+                                                                child: Text(
+                                                                  listViewScenarioHouseholdResponsesRecord
+                                                                      .responseItemName!,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
+                                                                ),
+                                                              ),
                                                             Expanded(
                                                               child: Column(
                                                                 mainAxisSize:
@@ -1417,11 +1453,16 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         MainAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                      Text(
-                                                                        listViewScenarioHouseholdResponsesRecord
-                                                                            .responseItemName!,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium,
+                                                                      Expanded(
+                                                                        flex: 1,
+                                                                        child:
+                                                                            Text(
+                                                                          listViewScenarioHouseholdResponsesRecord
+                                                                              .maxResilienceScore!
+                                                                              .toString(),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
                                                                       ),
                                                                     ],
                                                                   ),
