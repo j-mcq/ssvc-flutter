@@ -1372,7 +1372,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   (scenarioHouseholdResponsesRecord) =>
                                                       scenarioHouseholdResponsesRecord
                                                           .orderBy(
-                                                              'max_resilience_score',
+                                                              'highest_resilience_score',
                                                               descending: true),
                                             ),
                                             builder: (context, snapshot) {
@@ -1569,7 +1569,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         child:
                                                                             Text(
                                                                           listViewScenarioHouseholdResponsesRecord
-                                                                              .maxResilienceScore!
+                                                                              .highestResilienceScore!
                                                                               .toString(),
                                                                           style:
                                                                               FlutterFlowTheme.of(context).bodyMedium,
