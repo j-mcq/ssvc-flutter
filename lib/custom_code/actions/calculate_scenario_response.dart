@@ -144,7 +144,8 @@ Future<double> groupResponseItems(DocumentReference scenarioReference) async {
     responseCoverage += responseCoveragePerItem;
   }
 
-  return responseCoverage / responseItemTypeCount;
+  return double.parse(
+      (responseCoverage / responseItemTypeCount).toStringAsPrecision(2));
 }
 
 deletePreviousResults(DocumentReference scenarioReference) async {
