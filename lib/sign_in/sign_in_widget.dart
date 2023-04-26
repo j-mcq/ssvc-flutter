@@ -149,7 +149,9 @@ class _SignInWidgetState extends State<SignInWidget> {
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0x00000000),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -220,7 +222,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
                                             width: 2.0,
                                           ),
                                           borderRadius:

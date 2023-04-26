@@ -31,6 +31,11 @@ abstract class ScenarioHouseholdResponsesRecord
   @BuiltValueField(wireName: 'psr_categories')
   String? get psrCategories;
 
+  double? get priority;
+
+  @BuiltValueField(wireName: 'max_resilance_score')
+  double? get maxResilanceScore;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -44,7 +49,9 @@ abstract class ScenarioHouseholdResponsesRecord
         ..responseItemName = ''
         ..powerRequired = 0.0
         ..postcode = ''
-        ..psrCategories = '';
+        ..psrCategories = ''
+        ..priority = 0.0
+        ..maxResilanceScore = 0.0;
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -84,6 +91,8 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
   double? powerRequired,
   String? postcode,
   String? psrCategories,
+  double? priority,
+  double? maxResilanceScore,
 }) {
   final firestoreData = serializers.toFirestore(
     ScenarioHouseholdResponsesRecord.serializer,
@@ -95,7 +104,9 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
         ..scenario = scenario
         ..powerRequired = powerRequired
         ..postcode = postcode
-        ..psrCategories = psrCategories,
+        ..psrCategories = psrCategories
+        ..priority = priority
+        ..maxResilanceScore = maxResilanceScore,
     ),
   );
 

@@ -135,7 +135,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -185,7 +186,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -320,7 +322,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(16.0),

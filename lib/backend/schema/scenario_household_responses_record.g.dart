@@ -77,6 +77,20 @@ class _$ScenarioHouseholdResponsesRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.priority;
+    if (value != null) {
+      result
+        ..add('priority')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.maxResilanceScore;
+    if (value != null) {
+      result
+        ..add('max_resilance_score')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -132,6 +146,14 @@ class _$ScenarioHouseholdResponsesRecordSerializer
           result.psrCategories = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'priority':
+          result.priority = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'max_resilance_score':
+          result.maxResilanceScore = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -162,6 +184,10 @@ class _$ScenarioHouseholdResponsesRecord
   @override
   final String? psrCategories;
   @override
+  final double? priority;
+  @override
+  final double? maxResilanceScore;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ScenarioHouseholdResponsesRecord(
@@ -176,6 +202,8 @@ class _$ScenarioHouseholdResponsesRecord
       this.powerRequired,
       this.postcode,
       this.psrCategories,
+      this.priority,
+      this.maxResilanceScore,
       this.ffRef})
       : super._();
 
@@ -199,6 +227,8 @@ class _$ScenarioHouseholdResponsesRecord
         powerRequired == other.powerRequired &&
         postcode == other.postcode &&
         psrCategories == other.psrCategories &&
+        priority == other.priority &&
+        maxResilanceScore == other.maxResilanceScore &&
         ffRef == other.ffRef;
   }
 
@@ -212,6 +242,8 @@ class _$ScenarioHouseholdResponsesRecord
     _$hash = $jc(_$hash, powerRequired.hashCode);
     _$hash = $jc(_$hash, postcode.hashCode);
     _$hash = $jc(_$hash, psrCategories.hashCode);
+    _$hash = $jc(_$hash, priority.hashCode);
+    _$hash = $jc(_$hash, maxResilanceScore.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -227,6 +259,8 @@ class _$ScenarioHouseholdResponsesRecord
           ..add('powerRequired', powerRequired)
           ..add('postcode', postcode)
           ..add('psrCategories', psrCategories)
+          ..add('priority', priority)
+          ..add('maxResilanceScore', maxResilanceScore)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -271,6 +305,15 @@ class ScenarioHouseholdResponsesRecordBuilder
   set psrCategories(String? psrCategories) =>
       _$this._psrCategories = psrCategories;
 
+  double? _priority;
+  double? get priority => _$this._priority;
+  set priority(double? priority) => _$this._priority = priority;
+
+  double? _maxResilanceScore;
+  double? get maxResilanceScore => _$this._maxResilanceScore;
+  set maxResilanceScore(double? maxResilanceScore) =>
+      _$this._maxResilanceScore = maxResilanceScore;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -289,6 +332,8 @@ class ScenarioHouseholdResponsesRecordBuilder
       _powerRequired = $v.powerRequired;
       _postcode = $v.postcode;
       _psrCategories = $v.psrCategories;
+      _priority = $v.priority;
+      _maxResilanceScore = $v.maxResilanceScore;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -319,6 +364,8 @@ class ScenarioHouseholdResponsesRecordBuilder
             powerRequired: powerRequired,
             postcode: postcode,
             psrCategories: psrCategories,
+            priority: priority,
+            maxResilanceScore: maxResilanceScore,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
