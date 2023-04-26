@@ -84,10 +84,10 @@ class _$ScenarioHouseholdResponsesRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
-    value = object.maxResilanceScore;
+    value = object.highestResilienceScore;
     if (value != null) {
       result
-        ..add('max_resilance_score')
+        ..add('highest_resilience_score')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
@@ -150,8 +150,8 @@ class _$ScenarioHouseholdResponsesRecordSerializer
           result.priority = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
-        case 'max_resilance_score':
-          result.maxResilanceScore = serializers.deserialize(value,
+        case 'highest_resilience_score':
+          result.highestResilienceScore = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
         case 'Document__Reference__Field':
@@ -186,7 +186,7 @@ class _$ScenarioHouseholdResponsesRecord
   @override
   final double? priority;
   @override
-  final double? maxResilanceScore;
+  final double? highestResilienceScore;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -203,7 +203,7 @@ class _$ScenarioHouseholdResponsesRecord
       this.postcode,
       this.psrCategories,
       this.priority,
-      this.maxResilanceScore,
+      this.highestResilienceScore,
       this.ffRef})
       : super._();
 
@@ -228,7 +228,7 @@ class _$ScenarioHouseholdResponsesRecord
         postcode == other.postcode &&
         psrCategories == other.psrCategories &&
         priority == other.priority &&
-        maxResilanceScore == other.maxResilanceScore &&
+        highestResilienceScore == other.highestResilienceScore &&
         ffRef == other.ffRef;
   }
 
@@ -243,7 +243,7 @@ class _$ScenarioHouseholdResponsesRecord
     _$hash = $jc(_$hash, postcode.hashCode);
     _$hash = $jc(_$hash, psrCategories.hashCode);
     _$hash = $jc(_$hash, priority.hashCode);
-    _$hash = $jc(_$hash, maxResilanceScore.hashCode);
+    _$hash = $jc(_$hash, highestResilienceScore.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -260,7 +260,7 @@ class _$ScenarioHouseholdResponsesRecord
           ..add('postcode', postcode)
           ..add('psrCategories', psrCategories)
           ..add('priority', priority)
-          ..add('maxResilanceScore', maxResilanceScore)
+          ..add('highestResilienceScore', highestResilienceScore)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -309,10 +309,10 @@ class ScenarioHouseholdResponsesRecordBuilder
   double? get priority => _$this._priority;
   set priority(double? priority) => _$this._priority = priority;
 
-  double? _maxResilanceScore;
-  double? get maxResilanceScore => _$this._maxResilanceScore;
-  set maxResilanceScore(double? maxResilanceScore) =>
-      _$this._maxResilanceScore = maxResilanceScore;
+  double? _highestResilienceScore;
+  double? get highestResilienceScore => _$this._highestResilienceScore;
+  set highestResilienceScore(double? highestResilienceScore) =>
+      _$this._highestResilienceScore = highestResilienceScore;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -333,7 +333,7 @@ class ScenarioHouseholdResponsesRecordBuilder
       _postcode = $v.postcode;
       _psrCategories = $v.psrCategories;
       _priority = $v.priority;
-      _maxResilanceScore = $v.maxResilanceScore;
+      _highestResilienceScore = $v.highestResilienceScore;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -365,7 +365,7 @@ class ScenarioHouseholdResponsesRecordBuilder
             postcode: postcode,
             psrCategories: psrCategories,
             priority: priority,
-            maxResilanceScore: maxResilanceScore,
+            highestResilienceScore: highestResilienceScore,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
