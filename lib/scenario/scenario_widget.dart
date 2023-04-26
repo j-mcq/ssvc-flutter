@@ -1132,7 +1132,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'PSR Customers Impacted',
+                                                      'Prioritiesd PSR Responses',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -1147,7 +1147,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        'Summary of the types of PSR customers impacted by the scenario',
+                                                        'Summary of the types of PSR customers impacted by the scenario and the response items required.',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -1155,6 +1155,50 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       ),
                                                     ),
                                                   ],
+                                                ),
+                                                FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: 'Export List',
+                                                  options: FFButtonOptions(
+                                                    width: 150.0,
+                                                    height: 40.0,
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    iconPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily,
+                                                          color: Colors.white,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily),
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50.0),
+                                                  ),
                                                 ),
                                               ],
                                             ),
