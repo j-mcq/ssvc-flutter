@@ -84,7 +84,7 @@ Future<String?> calculateScenarioResponse(
                 psrCategories: mappedPsrCategory.names,
                 scenario: scenarioReference,
                 powerRequired: householdPowerConsumption,
-                maxResilienceScore: mappedPsrCategory.maxResilienceScore);
+                highestResilienceScore: mappedPsrCategory.maxResilienceScore);
 
         var scenarioHouseholdResponsesRecordReference =
             ScenarioHouseholdResponsesRecord.createDoc(scenarioReference);
@@ -108,9 +108,10 @@ Future<double> groupResponseItems(DocumentReference scenarioReference) async {
       parent: scenarioReference);
   final responseItems = await queryResponseItemsRecordOnce();
 
-  var responseCoverage = 0.0;
-
+  double responseCoverage = 0.0;
+  double responseItemTypeCount = 0.0;
   for (var responseItem in responseItems) {
+    double responseCoveragePerItem = 0.0;
     var itemCount = 0;
     for (var responseItemResult in responseItemResults) {
       if (responseItemResult.responseItem == responseItem.reference) {
@@ -118,6 +119,7 @@ Future<double> groupResponseItems(DocumentReference scenarioReference) async {
       }
     }
     if (itemCount > 0) {
+      responseItemTypeCount += 1;
       final createScenarioResponseItemsCreateData =
           createScenarioResponseItemsRecordData(
               numberRequired: itemCount,
@@ -129,12 +131,20 @@ Future<double> groupResponseItems(DocumentReference scenarioReference) async {
           ScenarioResponseItemsRecord.createDoc(scenarioReference);
       await scenarioResponseItemsRecordReference
           .set(createScenarioResponseItemsCreateData);
-
-      responseCoverage = itemCount / responseItem.stock!;
+      print(responseItem.name);
+      print(itemCount.toString());
+      print(responseItem.stock!.toString());
+      if (itemCount < responseItem.stock!) {
+        responseCoveragePerItem = 1;
+      } else {
+        responseCoveragePerItem = responseItem.stock! / itemCount;
+      }
     }
+
+    responseCoverage += responseCoveragePerItem;
   }
 
-  return responseCoverage;
+  return responseCoverage / responseItemTypeCount;
 }
 
 deletePreviousResults(DocumentReference scenarioReference) async {
