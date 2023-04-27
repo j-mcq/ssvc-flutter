@@ -30,6 +30,7 @@ class _SignInWidgetState extends State<SignInWidget> {
 
     _model.emailAddressController ??= TextEditingController();
     _model.passwordController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -330,7 +331,10 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('dashboard', mounted);
+                                      if (!currentUserEmailVerified) {
+                                        context.pushNamedAuth(
+                                            'verifyEmail', mounted);
+                                      }
                                     },
                                     child: Container(
                                       width: 150.0,

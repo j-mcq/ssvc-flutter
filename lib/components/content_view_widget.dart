@@ -26,6 +26,8 @@ class _ContentViewWidgetState extends State<ContentViewWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ContentViewModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

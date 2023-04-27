@@ -29,6 +29,7 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
     _model = createModel(context, () => EnterRadiusModel());
 
     _model.radiusController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
