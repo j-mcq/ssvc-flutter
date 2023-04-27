@@ -307,7 +307,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       }
 
                                       context.pushNamedAuth(
-                                          'homePage', mounted);
+                                          'dashboard', mounted);
                                     },
                                     child: Container(
                                       width: 150.0,
@@ -490,7 +490,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      context.goNamedAuth('dashboard', mounted);
                                     },
                                     text: 'Continue as Guest',
                                     options: FFButtonOptions(

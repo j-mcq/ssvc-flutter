@@ -330,7 +330,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      context.goNamedAuth('dashboard', mounted);
                                     },
                                     child: Container(
                                       width: 150.0,
@@ -395,7 +395,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      context.goNamedAuth('dashboard', mounted);
                                     },
                                   ),
                                 ),
@@ -422,7 +422,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      context.goNamedAuth('dashboard', mounted);
                                     },
                                   ),
                                 ),
@@ -505,7 +505,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      context.goNamedAuth('dashboard', mounted);
                                     },
                                     text: 'Continue as Guest',
                                     options: FFButtonOptions(
