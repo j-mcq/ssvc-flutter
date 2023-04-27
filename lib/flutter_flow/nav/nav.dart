@@ -152,13 +152,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
             ),
             FFRoute(
-              name: 'scenarios',
-              path: 'scenarios',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'scenarios')
-                  : ScenariosWidget(),
-            ),
-            FFRoute(
               name: 'admin',
               path: 'admin',
               builder: (context, params) => params.isEmpty
@@ -167,6 +160,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       scenarioReference: params.getParam('scenarioReference',
                           ParamType.DocumentReference, false, ['scenario']),
                     ),
+            ),
+            FFRoute(
+              name: 'scenarios',
+              path: 'scenarios',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'scenarios')
+                  : ScenariosWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

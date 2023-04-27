@@ -130,8 +130,8 @@ class _NavBarPageState extends State<NavBarPage> {
       'stockInformation': StockInformationWidget(),
       'scenarioCopy': ScenarioCopyWidget(),
       'stockItemDetails': StockItemDetailsWidget(),
-      'scenarios': ScenariosWidget(),
       'admin': AdminWidget(),
+      'scenarios': ScenariosWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
@@ -197,7 +197,7 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.add_business_rounded,
+                Icons.school_outlined,
                 size: 24.0,
               ),
               label: '•',
@@ -205,7 +205,7 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.school_outlined,
+                Icons.add_business_rounded,
                 size: 24.0,
               ),
               label: '•',
