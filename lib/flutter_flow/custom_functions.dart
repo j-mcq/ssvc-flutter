@@ -16,5 +16,5 @@ String? formatPercentage(double number) {
   if (number == null) {
     return null;
   }
-  return (number * 100).toStringAsFixed(2) + '%';
+  return (number * 100).toStringAsFixed(0) + '%';
 }
