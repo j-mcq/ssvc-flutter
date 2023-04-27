@@ -307,9 +307,13 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       }
 
                                       await authManager.sendEmailVerification();
-
-                                      context.pushNamedAuth(
-                                          'dashboard', mounted);
+                                      if (currentUserEmailVerified) {
+                                        context.pushNamedAuth(
+                                            'dashboard', mounted);
+                                      } else {
+                                        context.pushNamedAuth(
+                                            'verifyEmail', mounted);
+                                      }
                                     },
                                     child: Container(
                                       width: 150.0,
