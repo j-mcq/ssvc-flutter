@@ -78,6 +78,8 @@ class _ScenarioCopyWidgetState extends State<ScenarioCopyWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

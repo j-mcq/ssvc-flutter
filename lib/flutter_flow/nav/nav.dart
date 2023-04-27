@@ -103,13 +103,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ForgotPasswordWidget(),
             ),
             FFRoute(
-              name: 'phoneVerify',
-              path: 'phoneVerify',
-              builder: (context, params) => PhoneVerifyWidget(),
-            ),
-            FFRoute(
               name: 'dashboard',
               path: 'dashboard',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'dashboard')
                   : DashboardWidget(),
@@ -117,6 +113,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'scenario',
               path: 'scenario',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'scenario')
                   : ScenarioWidget(
@@ -127,6 +124,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'stockInformation',
               path: 'stockInformation',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'stockInformation')
                   : StockInformationWidget(),
@@ -134,6 +132,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'scenarioCopy',
               path: 'scenarioCopy',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'scenarioCopy')
                   : ScenarioCopyWidget(),
@@ -141,6 +140,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'stockItemDetails',
               path: 'stockItemDetails',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'stockItemDetails')
                   : StockItemDetailsWidget(
@@ -154,6 +154,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'admin',
               path: 'admin',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'admin')
                   : AdminWidget(
@@ -164,9 +165,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'scenarios',
               path: 'scenarios',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'scenarios')
                   : ScenariosWidget(),
+            ),
+            FFRoute(
+              name: 'verifyEmail',
+              path: 'verifyEmail',
+              requireAuth: true,
+              builder: (context, params) => VerifyEmailWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

@@ -64,6 +64,8 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

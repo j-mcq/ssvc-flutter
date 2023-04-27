@@ -29,6 +29,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
     _model.yourNameController ??= TextEditingController();
     _model.cityController ??= TextEditingController();
     _model.myBioController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -62,6 +62,8 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

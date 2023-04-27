@@ -26,6 +26,8 @@ class _RowsWidgetState extends State<RowsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => RowsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
