@@ -116,9 +116,18 @@ class _PolyMapState extends State<PolyMap> {
         ImageConfiguration(), 'assets/farm.png');
   }
 
+  _clearAppState() {
+    FFAppState().circleLatLng = null;
+    FFAppState().circleRadius = 0.0;
+    FFAppState().polygonLatLngList.clear();
+
+    FFAppState().mapCenterLocation = null;
+    FFAppState().mapZoomLevel = 16;
+  }
+
   Future<void> _loadMapData() async {
+    _clearAppState();
     if (_isDataLoaded == false) {
-      clearAppState();
       if (widget.scenario != null) {
         final polygonPoints = await queryPolygonPointsRecordOnce(
             parent: widget.scenario!,
@@ -153,15 +162,6 @@ class _PolyMapState extends State<PolyMap> {
       }
     }
     _isDataLoaded = true;
-  }
-
-  clearAppState() {
-    FFAppState().circleLatLng = null;
-    FFAppState().circleRadius = 0.0;
-    FFAppState().polygonLatLngList.clear();
-
-    FFAppState().mapCenterLocation = null;
-    FFAppState().mapZoomLevel = 16;
   }
 
   // Draw Polygon to the map
@@ -210,9 +210,6 @@ class _PolyMapState extends State<PolyMap> {
     final String markerIdVal = 'marker_id_$_markerIdCounter';
     _markerIdCounter++;
     setState(() {
-      print(
-          'Marker | Latitude: ${point.latitude}  Longitude: ${point.longitude}');
-
       _markers.add(gmf.Marker(
         markerId: gmf.MarkerId(markerIdVal),
         position: point,

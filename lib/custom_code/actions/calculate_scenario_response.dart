@@ -18,8 +18,10 @@ Future<String?> calculateScenarioResponse(
 
     final psrRecords = await queryPsrRecordOnce();
 
-    final polygonRecords =
-        await queryPolygonPointsRecordOnce(parent: scenarioReference);
+    final polygonRecords = await queryPolygonPointsRecordOnce(
+        parent: scenarioReference,
+        queryBuilder: (query) => query.orderBy('index'));
+
     final circleRecords =
         await queryCirclesRecordOnce(parent: scenarioReference);
 
@@ -132,9 +134,6 @@ Future<double> groupResponseItems(DocumentReference scenarioReference) async {
           ScenarioResponseItemsRecord.createDoc(scenarioReference);
       await scenarioResponseItemsRecordReference
           .set(createScenarioResponseItemsCreateData);
-      print(responseItem.name);
-      print(itemCount.toString());
-      print(responseItem.stock!.toString());
       if (itemCount < responseItem.stock!) {
         responseCoveragePerItem = 1;
       } else {
