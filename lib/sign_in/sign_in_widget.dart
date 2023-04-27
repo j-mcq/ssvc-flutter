@@ -330,7 +330,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      context.goNamedAuth('dashboard', mounted);
                                     },
                                     child: Container(
                                       width: 150.0,
@@ -395,7 +395,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      context.goNamedAuth('dashboard', mounted);
                                     },
                                   ),
                                 ),
@@ -422,7 +422,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      context.goNamedAuth('dashboard', mounted);
                                     },
                                   ),
                                 ),
@@ -487,48 +487,6 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     ),
                                   ],
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 24.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      GoRouter.of(context).prepareAuthEvent();
-                                      final user = await authManager
-                                          .signInAnonymously(context);
-                                      if (user == null) {
-                                        return;
-                                      }
-
-                                      context.goNamedAuth('homePage', mounted);
-                                    },
-                                    text: 'Continue as Guest',
-                                    options: FFButtonOptions(
-                                      width: 270.0,
-                                      height: 50.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: FlutterFlowTheme.of(context)
-                                          .lineColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleMedium,
-                                      elevation: 0.0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(50.0),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ],

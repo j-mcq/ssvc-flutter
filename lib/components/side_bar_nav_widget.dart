@@ -111,7 +111,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.pushNamed('homePage');
+                  context.pushNamed('dashboard');
                 },
                 child: Container(
                   width: double.infinity,

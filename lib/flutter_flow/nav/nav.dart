@@ -108,11 +108,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => PhoneVerifyWidget(),
             ),
             FFRoute(
-              name: 'homePage',
-              path: 'homePage',
+              name: 'dashboard',
+              path: 'dashboard',
               builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'homePage')
-                  : HomePageWidget(),
+                  ? NavBarPage(initialPage: 'dashboard')
+                  : DashboardWidget(),
             ),
             FFRoute(
               name: 'scenario',

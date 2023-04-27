@@ -215,7 +215,7 @@ class _PhoneVerifyWidgetState extends State<PhoneVerifyWidget> {
                             return;
                           }
 
-                          context.goNamedAuth('homePage', mounted);
+                          context.goNamedAuth('dashboard', mounted);
                         },
                         text: 'Confirm & Continue',
                         options: FFButtonOptions(
