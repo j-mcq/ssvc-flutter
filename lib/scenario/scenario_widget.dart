@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -1099,7 +1100,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                   progressColor: FlutterFlowTheme.of(context).primary,
                                                                                   backgroundColor: FlutterFlowTheme.of(context).lineColor,
                                                                                   center: Text(
-                                                                                    (containerScenarioResultsRecord != null ? containerScenarioResultsRecord!.responseCoverage! : 0.0).toString(),
+                                                                                    containerScenarioResultsRecord != null ? functions.formatPercentage(containerScenarioResultsRecord!.responseCoverage!)! : 'no data',
                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                           fontFamily: 'Outfit',
                                                                                           color: FlutterFlowTheme.of(context).primaryText,
