@@ -14,6 +14,8 @@ abstract class PsrCategoriesRecord
   @BuiltValueField(wireName: 'psr_category')
   DocumentReference? get psrCategory;
 
+  DocumentReference? get owner;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -51,11 +53,14 @@ abstract class PsrCategoriesRecord
 
 Map<String, dynamic> createPsrCategoriesRecordData({
   DocumentReference? psrCategory,
+  DocumentReference? owner,
 }) {
   final firestoreData = serializers.toFirestore(
     PsrCategoriesRecord.serializer,
     PsrCategoriesRecord(
-      (p) => p..psrCategory = psrCategory,
+      (p) => p
+        ..psrCategory = psrCategory
+        ..owner = owner,
     ),
   );
 

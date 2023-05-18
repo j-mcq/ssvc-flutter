@@ -290,9 +290,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   FFButtonWidget(
-                                    onPressed: () {
-                                      print(
-                                          'Button-ForgotPassword pressed ...');
+                                    onPressed: () async {
+                                      context.pushNamed('forgotPassword');
                                     },
                                     text: 'Forgot Password?',
                                     options: FFButtonOptions(

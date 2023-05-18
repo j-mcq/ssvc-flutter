@@ -19,6 +19,8 @@ abstract class PsrRecord implements Built<PsrRecord, PsrRecordBuilder> {
 
   double? get latitude;
 
+  DocumentReference? get owner;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -56,6 +58,7 @@ Map<String, dynamic> createPsrRecordData({
   String? postcode,
   double? longitude,
   double? latitude,
+  DocumentReference? owner,
 }) {
   final firestoreData = serializers.toFirestore(
     PsrRecord.serializer,
@@ -65,7 +68,8 @@ Map<String, dynamic> createPsrRecordData({
         ..address2 = address2
         ..postcode = postcode
         ..longitude = longitude
-        ..latitude = latitude,
+        ..latitude = latitude
+        ..owner = owner,
     ),
   );
 
