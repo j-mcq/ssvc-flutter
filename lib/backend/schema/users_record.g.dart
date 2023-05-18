@@ -82,6 +82,13 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.emailVerified;
+    if (value != null) {
+      result
+        ..add('email_verified')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -140,6 +147,10 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.city = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'email_verified':
+          result.emailVerified = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -173,6 +184,8 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String? city;
   @override
+  final bool? emailVerified;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -188,6 +201,7 @@ class _$UsersRecord extends UsersRecord {
       this.state,
       this.bio,
       this.city,
+      this.emailVerified,
       this.ffRef})
       : super._();
 
@@ -211,6 +225,7 @@ class _$UsersRecord extends UsersRecord {
         state == other.state &&
         bio == other.bio &&
         city == other.city &&
+        emailVerified == other.emailVerified &&
         ffRef == other.ffRef;
   }
 
@@ -226,6 +241,7 @@ class _$UsersRecord extends UsersRecord {
     _$hash = $jc(_$hash, state.hashCode);
     _$hash = $jc(_$hash, bio.hashCode);
     _$hash = $jc(_$hash, city.hashCode);
+    _$hash = $jc(_$hash, emailVerified.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -243,6 +259,7 @@ class _$UsersRecord extends UsersRecord {
           ..add('state', state)
           ..add('bio', bio)
           ..add('city', city)
+          ..add('emailVerified', emailVerified)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -287,6 +304,11 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String? get city => _$this._city;
   set city(String? city) => _$this._city = city;
 
+  bool? _emailVerified;
+  bool? get emailVerified => _$this._emailVerified;
+  set emailVerified(bool? emailVerified) =>
+      _$this._emailVerified = emailVerified;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -307,6 +329,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _state = $v.state;
       _bio = $v.bio;
       _city = $v.city;
+      _emailVerified = $v.emailVerified;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -339,6 +362,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
             state: state,
             bio: bio,
             city: city,
+            emailVerified: emailVerified,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

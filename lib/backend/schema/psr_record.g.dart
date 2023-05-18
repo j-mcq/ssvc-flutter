@@ -54,6 +54,14 @@ class _$PsrRecordSerializer implements StructuredSerializer<PsrRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
     }
+    value = object.owner;
+    if (value != null) {
+      result
+        ..add('owner')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -96,6 +104,12 @@ class _$PsrRecordSerializer implements StructuredSerializer<PsrRecord> {
           result.latitude = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
           break;
+        case 'owner':
+          result.owner = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -121,6 +135,8 @@ class _$PsrRecord extends PsrRecord {
   @override
   final double? latitude;
   @override
+  final DocumentReference<Object?>? owner;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$PsrRecord([void Function(PsrRecordBuilder)? updates]) =>
@@ -132,6 +148,7 @@ class _$PsrRecord extends PsrRecord {
       this.postcode,
       this.longitude,
       this.latitude,
+      this.owner,
       this.ffRef})
       : super._();
 
@@ -151,6 +168,7 @@ class _$PsrRecord extends PsrRecord {
         postcode == other.postcode &&
         longitude == other.longitude &&
         latitude == other.latitude &&
+        owner == other.owner &&
         ffRef == other.ffRef;
   }
 
@@ -162,6 +180,7 @@ class _$PsrRecord extends PsrRecord {
     _$hash = $jc(_$hash, postcode.hashCode);
     _$hash = $jc(_$hash, longitude.hashCode);
     _$hash = $jc(_$hash, latitude.hashCode);
+    _$hash = $jc(_$hash, owner.hashCode);
     _$hash = $jc(_$hash, ffRef.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -175,6 +194,7 @@ class _$PsrRecord extends PsrRecord {
           ..add('postcode', postcode)
           ..add('longitude', longitude)
           ..add('latitude', latitude)
+          ..add('owner', owner)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -203,6 +223,10 @@ class PsrRecordBuilder implements Builder<PsrRecord, PsrRecordBuilder> {
   double? get latitude => _$this._latitude;
   set latitude(double? latitude) => _$this._latitude = latitude;
 
+  DocumentReference<Object?>? _owner;
+  DocumentReference<Object?>? get owner => _$this._owner;
+  set owner(DocumentReference<Object?>? owner) => _$this._owner = owner;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -219,6 +243,7 @@ class PsrRecordBuilder implements Builder<PsrRecord, PsrRecordBuilder> {
       _postcode = $v.postcode;
       _longitude = $v.longitude;
       _latitude = $v.latitude;
+      _owner = $v.owner;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -247,6 +272,7 @@ class PsrRecordBuilder implements Builder<PsrRecord, PsrRecordBuilder> {
             postcode: postcode,
             longitude: longitude,
             latitude: latitude,
+            owner: owner,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
