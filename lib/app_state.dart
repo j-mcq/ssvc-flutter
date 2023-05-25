@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'backend/backend.dart';
+import '/backend/backend.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -47,6 +47,13 @@ class FFAppState extends ChangeNotifier {
 
   void removeAtIndexFromPolygonLatLngList(int _index) {
     _polygonLatLngList.removeAt(_index);
+  }
+
+  void updatePolygonLatLngListAtIndex(
+    int _index,
+    Function(LatLng) updateFn,
+  ) {
+    updateFn(_polygonLatLngList[_index]);
   }
 
   double _circleRadius = 0.0;

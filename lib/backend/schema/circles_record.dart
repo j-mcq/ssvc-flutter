@@ -1,31 +1,41 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'circles_record.g.dart';
+class CirclesRecord extends FirestoreRecord {
+  CirclesRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class CirclesRecord
-    implements Built<CirclesRecord, CirclesRecordBuilder> {
-  static Serializer<CirclesRecord> get serializer => _$circlesRecordSerializer;
+  // "latitude" field.
+  double? _latitude;
+  double get latitude => _latitude ?? 0.0;
+  bool hasLatitude() => _latitude != null;
 
-  double? get latitude;
+  // "longitude" field.
+  double? _longitude;
+  double get longitude => _longitude ?? 0.0;
+  bool hasLongitude() => _longitude != null;
 
-  double? get longitude;
-
-  double? get radius;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "radius" field.
+  double? _radius;
+  double get radius => _radius ?? 0.0;
+  bool hasRadius() => _radius != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
-  static void _initializeBuilder(CirclesRecordBuilder builder) => builder
-    ..latitude = 0.0
-    ..longitude = 0.0
-    ..radius = 0.0;
+  void _initializeFields() {
+    _latitude = castToType<double>(snapshotData['latitude']);
+    _longitude = castToType<double>(snapshotData['longitude']);
+    _radius = castToType<double>(snapshotData['radius']);
+  }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -35,22 +45,27 @@ abstract class CirclesRecord
   static DocumentReference createDoc(DocumentReference parent) =>
       parent.collection('circles').doc();
 
-  static Stream<CirclesRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<CirclesRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => CirclesRecord.fromSnapshot(s));
 
-  static Future<CirclesRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<CirclesRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => CirclesRecord.fromSnapshot(s));
 
-  CirclesRecord._();
-  factory CirclesRecord([void Function(CirclesRecordBuilder) updates]) =
-      _$CirclesRecord;
+  static CirclesRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      CirclesRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static CirclesRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      CirclesRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'CirclesRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createCirclesRecordData({
@@ -58,14 +73,12 @@ Map<String, dynamic> createCirclesRecordData({
   double? longitude,
   double? radius,
 }) {
-  final firestoreData = serializers.toFirestore(
-    CirclesRecord.serializer,
-    CirclesRecord(
-      (c) => c
-        ..latitude = latitude
-        ..longitude = longitude
-        ..radius = radius,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'latitude': latitude,
+      'longitude': longitude,
+      'radius': radius,
+    }.withoutNulls,
   );
 
   return firestoreData;

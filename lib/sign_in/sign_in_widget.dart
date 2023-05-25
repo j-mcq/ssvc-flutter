@@ -51,6 +51,7 @@ class _SignInWidgetState extends State<SignInWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, -1.0),
             child: SingleChildScrollView(
@@ -332,7 +333,7 @@ class _SignInWidgetState extends State<SignInWidget> {
 
                                       if (!currentUserEmailVerified) {
                                         context.pushNamedAuth(
-                                            'verifyEmail', mounted);
+                                            'verifyEmail', context.mounted);
                                       }
                                     },
                                     child: Container(
@@ -398,7 +399,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('dashboard', mounted);
+                                      context.goNamedAuth(
+                                          'dashboard', context.mounted);
                                     },
                                   ),
                                 ),
@@ -425,7 +427,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('dashboard', mounted);
+                                      context.goNamedAuth(
+                                          'dashboard', context.mounted);
                                     },
                                   ),
                                 ),

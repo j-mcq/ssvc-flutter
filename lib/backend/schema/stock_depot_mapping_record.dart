@@ -1,56 +1,65 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'stock_depot_mapping_record.g.dart';
+class StockDepotMappingRecord extends FirestoreRecord {
+  StockDepotMappingRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class StockDepotMappingRecord
-    implements Built<StockDepotMappingRecord, StockDepotMappingRecordBuilder> {
-  static Serializer<StockDepotMappingRecord> get serializer =>
-      _$stockDepotMappingRecordSerializer;
+  // "response_item_name" field.
+  String? _responseItemName;
+  String get responseItemName => _responseItemName ?? '';
+  bool hasResponseItemName() => _responseItemName != null;
 
-  @BuiltValueField(wireName: 'response_item_name')
-  String? get responseItemName;
+  // "depot_name" field.
+  String? _depotName;
+  String get depotName => _depotName ?? '';
+  bool hasDepotName() => _depotName != null;
 
-  @BuiltValueField(wireName: 'depot_name')
-  String? get depotName;
+  // "number_in_stock" field.
+  int? _numberInStock;
+  int get numberInStock => _numberInStock ?? 0;
+  bool hasNumberInStock() => _numberInStock != null;
 
-  @BuiltValueField(wireName: 'number_in_stock')
-  int? get numberInStock;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(StockDepotMappingRecordBuilder builder) =>
-      builder
-        ..responseItemName = ''
-        ..depotName = ''
-        ..numberInStock = 0;
+  void _initializeFields() {
+    _responseItemName = snapshotData['response_item_name'] as String?;
+    _depotName = snapshotData['depot_name'] as String?;
+    _numberInStock = snapshotData['number_in_stock'] as int?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('stock_depot_mapping');
 
   static Stream<StockDepotMappingRecord> getDocument(DocumentReference ref) =>
-      ref.snapshots().map(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.snapshots().map((s) => StockDepotMappingRecord.fromSnapshot(s));
 
   static Future<StockDepotMappingRecord> getDocumentOnce(
           DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => StockDepotMappingRecord.fromSnapshot(s));
 
-  StockDepotMappingRecord._();
-  factory StockDepotMappingRecord(
-          [void Function(StockDepotMappingRecordBuilder) updates]) =
-      _$StockDepotMappingRecord;
+  static StockDepotMappingRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      StockDepotMappingRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static StockDepotMappingRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      StockDepotMappingRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'StockDepotMappingRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createStockDepotMappingRecordData({
@@ -58,14 +67,12 @@ Map<String, dynamic> createStockDepotMappingRecordData({
   String? depotName,
   int? numberInStock,
 }) {
-  final firestoreData = serializers.toFirestore(
-    StockDepotMappingRecord.serializer,
-    StockDepotMappingRecord(
-      (s) => s
-        ..responseItemName = responseItemName
-        ..depotName = depotName
-        ..numberInStock = numberInStock,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'response_item_name': responseItemName,
+      'depot_name': depotName,
+      'number_in_stock': numberInStock,
+    }.withoutNulls,
   );
 
   return firestoreData;

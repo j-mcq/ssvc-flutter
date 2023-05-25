@@ -1,42 +1,54 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'scenario_results_record.g.dart';
+class ScenarioResultsRecord extends FirestoreRecord {
+  ScenarioResultsRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class ScenarioResultsRecord
-    implements Built<ScenarioResultsRecord, ScenarioResultsRecordBuilder> {
-  static Serializer<ScenarioResultsRecord> get serializer =>
-      _$scenarioResultsRecordSerializer;
+  // "scenario" field.
+  DocumentReference? _scenario;
+  DocumentReference? get scenario => _scenario;
+  bool hasScenario() => _scenario != null;
 
-  DocumentReference? get scenario;
+  // "psr_households_impacted" field.
+  int? _psrHouseholdsImpacted;
+  int get psrHouseholdsImpacted => _psrHouseholdsImpacted ?? 0;
+  bool hasPsrHouseholdsImpacted() => _psrHouseholdsImpacted != null;
 
-  @BuiltValueField(wireName: 'psr_households_impacted')
-  int? get psrHouseholdsImpacted;
+  // "response_coverage" field.
+  double? _responseCoverage;
+  double get responseCoverage => _responseCoverage ?? 0.0;
+  bool hasResponseCoverage() => _responseCoverage != null;
 
-  @BuiltValueField(wireName: 'response_coverage')
-  double? get responseCoverage;
+  // "total_cost" field.
+  double? _totalCost;
+  double get totalCost => _totalCost ?? 0.0;
+  bool hasTotalCost() => _totalCost != null;
 
-  @BuiltValueField(wireName: 'total_cost')
-  double? get totalCost;
-
-  @BuiltValueField(wireName: 'number_of_response_items')
-  double? get numberOfResponseItems;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "number_of_response_items" field.
+  double? _numberOfResponseItems;
+  double get numberOfResponseItems => _numberOfResponseItems ?? 0.0;
+  bool hasNumberOfResponseItems() => _numberOfResponseItems != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
-  static void _initializeBuilder(ScenarioResultsRecordBuilder builder) =>
-      builder
-        ..psrHouseholdsImpacted = 0
-        ..responseCoverage = 0.0
-        ..totalCost = 0.0
-        ..numberOfResponseItems = 0.0;
+  void _initializeFields() {
+    _scenario = snapshotData['scenario'] as DocumentReference?;
+    _psrHouseholdsImpacted = snapshotData['psr_households_impacted'] as int?;
+    _responseCoverage = castToType<double>(snapshotData['response_coverage']);
+    _totalCost = castToType<double>(snapshotData['total_cost']);
+    _numberOfResponseItems =
+        castToType<double>(snapshotData['number_of_response_items']);
+  }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -46,23 +58,27 @@ abstract class ScenarioResultsRecord
   static DocumentReference createDoc(DocumentReference parent) =>
       parent.collection('scenario_results').doc();
 
-  static Stream<ScenarioResultsRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<ScenarioResultsRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => ScenarioResultsRecord.fromSnapshot(s));
 
   static Future<ScenarioResultsRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => ScenarioResultsRecord.fromSnapshot(s));
 
-  ScenarioResultsRecord._();
-  factory ScenarioResultsRecord(
-          [void Function(ScenarioResultsRecordBuilder) updates]) =
-      _$ScenarioResultsRecord;
+  static ScenarioResultsRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      ScenarioResultsRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static ScenarioResultsRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      ScenarioResultsRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'ScenarioResultsRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createScenarioResultsRecordData({
@@ -72,16 +88,14 @@ Map<String, dynamic> createScenarioResultsRecordData({
   double? totalCost,
   double? numberOfResponseItems,
 }) {
-  final firestoreData = serializers.toFirestore(
-    ScenarioResultsRecord.serializer,
-    ScenarioResultsRecord(
-      (s) => s
-        ..scenario = scenario
-        ..psrHouseholdsImpacted = psrHouseholdsImpacted
-        ..responseCoverage = responseCoverage
-        ..totalCost = totalCost
-        ..numberOfResponseItems = numberOfResponseItems,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'scenario': scenario,
+      'psr_households_impacted': psrHouseholdsImpacted,
+      'response_coverage': responseCoverage,
+      'total_cost': totalCost,
+      'number_of_response_items': numberOfResponseItems,
+    }.withoutNulls,
   );
 
   return firestoreData;

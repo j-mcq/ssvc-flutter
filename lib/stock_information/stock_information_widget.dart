@@ -618,7 +618,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                             .imageLink !=
                                                                         ''
                                                                 ? listViewResponseItemsRecord
-                                                                    .imageLink!
+                                                                    .imageLink
                                                                 : random_data
                                                                     .randomImageUrl(
                                                                     0,
@@ -685,7 +685,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                       child:
                                                                           AutoSizeText(
                                                                         listViewResponseItemsRecord
-                                                                            .name!
+                                                                            .name
                                                                             .maybeHandleOverflow(
                                                                           maxChars:
                                                                               32,
@@ -715,7 +715,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                     flex: 1,
                                                     child: Text(
                                                       listViewResponseItemsRecord
-                                                          .depotName!,
+                                                          .depotName,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -730,7 +730,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                     flex: 1,
                                                     child: Text(
                                                       listViewResponseItemsRecord
-                                                          .stock!
+                                                          .stock
                                                           .toString(),
                                                       style:
                                                           FlutterFlowTheme.of(
@@ -746,7 +746,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                     flex: 1,
                                                     child: Text(
                                                       listViewResponseItemsRecord
-                                                          .unitPrice!
+                                                          .unitPrice
                                                           .toString(),
                                                       style:
                                                           FlutterFlowTheme.of(
@@ -762,7 +762,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                     flex: 1,
                                                     child: Text(
                                                       listViewResponseItemsRecord
-                                                          .totalEnergyStorageCapacity!
+                                                          .totalEnergyStorageCapacity
                                                           .toString(),
                                                       style:
                                                           FlutterFlowTheme.of(

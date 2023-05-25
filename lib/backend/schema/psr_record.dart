@@ -1,55 +1,81 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'psr_record.g.dart';
+class PsrRecord extends FirestoreRecord {
+  PsrRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class PsrRecord implements Built<PsrRecord, PsrRecordBuilder> {
-  static Serializer<PsrRecord> get serializer => _$psrRecordSerializer;
+  // "address1" field.
+  String? _address1;
+  String get address1 => _address1 ?? '';
+  bool hasAddress1() => _address1 != null;
 
-  String? get address1;
+  // "address2" field.
+  String? _address2;
+  String get address2 => _address2 ?? '';
+  bool hasAddress2() => _address2 != null;
 
-  String? get address2;
+  // "postcode" field.
+  String? _postcode;
+  String get postcode => _postcode ?? '';
+  bool hasPostcode() => _postcode != null;
 
-  String? get postcode;
+  // "longitude" field.
+  double? _longitude;
+  double get longitude => _longitude ?? 0.0;
+  bool hasLongitude() => _longitude != null;
 
-  double? get longitude;
+  // "latitude" field.
+  double? _latitude;
+  double get latitude => _latitude ?? 0.0;
+  bool hasLatitude() => _latitude != null;
 
-  double? get latitude;
+  // "owner" field.
+  DocumentReference? _owner;
+  DocumentReference? get owner => _owner;
+  bool hasOwner() => _owner != null;
 
-  DocumentReference? get owner;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(PsrRecordBuilder builder) => builder
-    ..address1 = ''
-    ..address2 = ''
-    ..postcode = ''
-    ..longitude = 0.0
-    ..latitude = 0.0;
+  void _initializeFields() {
+    _address1 = snapshotData['address1'] as String?;
+    _address2 = snapshotData['address2'] as String?;
+    _postcode = snapshotData['postcode'] as String?;
+    _longitude = castToType<double>(snapshotData['longitude']);
+    _latitude = castToType<double>(snapshotData['latitude']);
+    _owner = snapshotData['owner'] as DocumentReference?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('psr');
 
-  static Stream<PsrRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<PsrRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => PsrRecord.fromSnapshot(s));
 
-  static Future<PsrRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<PsrRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => PsrRecord.fromSnapshot(s));
 
-  PsrRecord._();
-  factory PsrRecord([void Function(PsrRecordBuilder) updates]) = _$PsrRecord;
+  static PsrRecord fromSnapshot(DocumentSnapshot snapshot) => PsrRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static PsrRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      PsrRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'PsrRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createPsrRecordData({
@@ -60,17 +86,15 @@ Map<String, dynamic> createPsrRecordData({
   double? latitude,
   DocumentReference? owner,
 }) {
-  final firestoreData = serializers.toFirestore(
-    PsrRecord.serializer,
-    PsrRecord(
-      (p) => p
-        ..address1 = address1
-        ..address2 = address2
-        ..postcode = postcode
-        ..longitude = longitude
-        ..latitude = latitude
-        ..owner = owner,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'address1': address1,
+      'address2': address2,
+      'postcode': postcode,
+      'longitude': longitude,
+      'latitude': latitude,
+      'owner': owner,
+    }.withoutNulls,
   );
 
   return firestoreData;

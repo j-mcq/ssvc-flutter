@@ -137,6 +137,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'scenarios': ScenariosWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
+
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],
       bottomNavigationBar: Visibility(

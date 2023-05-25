@@ -1,39 +1,47 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'scenario_response_items_record.g.dart';
+class ScenarioResponseItemsRecord extends FirestoreRecord {
+  ScenarioResponseItemsRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class ScenarioResponseItemsRecord
-    implements
-        Built<ScenarioResponseItemsRecord, ScenarioResponseItemsRecordBuilder> {
-  static Serializer<ScenarioResponseItemsRecord> get serializer =>
-      _$scenarioResponseItemsRecordSerializer;
+  // "name" field.
+  String? _name;
+  String get name => _name ?? '';
+  bool hasName() => _name != null;
 
-  String? get name;
+  // "response_item" field.
+  DocumentReference? _responseItem;
+  DocumentReference? get responseItem => _responseItem;
+  bool hasResponseItem() => _responseItem != null;
 
-  @BuiltValueField(wireName: 'response_item')
-  DocumentReference? get responseItem;
+  // "number_required" field.
+  int? _numberRequired;
+  int get numberRequired => _numberRequired ?? 0;
+  bool hasNumberRequired() => _numberRequired != null;
 
-  @BuiltValueField(wireName: 'number_required')
-  int? get numberRequired;
-
-  @BuiltValueField(wireName: 'image_path')
-  String? get imagePath;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "image_path" field.
+  String? _imagePath;
+  String get imagePath => _imagePath ?? '';
+  bool hasImagePath() => _imagePath != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
-  static void _initializeBuilder(ScenarioResponseItemsRecordBuilder builder) =>
-      builder
-        ..name = ''
-        ..numberRequired = 0
-        ..imagePath = '';
+  void _initializeFields() {
+    _name = snapshotData['name'] as String?;
+    _responseItem = snapshotData['response_item'] as DocumentReference?;
+    _numberRequired = snapshotData['number_required'] as int?;
+    _imagePath = snapshotData['image_path'] as String?;
+  }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -46,23 +54,27 @@ abstract class ScenarioResponseItemsRecord
 
   static Stream<ScenarioResponseItemsRecord> getDocument(
           DocumentReference ref) =>
-      ref.snapshots().map(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.snapshots().map((s) => ScenarioResponseItemsRecord.fromSnapshot(s));
 
   static Future<ScenarioResponseItemsRecord> getDocumentOnce(
           DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => ScenarioResponseItemsRecord.fromSnapshot(s));
 
-  ScenarioResponseItemsRecord._();
-  factory ScenarioResponseItemsRecord(
-          [void Function(ScenarioResponseItemsRecordBuilder) updates]) =
-      _$ScenarioResponseItemsRecord;
+  static ScenarioResponseItemsRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      ScenarioResponseItemsRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static ScenarioResponseItemsRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      ScenarioResponseItemsRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'ScenarioResponseItemsRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createScenarioResponseItemsRecordData({
@@ -71,15 +83,13 @@ Map<String, dynamic> createScenarioResponseItemsRecordData({
   int? numberRequired,
   String? imagePath,
 }) {
-  final firestoreData = serializers.toFirestore(
-    ScenarioResponseItemsRecord.serializer,
-    ScenarioResponseItemsRecord(
-      (s) => s
-        ..name = name
-        ..responseItem = responseItem
-        ..numberRequired = numberRequired
-        ..imagePath = imagePath,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'name': name,
+      'response_item': responseItem,
+      'number_required': numberRequired,
+      'image_path': imagePath,
+    }.withoutNulls,
   );
 
   return firestoreData;

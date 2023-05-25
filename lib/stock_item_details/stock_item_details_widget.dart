@@ -512,7 +512,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                             _model.imagepath ==
                                                                 ''
                                                         ? clipContainerResponseItemsRecord
-                                                            .imageLink!
+                                                            .imageLink
                                                         : _model.imagepath!,
                                                     width: 714.8,
                                                     height: 500.0,
@@ -687,7 +687,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               text:
                                                   clipContainerResponseItemsRecord
                                                       .unitPrice
-                                                      ?.toString(),
+                                                      .toString(),
                                             ),
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -762,7 +762,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               text:
                                                   clipContainerResponseItemsRecord
                                                       .totalEnergyStorageCapacity
-                                                      ?.toString(),
+                                                      .toString(),
                                             ),
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -838,7 +838,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               text:
                                                   clipContainerResponseItemsRecord
                                                       .stock
-                                                      ?.toString(),
+                                                      .toString(),
                                             ),
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -1136,7 +1136,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
                                                                               AutoSizeText(
-                                                                                listViewStockDepotMappingRecord.depotName!.maybeHandleOverflow(
+                                                                                listViewStockDepotMappingRecord.depotName.maybeHandleOverflow(
                                                                                   maxChars: 32,
                                                                                   replacement: '…',
                                                                                 ),
@@ -1170,7 +1170,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                                         child:
                                                                             Text(
                                                                           listViewStockDepotMappingRecord
-                                                                              .numberInStock!
+                                                                              .numberInStock
                                                                               .toString(),
                                                                           style:
                                                                               FlutterFlowTheme.of(context).bodyMedium,
