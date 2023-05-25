@@ -1,32 +1,41 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'polygon_points_record.g.dart';
+class PolygonPointsRecord extends FirestoreRecord {
+  PolygonPointsRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class PolygonPointsRecord
-    implements Built<PolygonPointsRecord, PolygonPointsRecordBuilder> {
-  static Serializer<PolygonPointsRecord> get serializer =>
-      _$polygonPointsRecordSerializer;
+  // "latitude" field.
+  double? _latitude;
+  double get latitude => _latitude ?? 0.0;
+  bool hasLatitude() => _latitude != null;
 
-  double? get latitude;
+  // "longitude" field.
+  double? _longitude;
+  double get longitude => _longitude ?? 0.0;
+  bool hasLongitude() => _longitude != null;
 
-  double? get longitude;
-
-  int? get index;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "index" field.
+  int? _index;
+  int get index => _index ?? 0;
+  bool hasIndex() => _index != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
-  static void _initializeBuilder(PolygonPointsRecordBuilder builder) => builder
-    ..latitude = 0.0
-    ..longitude = 0.0
-    ..index = 0;
+  void _initializeFields() {
+    _latitude = castToType<double>(snapshotData['latitude']);
+    _longitude = castToType<double>(snapshotData['longitude']);
+    _index = snapshotData['index'] as int?;
+  }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -36,23 +45,27 @@ abstract class PolygonPointsRecord
   static DocumentReference createDoc(DocumentReference parent) =>
       parent.collection('polygon_points').doc();
 
-  static Stream<PolygonPointsRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<PolygonPointsRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => PolygonPointsRecord.fromSnapshot(s));
 
   static Future<PolygonPointsRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => PolygonPointsRecord.fromSnapshot(s));
 
-  PolygonPointsRecord._();
-  factory PolygonPointsRecord(
-          [void Function(PolygonPointsRecordBuilder) updates]) =
-      _$PolygonPointsRecord;
+  static PolygonPointsRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      PolygonPointsRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static PolygonPointsRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      PolygonPointsRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'PolygonPointsRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createPolygonPointsRecordData({
@@ -60,14 +73,12 @@ Map<String, dynamic> createPolygonPointsRecordData({
   double? longitude,
   int? index,
 }) {
-  final firestoreData = serializers.toFirestore(
-    PolygonPointsRecord.serializer,
-    PolygonPointsRecord(
-      (p) => p
-        ..latitude = latitude
-        ..longitude = longitude
-        ..index = index,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'latitude': latitude,
+      'longitude': longitude,
+      'index': index,
+    }.withoutNulls,
   );
 
   return firestoreData;

@@ -1,57 +1,78 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'scenario_household_responses_record.g.dart';
+class ScenarioHouseholdResponsesRecord extends FirestoreRecord {
+  ScenarioHouseholdResponsesRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class ScenarioHouseholdResponsesRecord
-    implements
-        Built<ScenarioHouseholdResponsesRecord,
-            ScenarioHouseholdResponsesRecordBuilder> {
-  static Serializer<ScenarioHouseholdResponsesRecord> get serializer =>
-      _$scenarioHouseholdResponsesRecordSerializer;
+  // "response_item" field.
+  DocumentReference? _responseItem;
+  DocumentReference? get responseItem => _responseItem;
+  bool hasResponseItem() => _responseItem != null;
 
-  @BuiltValueField(wireName: 'response_item')
-  DocumentReference? get responseItem;
+  // "cost" field.
+  double? _cost;
+  double get cost => _cost ?? 0.0;
+  bool hasCost() => _cost != null;
 
-  double? get cost;
+  // "response_item_name" field.
+  String? _responseItemName;
+  String get responseItemName => _responseItemName ?? '';
+  bool hasResponseItemName() => _responseItemName != null;
 
-  @BuiltValueField(wireName: 'response_item_name')
-  String? get responseItemName;
+  // "scenario" field.
+  DocumentReference? _scenario;
+  DocumentReference? get scenario => _scenario;
+  bool hasScenario() => _scenario != null;
 
-  DocumentReference? get scenario;
+  // "power_required" field.
+  double? _powerRequired;
+  double get powerRequired => _powerRequired ?? 0.0;
+  bool hasPowerRequired() => _powerRequired != null;
 
-  @BuiltValueField(wireName: 'power_required')
-  double? get powerRequired;
+  // "postcode" field.
+  String? _postcode;
+  String get postcode => _postcode ?? '';
+  bool hasPostcode() => _postcode != null;
 
-  String? get postcode;
+  // "psr_categories" field.
+  String? _psrCategories;
+  String get psrCategories => _psrCategories ?? '';
+  bool hasPsrCategories() => _psrCategories != null;
 
-  @BuiltValueField(wireName: 'psr_categories')
-  String? get psrCategories;
+  // "priority" field.
+  double? _priority;
+  double get priority => _priority ?? 0.0;
+  bool hasPriority() => _priority != null;
 
-  double? get priority;
-
-  @BuiltValueField(wireName: 'highest_resilience_score')
-  double? get highestResilienceScore;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "highest_resilience_score" field.
+  double? _highestResilienceScore;
+  double get highestResilienceScore => _highestResilienceScore ?? 0.0;
+  bool hasHighestResilienceScore() => _highestResilienceScore != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
-  static void _initializeBuilder(
-          ScenarioHouseholdResponsesRecordBuilder builder) =>
-      builder
-        ..cost = 0.0
-        ..responseItemName = ''
-        ..powerRequired = 0.0
-        ..postcode = ''
-        ..psrCategories = ''
-        ..priority = 0.0
-        ..highestResilienceScore = 0.0;
+  void _initializeFields() {
+    _responseItem = snapshotData['response_item'] as DocumentReference?;
+    _cost = castToType<double>(snapshotData['cost']);
+    _responseItemName = snapshotData['response_item_name'] as String?;
+    _scenario = snapshotData['scenario'] as DocumentReference?;
+    _powerRequired = castToType<double>(snapshotData['power_required']);
+    _postcode = snapshotData['postcode'] as String?;
+    _psrCategories = snapshotData['psr_categories'] as String?;
+    _priority = castToType<double>(snapshotData['priority']);
+    _highestResilienceScore =
+        castToType<double>(snapshotData['highest_resilience_score']);
+  }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -64,23 +85,30 @@ abstract class ScenarioHouseholdResponsesRecord
 
   static Stream<ScenarioHouseholdResponsesRecord> getDocument(
           DocumentReference ref) =>
-      ref.snapshots().map(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref
+          .snapshots()
+          .map((s) => ScenarioHouseholdResponsesRecord.fromSnapshot(s));
 
   static Future<ScenarioHouseholdResponsesRecord> getDocumentOnce(
           DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => ScenarioHouseholdResponsesRecord.fromSnapshot(s));
 
-  ScenarioHouseholdResponsesRecord._();
-  factory ScenarioHouseholdResponsesRecord(
-          [void Function(ScenarioHouseholdResponsesRecordBuilder) updates]) =
-      _$ScenarioHouseholdResponsesRecord;
+  static ScenarioHouseholdResponsesRecord fromSnapshot(
+          DocumentSnapshot snapshot) =>
+      ScenarioHouseholdResponsesRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static ScenarioHouseholdResponsesRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      ScenarioHouseholdResponsesRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'ScenarioHouseholdResponsesRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
@@ -94,20 +122,18 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
   double? priority,
   double? highestResilienceScore,
 }) {
-  final firestoreData = serializers.toFirestore(
-    ScenarioHouseholdResponsesRecord.serializer,
-    ScenarioHouseholdResponsesRecord(
-      (s) => s
-        ..responseItem = responseItem
-        ..cost = cost
-        ..responseItemName = responseItemName
-        ..scenario = scenario
-        ..powerRequired = powerRequired
-        ..postcode = postcode
-        ..psrCategories = psrCategories
-        ..priority = priority
-        ..highestResilienceScore = highestResilienceScore,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'response_item': responseItem,
+      'cost': cost,
+      'response_item_name': responseItemName,
+      'scenario': scenario,
+      'power_required': powerRequired,
+      'postcode': postcode,
+      'psr_categories': psrCategories,
+      'priority': priority,
+      'highest_resilience_score': highestResilienceScore,
+    }.withoutNulls,
   );
 
   return firestoreData;

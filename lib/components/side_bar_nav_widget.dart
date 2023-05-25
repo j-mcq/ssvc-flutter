@@ -303,7 +303,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  context.goNamedAuth('signIn', mounted);
+                  context.goNamedAuth('signIn', context.mounted);
                 },
                 child: Container(
                   width: double.infinity,

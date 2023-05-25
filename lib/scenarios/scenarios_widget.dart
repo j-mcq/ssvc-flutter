@@ -665,7 +665,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                       children: [
                                                                         AutoSizeText(
                                                                           listViewScenarioRecord
-                                                                              .name!
+                                                                              .name
                                                                               .maybeHandleOverflow(
                                                                             maxChars:
                                                                                 32,
@@ -712,7 +712,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                   containerScenarioResultsRecord !=
                                                                           null
                                                                       ? containerScenarioResultsRecord!
-                                                                          .psrHouseholdsImpacted!
+                                                                          .psrHouseholdsImpacted
                                                                           .toString()
                                                                       : '',
                                                                   style: FlutterFlowTheme.of(
@@ -752,7 +752,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                   containerScenarioResultsRecord !=
                                                                           null
                                                                       ? containerScenarioResultsRecord!
-                                                                          .numberOfResponseItems!
+                                                                          .numberOfResponseItems
                                                                           .toString()
                                                                       : '',
                                                                   style: FlutterFlowTheme.of(
@@ -786,7 +786,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                           child:
                                                                               LinearPercentIndicator(
                                                                             percent: containerScenarioResultsRecord != null
-                                                                                ? containerScenarioResultsRecord!.responseCoverage!
+                                                                                ? containerScenarioResultsRecord!.responseCoverage
                                                                                 : 0.0,
                                                                             lineHeight:
                                                                                 20.0,
@@ -798,7 +798,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                                 FlutterFlowTheme.of(context).lineColor,
                                                                             center:
                                                                                 Text(
-                                                                              containerScenarioResultsRecord != null ? functions.formatPercentage(containerScenarioResultsRecord!.responseCoverage!)! : 'no data',
+                                                                              containerScenarioResultsRecord != null ? functions.formatPercentage(containerScenarioResultsRecord!.responseCoverage)! : 'no data',
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
                                                                                     color: FlutterFlowTheme.of(context).primaryText,
@@ -830,7 +830,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                           null
                                                                       ? formatNumber(
                                                                           containerScenarioResultsRecord!
-                                                                              .totalCost!,
+                                                                              .totalCost,
                                                                           formatType:
                                                                               FormatType.decimal,
                                                                           decimalType:

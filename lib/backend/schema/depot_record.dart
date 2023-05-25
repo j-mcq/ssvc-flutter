@@ -1,52 +1,60 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'depot_record.g.dart';
+class DepotRecord extends FirestoreRecord {
+  DepotRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class DepotRecord implements Built<DepotRecord, DepotRecordBuilder> {
-  static Serializer<DepotRecord> get serializer => _$depotRecordSerializer;
+  // "name" field.
+  String? _name;
+  String get name => _name ?? '';
+  bool hasName() => _name != null;
 
-  String? get name;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(DepotRecordBuilder builder) =>
-      builder..name = '';
+  void _initializeFields() {
+    _name = snapshotData['name'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('depot');
 
-  static Stream<DepotRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<DepotRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => DepotRecord.fromSnapshot(s));
 
-  static Future<DepotRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<DepotRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => DepotRecord.fromSnapshot(s));
 
-  DepotRecord._();
-  factory DepotRecord([void Function(DepotRecordBuilder) updates]) =
-      _$DepotRecord;
+  static DepotRecord fromSnapshot(DocumentSnapshot snapshot) => DepotRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static DepotRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      DepotRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'DepotRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createDepotRecordData({
   String? name,
 }) {
-  final firestoreData = serializers.toFirestore(
-    DepotRecord.serializer,
-    DepotRecord(
-      (d) => d..name = name,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'name': name,
+    }.withoutNulls,
   );
 
   return firestoreData;

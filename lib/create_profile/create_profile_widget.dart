@@ -64,6 +64,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
             )
           : null,
       body: SafeArea(
+        top: true,
         child: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Column(
