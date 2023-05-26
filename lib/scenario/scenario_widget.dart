@@ -775,415 +775,82 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 32.0, 16.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 4.0,
-                                color: Color(0x33000000),
-                                offset: Offset(0.0, 2.0),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(16.0),
+                        child: StreamBuilder<List<ScenarioResultsRecord>>(
+                          stream: queryScenarioResultsRecord(
+                            parent: widget.scenarioReference,
+                            singleRecord: true,
                           ),
-                          alignment: AlignmentDirectional(0.0, -1.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 16.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 1.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .lineColor,
-                                            offset: Offset(0.0, 1.0),
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 16.0, 16.0, 16.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Scenario Results',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .headlineSmall,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 4.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    'Outage scenario results',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context).primary,
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        4.0, 0.0, 4.0, 24.0),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          1.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(0.0),
-                                      ),
-                                      child: Padding(
+                                ),
+                              );
+                            }
+                            List<ScenarioResultsRecord>
+                                scenarioResultsContainerScenarioResultsRecordList =
+                                snapshot.data!;
+                            final scenarioResultsContainerScenarioResultsRecord =
+                                scenarioResultsContainerScenarioResultsRecordList
+                                        .isNotEmpty
+                                    ? scenarioResultsContainerScenarioResultsRecordList
+                                        .first
+                                    : null;
+                            return Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 4.0,
+                                    color: Color(0x33000000),
+                                    offset: Offset(0.0, 2.0),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                              alignment: AlignmentDirectional(0.0, -1.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 16.0),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 16.0, 0.0, 12.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 12.0, 12.0, 0.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                    tablet: false,
-                                                  ))
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        'PSR Housholds Impacted',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleMedium,
-                                                      ),
-                                                    ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                    tablet: false,
-                                                  ))
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        'Number of Response Items Required',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleMedium,
-                                                      ),
-                                                    ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                    tablet: false,
-                                                  ))
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          'Scenario Coverage',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .titleMedium,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                    tablet: false,
-                                                  ))
-                                                    Expanded(
-                                                      child: Text(
-                                                        'Total Cost of Response Equipment',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleMedium,
-                                                      ),
-                                                    ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 16.0, 0.0, 0.0),
-                                              child: ListView(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                scrollDirection: Axis.vertical,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 2.0),
-                                                    child: StreamBuilder<
-                                                        List<
-                                                            ScenarioResultsRecord>>(
-                                                      stream:
-                                                          queryScenarioResultsRecord(
-                                                        parent: widget
-                                                            .scenarioReference,
-                                                        singleRecord: true,
-                                                      ),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50.0,
-                                                              height: 50.0,
-                                                              child:
-                                                                  CircularProgressIndicator(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        List<ScenarioResultsRecord>
-                                                            containerScenarioResultsRecordList =
-                                                            snapshot.data!;
-                                                        final containerScenarioResultsRecord =
-                                                            containerScenarioResultsRecordList
-                                                                    .isNotEmpty
-                                                                ? containerScenarioResultsRecordList
-                                                                    .first
-                                                                : null;
-                                                        return Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                blurRadius: 0.0,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .lineColor,
-                                                                offset: Offset(
-                                                                    0.0, 1.0),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        12.0,
-                                                                        12.0,
-                                                                        12.0,
-                                                                        12.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                if (responsiveVisibility(
-                                                                  context:
-                                                                      context,
-                                                                  phone: false,
-                                                                  tablet: false,
-                                                                ))
-                                                                  Expanded(
-                                                                    flex: 1,
-                                                                    child: Text(
-                                                                      containerScenarioResultsRecord !=
-                                                                              null
-                                                                          ? containerScenarioResultsRecord!
-                                                                              .psrHouseholdsImpacted
-                                                                              .toString()
-                                                                          : '',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium,
-                                                                    ),
-                                                                  ),
-                                                                if (responsiveVisibility(
-                                                                  context:
-                                                                      context,
-                                                                  phone: false,
-                                                                ))
-                                                                  Expanded(
-                                                                    flex: 1,
-                                                                    child: Text(
-                                                                      containerScenarioResultsRecord !=
-                                                                              null
-                                                                          ? containerScenarioResultsRecord!
-                                                                              .numberOfResponseItems
-                                                                              .toString()
-                                                                          : '',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium,
-                                                                    ),
-                                                                  ),
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          if (containerScenarioResultsRecord !=
-                                                                              null)
-                                                                            Expanded(
-                                                                              child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 20.0, 0.0),
-                                                                                child: LinearPercentIndicator(
-                                                                                  percent: containerScenarioResultsRecord != null ? containerScenarioResultsRecord!.responseCoverage : 0.0,
-                                                                                  lineHeight: 20.0,
-                                                                                  animation: true,
-                                                                                  progressColor: FlutterFlowTheme.of(context).primary,
-                                                                                  backgroundColor: FlutterFlowTheme.of(context).lineColor,
-                                                                                  center: Text(
-                                                                                    containerScenarioResultsRecord != null ? functions.formatPercentage(containerScenarioResultsRecord!.responseCoverage)! : 'no data',
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          fontFamily: 'Outfit',
-                                                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                                                          fontSize: 14.0,
-                                                                                          fontWeight: FontWeight.normal,
-                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                        ),
-                                                                                  ),
-                                                                                  barRadius: Radius.circular(12.0),
-                                                                                  padding: EdgeInsets.zero,
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                if (responsiveVisibility(
-                                                                  context:
-                                                                      context,
-                                                                  phone: false,
-                                                                ))
-                                                                  Expanded(
-                                                                    flex: 1,
-                                                                    child: Text(
-                                                                      containerScenarioResultsRecord !=
-                                                                              null
-                                                                          ? formatNumber(
-                                                                              containerScenarioResultsRecord!.totalCost,
-                                                                              formatType: FormatType.decimal,
-                                                                              decimalType: DecimalType.automatic,
-                                                                              currency: '£',
-                                                                            )
-                                                                          : '',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium,
-                                                                    ),
-                                                                  ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 1.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
+                                            0.0, 1.0, 0.0, 0.0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
-                                                .lineColor,
-                                            offset: Offset(0.0, 0.0),
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
+                                                .secondaryBackground,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                blurRadius: 0.0,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .lineColor,
+                                                offset: Offset(0.0, 1.0),
+                                              )
+                                            ],
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0.0),
+                                              bottomRight: Radius.circular(0.0),
+                                              topLeft: Radius.circular(16.0),
+                                              topRight: Radius.circular(16.0),
+                                            ),
+                                          ),
+                                          child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 16.0, 16.0, 16.0),
@@ -1202,7 +869,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Prioritiesd PSR Responses',
+                                                      'Scenario Results',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -1217,7 +884,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   0.0,
                                                                   0.0),
                                                       child: Text(
-                                                        'Summary of the types of PSR customers impacted by the scenario and the response items required.',
+                                                        'Outage scenario results',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -1226,356 +893,1215 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                     ),
                                                   ],
                                                 ),
-                                                FFButtonWidget(
-                                                  onPressed: () {
-                                                    print('Button pressed ...');
-                                                  },
-                                                  text: 'Export List',
-                                                  options: FFButtonOptions(
-                                                    width: 150.0,
-                                                    height: 40.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50.0),
-                                                  ),
-                                                ),
                                               ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12.0, 12.0, 12.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          8.0, 0.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    'Postcode',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall,
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          8.0, 0.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    'PSR Categories',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall,
-                                                  ),
-                                                ),
-                                              ),
-                                              if (responsiveVisibility(
-                                                context: context,
-                                                phone: false,
-                                                tablet: false,
-                                              ))
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    'Total Power Capacity Required (Wh)',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall,
-                                                  ),
-                                                ),
-                                              if (responsiveVisibility(
-                                                context: context,
-                                                phone: false,
-                                                tablet: false,
-                                              ))
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    'Response Item Required',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall,
-                                                  ),
-                                                ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: Text(
-                                                  'Criticality Score',
-                                                  textAlign: TextAlign.start,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodySmall,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 16.0, 16.0, 0.0),
-                                          child: StreamBuilder<
-                                              List<
-                                                  ScenarioHouseholdResponsesRecord>>(
-                                            stream:
-                                                queryScenarioHouseholdResponsesRecord(
-                                              parent: widget.scenarioReference,
-                                              queryBuilder:
-                                                  (scenarioHouseholdResponsesRecord) =>
-                                                      scenarioHouseholdResponsesRecord
-                                                          .orderBy(
-                                                              'highest_resilience_score',
-                                                              descending: true),
+                                      ),
+                                      if (scenarioResultsContainerScenarioResultsRecord !=
+                                          null)
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 4.0,
+                                                  color: Color(0x33000000),
+                                                  offset: Offset(0.0, 2.0),
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(0.0),
                                             ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ScenarioHouseholdResponsesRecord>
-                                                  listViewScenarioHouseholdResponsesRecordList =
-                                                  snapshot.data!;
-                                              return ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                scrollDirection: Axis.vertical,
-                                                itemCount:
-                                                    listViewScenarioHouseholdResponsesRecordList
-                                                        .length,
-                                                itemBuilder:
-                                                    (context, listViewIndex) {
-                                                  final listViewScenarioHouseholdResponsesRecord =
-                                                      listViewScenarioHouseholdResponsesRecordList[
-                                                          listViewIndex];
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 2.0),
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            blurRadius: 0.0,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .lineColor,
-                                                            offset: Offset(
-                                                                0.0, 1.0),
-                                                          )
-                                                        ],
+                                            alignment:
+                                                AlignmentDirectional(0.0, -1.0),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 0.0, 16.0),
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  4.0,
+                                                                  0.0,
+                                                                  4.0,
+                                                                  24.0),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            1.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      0.0),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      16.0,
+                                                                      0.0,
+                                                                      12.0),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12.0,
+                                                                        12.0,
+                                                                        12.0,
+                                                                        0.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    if (responsiveVisibility(
+                                                                      context:
+                                                                          context,
+                                                                      phone:
+                                                                          false,
+                                                                      tablet:
+                                                                          false,
+                                                                    ))
+                                                                      Expanded(
+                                                                        flex: 1,
+                                                                        child:
+                                                                            Text(
+                                                                          'PSR Housholds Impacted',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).titleMedium,
+                                                                        ),
+                                                                      ),
+                                                                    if (responsiveVisibility(
+                                                                      context:
+                                                                          context,
+                                                                      phone:
+                                                                          false,
+                                                                      tablet:
+                                                                          false,
+                                                                    ))
+                                                                      Expanded(
+                                                                        flex: 1,
+                                                                        child:
+                                                                            Text(
+                                                                          'Number of Response Items Required',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).titleMedium,
+                                                                        ),
+                                                                      ),
+                                                                    if (responsiveVisibility(
+                                                                      context:
+                                                                          context,
+                                                                      phone:
+                                                                          false,
+                                                                      tablet:
+                                                                          false,
+                                                                    ))
+                                                                      Expanded(
+                                                                        flex: 1,
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              10.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Scenario Coverage',
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).titleMedium,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    if (responsiveVisibility(
+                                                                      context:
+                                                                          context,
+                                                                      phone:
+                                                                          false,
+                                                                      tablet:
+                                                                          false,
+                                                                    ))
+                                                                      Expanded(
+                                                                        child:
+                                                                            Text(
+                                                                          'Total Cost of Response Equipment',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).titleMedium,
+                                                                        ),
+                                                                      ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            16.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child: ListView(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  scrollDirection:
+                                                                      Axis.vertical,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          2.0),
+                                                                      child: StreamBuilder<
+                                                                          List<
+                                                                              ScenarioResultsRecord>>(
+                                                                        stream:
+                                                                            queryScenarioResultsRecord(
+                                                                          parent:
+                                                                              widget.scenarioReference,
+                                                                          singleRecord:
+                                                                              true,
+                                                                        ),
+                                                                        builder:
+                                                                            (context,
+                                                                                snapshot) {
+                                                                          // Customize what your widget looks like when it's loading.
+                                                                          if (!snapshot
+                                                                              .hasData) {
+                                                                            return Center(
+                                                                              child: SizedBox(
+                                                                                width: 50.0,
+                                                                                height: 50.0,
+                                                                                child: CircularProgressIndicator(
+                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                          List<ScenarioResultsRecord>
+                                                                              containerScenarioResultsRecordList =
+                                                                              snapshot.data!;
+                                                                          final containerScenarioResultsRecord = containerScenarioResultsRecordList.isNotEmpty
+                                                                              ? containerScenarioResultsRecordList.first
+                                                                              : null;
+                                                                          return Container(
+                                                                            width:
+                                                                                double.infinity,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                              boxShadow: [
+                                                                                BoxShadow(
+                                                                                  blurRadius: 0.0,
+                                                                                  color: FlutterFlowTheme.of(context).lineColor,
+                                                                                  offset: Offset(0.0, 1.0),
+                                                                                )
+                                                                              ],
+                                                                            ),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  if (responsiveVisibility(
+                                                                                    context: context,
+                                                                                    phone: false,
+                                                                                    tablet: false,
+                                                                                  ))
+                                                                                    Expanded(
+                                                                                      flex: 1,
+                                                                                      child: Text(
+                                                                                        containerScenarioResultsRecord != null ? containerScenarioResultsRecord!.psrHouseholdsImpacted.toString() : '',
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                      ),
+                                                                                    ),
+                                                                                  if (responsiveVisibility(
+                                                                                    context: context,
+                                                                                    phone: false,
+                                                                                  ))
+                                                                                    Expanded(
+                                                                                      flex: 1,
+                                                                                      child: Text(
+                                                                                        containerScenarioResultsRecord != null ? containerScenarioResultsRecord!.numberOfResponseItems.toString() : '',
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                      ),
+                                                                                    ),
+                                                                                  Expanded(
+                                                                                    flex: 1,
+                                                                                    child: Column(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            if (containerScenarioResultsRecord != null)
+                                                                                              Expanded(
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 20.0, 0.0),
+                                                                                                  child: LinearPercentIndicator(
+                                                                                                    percent: containerScenarioResultsRecord != null ? containerScenarioResultsRecord!.responseCoverage : 0.0,
+                                                                                                    lineHeight: 20.0,
+                                                                                                    animation: true,
+                                                                                                    progressColor: FlutterFlowTheme.of(context).primary,
+                                                                                                    backgroundColor: FlutterFlowTheme.of(context).lineColor,
+                                                                                                    center: Text(
+                                                                                                      containerScenarioResultsRecord != null ? functions.formatPercentage(containerScenarioResultsRecord!.responseCoverage)! : 'no data',
+                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                            fontFamily: 'Outfit',
+                                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                            fontSize: 14.0,
+                                                                                                            fontWeight: FontWeight.normal,
+                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                          ),
+                                                                                                    ),
+                                                                                                    barRadius: Radius.circular(12.0),
+                                                                                                    padding: EdgeInsets.zero,
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                  if (responsiveVisibility(
+                                                                                    context: context,
+                                                                                    phone: false,
+                                                                                  ))
+                                                                                    Expanded(
+                                                                                      flex: 1,
+                                                                                      child: Text(
+                                                                                        containerScenarioResultsRecord != null
+                                                                                            ? formatNumber(
+                                                                                                containerScenarioResultsRecord!.totalCost,
+                                                                                                formatType: FormatType.decimal,
+                                                                                                decimalType: DecimalType.automatic,
+                                                                                                currency: '£',
+                                                                                              )
+                                                                                            : '',
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                      ),
+                                                                                    ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
                                                       ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    12.0,
-                                                                    12.0,
-                                                                    12.0),
-                                                        child: Row(
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  1.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              blurRadius: 0.0,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .lineColor,
+                                                              offset: Offset(
+                                                                  0.0, 0.0),
+                                                            )
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                          ),
+                                                        ),
+                                                        child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            Expanded(
-                                                              flex: 1,
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16.0,
+                                                                          16.0,
+                                                                          16.0,
+                                                                          16.0),
                                                               child: Row(
                                                                 mainAxisSize:
                                                                     MainAxisSize
                                                                         .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
                                                                 children: [
                                                                   Column(
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                      AutoSizeText(
-                                                                        listViewScenarioHouseholdResponsesRecord
-                                                                            .postcode
-                                                                            .maybeHandleOverflow(
-                                                                          maxChars:
-                                                                              32,
-                                                                          replacement:
-                                                                              '…',
-                                                                        ),
+                                                                      Text(
+                                                                        'Prioritiesd PSR Responses',
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .titleMedium,
+                                                                            .headlineSmall,
                                                                       ),
-                                                                      if (responsiveVisibility(
-                                                                        context:
-                                                                            context,
-                                                                        tabletLandscape:
-                                                                            false,
-                                                                        desktop:
-                                                                            false,
-                                                                      ))
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0.0,
-                                                                              2.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              Text(
-                                                                            'user@domainname.com',
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).bodySmall,
-                                                                          ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            4.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          'Summary of the types of PSR customers impacted by the scenario and the response items required.',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodySmall,
                                                                         ),
+                                                                      ),
                                                                     ],
+                                                                  ),
+                                                                  FFButtonWidget(
+                                                                    onPressed:
+                                                                        () {
+                                                                      print(
+                                                                          'Button pressed ...');
+                                                                    },
+                                                                    text:
+                                                                        'Export List',
+                                                                    options:
+                                                                        FFButtonOptions(
+                                                                      width:
+                                                                          150.0,
+                                                                      height:
+                                                                          40.0,
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                      textStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .titleSmall
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                            color:
+                                                                                Colors.white,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                          ),
+                                                                      borderSide:
+                                                                          BorderSide(
+                                                                        color: Colors
+                                                                            .transparent,
+                                                                        width:
+                                                                            1.0,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              50.0),
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ),
                                                             ),
-                                                            if (responsiveVisibility(
-                                                              context: context,
-                                                              phone: false,
-                                                              tablet: false,
-                                                            ))
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Text(
-                                                                  listViewScenarioHouseholdResponsesRecord
-                                                                      .psrCategories,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
-                                                                ),
-                                                              ),
-                                                            if (responsiveVisibility(
-                                                              context: context,
-                                                              phone: false,
-                                                              tablet: false,
-                                                            ))
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Text(
-                                                                  formatNumber(
-                                                                    listViewScenarioHouseholdResponsesRecord
-                                                                        .powerRequired,
-                                                                    formatType:
-                                                                        FormatType
-                                                                            .decimal,
-                                                                    decimalType:
-                                                                        DecimalType
-                                                                            .automatic,
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                      ),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12.0,
+                                                                        12.0,
+                                                                        12.0,
+                                                                        0.0),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Expanded(
+                                                                  flex: 1,
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            8.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Text(
+                                                                      'Postcode',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodySmall,
+                                                                    ),
                                                                   ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
+                                                                ),
+                                                                Expanded(
+                                                                  flex: 1,
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            8.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Text(
+                                                                      'PSR Categories',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodySmall,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                if (responsiveVisibility(
+                                                                  context:
+                                                                      context,
+                                                                  phone: false,
+                                                                  tablet: false,
+                                                                ))
+                                                                  Expanded(
+                                                                    flex: 1,
+                                                                    child: Text(
+                                                                      'Total Power Capacity Required (Wh)',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodySmall,
+                                                                    ),
+                                                                  ),
+                                                                if (responsiveVisibility(
+                                                                  context:
+                                                                      context,
+                                                                  phone: false,
+                                                                  tablet: false,
+                                                                ))
+                                                                  Expanded(
+                                                                    flex: 1,
+                                                                    child: Text(
+                                                                      'Response Item Required',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodySmall,
+                                                                    ),
+                                                                  ),
+                                                                Expanded(
+                                                                  flex: 1,
+                                                                  child: Text(
+                                                                    'Criticality Score',
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .start,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodySmall,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        16.0,
+                                                                        16.0,
+                                                                        0.0),
+                                                            child: StreamBuilder<
+                                                                List<
+                                                                    ScenarioHouseholdResponsesRecord>>(
+                                                              stream:
+                                                                  queryScenarioHouseholdResponsesRecord(
+                                                                parent: widget
+                                                                    .scenarioReference,
+                                                                queryBuilder: (scenarioHouseholdResponsesRecord) =>
+                                                                    scenarioHouseholdResponsesRecord.orderBy(
+                                                                        'highest_resilience_score',
+                                                                        descending:
+                                                                            true),
+                                                              ),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
+                                                                    child:
+                                                                        SizedBox(
+                                                                      width:
+                                                                          50.0,
+                                                                      height:
+                                                                          50.0,
+                                                                      child:
+                                                                          CircularProgressIndicator(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                                List<ScenarioHouseholdResponsesRecord>
+                                                                    listViewScenarioHouseholdResponsesRecordList =
+                                                                    snapshot
+                                                                        .data!;
+                                                                return ListView
+                                                                    .builder(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  scrollDirection:
+                                                                      Axis.vertical,
+                                                                  itemCount:
+                                                                      listViewScenarioHouseholdResponsesRecordList
+                                                                          .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          listViewIndex) {
+                                                                    final listViewScenarioHouseholdResponsesRecord =
+                                                                        listViewScenarioHouseholdResponsesRecordList[
+                                                                            listViewIndex];
+                                                                    return Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          2.0),
+                                                                      child:
+                                                                          Container(
+                                                                        width: double
+                                                                            .infinity,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryBackground,
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              blurRadius: 0.0,
+                                                                              color: FlutterFlowTheme.of(context).lineColor,
+                                                                              offset: Offset(0.0, 1.0),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              12.0,
+                                                                              12.0,
+                                                                              12.0,
+                                                                              12.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Expanded(
+                                                                                flex: 1,
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  children: [
+                                                                                    Column(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        AutoSizeText(
+                                                                                          listViewScenarioHouseholdResponsesRecord.postcode.maybeHandleOverflow(
+                                                                                            maxChars: 32,
+                                                                                            replacement: '…',
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).titleMedium,
+                                                                                        ),
+                                                                                        if (responsiveVisibility(
+                                                                                          context: context,
+                                                                                          tabletLandscape: false,
+                                                                                          desktop: false,
+                                                                                        ))
+                                                                                          Padding(
+                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                                                                                            child: Text(
+                                                                                              'user@domainname.com',
+                                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                            ),
+                                                                                          ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                              if (responsiveVisibility(
+                                                                                context: context,
+                                                                                phone: false,
+                                                                                tablet: false,
+                                                                              ))
+                                                                                Expanded(
+                                                                                  flex: 1,
+                                                                                  child: Text(
+                                                                                    listViewScenarioHouseholdResponsesRecord.psrCategories,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                  ),
+                                                                                ),
+                                                                              if (responsiveVisibility(
+                                                                                context: context,
+                                                                                phone: false,
+                                                                                tablet: false,
+                                                                              ))
+                                                                                Expanded(
+                                                                                  flex: 1,
+                                                                                  child: Text(
+                                                                                    formatNumber(
+                                                                                      listViewScenarioHouseholdResponsesRecord.powerRequired,
+                                                                                      formatType: FormatType.decimal,
+                                                                                      decimalType: DecimalType.automatic,
+                                                                                    ),
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                  ),
+                                                                                ),
+                                                                              if (responsiveVisibility(
+                                                                                context: context,
+                                                                                phone: false,
+                                                                                tablet: false,
+                                                                              ))
+                                                                                Expanded(
+                                                                                  flex: 1,
+                                                                                  child: Text(
+                                                                                    listViewScenarioHouseholdResponsesRecord.responseItemName,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                  ),
+                                                                                ),
+                                                                              Expanded(
+                                                                                child: Column(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                                                                  children: [
+                                                                                    Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                                                      children: [
+                                                                                        Expanded(
+                                                                                          flex: 1,
+                                                                                          child: Text(
+                                                                                            listViewScenarioHouseholdResponsesRecord.highestResilienceScore.toString(),
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  1.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              blurRadius: 0.0,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .lineColor,
+                                                              offset: Offset(
+                                                                  0.0, 0.0),
+                                                            )
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                          ),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      32.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        16.0,
+                                                                        16.0,
+                                                                        16.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                          'Response Items Required',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).headlineSmall,
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              4.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Summary of the types of PSR customers impacted by the scenario',
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).bodySmall,
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ),
-                                                            if (responsiveVisibility(
-                                                              context: context,
-                                                              phone: false,
-                                                              tablet: false,
-                                                            ))
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Text(
-                                                                  listViewScenarioHouseholdResponsesRecord
-                                                                      .responseItemName,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
-                                                                ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  1.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              blurRadius: 0.0,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .lineColor,
+                                                              offset: Offset(
+                                                                  0.0, 0.0),
+                                                            )
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                          ),
+                                                        ),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16.0,
+                                                                          1.0,
+                                                                          16.0,
+                                                                          0.0),
+                                                              child: StreamBuilder<
+                                                                  List<
+                                                                      ResponseItemsRecord>>(
+                                                                stream:
+                                                                    queryResponseItemsRecord(),
+                                                                builder: (context,
+                                                                    snapshot) {
+                                                                  // Customize what your widget looks like when it's loading.
+                                                                  if (!snapshot
+                                                                      .hasData) {
+                                                                    return Center(
+                                                                      child:
+                                                                          SizedBox(
+                                                                        width:
+                                                                            50.0,
+                                                                        height:
+                                                                            50.0,
+                                                                        child:
+                                                                            CircularProgressIndicator(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                  List<ResponseItemsRecord>
+                                                                      containerResponseItemsRecordList =
+                                                                      snapshot
+                                                                          .data!;
+                                                                  return Container(
+                                                                    width: double
+                                                                        .infinity,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryBackground,
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          blurRadius:
+                                                                              0.0,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).lineColor,
+                                                                          offset: Offset(
+                                                                              0.0,
+                                                                              0.0),
+                                                                        )
+                                                                      ],
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .only(
+                                                                        bottomLeft:
+                                                                            Radius.circular(0.0),
+                                                                        bottomRight:
+                                                                            Radius.circular(0.0),
+                                                                        topLeft:
+                                                                            Radius.circular(16.0),
+                                                                        topRight:
+                                                                            Radius.circular(16.0),
+                                                                      ),
+                                                                    ),
+                                                                    child: FutureBuilder<
+                                                                        List<
+                                                                            ScenarioResponseItemsRecord>>(
+                                                                      future:
+                                                                          queryScenarioResponseItemsRecordOnce(
+                                                                        parent:
+                                                                            widget.scenarioReference,
+                                                                      ),
+                                                                      builder:
+                                                                          (context,
+                                                                              snapshot) {
+                                                                        // Customize what your widget looks like when it's loading.
+                                                                        if (!snapshot
+                                                                            .hasData) {
+                                                                          return Center(
+                                                                            child:
+                                                                                SizedBox(
+                                                                              width: 50.0,
+                                                                              height: 50.0,
+                                                                              child: CircularProgressIndicator(
+                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        }
+                                                                        List<ScenarioResponseItemsRecord>
+                                                                            chartScenarioResponseItemsRecordList =
+                                                                            snapshot.data!;
+                                                                        return Container(
+                                                                          width:
+                                                                              300.0,
+                                                                          height:
+                                                                              300.0,
+                                                                          child:
+                                                                              Stack(
+                                                                            children: [
+                                                                              FlutterFlowBarChart(
+                                                                                barData: [
+                                                                                  FFBarChartData(
+                                                                                    yData: chartScenarioResponseItemsRecordList.map((d) => d.numberRequired).toList(),
+                                                                                    color: FlutterFlowTheme.of(context).tertiary,
+                                                                                  ),
+                                                                                  FFBarChartData(
+                                                                                    yData: containerResponseItemsRecordList.map((d) => d.stock).toList(),
+                                                                                    color: Color(0xFF9418A8),
+                                                                                  )
+                                                                                ],
+                                                                                xLabels: chartScenarioResponseItemsRecordList.map((d) => d.name).toList(),
+                                                                                barWidth: 55.0,
+                                                                                barBorderRadius: BorderRadius.circular(0.0),
+                                                                                barSpace: 0.0,
+                                                                                groupSpace: 5.0,
+                                                                                alignment: BarChartAlignment.spaceEvenly,
+                                                                                chartStylingInfo: ChartStylingInfo(
+                                                                                  enableTooltip: true,
+                                                                                  backgroundColor: Colors.white,
+                                                                                  showGrid: true,
+                                                                                  borderColor: FlutterFlowTheme.of(context).lineColor,
+                                                                                  borderWidth: 1.0,
+                                                                                ),
+                                                                                axisBounds: AxisBounds(),
+                                                                                xAxisLabelInfo: AxisLabelInfo(
+                                                                                  title: 'Response Item',
+                                                                                  titleTextStyle: TextStyle(
+                                                                                    fontSize: 14.0,
+                                                                                  ),
+                                                                                  showLabels: true,
+                                                                                  labelInterval: 10.0,
+                                                                                ),
+                                                                                yAxisLabelInfo: AxisLabelInfo(
+                                                                                  title: 'Number Required',
+                                                                                  titleTextStyle: TextStyle(
+                                                                                    fontSize: 14.0,
+                                                                                  ),
+                                                                                  showLabels: true,
+                                                                                  labelInterval: 10.0,
+                                                                                ),
+                                                                              ),
+                                                                              Align(
+                                                                                alignment: AlignmentDirectional(-0.9, -0.9),
+                                                                                child: FlutterFlowChartLegendWidget(
+                                                                                  entries: [
+                                                                                    LegendEntry(FlutterFlowTheme.of(context).tertiary, 'Required for Scenario'),
+                                                                                    LegendEntry(Color(0xFF9418A8), 'In Stock '),
+                                                                                  ],
+                                                                                  width: 200.0,
+                                                                                  height: 50.0,
+                                                                                  textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                  textPadding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                                                                  indicatorSize: 10.0,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                  );
+                                                                },
                                                               ),
-                                                            Expanded(
-                                                              child: Column(
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16.0,
+                                                                  1.0,
+                                                                  16.0,
+                                                                  0.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              blurRadius: 0.0,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .lineColor,
+                                                              offset: Offset(
+                                                                  0.0, 0.0),
+                                                            )
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                          ),
+                                                        ),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          16.0,
+                                                                          16.0,
+                                                                          16.0),
+                                                              child: Row(
                                                                 mainAxisSize:
                                                                     MainAxisSize
                                                                         .max,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .end,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
                                                                 children: [
-                                                                  Row(
+                                                                  Column(
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                      Expanded(
-                                                                        flex: 1,
+                                                                      Text(
+                                                                        'Response Items List',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .headlineSmall,
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            4.0,
+                                                                            0.0,
+                                                                            0.0),
                                                                         child:
                                                                             Text(
-                                                                          listViewScenarioHouseholdResponsesRecord
-                                                                              .highestResilienceScore
-                                                                              .toString(),
+                                                                          'Summary of the equipment required to respond to this scenario and the current stock levels.',
                                                                           style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                              FlutterFlowTheme.of(context).bodySmall,
                                                                         ),
                                                                       ),
                                                                     ],
@@ -1587,713 +2113,326 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         ),
                                                       ),
                                                     ),
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 1.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .lineColor,
-                                            offset: Offset(0.0, 0.0),
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 32.0, 0.0, 0.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      16.0, 16.0, 16.0, 16.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'Response Items Required',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineSmall,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    4.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          'Summary of the types of PSR customers impacted by the scenario',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodySmall,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 1.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .lineColor,
-                                            offset: Offset(0.0, 0.0),
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16.0, 1.0, 16.0, 0.0),
-                                            child: StreamBuilder<
-                                                List<ResponseItemsRecord>>(
-                                              stream:
-                                                  queryResponseItemsRecord(),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<ResponseItemsRecord>
-                                                    containerResponseItemsRecordList =
-                                                    snapshot.data!;
-                                                return Container(
-                                                  width: double.infinity,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        blurRadius: 0.0,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .lineColor,
-                                                        offset:
-                                                            Offset(0.0, 0.0),
-                                                      )
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(0.0),
-                                                      bottomRight:
-                                                          Radius.circular(0.0),
-                                                      topLeft:
-                                                          Radius.circular(16.0),
-                                                      topRight:
-                                                          Radius.circular(16.0),
-                                                    ),
-                                                  ),
-                                                  child: Visibility(
-                                                    visible:
-                                                        containerResponseItemsRecordList
-                                                                .length >
-                                                            0,
-                                                    child: FutureBuilder<
-                                                        List<
-                                                            ScenarioResponseItemsRecord>>(
-                                                      future:
-                                                          queryScenarioResponseItemsRecordOnce(
-                                                        parent: widget
-                                                            .scenarioReference,
-                                                      ),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50.0,
-                                                              height: 50.0,
-                                                              child:
-                                                                  CircularProgressIndicator(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        List<ScenarioResponseItemsRecord>
-                                                            chartScenarioResponseItemsRecordList =
-                                                            snapshot.data!;
-                                                        return Container(
-                                                          width: 300.0,
-                                                          height: 300.0,
-                                                          child: Stack(
-                                                            children: [
-                                                              FlutterFlowBarChart(
-                                                                barData: [
-                                                                  FFBarChartData(
-                                                                    yData: chartScenarioResponseItemsRecordList
-                                                                        .map((d) =>
-                                                                            d.numberRequired)
-                                                                        .toList(),
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .tertiary,
-                                                                  ),
-                                                                  FFBarChartData(
-                                                                    yData: containerResponseItemsRecordList
-                                                                        .map((d) =>
-                                                                            d.stock)
-                                                                        .toList(),
-                                                                    color: Color(
-                                                                        0xFF9418A8),
-                                                                  )
-                                                                ],
-                                                                xLabels: chartScenarioResponseItemsRecordList
-                                                                    .map((d) =>
-                                                                        d.name)
-                                                                    .toList(),
-                                                                barWidth: 55.0,
-                                                                barBorderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            0.0),
-                                                                barSpace: 0.0,
-                                                                groupSpace: 5.0,
-                                                                alignment:
-                                                                    BarChartAlignment
-                                                                        .spaceEvenly,
-                                                                chartStylingInfo:
-                                                                    ChartStylingInfo(
-                                                                  enableTooltip:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .white,
-                                                                  showGrid:
-                                                                      true,
-                                                                  borderColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .lineColor,
-                                                                  borderWidth:
-                                                                      1.0,
-                                                                ),
-                                                                axisBounds:
-                                                                    AxisBounds(),
-                                                                xAxisLabelInfo:
-                                                                    AxisLabelInfo(
-                                                                  title:
-                                                                      'Response Item',
-                                                                  titleTextStyle:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        14.0,
-                                                                  ),
-                                                                  showLabels:
-                                                                      true,
-                                                                  labelInterval:
-                                                                      10.0,
-                                                                ),
-                                                                yAxisLabelInfo:
-                                                                    AxisLabelInfo(
-                                                                  title:
-                                                                      'Number Required',
-                                                                  titleTextStyle:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        14.0,
-                                                                  ),
-                                                                  showLabels:
-                                                                      true,
-                                                                  labelInterval:
-                                                                      10.0,
-                                                                ),
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        -0.9,
-                                                                        -0.9),
-                                                                child:
-                                                                    FlutterFlowChartLegendWidget(
-                                                                  entries: [
-                                                                    LegendEntry(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .tertiary,
-                                                                        'Required for Scenario'),
-                                                                    LegendEntry(
-                                                                        Color(
-                                                                            0xFF9418A8),
-                                                                        'In Stock '),
-                                                                  ],
-                                                                  width: 200.0,
-                                                                  height: 50.0,
-                                                                  textStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
-                                                                  textPadding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5.0,
-                                                                          0.0,
-                                                                          5.0,
-                                                                          0.0),
-                                                                  indicatorSize:
-                                                                      10.0,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 1.0, 16.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .lineColor,
-                                            offset: Offset(0.0, 0.0),
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 16.0, 16.0, 16.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Response Items List',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .headlineSmall,
-                                                    ),
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0.0,
-                                                                  4.0,
-                                                                  0.0,
+                                                                  16.0,
+                                                                  1.0,
+                                                                  16.0,
                                                                   0.0),
-                                                      child: Text(
-                                                        'Summary of the equipment required to respond to this scenario and the current stock levels.',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 1.0, 16.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .lineColor,
-                                            offset: Offset(0.0, 0.0),
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(0.0),
-                                          bottomRight: Radius.circular(0.0),
-                                          topLeft: Radius.circular(16.0),
-                                          topRight: Radius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 12.0, 12.0, 0.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        'Response Item',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 2,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        '',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 2,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        'Number Required',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      16.0, 16.0, 16.0, 0.0),
-                                              child: StreamBuilder<
-                                                  List<
-                                                      ScenarioResponseItemsRecord>>(
-                                                stream:
-                                                    queryScenarioResponseItemsRecord(
-                                                  parent:
-                                                      widget.scenarioReference,
-                                                ),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50.0,
-                                                        height: 50.0,
-                                                        child:
-                                                            CircularProgressIndicator(
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primary,
+                                                              .secondaryBackground,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              blurRadius: 0.0,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .lineColor,
+                                                              offset: Offset(
+                                                                  0.0, 0.0),
+                                                            )
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    0.0),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    16.0),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  List<ScenarioResponseItemsRecord>
-                                                      listViewScenarioResponseItemsRecordList =
-                                                      snapshot.data!;
-                                                  return ListView.builder(
-                                                    padding: EdgeInsets.zero,
-                                                    shrinkWrap: true,
-                                                    scrollDirection:
-                                                        Axis.vertical,
-                                                    itemCount:
-                                                        listViewScenarioResponseItemsRecordList
-                                                            .length,
-                                                    itemBuilder: (context,
-                                                        listViewIndex) {
-                                                      final listViewScenarioResponseItemsRecord =
-                                                          listViewScenarioResponseItemsRecordList[
-                                                              listViewIndex];
-                                                      return Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    2.0),
                                                         child: Container(
-                                                          width:
-                                                              double.infinity,
                                                           decoration:
                                                               BoxDecoration(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                blurRadius: 0.0,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .lineColor,
-                                                                offset: Offset(
-                                                                    0.0, 1.0),
-                                                              )
-                                                            ],
                                                           ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         12.0,
                                                                         12.0,
                                                                         12.0,
-                                                                        12.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Image
-                                                                              .network(
-                                                                            listViewScenarioResponseItemsRecord.imagePath,
-                                                                            width:
-                                                                                100.0,
-                                                                            height:
-                                                                                100.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ],
+                                                                        0.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      flex: 1,
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            8.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          'Response Item',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodySmall,
+                                                                        ),
                                                                       ),
-                                                                    ],
-                                                                  ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      flex: 2,
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            8.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          '',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodySmall,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      flex: 2,
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            8.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          'Number Required',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodySmall,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                                Expanded(
-                                                                  flex: 2,
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          AutoSizeText(
-                                                                            listViewScenarioResponseItemsRecord.name.maybeHandleOverflow(
-                                                                              maxChars: 32,
-                                                                              replacement: '…',
-                                                                            ),
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).titleMedium,
+                                                              ),
+                                                              Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        16.0,
+                                                                        16.0,
+                                                                        0.0),
+                                                                child: StreamBuilder<
+                                                                    List<
+                                                                        ScenarioResponseItemsRecord>>(
+                                                                  stream:
+                                                                      queryScenarioResponseItemsRecord(
+                                                                    parent: widget
+                                                                        .scenarioReference,
+                                                                  ),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              CircularProgressIndicator(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
                                                                           ),
-                                                                          if (responsiveVisibility(
-                                                                            context:
-                                                                                context,
-                                                                            tabletLandscape:
-                                                                                false,
-                                                                            desktop:
-                                                                                false,
-                                                                          ))
-                                                                            Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
-                                                                              child: Text(
-                                                                                'user@domainname.com',
-                                                                                style: FlutterFlowTheme.of(context).bodySmall,
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    List<ScenarioResponseItemsRecord>
+                                                                        listViewScenarioResponseItemsRecordList =
+                                                                        snapshot
+                                                                            .data!;
+                                                                    return ListView
+                                                                        .builder(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      scrollDirection:
+                                                                          Axis.vertical,
+                                                                      itemCount:
+                                                                          listViewScenarioResponseItemsRecordList
+                                                                              .length,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              listViewIndex) {
+                                                                        final listViewScenarioResponseItemsRecord =
+                                                                            listViewScenarioResponseItemsRecordList[listViewIndex];
+                                                                        return Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              2.0),
+                                                                          child:
+                                                                              Container(
+                                                                            width:
+                                                                                double.infinity,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                              boxShadow: [
+                                                                                BoxShadow(
+                                                                                  blurRadius: 0.0,
+                                                                                  color: FlutterFlowTheme.of(context).lineColor,
+                                                                                  offset: Offset(0.0, 1.0),
+                                                                                )
+                                                                              ],
+                                                                            ),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  Expanded(
+                                                                                    flex: 1,
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: [
+                                                                                        Column(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                          children: [
+                                                                                            Image.network(
+                                                                                              listViewScenarioResponseItemsRecord.imagePath,
+                                                                                              width: 100.0,
+                                                                                              height: 100.0,
+                                                                                              fit: BoxFit.cover,
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                  Expanded(
+                                                                                    flex: 2,
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: [
+                                                                                        Column(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                          children: [
+                                                                                            AutoSizeText(
+                                                                                              listViewScenarioResponseItemsRecord.name.maybeHandleOverflow(
+                                                                                                maxChars: 32,
+                                                                                                replacement: '…',
+                                                                                              ),
+                                                                                              style: FlutterFlowTheme.of(context).titleMedium,
+                                                                                            ),
+                                                                                            if (responsiveVisibility(
+                                                                                              context: context,
+                                                                                              tabletLandscape: false,
+                                                                                              desktop: false,
+                                                                                            ))
+                                                                                              Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  'user@domainname.com',
+                                                                                                  style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                                ),
+                                                                                              ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                  if (responsiveVisibility(
+                                                                                    context: context,
+                                                                                    phone: false,
+                                                                                    tablet: false,
+                                                                                  ))
+                                                                                    Expanded(
+                                                                                      flex: 2,
+                                                                                      child: Text(
+                                                                                        listViewScenarioResponseItemsRecord.numberRequired.toString(),
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                      ),
+                                                                                    ),
+                                                                                ],
                                                                               ),
                                                                             ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    );
+                                                                  },
                                                                 ),
-                                                                if (responsiveVisibility(
-                                                                  context:
-                                                                      context,
-                                                                  phone: false,
-                                                                  tablet: false,
-                                                                ))
-                                                                  Expanded(
-                                                                    flex: 2,
-                                                                    child: Text(
-                                                                      listViewScenarioResponseItemsRecord
-                                                                          .numberRequired
-                                                                          .toString(),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium,
-                                                                    ),
-                                                                  ),
-                                                              ],
-                                                            ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
-                                                      );
-                                                    },
-                                                  );
-                                                },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ],
+                                          ),
+                                        ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 1.0, 16.0, 0.0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                blurRadius: 0.0,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .lineColor,
+                                                offset: Offset(0.0, 0.0),
+                                              )
+                                            ],
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0.0),
+                                              bottomRight: Radius.circular(0.0),
+                                              topLeft: Radius.circular(16.0),
+                                              topRight: Radius.circular(16.0),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       ),
                     ),
