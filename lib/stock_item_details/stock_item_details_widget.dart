@@ -12,6 +12,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -762,6 +763,10 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                             validator: _model
                                                 .unitPriceControllerValidator
                                                 .asValidator(context),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp('[0-9]'))
+                                            ],
                                           ),
                                         ),
                                         Padding(
@@ -845,6 +850,10 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                             validator: _model
                                                 .energyCapacityControllerValidator
                                                 .asValidator(context),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp('[0-9]'))
+                                            ],
                                           ),
                                         ),
                                         if (false)
