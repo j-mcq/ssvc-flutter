@@ -955,6 +955,20 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       ))
                                                         Expanded(
                                                           flex: 1,
+                                                          child: Text(
+                                                            'Nearest Depot',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .titleMedium,
+                                                          ),
+                                                        ),
+                                                      if (responsiveVisibility(
+                                                        context: context,
+                                                        phone: false,
+                                                        tablet: false,
+                                                      ))
+                                                        Expanded(
+                                                          flex: 1,
                                                           child: Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
@@ -969,19 +983,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       .of(context)
                                                                   .titleMedium,
                                                             ),
-                                                          ),
-                                                        ),
-                                                      if (responsiveVisibility(
-                                                        context: context,
-                                                        phone: false,
-                                                        tablet: false,
-                                                      ))
-                                                        Expanded(
-                                                          child: Text(
-                                                            'Total Cost of Response Equipment',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .titleMedium,
                                                           ),
                                                         ),
                                                     ],
@@ -1111,6 +1112,23 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                               FlutterFlowTheme.of(context).bodyMedium,
                                                                         ),
                                                                       ),
+                                                                    if (responsiveVisibility(
+                                                                      context:
+                                                                          context,
+                                                                      phone:
+                                                                          false,
+                                                                    ))
+                                                                      Expanded(
+                                                                        flex: 1,
+                                                                        child:
+                                                                            Text(
+                                                                          containerScenarioResultsRecord != null
+                                                                              ? containerScenarioResultsRecord!.nearestDepotName
+                                                                              : '',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                      ),
                                                                     Expanded(
                                                                       flex: 1,
                                                                       child:
@@ -1154,28 +1172,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         ],
                                                                       ),
                                                                     ),
-                                                                    if (responsiveVisibility(
-                                                                      context:
-                                                                          context,
-                                                                      phone:
-                                                                          false,
-                                                                    ))
-                                                                      Expanded(
-                                                                        flex: 1,
-                                                                        child:
-                                                                            Text(
-                                                                          containerScenarioResultsRecord != null
-                                                                              ? formatNumber(
-                                                                                  containerScenarioResultsRecord!.totalCost,
-                                                                                  formatType: FormatType.decimal,
-                                                                                  decimalType: DecimalType.automatic,
-                                                                                  currency: '£',
-                                                                                )
-                                                                              : '',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
-                                                                        ),
-                                                                      ),
                                                                   ],
                                                                 ),
                                                               ),
