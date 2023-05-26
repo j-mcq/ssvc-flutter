@@ -99,7 +99,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
                       child: Text(
-                        'You have not verified you Email address yet. Please click on the link in hte email that was sent to you email.',
+                        'You have not verified you Email address yet. Please click on the link in the email that was sent to you email.',
                         textAlign: TextAlign.start,
                         style: FlutterFlowTheme.of(context).bodySmall,
                       ),
@@ -112,6 +112,59 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                           await authManager.sendEmailVerification();
                         },
                         text: 'Re-send Verification Email',
+                        options: FFButtonOptions(
+                          width: 270.0,
+                          height: 50.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .titleSmallFamily,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .titleSmallFamily),
+                              ),
+                          elevation: 2.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(60.0),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 44.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          if (currentUserEmailVerified) {
+                            context.pushNamed('dashboard');
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'You email has not been verified yet',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).secondary,
+                              ),
+                            );
+                          }
+                        },
+                        text: 'Log In',
                         options: FFButtonOptions(
                           width: 270.0,
                           height: 50.0,
