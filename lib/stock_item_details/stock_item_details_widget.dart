@@ -692,7 +692,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                             ),
                                             obscureText: false,
                                             decoration: InputDecoration(
-                                              labelText: 'Unit Price',
+                                              labelText: 'Unit Price (£)',
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodySmall,
@@ -747,6 +747,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
+                                            keyboardType: const TextInputType
+                                                    .numberWithOptions(
+                                                signed: true, decimal: true),
                                             validator: _model
                                                 .unitPriceControllerValidator
                                                 .asValidator(context),
@@ -823,6 +826,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
+                                            keyboardType: const TextInputType
+                                                    .numberWithOptions(
+                                                signed: true, decimal: true),
                                             validator: _model
                                                 .energyCapacityControllerValidator
                                                 .asValidator(context),

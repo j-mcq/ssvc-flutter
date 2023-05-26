@@ -208,7 +208,10 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                           FFButtonWidget(
                                             onPressed: () async {
                                               final responseItemsCreateData =
-                                                  createResponseItemsRecordData();
+                                                  createResponseItemsRecordData(
+                                                imageLink:
+                                                    FFAppState().defautImage,
+                                              );
                                               var responseItemsRecordReference =
                                                   ResponseItemsRecord.collection
                                                       .doc();
