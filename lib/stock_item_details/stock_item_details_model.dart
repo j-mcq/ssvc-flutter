@@ -34,6 +34,14 @@ class StockItemDetailsModel extends FlutterFlowModel {
   // State field(s) for itemName widget.
   TextEditingController? itemNameController;
   String? Function(BuildContext, String?)? itemNameControllerValidator;
+  String? _itemNameControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for description widget.
   TextEditingController? descriptionController;
   String? Function(BuildContext, String?)? descriptionControllerValidator;
@@ -43,14 +51,33 @@ class StockItemDetailsModel extends FlutterFlowModel {
   // State field(s) for energyCapacity widget.
   TextEditingController? energyCapacityController;
   String? Function(BuildContext, String?)? energyCapacityControllerValidator;
+  String? _energyCapacityControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for stockLevel widget.
   TextEditingController? stockLevelController;
   String? Function(BuildContext, String?)? stockLevelControllerValidator;
+  String? _stockLevelControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
     sideBarNavModel = createModel(context, () => SideBarNavModel());
+    itemNameControllerValidator = _itemNameControllerValidator;
+    energyCapacityControllerValidator = _energyCapacityControllerValidator;
+    stockLevelControllerValidator = _stockLevelControllerValidator;
   }
 
   void dispose() {
