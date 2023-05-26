@@ -493,6 +493,15 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                     }
                                                   }
 
+                                                  final responseItemsUpdateData =
+                                                      createResponseItemsRecordData(
+                                                    imageLink:
+                                                        _model.uploadedFileUrl,
+                                                  );
+                                                  await clipContainerResponseItemsRecord
+                                                      .reference
+                                                      .update(
+                                                          responseItemsUpdateData);
                                                   setState(() {
                                                     _model.imagepath =
                                                         _model.uploadedFileUrl;
