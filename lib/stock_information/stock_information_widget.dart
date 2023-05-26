@@ -965,6 +965,24 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 16.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Total Stock',
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineSmall,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 1.0, 0.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -990,15 +1008,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 32.0, 0.0, 0.0),
-                                    child: FutureBuilder<
-                                        List<StockDepotMappingRecord>>(
-                                      future: queryStockDepotMappingRecordOnce(
-                                        queryBuilder:
-                                            (stockDepotMappingRecord) =>
-                                                stockDepotMappingRecord.where(
-                                                    'response_item',
-                                                    isNotEqualTo: null),
-                                      ),
+                                    child: StreamBuilder<
+                                        List<ResponseItemsRecord>>(
+                                      stream: queryResponseItemsRecord(),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
                                         if (!snapshot.hasData) {
@@ -1014,8 +1026,8 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                             ),
                                           );
                                         }
-                                        List<StockDepotMappingRecord>
-                                            chartStockDepotMappingRecordList =
+                                        List<ResponseItemsRecord>
+                                            chartResponseItemsRecordList =
                                             snapshot.data!;
                                         return Container(
                                           width: 300.0,
@@ -1024,9 +1036,8 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                             barData: [
                                               FFBarChartData(
                                                 yData:
-                                                    chartStockDepotMappingRecordList
-                                                        .map((d) =>
-                                                            d.numberInStock)
+                                                    chartResponseItemsRecordList
+                                                        .map((d) => d.stock)
                                                         .toList(),
                                                 color:
                                                     FlutterFlowTheme.of(context)
@@ -1034,9 +1045,8 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                               )
                                             ],
                                             xLabels:
-                                                chartStockDepotMappingRecordList
-                                                    .map((d) =>
-                                                        d.responseItemName)
+                                                chartResponseItemsRecordList
+                                                    .map((d) => d.name)
                                                     .toList(),
                                             barWidth: 55.0,
                                             barBorderRadius:
