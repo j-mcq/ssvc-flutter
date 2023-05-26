@@ -44,11 +44,6 @@ class ResponseItemsRecord extends FirestoreRecord {
   double get stock => _stock ?? 0.0;
   bool hasStock() => _stock != null;
 
-  // "depot" field.
-  DocumentReference? _depot;
-  DocumentReference? get depot => _depot;
-  bool hasDepot() => _depot != null;
-
   // "depot_name" field.
   String? _depotName;
   String get depotName => _depotName ?? '';
@@ -74,6 +69,11 @@ class ResponseItemsRecord extends FirestoreRecord {
   double get baselinePower => _baselinePower ?? 0.0;
   bool hasBaselinePower() => _baselinePower != null;
 
+  // "depot" field.
+  DocumentReference? _depot;
+  DocumentReference? get depot => _depot;
+  bool hasDepot() => _depot != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _description = snapshotData['description'] as String?;
@@ -81,13 +81,13 @@ class ResponseItemsRecord extends FirestoreRecord {
     _imageLink = snapshotData['image_link'] as String?;
     _unitPrice = castToType<double>(snapshotData['unit_price']);
     _stock = castToType<double>(snapshotData['stock']);
-    _depot = snapshotData['depot'] as DocumentReference?;
     _depotName = snapshotData['depot_name'] as String?;
     _totalEnergyStorageCapacity =
         castToType<double>(snapshotData['total_energy_storage_capacity']);
     _surgePower = castToType<double>(snapshotData['surge_power']);
     _weight = castToType<double>(snapshotData['weight']);
     _baselinePower = castToType<double>(snapshotData['baseline_power']);
+    _depot = snapshotData['depot'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -123,12 +123,12 @@ Map<String, dynamic> createResponseItemsRecordData({
   String? imageLink,
   double? unitPrice,
   double? stock,
-  DocumentReference? depot,
   String? depotName,
   double? totalEnergyStorageCapacity,
   double? surgePower,
   double? weight,
   double? baselinePower,
+  DocumentReference? depot,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -138,12 +138,12 @@ Map<String, dynamic> createResponseItemsRecordData({
       'image_link': imageLink,
       'unit_price': unitPrice,
       'stock': stock,
-      'depot': depot,
       'depot_name': depotName,
       'total_energy_storage_capacity': totalEnergyStorageCapacity,
       'surge_power': surgePower,
       'weight': weight,
       'baseline_power': baselinePower,
+      'depot': depot,
     }.withoutNulls,
   );
 

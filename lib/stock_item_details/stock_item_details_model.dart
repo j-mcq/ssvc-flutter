@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/components/edit_stock_number_widget.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -17,10 +18,6 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class StockItemDetailsModel extends FlutterFlowModel {
-  ///  Local state fields for this page.
-
-  String? imagepath;
-
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
@@ -60,24 +57,12 @@ class StockItemDetailsModel extends FlutterFlowModel {
     return null;
   }
 
-  // State field(s) for stockLevel widget.
-  TextEditingController? stockLevelController;
-  String? Function(BuildContext, String?)? stockLevelControllerValidator;
-  String? _stockLevelControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Field is required';
-    }
-
-    return null;
-  }
-
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
     sideBarNavModel = createModel(context, () => SideBarNavModel());
     itemNameControllerValidator = _itemNameControllerValidator;
     energyCapacityControllerValidator = _energyCapacityControllerValidator;
-    stockLevelControllerValidator = _stockLevelControllerValidator;
   }
 
   void dispose() {
@@ -86,7 +71,6 @@ class StockItemDetailsModel extends FlutterFlowModel {
     descriptionController?.dispose();
     unitPriceController?.dispose();
     energyCapacityController?.dispose();
-    stockLevelController?.dispose();
   }
 
   /// Additional helper methods are added here.
