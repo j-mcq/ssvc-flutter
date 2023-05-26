@@ -3,3 +3,4 @@ export 'calculate_scenario_response.dart' show calculateScenarioResponse;
 export 'import_psr_data.dart' show importPsrData;
 export 'load_scenario.dart' show loadScenario;
 export 'build_depot_mappings.dart' show buildDepotMappings;
+export 'delete_depot_mappings.dart' show deleteDepotMappings;

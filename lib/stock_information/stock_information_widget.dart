@@ -502,20 +502,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       Expanded(
                                         flex: 1,
                                         child: Text(
-                                          'Depot',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodySmall,
-                                        ),
-                                      ),
-                                    if (responsiveVisibility(
-                                      context: context,
-                                      phone: false,
-                                      tablet: false,
-                                    ))
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          'Number in stock',
+                                          'Total Stock Level',
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall,
                                         ),
@@ -628,23 +615,49 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            Image.network(
-                                                              listViewResponseItemsRecord
-                                                                              .imageLink !=
-                                                                          null &&
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                context
+                                                                    .pushNamed(
+                                                                  'stockItemDetails',
+                                                                  queryParams: {
+                                                                    'responseItemReference':
+                                                                        serializeParam(
                                                                       listViewResponseItemsRecord
-                                                                              .imageLink !=
-                                                                          ''
-                                                                  ? listViewResponseItemsRecord
-                                                                      .imageLink
-                                                                  : random_data
-                                                                      .randomImageUrl(
-                                                                      0,
-                                                                      0,
+                                                                          .reference,
+                                                                      ParamType
+                                                                          .DocumentReference,
                                                                     ),
-                                                              width: 100.0,
-                                                              height: 100.0,
-                                                              fit: BoxFit.cover,
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                              child:
+                                                                  Image.network(
+                                                                listViewResponseItemsRecord.imageLink !=
+                                                                            null &&
+                                                                        listViewResponseItemsRecord.imageLink !=
+                                                                            ''
+                                                                    ? listViewResponseItemsRecord
+                                                                        .imageLink
+                                                                    : random_data
+                                                                        .randomImageUrl(
+                                                                        0,
+                                                                        0,
+                                                                      ),
+                                                                width: 100.0,
+                                                                height: 100.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -719,38 +732,82 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       ],
                                                     ),
                                                   ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                    tablet: false,
-                                                  ))
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        listViewResponseItemsRecord
-                                                            .depotName,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium,
+                                                  Expanded(
+                                                    child: StreamBuilder<
+                                                        List<
+                                                            StockDepotMappingRecord>>(
+                                                      stream:
+                                                          queryStockDepotMappingRecord(
+                                                        queryBuilder: (stockDepotMappingRecord) =>
+                                                            stockDepotMappingRecord.where(
+                                                                'response_item',
+                                                                isEqualTo:
+                                                                    listViewResponseItemsRecord
+                                                                        .reference),
                                                       ),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        // Customize what your widget looks like when it's loading.
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: SizedBox(
+                                                              width: 50.0,
+                                                              height: 50.0,
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
+                                                        List<StockDepotMappingRecord>
+                                                            columnStockDepotMappingRecordList =
+                                                            snapshot.data!;
+                                                        return Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: List.generate(
+                                                              columnStockDepotMappingRecordList
+                                                                  .length,
+                                                              (columnIndex) {
+                                                            final columnStockDepotMappingRecord =
+                                                                columnStockDepotMappingRecordList[
+                                                                    columnIndex];
+                                                            return Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  columnStockDepotMappingRecord
+                                                                      .depotName,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
+                                                                ),
+                                                                Text(
+                                                                  ': ',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
+                                                                ),
+                                                                Text(
+                                                                  columnStockDepotMappingRecord
+                                                                      .numberInStock
+                                                                      .toString(),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
+                                                                ),
+                                                              ],
+                                                            );
+                                                          }),
+                                                        );
+                                                      },
                                                     ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                  ))
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        listViewResponseItemsRecord
-                                                            .stock
-                                                            .toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium,
-                                                      ),
-                                                    ),
+                                                  ),
                                                   if (responsiveVisibility(
                                                     context: context,
                                                     phone: false,
@@ -875,9 +932,11 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                           ) ??
                                                                           false;
                                                                   if (confirmDialogResponse) {
-                                                                    await listViewResponseItemsRecord
-                                                                        .reference
-                                                                        .delete();
+                                                                    await actions
+                                                                        .deleteDepotMappings(
+                                                                      listViewResponseItemsRecord
+                                                                          .reference,
+                                                                    );
                                                                   }
                                                                 },
                                                                 child: Icon(
@@ -936,8 +995,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       future: queryStockDepotMappingRecordOnce(
                                         queryBuilder:
                                             (stockDepotMappingRecord) =>
-                                                stockDepotMappingRecord
-                                                    .orderBy('depot_name'),
+                                                stockDepotMappingRecord.where(
+                                                    'response_item',
+                                                    isNotEqualTo: null),
                                       ),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
