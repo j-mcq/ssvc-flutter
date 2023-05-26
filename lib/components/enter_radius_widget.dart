@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'enter_radius_model.dart';
@@ -120,21 +121,22 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0x00000000),
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   width: 2.0,
                                 ),
                                 borderRadius: BorderRadius.circular(40.0),
                               ),
                               errorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0x00000000),
+                                  color: FlutterFlowTheme.of(context).error,
                                   width: 2.0,
                                 ),
                                 borderRadius: BorderRadius.circular(40.0),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0x00000000),
+                                  color: FlutterFlowTheme.of(context).error,
                                   width: 2.0,
                                 ),
                                 borderRadius: BorderRadius.circular(40.0),
@@ -146,8 +148,12 @@ class _EnterRadiusWidgetState extends State<EnterRadiusWidget> {
                                   16.0, 24.0, 0.0, 24.0),
                             ),
                             style: FlutterFlowTheme.of(context).bodyMedium,
+                            keyboardType: TextInputType.number,
                             validator: _model.radiusControllerValidator
                                 .asValidator(context),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                            ],
                           ),
                         ),
                       ),
