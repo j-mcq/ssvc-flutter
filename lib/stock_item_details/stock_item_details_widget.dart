@@ -568,7 +568,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               ),
                                               errorBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Color(0x00000000),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -577,7 +579,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               focusedErrorBorder:
                                                   OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Color(0x00000000),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -722,7 +726,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               ),
                                               errorBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Color(0x00000000),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -731,7 +737,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               focusedErrorBorder:
                                                   OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Color(0x00000000),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -801,7 +809,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               ),
                                               errorBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Color(0x00000000),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
@@ -810,7 +820,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               focusedErrorBorder:
                                                   OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Color(0x00000000),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
