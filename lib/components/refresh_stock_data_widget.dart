@@ -123,7 +123,6 @@ class _RefreshStockDataWidgetState extends State<RefreshStockDataWidget> {
                           await actions.buildDepotMappings(
                             widget.responseItemReference!,
                           );
-                          Navigator.pop(context);
                         },
                         text: 'Refresh Stock Data',
                         options: FFButtonOptions(
