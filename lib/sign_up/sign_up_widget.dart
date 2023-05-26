@@ -210,7 +210,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         labelText: 'Password',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .bodySmall,
-                                        hintText: 'Enter your email here...',
+                                        hintText: 'Enter a password here...',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodySmall,
                                         enabledBorder: OutlineInputBorder(

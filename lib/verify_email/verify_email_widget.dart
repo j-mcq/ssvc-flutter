@@ -131,6 +131,20 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           await authManager.sendEmailVerification();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Verification link sent',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
                         },
                         text: 'Re-send Verification Email',
                         options: FFButtonOptions(
@@ -166,26 +180,9 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 44.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          if (currentUserEmailVerified) {
-                            context.pushNamed('dashboard');
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Your email has not been verified yet, please try again.',
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                  ),
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).secondary,
-                              ),
-                            );
-                          }
+                          context.pushNamed('signIn');
                         },
-                        text: 'Log In',
+                        text: 'Log In Again',
                         options: FFButtonOptions(
                           width: 270.0,
                           height: 50.0,
