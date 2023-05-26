@@ -34,7 +34,7 @@ class StockItemDetailsModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? itemNameControllerValidator;
   String? _itemNameControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Field is required';
+      return 'Please enter an item name';
     }
 
     return null;
@@ -52,7 +52,7 @@ class StockItemDetailsModel extends FlutterFlowModel {
   String? _energyCapacityControllerValidator(
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
-      return 'Field is required';
+      return 'Please enter the item storage capacity';
     }
 
     return null;
