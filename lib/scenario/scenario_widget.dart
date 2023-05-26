@@ -1975,6 +1975,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 textStyle: FlutterFlowTheme.of(context).bodyMedium,
                                                                                 textPadding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                 padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                                                                borderWidth: 1.0,
+                                                                                borderColor: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                 indicatorSize: 10.0,
                                                                               ),
                                                                             ),
@@ -2205,6 +2207,23 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         ),
                                                                       ),
                                                                     ),
+                                                                    Expanded(
+                                                                      flex: 2,
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            8.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          'Number In Stock',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodySmall,
+                                                                        ),
+                                                                      ),
+                                                                    ),
                                                                   ],
                                                                 ),
                                                               ),
@@ -2354,6 +2373,36 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                       child: Text(
                                                                                         listViewScenarioResponseItemsRecord.numberRequired.toString(),
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                      ),
+                                                                                    ),
+                                                                                  if (responsiveVisibility(
+                                                                                    context: context,
+                                                                                    phone: false,
+                                                                                    tablet: false,
+                                                                                  ))
+                                                                                    Expanded(
+                                                                                      flex: 2,
+                                                                                      child: StreamBuilder<ResponseItemsRecord>(
+                                                                                        stream: ResponseItemsRecord.getDocument(listViewScenarioResponseItemsRecord.responseItem!),
+                                                                                        builder: (context, snapshot) {
+                                                                                          // Customize what your widget looks like when it's loading.
+                                                                                          if (!snapshot.hasData) {
+                                                                                            return Center(
+                                                                                              child: SizedBox(
+                                                                                                width: 50.0,
+                                                                                                height: 50.0,
+                                                                                                child: CircularProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                                ),
+                                                                                              ),
+                                                                                            );
+                                                                                          }
+                                                                                          final textResponseItemsRecord = snapshot.data!;
+                                                                                          return Text(
+                                                                                            textResponseItemsRecord.stock.toString(),
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                          );
+                                                                                        },
                                                                                       ),
                                                                                     ),
                                                                                 ],
