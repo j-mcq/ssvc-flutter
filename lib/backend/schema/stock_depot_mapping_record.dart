@@ -19,20 +19,32 @@ class StockDepotMappingRecord extends FirestoreRecord {
   String get responseItemName => _responseItemName ?? '';
   bool hasResponseItemName() => _responseItemName != null;
 
-  // "depot_name" field.
-  String? _depotName;
-  String get depotName => _depotName ?? '';
-  bool hasDepotName() => _depotName != null;
-
   // "number_in_stock" field.
   int? _numberInStock;
   int get numberInStock => _numberInStock ?? 0;
   bool hasNumberInStock() => _numberInStock != null;
 
+  // "response_item" field.
+  DocumentReference? _responseItem;
+  DocumentReference? get responseItem => _responseItem;
+  bool hasResponseItem() => _responseItem != null;
+
+  // "depot" field.
+  DocumentReference? _depot;
+  DocumentReference? get depot => _depot;
+  bool hasDepot() => _depot != null;
+
+  // "depot_name" field.
+  String? _depotName;
+  String get depotName => _depotName ?? '';
+  bool hasDepotName() => _depotName != null;
+
   void _initializeFields() {
     _responseItemName = snapshotData['response_item_name'] as String?;
-    _depotName = snapshotData['depot_name'] as String?;
     _numberInStock = snapshotData['number_in_stock'] as int?;
+    _responseItem = snapshotData['response_item'] as DocumentReference?;
+    _depot = snapshotData['depot'] as DocumentReference?;
+    _depotName = snapshotData['depot_name'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -64,14 +76,18 @@ class StockDepotMappingRecord extends FirestoreRecord {
 
 Map<String, dynamic> createStockDepotMappingRecordData({
   String? responseItemName,
-  String? depotName,
   int? numberInStock,
+  DocumentReference? responseItem,
+  DocumentReference? depot,
+  String? depotName,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'response_item_name': responseItemName,
-      'depot_name': depotName,
       'number_in_stock': numberInStock,
+      'response_item': responseItem,
+      'depot': depot,
+      'depot_name': depotName,
     }.withoutNulls,
   );
 

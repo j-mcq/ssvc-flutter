@@ -8,7 +8,6 @@ import 'schema/util/firestore_util.dart';
 import 'schema/users_record.dart';
 import 'schema/response_items_record.dart';
 import 'schema/scenario_record.dart';
-import 'schema/depot_record.dart';
 import 'schema/stock_depot_mapping_record.dart';
 import 'schema/psr_record.dart';
 import 'schema/psr_categories_record.dart';
@@ -19,6 +18,7 @@ import 'schema/circles_record.dart';
 import 'schema/scenario_results_record.dart';
 import 'schema/scenario_household_responses_record.dart';
 import 'schema/scenario_response_items_record.dart';
+import 'schema/depots_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,7 +29,6 @@ export 'schema/util/schema_util.dart';
 export 'schema/users_record.dart';
 export 'schema/response_items_record.dart';
 export 'schema/scenario_record.dart';
-export 'schema/depot_record.dart';
 export 'schema/stock_depot_mapping_record.dart';
 export 'schema/psr_record.dart';
 export 'schema/psr_categories_record.dart';
@@ -40,6 +39,7 @@ export 'schema/circles_record.dart';
 export 'schema/scenario_results_record.dart';
 export 'schema/scenario_household_responses_record.dart';
 export 'schema/scenario_response_items_record.dart';
+export 'schema/depots_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -191,58 +191,6 @@ Future<FFFirestorePage<ScenarioRecord>> queryScenarioRecordPage({
     queryCollectionPage(
       ScenarioRecord.collection,
       ScenarioRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      nextPageMarker: nextPageMarker,
-      pageSize: pageSize,
-      isStream: isStream,
-    );
-
-/// Functions to query DepotRecords (as a Stream and as a Future).
-Future<int> queryDepotRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      DepotRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<DepotRecord>> queryDepotRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      DepotRecord.collection,
-      DepotRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<DepotRecord>> queryDepotRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      DepotRecord.collection,
-      DepotRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<FFFirestorePage<DepotRecord>> queryDepotRecordPage({
-  Query Function(Query)? queryBuilder,
-  DocumentSnapshot? nextPageMarker,
-  required int pageSize,
-  required bool isStream,
-}) =>
-    queryCollectionPage(
-      DepotRecord.collection,
-      DepotRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
@@ -800,6 +748,58 @@ Future<FFFirestorePage<ScenarioResponseItemsRecord>>
           pageSize: pageSize,
           isStream: isStream,
         );
+
+/// Functions to query DepotsRecords (as a Stream and as a Future).
+Future<int> queryDepotsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DepotsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<DepotsRecord>> queryDepotsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DepotsRecord.collection,
+      DepotsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DepotsRecord>> queryDepotsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DepotsRecord.collection,
+      DepotsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<DepotsRecord>> queryDepotsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      DepotsRecord.collection,
+      DepotsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
 
 Future<int> queryCollectionCount(
   Query collection, {
