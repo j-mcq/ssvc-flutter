@@ -1407,6 +1407,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                                                   padding: MediaQuery.of(bottomSheetContext).viewInsets,
                                                                                   child: EditStockNumberWidget(
                                                                                     stockDepotMapping: listViewStockDepotMappingRecord.reference,
+                                                                                    stockLevel: listViewStockDepotMappingRecord.numberInStock,
                                                                                   ),
                                                                                 ),
                                                                               );
