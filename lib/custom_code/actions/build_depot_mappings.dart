@@ -13,14 +13,15 @@ Future<String?> buildDepotMappings(
   // get depots collection
   try {
     final depots = await queryDepotsRecordOnce();
-    final responseItems = await queryResponseItemsRecordOnce();
+    final responseItem =
+        await ResponseItemsRecord.getDocument(responseItemReference).first;
 
     for (var depot in depots) {
       final stockDepotMapping = createStockDepotMappingRecordData(
           responseItem: responseItemReference,
           depot: depot.reference,
           depotName: depot.name,
-          responseItemName: responseItems.first.name);
+          responseItemName: responseItem.name);
       StockDepotMappingRecord.collection.add(stockDepotMapping);
     }
     return null;

@@ -64,7 +64,7 @@ class _PolyMapState extends State<PolyMap> {
   bool _isDataLoaded = false;
   String _lastItemType = 'polygon'; // Default
   bool _showPsrHouseholds = true;
-  double _zoomLevel = 16; // Default
+  double _zoomLevel = 10; // Default
   gmf.LatLng _map_center_location = gmf.LatLng(53.178703, -2.994242);
 
   @override
@@ -97,8 +97,8 @@ class _PolyMapState extends State<PolyMap> {
             scenarioRecord.mapCenterLocation!.latitude,
             scenarioRecord.mapCenterLocation!.longitude);
       }
-      if (scenarioRecord.mapZoomLevel != null) {
-        _zoomLevel = scenarioRecord.mapZoomLevel!;
+      if (scenarioRecord.mapZoomLevel > 0) {
+        _zoomLevel = scenarioRecord.mapZoomLevel;
       }
     } else if (widget.currentLocation != null) {
       _map_center_location = gmf.LatLng(
@@ -122,7 +122,7 @@ class _PolyMapState extends State<PolyMap> {
     FFAppState().polygonLatLngList.clear();
 
     FFAppState().mapCenterLocation = null;
-    FFAppState().mapZoomLevel = 16;
+    FFAppState().mapZoomLevel = _zoomLevel;
   }
 
   Future<void> _loadMapData() async {

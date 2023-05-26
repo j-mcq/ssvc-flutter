@@ -11,5 +11,21 @@ import 'package:flutter/material.dart';
 Future<String?> deleteDepotMappings(
     DocumentReference? responseItemReference) async {
   // Add your function code here!
-  return null;
+  try {
+    final stockDepotMappings = await queryStockDepotMappingRecordOnce(
+        queryBuilder: (stockDepotMappings) => stockDepotMappings
+            .where('response_item', isEqualTo: responseItemReference));
+
+    for (var stockDepotMapping in stockDepotMappings) {
+      await stockDepotMapping.reference.delete();
+    }
+
+    // then delete the response item
+    await responseItemReference!.delete();
+
+    return null;
+  } catch (e) {
+    print('Error deleting depot mapings: $e');
+    return 'Error deleting depot mapings: $e';
+  }
 }
