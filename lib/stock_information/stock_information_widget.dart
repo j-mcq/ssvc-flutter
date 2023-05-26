@@ -567,6 +567,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       snapshot.data!;
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
+                                    primary: false,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemCount:
@@ -938,7 +939,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                           snapshot.data!;
                                       return Container(
                                         width: 300.0,
-                                        height: 300.0,
+                                        height: 400.0,
                                         child: FlutterFlowBarChart(
                                           barData: [
                                             FFBarChartData(
