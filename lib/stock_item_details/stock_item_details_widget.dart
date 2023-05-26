@@ -502,10 +502,6 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                       .reference
                                                       .update(
                                                           responseItemsUpdateData);
-                                                  setState(() {
-                                                    _model.imagepath =
-                                                        _model.uploadedFileUrl;
-                                                  });
                                                 },
                                                 child: Container(
                                                   width: 350.0,
