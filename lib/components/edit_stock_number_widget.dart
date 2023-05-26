@@ -15,9 +15,11 @@ class EditStockNumberWidget extends StatefulWidget {
   const EditStockNumberWidget({
     Key? key,
     required this.stockDepotMapping,
+    required this.stockLevel,
   }) : super(key: key);
 
   final DocumentReference? stockDepotMapping;
+  final int? stockLevel;
 
   @override
   _EditStockNumberWidgetState createState() => _EditStockNumberWidgetState();
@@ -37,7 +39,8 @@ class _EditStockNumberWidgetState extends State<EditStockNumberWidget> {
     super.initState();
     _model = createModel(context, () => EditStockNumberModel());
 
-    _model.stockLevelController ??= TextEditingController();
+    _model.stockLevelController ??= TextEditingController(
+        text: widget.stockLevel != null ? widget.stockLevel?.toString() : null);
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
