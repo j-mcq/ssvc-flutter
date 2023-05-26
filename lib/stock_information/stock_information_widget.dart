@@ -932,9 +932,11 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                           ) ??
                                                                           false;
                                                                   if (confirmDialogResponse) {
-                                                                    await listViewResponseItemsRecord
-                                                                        .reference
-                                                                        .delete();
+                                                                    await actions
+                                                                        .deleteDepotMappings(
+                                                                      listViewResponseItemsRecord
+                                                                          .reference,
+                                                                    );
                                                                   }
                                                                 },
                                                                 child: Icon(
