@@ -1234,6 +1234,15 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                         0.0, 24.0, 20.0, 32.0),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
+                                                    if (_model.formKey
+                                                                .currentState ==
+                                                            null ||
+                                                        !_model.formKey
+                                                            .currentState!
+                                                            .validate()) {
+                                                      return;
+                                                    }
+
                                                     final responseItemsUpdateData =
                                                         createResponseItemsRecordData(
                                                       name: _model
