@@ -1926,16 +1926,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 FFBarChartData(
                                                                                   yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberRequired).toList(),
                                                                                   color: FlutterFlowTheme.of(context).tertiary,
-                                                                                ),
-                                                                                FFBarChartData(
-                                                                                  yData: containerResponseItemsRecordList.map((d) => d.stock).toList(),
-                                                                                  color: Color(0xFF9418A8),
                                                                                 )
                                                                               ],
                                                                               xLabels: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.name).toList(),
                                                                               barWidth: 55.0,
                                                                               barBorderRadius: BorderRadius.circular(0.0),
-                                                                              barSpace: 0.0,
                                                                               groupSpace: 5.0,
                                                                               alignment: BarChartAlignment.spaceEvenly,
                                                                               chartStylingInfo: ChartStylingInfo(
@@ -1968,7 +1963,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                               child: FlutterFlowChartLegendWidget(
                                                                                 entries: [
                                                                                   LegendEntry(FlutterFlowTheme.of(context).tertiary, 'Required for Scenario'),
-                                                                                  LegendEntry(Color(0xFF9418A8), 'In Stock '),
                                                                                 ],
                                                                                 width: 200.0,
                                                                                 height: 50.0,
