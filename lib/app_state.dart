@@ -80,10 +80,17 @@ class FFAppState extends ChangeNotifier {
     _mapCenterLocation = _value;
   }
 
-  double _mapZoomLevel = 0.0;
+  double _mapZoomLevel = 16;
   double get mapZoomLevel => _mapZoomLevel;
   set mapZoomLevel(double _value) {
     _mapZoomLevel = _value;
+  }
+
+  String _defautImage =
+      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/ssvc-v039x3/assets/sw0fdnvp3hmh/download.png';
+  String get defautImage => _defautImage;
+  set defautImage(String _value) {
+    _defautImage = _value;
   }
 }
 

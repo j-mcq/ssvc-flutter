@@ -513,7 +513,8 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                                 ''
                                                         ? clipContainerResponseItemsRecord
                                                             .imageLink
-                                                        : _model.imagepath!,
+                                                        : FFAppState()
+                                                            .defautImage,
                                                     width: 714.8,
                                                     height: 500.0,
                                                     fit: BoxFit.cover,
