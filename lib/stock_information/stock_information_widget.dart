@@ -936,8 +936,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       future: queryStockDepotMappingRecordOnce(
                                         queryBuilder:
                                             (stockDepotMappingRecord) =>
-                                                stockDepotMappingRecord
-                                                    .orderBy('depot_name'),
+                                                stockDepotMappingRecord.where(
+                                                    'response_item',
+                                                    isNotEqualTo: null),
                                       ),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
