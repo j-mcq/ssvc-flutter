@@ -10,6 +10,22 @@ import 'package:flutter/material.dart';
 
 Future<String?> buildDepotMappings(
     DocumentReference responseItemReference) async {
-  // Add your function code here!
-  return null;
+  // get depots collection
+  try {
+    final depots = await queryDepotsRecordOnce();
+    final responseItems = await queryResponseItemsRecordOnce();
+
+    for (var depot in depots) {
+      final stockDepotMapping = createStockDepotMappingRecordData(
+          responseItem: responseItemReference,
+          depot: depot.reference,
+          depotName: depot.name,
+          responseItemName: responseItems.first.name);
+      StockDepotMappingRecord.collection.add(stockDepotMapping);
+    }
+    return null;
+  } catch (e) {
+    print('Error creating depot mapings: $e');
+    return 'Error creating depot mapings: $e';
+  }
 }
