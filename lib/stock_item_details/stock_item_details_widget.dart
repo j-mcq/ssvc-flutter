@@ -517,12 +517,8 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                     shape: BoxShape.rectangle,
                                                   ),
                                                   child: Image.network(
-                                                    _model.imagepath == null ||
-                                                            _model.imagepath ==
-                                                                ''
-                                                        ? clipContainerResponseItemsRecord
-                                                            .imageLink
-                                                        : _model.imagepath!,
+                                                    clipContainerResponseItemsRecord
+                                                        .imageLink,
                                                     width: 714.8,
                                                     height: 500.0,
                                                     fit: BoxFit.cover,
