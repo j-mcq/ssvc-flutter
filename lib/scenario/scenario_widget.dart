@@ -955,6 +955,20 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       ))
                                                         Expanded(
                                                           flex: 1,
+                                                          child: Text(
+                                                            'Nearest Depot',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .titleMedium,
+                                                          ),
+                                                        ),
+                                                      if (responsiveVisibility(
+                                                        context: context,
+                                                        phone: false,
+                                                        tablet: false,
+                                                      ))
+                                                        Expanded(
+                                                          flex: 1,
                                                           child: Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
@@ -969,19 +983,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       .of(context)
                                                                   .titleMedium,
                                                             ),
-                                                          ),
-                                                        ),
-                                                      if (responsiveVisibility(
-                                                        context: context,
-                                                        phone: false,
-                                                        tablet: false,
-                                                      ))
-                                                        Expanded(
-                                                          child: Text(
-                                                            'Total Cost of Response Equipment',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .titleMedium,
                                                           ),
                                                         ),
                                                     ],
@@ -1111,6 +1112,23 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                               FlutterFlowTheme.of(context).bodyMedium,
                                                                         ),
                                                                       ),
+                                                                    if (responsiveVisibility(
+                                                                      context:
+                                                                          context,
+                                                                      phone:
+                                                                          false,
+                                                                    ))
+                                                                      Expanded(
+                                                                        flex: 1,
+                                                                        child:
+                                                                            Text(
+                                                                          containerScenarioResultsRecord != null
+                                                                              ? containerScenarioResultsRecord!.nearestDepotName
+                                                                              : '',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                      ),
                                                                     Expanded(
                                                                       flex: 1,
                                                                       child:
@@ -1154,28 +1172,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         ],
                                                                       ),
                                                                     ),
-                                                                    if (responsiveVisibility(
-                                                                      context:
-                                                                          context,
-                                                                      phone:
-                                                                          false,
-                                                                    ))
-                                                                      Expanded(
-                                                                        flex: 1,
-                                                                        child:
-                                                                            Text(
-                                                                          containerScenarioResultsRecord != null
-                                                                              ? formatNumber(
-                                                                                  containerScenarioResultsRecord!.totalCost,
-                                                                                  formatType: FormatType.decimal,
-                                                                                  decimalType: DecimalType.automatic,
-                                                                                  currency: '£',
-                                                                                )
-                                                                              : '',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
-                                                                        ),
-                                                                      ),
                                                                   ],
                                                                 ),
                                                               ),
@@ -1926,16 +1922,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 FFBarChartData(
                                                                                   yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberRequired).toList(),
                                                                                   color: FlutterFlowTheme.of(context).tertiary,
-                                                                                ),
-                                                                                FFBarChartData(
-                                                                                  yData: containerResponseItemsRecordList.map((d) => d.stock).toList(),
-                                                                                  color: Color(0xFF9418A8),
                                                                                 )
                                                                               ],
                                                                               xLabels: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.name).toList(),
                                                                               barWidth: 55.0,
                                                                               barBorderRadius: BorderRadius.circular(0.0),
-                                                                              barSpace: 0.0,
                                                                               groupSpace: 5.0,
                                                                               alignment: BarChartAlignment.spaceEvenly,
                                                                               chartStylingInfo: ChartStylingInfo(
@@ -1968,7 +1959,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                               child: FlutterFlowChartLegendWidget(
                                                                                 entries: [
                                                                                   LegendEntry(FlutterFlowTheme.of(context).tertiary, 'Required for Scenario'),
-                                                                                  LegendEntry(Color(0xFF9418A8), 'In Stock '),
                                                                                 ],
                                                                                 width: 200.0,
                                                                                 height: 50.0,

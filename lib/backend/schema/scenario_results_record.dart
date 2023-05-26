@@ -39,6 +39,16 @@ class ScenarioResultsRecord extends FirestoreRecord {
   double get numberOfResponseItems => _numberOfResponseItems ?? 0.0;
   bool hasNumberOfResponseItems() => _numberOfResponseItems != null;
 
+  // "nearest_depot" field.
+  DocumentReference? _nearestDepot;
+  DocumentReference? get nearestDepot => _nearestDepot;
+  bool hasNearestDepot() => _nearestDepot != null;
+
+  // "nearest_depot_name" field.
+  String? _nearestDepotName;
+  String get nearestDepotName => _nearestDepotName ?? '';
+  bool hasNearestDepotName() => _nearestDepotName != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -48,6 +58,8 @@ class ScenarioResultsRecord extends FirestoreRecord {
     _totalCost = castToType<double>(snapshotData['total_cost']);
     _numberOfResponseItems =
         castToType<double>(snapshotData['number_of_response_items']);
+    _nearestDepot = snapshotData['nearest_depot'] as DocumentReference?;
+    _nearestDepotName = snapshotData['nearest_depot_name'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -87,6 +99,8 @@ Map<String, dynamic> createScenarioResultsRecordData({
   double? responseCoverage,
   double? totalCost,
   double? numberOfResponseItems,
+  DocumentReference? nearestDepot,
+  String? nearestDepotName,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -95,6 +109,8 @@ Map<String, dynamic> createScenarioResultsRecordData({
       'response_coverage': responseCoverage,
       'total_cost': totalCost,
       'number_of_response_items': numberOfResponseItems,
+      'nearest_depot': nearestDepot,
+      'nearest_depot_name': nearestDepotName,
     }.withoutNulls,
   );
 
