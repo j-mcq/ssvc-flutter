@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -1470,6 +1471,12 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                             .validate()) {
                                                       return;
                                                     }
+                                                    _model.outCalculateTotalStockLevels =
+                                                        await actions
+                                                            .calculateTotalStockLevels(
+                                                      widget
+                                                          .responseItemReference,
+                                                    );
 
                                                     final responseItemsUpdateData =
                                                         createResponseItemsRecordData(
@@ -1498,6 +1505,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                           double.tryParse(_model
                                                               .energyCapacityController
                                                               .text),
+                                                      stock: _model
+                                                          .outCalculateTotalStockLevels
+                                                          ?.toDouble(),
                                                     );
                                                     await widget
                                                         .responseItemReference!
@@ -1506,6 +1516,8 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
 
                                                     context.pushNamed(
                                                         'stockInformation');
+
+                                                    setState(() {});
                                                   },
                                                   text: 'Save Changes',
                                                   options: FFButtonOptions(

@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,9 @@ class StockItemDetailsModel extends FlutterFlowModel {
 
     return null;
   }
+
+  // Stores action output result for [Custom Action - calculateTotalStockLevels] action in Button widget.
+  int? outCalculateTotalStockLevels;
 
   /// Initialization and disposal methods.
 
