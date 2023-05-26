@@ -308,13 +308,31 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       }
 
                                       await authManager.sendEmailVerification();
-                                      if (currentUserEmailVerified) {
-                                        context.pushNamedAuth(
-                                            'dashboard', context.mounted);
-                                      } else {
-                                        context.pushNamedAuth(
-                                            'verifyEmail', context.mounted);
-                                      }
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'We have just sent and email to you with a link to verify your email address. Please click the link and then log in.',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                      );
+                                      GoRouter.of(context).prepareAuthEvent();
+                                      await authManager.signOut();
+                                      GoRouter.of(context)
+                                          .clearRedirectLocation();
+
+                                      context.goNamedAuth(
+                                          'signIn', context.mounted);
                                     },
                                     child: Container(
                                       width: 150.0,
