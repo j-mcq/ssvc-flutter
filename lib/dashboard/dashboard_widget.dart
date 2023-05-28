@@ -82,7 +82,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
         _model.outTotalScenarioCoveragePercentage =
             await actions.calculateTotalScenarioCoveragePercentage();
         setState(() {
-          _model.totalResponseItems = _model.outAllResponseItemsCount;
+          _model.totalResponseItems =
+              _model.outAllResponseItemsCount?.toDouble();
           _model.totalScenarioCoverage =
               _model.outTotalScenarioCoveragePercentage;
         });
