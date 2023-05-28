@@ -13,8 +13,8 @@ import '/auth/firebase_auth/auth_util.dart';
 
 String? formatPercentage(double number) {
   // convert input value to 2dp percentage
-  if (number == null) {
-    return null;
-  }
-  return (number * 100).toStringAsFixed(0) + '%';
+
+  final percentage = (number * 100).toStringAsFixed(0);
+
+  return percentage + '%';
 }

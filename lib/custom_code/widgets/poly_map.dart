@@ -64,6 +64,7 @@ class _PolyMapState extends State<PolyMap> {
   bool _isDataLoaded = false;
   String _lastItemType = 'polygon'; // Default
   bool _showPsrHouseholds = true;
+  bool _showDepots = true;
   double _zoomLevel = 10; // Default
   gmf.LatLng _map_center_location = gmf.LatLng(53.178703, -2.994242);
 
@@ -113,14 +114,12 @@ class _PolyMapState extends State<PolyMap> {
   // This function is to change the marker icon
   void _setMarkerIcon() async {
     _markerIcon = await gmf.BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(), 'assets/farm.png');
+        ImageConfiguration(), 'assets/images/depot-32.png');
   }
 
   _clearAppState() {
     FFAppState().circleLatLng = null;
     FFAppState().circleRadius = 0.0;
-    FFAppState().polygonLatLngList.clear();
-
     FFAppState().mapCenterLocation = null;
     FFAppState().mapZoomLevel = _zoomLevel;
   }
@@ -136,6 +135,7 @@ class _PolyMapState extends State<PolyMap> {
 
         // if there are polygonPoints then iterate through and add to _polygons
         if (polygonPoints.isNotEmpty) {
+          FFAppState().polygonLatLngList.clear();
           polygonPoints.forEach((element) {
             // create a new polyLatLng and add to the list
             polygonLatLngs.add(PolygonLatLng(
@@ -157,7 +157,19 @@ class _PolyMapState extends State<PolyMap> {
 
         for (var psrHousehold in psrHouseholds) {
           _setMarkers(
-              gmf.LatLng(psrHousehold.latitude!, psrHousehold.longitude!));
+              gmf.LatLng(psrHousehold.latitude!, psrHousehold.longitude!),
+              false,
+              psrHousehold.postcode);
+        }
+      }
+      if (_showDepots) {
+        final depots = await queryDepotsRecordOnce();
+
+        for (var depot in depots) {
+          _setMarkers(
+              gmf.LatLng(depot.location!.latitude, depot.location!.longitude),
+              true,
+              depot.name);
         }
       }
     }
@@ -206,15 +218,16 @@ class _PolyMapState extends State<PolyMap> {
   }
 
   // Set Markers to the map
-  void _setMarkers(gmf.LatLng point) {
+  void _setMarkers(gmf.LatLng point, bool isDepot, String title) {
     final String markerIdVal = 'marker_id_$_markerIdCounter';
     _markerIdCounter++;
     setState(() {
       _markers.add(gmf.Marker(
         markerId: gmf.MarkerId(markerIdVal),
         position: point,
+        icon: isDepot ? _markerIcon : BitmapDescriptor.defaultMarker,
         infoWindow: InfoWindow(
-            title: 'PSR Household',
+            title: title,
             snippet:
                 'latitude: ${point.latitude} longitude: ${point.longitude}'),
       ));
@@ -312,7 +325,7 @@ class _PolyMapState extends State<PolyMap> {
                       } else if (_isMarker) {
                         setState(() {
                           _markers.clear();
-                          _setMarkers(point);
+                          _setMarkers(point, false, '');
                         });
                       } else if (_isCircle) {
                         setState(() {

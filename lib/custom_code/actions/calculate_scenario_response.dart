@@ -1,4 +1,6 @@
 // Automatic FlutterFlow imports
+import 'package:maps_toolkit/maps_toolkit.dart';
+
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -32,6 +34,11 @@ Future<String?> calculateScenarioResponse(
     if (outageDuration == null) {
       return 'Scenario duration is not set';
     }
+
+    // get polygon centroid to check nearest depot
+    final nearestDepot = await getNearestDepot(
+        polygonRecords.map((e) => mtk.LatLng(e.latitude, e.longitude)));
+
     List<PsrRecord> impactedPsrHouseholds = [];
 
     // check if households are in outage area
@@ -97,13 +104,43 @@ Future<String?> calculateScenarioResponse(
     }
 
     final responseCoverage = await groupResponseItems(scenarioReference);
-    saveScenarioResults(scenarioReference, impactedPsrHouseholds.length,
-        totalCost, totalResponseItems, responseCoverage);
+    saveScenarioResults(
+        scenarioReference,
+        impactedPsrHouseholds.length,
+        totalCost,
+        totalResponseItems,
+        responseCoverage,
+        nearestDepot.reference,
+        nearestDepot.name);
     return null;
   } catch (e) {
     print('Error calculating scenario response: ' + e.toString());
     return 'Error calculating scenario response';
   }
+}
+
+Future<DepotsRecord> getNearestDepot(Iterable<mtk.LatLng> polygons) async {
+  // get Depot locations
+  final depotsRecords = await queryDepotsRecordOnce();
+  var closestDepot = depotsRecords.first;
+
+  final polygonCentroid = await getPolygonCentroid(polygons);
+
+  for (var depot in depotsRecords) {
+    final distanceToDepot = SphericalUtil.computeDistanceBetween(
+        mtk.LatLng(depot.location!.latitude, depot.location!.longitude),
+        polygonCentroid);
+    final distanceToClosestDepot = SphericalUtil.computeDistanceBetween(
+        mtk.LatLng(
+            closestDepot.location!.latitude, closestDepot.location!.longitude),
+        polygonCentroid);
+
+    if (distanceToDepot < distanceToClosestDepot) {
+      closestDepot = depot;
+    }
+  }
+  return closestDepot;
+  // get polygon centroid
 }
 
 Future<double> groupResponseItems(DocumentReference scenarioReference) async {
@@ -144,8 +181,13 @@ Future<double> groupResponseItems(DocumentReference scenarioReference) async {
     responseCoverage += responseCoveragePerItem;
   }
 
-  return double.parse(
-      (responseCoverage / responseItemTypeCount).toStringAsPrecision(2));
+  double percentageCoverage = 0;
+  if (responseItemTypeCount > 0) {
+    percentageCoverage = double.parse(
+        (responseCoverage / responseItemTypeCount).toStringAsPrecision(2));
+  }
+
+  return percentageCoverage;
 }
 
 deletePreviousResults(DocumentReference scenarioReference) async {
@@ -225,14 +267,18 @@ Future<bool> saveScenarioResults(
     int totalPsrHomesImpacted,
     double totalCost,
     double totalResponseItems,
-    double responseCoverage) async {
+    double responseCoverage,
+    DocumentReference nearestDepotReference,
+    String nearestDepot) async {
   // save scenario results
   final scenarioResultsCreateData = createScenarioResultsRecordData(
       scenario: scenarioReference,
       psrHouseholdsImpacted: totalPsrHomesImpacted,
       totalCost: totalCost,
       numberOfResponseItems: totalResponseItems,
-      responseCoverage: responseCoverage);
+      responseCoverage: responseCoverage,
+      nearestDepot: nearestDepotReference,
+      nearestDepotName: nearestDepot);
 
   var scenarioResultsRecordReference =
       ScenarioResultsRecord.createDoc(scenarioReference);
@@ -259,4 +305,17 @@ bool checkLocationIsInCircle(
   final isInPolygon =
       mtk.PolygonUtil.containsLocation(propertyLocation, circleCenters, true);
   return isInPolygon;
+}
+
+mtk.LatLng getPolygonCentroid(Iterable<mtk.LatLng> points) {
+  double latitude = 0;
+  double longitude = 0;
+  int n = points.length;
+
+  for (mtk.LatLng point in points) {
+    latitude += point.latitude;
+    longitude += point.longitude;
+  }
+
+  return mtk.LatLng(latitude / n, longitude / n);
 }
