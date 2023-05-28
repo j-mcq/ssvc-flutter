@@ -8,19 +8,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<int> calculateAllResponseItemsCount() async {
+Future<double> calculateAllResponseItemsCount() async {
   // Add your function code here!
-  try {
-    final responseItems = await queryResponseItemsRecordOnce();
-    int totalResponseItems = 0;
-    for (var responseItem in responseItems) {
-      totalResponseItems +=
-          await calculateTotalStockLevels(responseItem.reference);
-    }
-
-    return totalResponseItems;
-  } catch (e) {
-    print('error calculating total response items: $e ');
-    return 0;
-  }
+  return 0;
 }

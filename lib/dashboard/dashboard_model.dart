@@ -22,7 +22,7 @@ class DashboardModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - calculateAllResponseItemsCount] action in dashboard widget.
-  int? outAllResponseItemsCount;
+  double? outAllResponseItemsCount;
   // Stores action output result for [Custom Action - calculateTotalScenarioCoveragePercentage] action in dashboard widget.
   double? outTotalScenarioCoveragePercentage;
   // Model for sideBarNav component.
