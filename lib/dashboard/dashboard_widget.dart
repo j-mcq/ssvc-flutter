@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -80,9 +79,12 @@ class _DashboardWidgetState extends State<DashboardWidget>
       if (currentUserEmailVerified) {
         _model.outAllResponseItemsCount =
             await actions.calculateAllResponseItemsCount();
+        _model.outTotalScenarioCoveragePercentage =
+            await actions.calculateTotalScenarioCoveragePercentage();
         setState(() {
           _model.totalResponseItems = _model.outAllResponseItemsCount;
-          _model.totalScenarioCoverage = _model.outAllResponseItemsCount;
+          _model.totalScenarioCoverage =
+              _model.outTotalScenarioCoveragePercentage;
         });
       } else {
         context.pushNamed('verifyEmail');
@@ -187,7 +189,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     4.0, 4.0, 8.0, 4.0),
                                 child: Container(
-                                  height: 300.0,
+                                  height: 220.0,
                                   constraints: BoxConstraints(
                                     maxWidth:
                                         MediaQuery.of(context).size.width *
@@ -221,6 +223,17 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall,
                                         ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 8.0, 0.0),
+                                          child: Text(
+                                            'Percentage of user defined scenarios that are covered by the current stock levels',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodySmall,
+                                          ),
+                                        ),
                                         Expanded(
                                           child: Padding(
                                             padding:
@@ -238,7 +251,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.end,
+                                                        MainAxisAlignment.start,
                                                     children: [
                                                       Padding(
                                                         padding:
@@ -252,7 +265,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                             CircularPercentIndicator(
                                                           percent: _model
                                                               .totalScenarioCoverage!,
-                                                          radius: 45.0,
+                                                          radius: 50.0,
                                                           lineWidth: 12.0,
                                                           animation: true,
                                                           progressColor:
@@ -291,106 +304,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                           FlutterFlowTheme.of(context)
                                                                               .bodyMediumFamily),
                                                                 ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      8.0,
-                                                                      0.0),
-                                                          child: Text(
-                                                            'Percentage of historical outages covered by the current stock levels',
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodySmall,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    12.0),
-                                                        child:
-                                                            CircularPercentIndicator(
-                                                          percent: functions
-                                                              .scenarioPercentage(),
-                                                          radius: 45.0,
-                                                          lineWidth: 12.0,
-                                                          animation: true,
-                                                          progressColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .tertiary,
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .lineColor,
-                                                          center: Text(
-                                                            formatNumber(
-                                                              functions
-                                                                  .scenarioPercentage(),
-                                                              formatType:
-                                                                  FormatType
-                                                                      .percent,
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Outfit',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .tertiary,
-                                                                  fontSize:
-                                                                      14.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      8.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Text(
-                                                            'Percentage of user defined scenarios that are covered by the current stock levels',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodySmall,
                                                           ),
                                                         ),
                                                       ),
