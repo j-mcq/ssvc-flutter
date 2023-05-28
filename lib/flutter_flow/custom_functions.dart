@@ -18,3 +18,7 @@ String? formatPercentage(double number) {
 
   return percentage + '%';
 }
+
+double scenarioPercentage() {
+  return 0;
+}
