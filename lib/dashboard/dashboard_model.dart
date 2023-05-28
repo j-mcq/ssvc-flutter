@@ -15,9 +15,9 @@ import 'package:provider/provider.dart';
 class DashboardModel extends FlutterFlowModel {
   ///  Local state fields for this page.
 
-  double? totalResponseItems;
+  double? totalResponseItems = 0.0;
 
-  double? totalScenarioCoverage;
+  double? totalScenarioCoverage = 0.0;
 
   ///  State fields for stateful widgets in this page.
 

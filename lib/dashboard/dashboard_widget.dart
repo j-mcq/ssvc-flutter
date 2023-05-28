@@ -190,7 +190,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     4.0, 4.0, 8.0, 4.0),
                                 child: Container(
-                                  height: 220.0,
+                                  height: 250.0,
                                   constraints: BoxConstraints(
                                     maxWidth:
                                         MediaQuery.of(context).size.width *
