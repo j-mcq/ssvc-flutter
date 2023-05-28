@@ -8,3 +8,5 @@ export 'calculate_total_stock_levels.dart' show calculateTotalStockLevels;
 export 'delete_scenario.dart' show deleteScenario;
 export 'calculate_all_response_items_count.dart'
     show calculateAllResponseItemsCount;
+export 'calculate_total_scenario_coverage_percentage.dart'
+    show calculateTotalScenarioCoveragePercentage;
