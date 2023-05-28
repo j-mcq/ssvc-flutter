@@ -1,8 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -192,16 +194,6 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall,
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
-                                          child: Text(
-                                            'An overview of historic and current scenarios',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall,
-                                          ),
-                                        ),
                                         Expanded(
                                           child: Padding(
                                             padding:
@@ -307,7 +299,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                     12.0),
                                                         child:
                                                             CircularPercentIndicator(
-                                                          percent: 0.93,
+                                                          percent: functions
+                                                              .scenarioPercentage(),
                                                           radius: 45.0,
                                                           lineWidth: 12.0,
                                                           animation: true,
@@ -320,7 +313,13 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                       context)
                                                                   .lineColor,
                                                           center: Text(
-                                                            '93%',
+                                                            formatNumber(
+                                                              functions
+                                                                  .scenarioPercentage(),
+                                                              formatType:
+                                                                  FormatType
+                                                                      .percent,
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -477,106 +476,145 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           ),
                                         ),
                                       ),
-                                      Container(
-                                        width: double.infinity,
-                                        constraints: BoxConstraints(
-                                          maxWidth: 570.0,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 4.0,
-                                              color: Color(0x33000000),
-                                              offset: Offset(0.0, 2.0),
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
-                                        ),
-                                        alignment:
-                                            AlignmentDirectional(0.0, -1.0),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 16.0, 16.0, 16.0),
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'PSR Customers',
-                                                  textAlign: TextAlign.start,
-                                                  style: FlutterFlowTheme.of(
+                                      FutureBuilder<int>(
+                                        future: queryPsrRecordCount(),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: FlutterFlowTheme.of(
                                                           context)
-                                                      .headlineSmall,
+                                                      .primary,
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 12.0),
-                                                  child: Text(
-                                                    'Total number of PSR customer with electricity dependant medical conditions.',
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall,
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.4,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            24.0),
-                                                  ),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Icon(
-                                                        Icons
-                                                            .supervisor_account_rounded,
-                                                        color:
+                                              ),
+                                            );
+                                          }
+                                          int cardTotalUsersCount =
+                                              snapshot.data!;
+                                          return Container(
+                                            width: double.infinity,
+                                            constraints: BoxConstraints(
+                                              maxWidth: 570.0,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 4.0,
+                                                  color: Color(0x33000000),
+                                                  offset: Offset(0.0, 2.0),
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(16.0),
+                                            ),
+                                            alignment:
+                                                AlignmentDirectional(0.0, -1.0),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 16.0, 16.0, 16.0),
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'PSR Customers',
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .headlineSmall,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  12.0),
+                                                      child: Text(
+                                                        'Total number of PSR customer with electricity dependant medical conditions.',
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style:
                                                             FlutterFlowTheme.of(
                                                                     context)
+                                                                .bodySmall,
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.4,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(24.0),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .supervisor_account_rounded,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .primary,
-                                                        size: 44.0,
+                                                            size: 44.0,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Text(
+                                                              formatNumber(
+                                                                cardTotalUsersCount,
+                                                                formatType:
+                                                                    FormatType
+                                                                        .compact,
+                                                              ),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .displaySmall,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    16.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          '56.4k',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .displaySmall,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ).animateOnPageLoad(animationsMap[
-                                                    'containerOnPageLoadAnimation']!),
-                                              ],
+                                                    ).animateOnPageLoad(
+                                                        animationsMap[
+                                                            'containerOnPageLoadAnimation']!),
+                                                  ],
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),

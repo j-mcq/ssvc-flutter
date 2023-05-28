@@ -18,3 +18,7 @@ String? formatPercentage(double number) {
   }
   return (number * 100).toStringAsFixed(0) + '%';
 }
+
+double scenarioPercentage() {
+  return 0;
+}
