@@ -801,15 +801,32 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                         ),
                                                                       );
                                                                     }
-                                                                    int textCount =
+                                                                    int rowCount =
                                                                         snapshot
                                                                             .data!;
-                                                                    return Text(
-                                                                      textCount
-                                                                          .toString(),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium,
+                                                                    return Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Text(
+                                                                          columnDepotsRecord
+                                                                              .name,
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                        Text(
+                                                                          ': ',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                        Text(
+                                                                          rowCount
+                                                                              .toString(),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                      ],
                                                                     );
                                                                   },
                                                                 ),
