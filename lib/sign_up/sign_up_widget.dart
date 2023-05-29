@@ -330,7 +330,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       );
 
                                       context.pushNamedAuth(
-                                          'signIn', context.mounted);
+                                          'verifyEmail', context.mounted);
                                     },
                                     child: Container(
                                       width: 150.0,
