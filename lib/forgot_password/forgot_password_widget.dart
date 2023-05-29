@@ -203,21 +203,22 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(40.0),
                           ),
                           errorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(40.0),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(40.0),
