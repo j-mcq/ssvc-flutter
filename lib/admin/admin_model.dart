@@ -28,13 +28,18 @@ class AdminModel extends FlutterFlowModel {
 
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading1 = false;
+  FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
+  String uploadedFileUrl1 = '';
 
   // Stores action output result for [Custom Action - importPsrData] action in Button widget.
   bool? outImportPsrData;
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl2 = '';
+
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
