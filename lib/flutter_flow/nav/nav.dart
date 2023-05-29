@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import '../flutter_flow_theme.dart';
-import '../../backend/backend.dart';
+import '/backend/backend.dart';
 
 import '../../auth/base_auth_user_provider.dart';
 
@@ -103,20 +103,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ForgotPasswordWidget(),
             ),
             FFRoute(
-              name: 'phoneVerify',
-              path: 'phoneVerify',
-              builder: (context, params) => PhoneVerifyWidget(),
-            ),
-            FFRoute(
-              name: 'homePage',
-              path: 'homePage',
+              name: 'dashboard',
+              path: 'dashboard',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'homePage')
-                  : HomePageWidget(),
+                  ? NavBarPage(initialPage: 'dashboard')
+                  : DashboardWidget(),
             ),
             FFRoute(
               name: 'scenario',
               path: 'scenario',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'scenario')
                   : ScenarioWidget(
@@ -127,6 +124,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'stockInformation',
               path: 'stockInformation',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'stockInformation')
                   : StockInformationWidget(),
@@ -134,6 +132,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'scenarioCopy',
               path: 'scenarioCopy',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'scenarioCopy')
                   : ScenarioCopyWidget(),
@@ -141,9 +140,41 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'stockItemDetails',
               path: 'stockItemDetails',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'stockItemDetails')
-                  : StockItemDetailsWidget(),
+                  : StockItemDetailsWidget(
+                      responseItemReference: params.getParam(
+                          'responseItemReference',
+                          ParamType.DocumentReference,
+                          false,
+                          ['response_items']),
+                    ),
+            ),
+            FFRoute(
+              name: 'admin',
+              path: 'admin',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'admin')
+                  : AdminWidget(
+                      scenarioReference: params.getParam('scenarioReference',
+                          ParamType.DocumentReference, false, ['scenario']),
+                    ),
+            ),
+            FFRoute(
+              name: 'scenarios',
+              path: 'scenarios',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'scenarios')
+                  : ScenariosWidget(),
+            ),
+            FFRoute(
+              name: 'verifyEmail',
+              path: 'verifyEmail',
+              requireAuth: true,
+              builder: (context, params) => VerifyEmailWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -281,7 +312,8 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(param, type, isList, collectionNamePath);
+    return deserializeParam<T>(param, type, isList,
+        collectionNamePath: collectionNamePath);
   }
 }
 

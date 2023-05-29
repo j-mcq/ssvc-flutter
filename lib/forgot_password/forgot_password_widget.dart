@@ -59,6 +59,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

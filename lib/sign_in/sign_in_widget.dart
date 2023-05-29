@@ -30,6 +30,7 @@ class _SignInWidgetState extends State<SignInWidget> {
 
     _model.emailAddressController ??= TextEditingController();
     _model.passwordController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -50,6 +51,7 @@ class _SignInWidgetState extends State<SignInWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, -1.0),
             child: SingleChildScrollView(
@@ -149,7 +151,9 @@ class _SignInWidgetState extends State<SignInWidget> {
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0x00000000),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -206,7 +210,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         labelText: 'Password',
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .bodySmall,
-                                        hintText: 'Enter your email here...',
+                                        hintText: 'Enter a password here...',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodySmall,
                                         enabledBorder: OutlineInputBorder(
@@ -220,7 +224,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
                                             width: 2.0,
                                           ),
                                           borderRadius:
@@ -286,9 +291,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   FFButtonWidget(
-                                    onPressed: () {
-                                      print(
-                                          'Button-ForgotPassword pressed ...');
+                                    onPressed: () async {
+                                      context.pushNamed('forgotPassword');
                                     },
                                     text: 'Forgot Password?',
                                     options: FFButtonOptions(
@@ -327,7 +331,13 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      if (currentUserEmailVerified) {
+                                        context.pushNamedAuth(
+                                            'dashboard', context.mounted);
+                                      } else {
+                                        context.pushNamedAuth(
+                                            'verifyEmail', context.mounted);
+                                      }
                                     },
                                     child: Container(
                                       width: 150.0,
@@ -379,33 +389,6 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     borderWidth: 1.0,
                                     buttonSize: 44.0,
                                     icon: FaIcon(
-                                      FontAwesomeIcons.google,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 16.0,
-                                    ),
-                                    onPressed: () async {
-                                      GoRouter.of(context).prepareAuthEvent();
-                                      final user = await authManager
-                                          .signInWithGoogle(context);
-                                      if (user == null) {
-                                        return;
-                                      }
-
-                                      context.goNamedAuth('homePage', mounted);
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 8.0, 8.0),
-                                  child: FlutterFlowIconButton(
-                                    borderColor:
-                                        FlutterFlowTheme.of(context).lineColor,
-                                    borderRadius: 12.0,
-                                    borderWidth: 1.0,
-                                    buttonSize: 44.0,
-                                    icon: FaIcon(
                                       FontAwesomeIcons.windows,
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
@@ -419,7 +402,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      context.goNamedAuth('homePage', mounted);
+                                      context.goNamedAuth(
+                                          'dashboard', context.mounted);
                                     },
                                   ),
                                 ),
@@ -484,48 +468,6 @@ class _SignInWidgetState extends State<SignInWidget> {
                                     ),
                                   ],
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 24.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      GoRouter.of(context).prepareAuthEvent();
-                                      final user = await authManager
-                                          .signInAnonymously(context);
-                                      if (user == null) {
-                                        return;
-                                      }
-
-                                      context.goNamedAuth('homePage', mounted);
-                                    },
-                                    text: 'Continue as Guest',
-                                    options: FFButtonOptions(
-                                      width: 270.0,
-                                      height: 50.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: FlutterFlowTheme.of(context)
-                                          .lineColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleMedium,
-                                      elevation: 0.0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(50.0),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ],

@@ -1,73 +1,117 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'scenario_results_record.g.dart';
+class ScenarioResultsRecord extends FirestoreRecord {
+  ScenarioResultsRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class ScenarioResultsRecord
-    implements Built<ScenarioResultsRecord, ScenarioResultsRecordBuilder> {
-  static Serializer<ScenarioResultsRecord> get serializer =>
-      _$scenarioResultsRecordSerializer;
+  // "scenario" field.
+  DocumentReference? _scenario;
+  DocumentReference? get scenario => _scenario;
+  bool hasScenario() => _scenario != null;
 
-  DocumentReference? get scenario;
+  // "psr_households_impacted" field.
+  int? _psrHouseholdsImpacted;
+  int get psrHouseholdsImpacted => _psrHouseholdsImpacted ?? 0;
+  bool hasPsrHouseholdsImpacted() => _psrHouseholdsImpacted != null;
 
-  @BuiltValueField(wireName: 'response_item')
-  DocumentReference? get responseItem;
+  // "response_coverage" field.
+  double? _responseCoverage;
+  double get responseCoverage => _responseCoverage ?? 0.0;
+  bool hasResponseCoverage() => _responseCoverage != null;
 
-  @BuiltValueField(wireName: 'number_required')
-  int? get numberRequired;
+  // "total_cost" field.
+  double? _totalCost;
+  double get totalCost => _totalCost ?? 0.0;
+  bool hasTotalCost() => _totalCost != null;
 
-  @BuiltValueField(wireName: 'response_item_name')
-  String? get responseItemName;
+  // "number_of_response_items" field.
+  double? _numberOfResponseItems;
+  double get numberOfResponseItems => _numberOfResponseItems ?? 0.0;
+  bool hasNumberOfResponseItems() => _numberOfResponseItems != null;
 
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "nearest_depot" field.
+  DocumentReference? _nearestDepot;
+  DocumentReference? get nearestDepot => _nearestDepot;
+  bool hasNearestDepot() => _nearestDepot != null;
 
-  static void _initializeBuilder(ScenarioResultsRecordBuilder builder) =>
-      builder
-        ..numberRequired = 0
-        ..responseItemName = '';
+  // "nearest_depot_name" field.
+  String? _nearestDepotName;
+  String get nearestDepotName => _nearestDepotName ?? '';
+  bool hasNearestDepotName() => _nearestDepotName != null;
 
-  static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('scenario_results');
+  DocumentReference get parentReference => reference.parent.parent!;
 
-  static Stream<ScenarioResultsRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  void _initializeFields() {
+    _scenario = snapshotData['scenario'] as DocumentReference?;
+    _psrHouseholdsImpacted = snapshotData['psr_households_impacted'] as int?;
+    _responseCoverage = castToType<double>(snapshotData['response_coverage']);
+    _totalCost = castToType<double>(snapshotData['total_cost']);
+    _numberOfResponseItems =
+        castToType<double>(snapshotData['number_of_response_items']);
+    _nearestDepot = snapshotData['nearest_depot'] as DocumentReference?;
+    _nearestDepotName = snapshotData['nearest_depot_name'] as String?;
+  }
+
+  static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
+      parent != null
+          ? parent.collection('scenario_results')
+          : FirebaseFirestore.instance.collectionGroup('scenario_results');
+
+  static DocumentReference createDoc(DocumentReference parent) =>
+      parent.collection('scenario_results').doc();
+
+  static Stream<ScenarioResultsRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => ScenarioResultsRecord.fromSnapshot(s));
 
   static Future<ScenarioResultsRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => ScenarioResultsRecord.fromSnapshot(s));
 
-  ScenarioResultsRecord._();
-  factory ScenarioResultsRecord(
-          [void Function(ScenarioResultsRecordBuilder) updates]) =
-      _$ScenarioResultsRecord;
+  static ScenarioResultsRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      ScenarioResultsRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static ScenarioResultsRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      ScenarioResultsRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'ScenarioResultsRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createScenarioResultsRecordData({
   DocumentReference? scenario,
-  DocumentReference? responseItem,
-  int? numberRequired,
-  String? responseItemName,
+  int? psrHouseholdsImpacted,
+  double? responseCoverage,
+  double? totalCost,
+  double? numberOfResponseItems,
+  DocumentReference? nearestDepot,
+  String? nearestDepotName,
 }) {
-  final firestoreData = serializers.toFirestore(
-    ScenarioResultsRecord.serializer,
-    ScenarioResultsRecord(
-      (s) => s
-        ..scenario = scenario
-        ..responseItem = responseItem
-        ..numberRequired = numberRequired
-        ..responseItemName = responseItemName,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'scenario': scenario,
+      'psr_households_impacted': psrHouseholdsImpacted,
+      'response_coverage': responseCoverage,
+      'total_cost': totalCost,
+      'number_of_response_items': numberOfResponseItems,
+      'nearest_depot': nearestDepot,
+      'nearest_depot_name': nearestDepotName,
+    }.withoutNulls,
   );
 
   return firestoreData;

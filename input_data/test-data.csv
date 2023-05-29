@@ -1,203 +1,532 @@
-﻿Network,Region,Town,XSPNTYPE - Split 1,XSPNTYPE - Split 2,XSPNTYPE - Split 3,XSPNTYPE - Split 4,XSPNTYPE - Split 5,XSPNTYPE - Split 6,XSPNTYPE - Split 7,XSPNTYPE - Split 8,XSPNTYPE - Split 9,Post Code,Latitude,Longitude
-,,,/psr_category_options/3KWN8RrvItKZbA4TMC5O,,,,,,,,,CR7 8LW,51.40195,-0.09994
-,,,/psr_category_options/36hcCtCMRjwe6F3TsXEk,,,,,,,,,CR7 7AD,51.39465,-0.09496
-,,,/psr_category_options/YQCuvMDs35KSxr6Wo7tn,,,,,,,,,CR7 8JH,51.40239,-0.10179
-,,,/psr_category_options/ItXtyRvcD5IyFh9hBaJF,,,,,,,,,CR7 7LL,51.39649,-0.10937
-,,,/psr_category_options/h2giwPRcaslqtv17UT7I,,,,,,,,,CR7 8NJ,51.40392,-0.09827
-,,,/psr_category_options/RaaPI2suS69c4Bk7eG7f,,,,,,,,,CR7 8RD,51.39789,-0.09724
-,,,/psr_category_options/ZendZJembGxrOWLmplZ9,,,,,,,,,CR7 8DU,51.40989,-0.10494
-,,,/psr_category_options/O9CDAbK2Kknsfn8JWUYr,,,,,,,,,CR7 8QE,51.40016,-0.09562
-,,,/psr_category_options/JN9HawhY66XKVXDEor6k,,,,,,,,,CR7 6BY,51.38998,-0.11936
-,,,/psr_category_options/nMR4mXnHFuwHHMRNF0Kh,,,,,,,,,CR7 8BP,51.40685,-0.10962
-,,,/psr_category_options/NKie86jDRC3KcQJUls6S,,,,,,,,,CR7 7AZ,51.39408,-0.0982
-,,,/psr_category_options/3KWN8RrvItKZbA4TMC5O,,,,,,,,,CR7 6BG,51.39231,-0.11952
-,,,/psr_category_options/36hcCtCMRjwe6F3TsXEk,,,,,,,,,CR7 7DB,51.39839,-0.10596
-,,,/psr_category_options/YQCuvMDs35KSxr6Wo7tn,,,,,,,,,CR7 8FD,51.41185,-0.11181
-,,,/psr_category_options/ItXtyRvcD5IyFh9hBaJF,,,,,,,,,CR7 7LP,51.39663,-0.11161
-,,,/psr_category_options/h2giwPRcaslqtv17UT7I,,,,,,,,,CR7 8AY,51.40452,-0.10445
-,,,/psr_category_options/RaaPI2suS69c4Bk7eG7f,,,,,,,,,CR7 8PP,51.40841,-0.0964
-,,,/psr_category_options/ZendZJembGxrOWLmplZ9,,,,,,,,,CR7 8QA,51.3999,-0.09534
-,,,/psr_category_options/O9CDAbK2Kknsfn8JWUYr,,,,,,,,,CR7 8BN,51.40803,-0.11082
-,,,/psr_category_options/JN9HawhY66XKVXDEor6k,,,,,,,,,CR7 6JU,51.39885,-0.11873
-,,,/psr_category_options/nMR4mXnHFuwHHMRNF0Kh,,,,,,,,,CR7 7PU,51.39728,-0.11405
-,,,/psr_category_options/NKie86jDRC3KcQJUls6S,,,,,,,,,CR7 8AD,51.40322,-0.105
-,,,/psr_category_options/3KWN8RrvItKZbA4TMC5O,,,,,,,,,CR7 7DA,51.39828,-0.10549
-,,,/psr_category_options/36hcCtCMRjwe6F3TsXEk,,,,,,,,,CR7 8EG,51.41206,-0.107
-,,,/psr_category_options/YQCuvMDs35KSxr6Wo7tn,,,,,,,,,CR7 8BR,51.40884,-0.10895
-,,,/psr_category_options/ItXtyRvcD5IyFh9hBaJF,,,,,,,,,CR7 7HE,51.38991,-0.10805
-,,,/psr_category_options/h2giwPRcaslqtv17UT7I,,,,,,,,,CR7 8JH,51.40239,-0.10179
-,,,/psr_category_options/RaaPI2suS69c4Bk7eG7f,,,,,,,,,CR7 7RZ,51.39643,-0.10086
-,,,/psr_category_options/ZendZJembGxrOWLmplZ9,,,,,,,,,CR7 7LJ,51.39612,-0.11402
-,,,/psr_category_options/O9CDAbK2Kknsfn8JWUYr,,,,,,,,,CR7 7NR,51.40091,-0.11563
-,,,/psr_category_options/JN9HawhY66XKVXDEor6k,,,,,,,,,CR7 8BW,51.41027,-0.10931
-,,,/psr_category_options/nMR4mXnHFuwHHMRNF0Kh,,,,,,,,,CR7 8BT,51.41084,-0.11212
-,,,/psr_category_options/NKie86jDRC3KcQJUls6S,,,,,,,,,CR7 7BZ,51.39315,-0.10153
-,,,/psr_category_options/3KWN8RrvItKZbA4TMC5O,,,,,,,,,DA7 5EP,51.46929,0.14216
-,,,/psr_category_options/36hcCtCMRjwe6F3TsXEk,,,,,,,,,DA7 6ST,51.46692,0.17549
-,,,/psr_category_options/YQCuvMDs35KSxr6Wo7tn,,,,,,,,,DA7 5EY,51.47196,0.14388
-,,,/psr_category_options/ItXtyRvcD5IyFh9hBaJF,,,,,,,,,DA7 6AJ,51.45791,0.15384
-,,,/psr_category_options/h2giwPRcaslqtv17UT7I,,,,,,,,,DA6 7PN,51.45392,0.15188
-,,,/psr_category_options/RaaPI2suS69c4Bk7eG7f,,,,,,,,,DA7 4PX,51.46703,0.13502
-,,,/psr_category_options/ZendZJembGxrOWLmplZ9,,,,,,,,,DA7 4NQ,51.46502,0.14472
-,,,/psr_category_options/O9CDAbK2Kknsfn8JWUYr,,,,,,,,,DA7 6LW,51.46062,0.16422
-,,,/psr_category_options/JN9HawhY66XKVXDEor6k,,,,,,,,,DA7 5LY,51.47725,0.13868
-,,,/psr_category_options/nMR4mXnHFuwHHMRNF0Kh,,,,,,,,,DA7 6DF,51.4617,0.15655
-,,,/psr_category_options/NKie86jDRC3KcQJUls6S,,,,,,,,,DA7 6DP,51.45886,0.1541
-,,,/psr_category_options/3KWN8RrvItKZbA4TMC5O,,,,,,,,,DA6 8BT,51.45982,0.12946
-,,,/psr_category_options/36hcCtCMRjwe6F3TsXEk,,,,,,,,,DA6 7PP,51.45292,0.15112
-,,,/psr_category_options/YQCuvMDs35KSxr6Wo7tn,,,,,,,,,DA7 4AH,51.46085,0.13505
-,,,/psr_category_options/ItXtyRvcD5IyFh9hBaJF,,,,,,,,,DA7 5BT,51.46725,0.1521
-,,,/psr_category_options/h2giwPRcaslqtv17UT7I,,,,,,,,,DA7 5LU,51.47596,0.13769
-,,,/psr_category_options/RaaPI2suS69c4Bk7eG7f,,,,,,,,,DA7 6JZ,51.45548,0.16847
-,,,/psr_category_options/ZendZJembGxrOWLmplZ9,,,,,,,,,DA7 5RL,51.47725,0.13096
-,,,/psr_category_options/O9CDAbK2Kknsfn8JWUYr,,,,,,,,,DA7 4RQ,51.46433,0.13069
-,,,/psr_category_options/JN9HawhY66XKVXDEor6k,,,,,,,,,DA6 8EL,51.4575,0.12918
-,,,/psr_category_options/nMR4mXnHFuwHHMRNF0Kh,,,,,,,,,DA7 5EA,51.47201,0.14695
-,,,/psr_category_options/NKie86jDRC3KcQJUls6S,,,,,,,,,DA7 5EZ,51.47157,0.14426
-,,,/psr_category_options/3KWN8RrvItKZbA4TMC5O,,,,,,,,,DA7 6RH,51.46642,0.1723
-,,,/psr_category_options/36hcCtCMRjwe6F3TsXEk,,,,,,,,,DA7 4LH,51.46263,0.14498
-,,,/psr_category_options/YQCuvMDs35KSxr6Wo7tn,,,,,,,,,DA6 7AF,51.45504,0.14104
-,,,/psr_category_options/ItXtyRvcD5IyFh9hBaJF,,,,,,,,,DA7 5RT,51.47883,0.12726
-,,,/psr_category_options/h2giwPRcaslqtv17UT7I,,,,,,,,,DA7 5EU,51.47178,0.14129
-,,,/psr_category_options/RaaPI2suS69c4Bk7eG7f,,,,,,,,,DA6 7HU,51.45063,0.14345
-,,,/psr_category_options/ZendZJembGxrOWLmplZ9,,,,,,,,,DA7 6DG,51.46238,0.15598
-,,,/psr_category_options/O9CDAbK2Kknsfn8JWUYr,,,,,,,,,DA7 5RU,51.47797,0.12637
-,,,/psr_category_options/JN9HawhY66XKVXDEor6k,,,,,,,,,DA6 8JW,51.45258,0.13225
-,,,/psr_category_options/nMR4mXnHFuwHHMRNF0Kh,,,,,,,,,DA7 6JF,51.4641,0.16308
-,,,/psr_category_options/NKie86jDRC3KcQJUls6S,,,,,,,,,DA7 6AA,51.45525,0.15948
-,,,/psr_category_options/3KWN8RrvItKZbA4TMC5O,,,,,,,,,DA7 4LT,51.45977,0.14868
-,,,/psr_category_options/36hcCtCMRjwe6F3TsXEk,,,,,,,,,DA7 6EF,51.45849,0.16288
-,,,/psr_category_options/YQCuvMDs35KSxr6Wo7tn,,,,,,,,,DA7 4RH,51.46536,0.13067
-,,,/psr_category_options/ItXtyRvcD5IyFh9hBaJF,,,,,,,,,DA7 4SJ,51.46702,0.13161
-,,,/psr_category_options/h2giwPRcaslqtv17UT7I,,,,,,,,,CR7 8AL,51.40334,-0.1063
-,,,/psr_category_options/RaaPI2suS69c4Bk7eG7f,,,,,,,,,CR7 8FD,51.41185,-0.11181
-,,,/psr_category_options/ZendZJembGxrOWLmplZ9,,,,,,,,,CR7 7LA,51.39523,-0.11266
-,,,/psr_category_options/O9CDAbK2Kknsfn8JWUYr,,,,,,,,,CR7 6HA,51.39435,-0.11673
-,,,/psr_category_options/JN9HawhY66XKVXDEor6k,,,,,,,,,CR7 8DR,51.41024,-0.10266
-,,,/psr_category_options/nMR4mXnHFuwHHMRNF0Kh,,,,,,,,,CR7 6DB,51.3938,-0.11977
-,,,/psr_category_options/NKie86jDRC3KcQJUls6S,,,,,,,,,CR7 7EH,51.39325,-0.10614
-,,,/psr_category_options/3KWN8RrvItKZbA4TMC5O,,,,,,,,,CR7 7BA,51.39629,-0.10341
-,,,/psr_category_options/36hcCtCMRjwe6F3TsXEk,,,,,,,,,CR7 8NP,51.40464,-0.09487
-,,,/psr_category_options/YQCuvMDs35KSxr6Wo7tn,,,,,,,,,CR7 8PL,51.40782,-0.09694
-,,,/psr_category_options/ItXtyRvcD5IyFh9hBaJF,,,,,,,,,CR7 7DA,51.39828,-0.10549
-,,,/psr_category_options/h2giwPRcaslqtv17UT7I,,,,,,,,,CR7 7HE,51.38991,-0.10805
-,,,/psr_category_options/RaaPI2suS69c4Bk7eG7f,,,,,,,,,CR7 8RD,51.39789,-0.09724
-,,,/psr_category_options/ZendZJembGxrOWLmplZ9,,,,,,,,,CR7 6BZ,51.38913,-0.11757
-,,,/psr_category_options/O9CDAbK2Kknsfn8JWUYr,,,,,,,,,CR7 8QN,51.4034,-0.09459
-,,,/psr_category_options/JN9HawhY66XKVXDEor6k,,,,,,,,,CR7 6BG,51.39231,-0.11952
-,,,/psr_category_options/nMR4mXnHFuwHHMRNF0Kh,,,,,,,,,CR7 8NS,51.4049,-0.09501
-,,,/psr_category_options/NKie86jDRC3KcQJUls6S,,,,,,,,,CR7 7PD,51.40024,-0.11566
-,,,,,,,,,,,,CR7 7DB,51.39839,-0.10596
-,,,,,,,,,,,,CR7 6AL,51.39137,-0.1154
-,,,,,,,,,,,,CR7 8AY,51.40452,-0.10445
-,,,,,,,,,,,,CR7 8EW,51.41217,-0.10358
-,,,,,,,,,,,,CR7 8NE,51.40294,-0.09883
-,,,,,,,,,,,,CR7 8QP,51.40469,-0.09156
-,,,,,,,,,,,,CR7 8EB,51.41036,-0.09977
-,,,,,,,,,,,,CR7 7HL,51.38808,-0.10922
-,,,,,,,,,,,,CR7 8DY,51.41045,-0.10123
-,,,,,,,,,,,,CR7 8DD,51.40531,-0.10094
-,,,,,,,,,,,,CR7 7HJ,51.3916,-0.10844
-,,,,,,,,,,,,CR7 7DJ,51.39729,-0.10694
-,,,,,,,,,,,,CR7 8RB,51.39783,-0.09845
-,,,,,,,,,,,,CR7 8RL,51.39775,-0.09609
-,,,,,,,,,,,,CR7 8BP,51.40685,-0.10962
-,,,,,,,,,,,,CR7 8EE,51.40963,-0.09882
-,,,,,,,,,,,,CR7 8BT,51.41084,-0.11212
-,,,,,,,,,,,,CR7 7PS,51.39818,-0.11376
-,,,,,,,,,,,,CR7 7PY,51.39757,-0.11411
-,,,,,,,,,,,,CR7 8QH,51.40201,-0.09564
-,,,,,,,,,,,,CR7 7DP,51.39687,-0.10861
-,,,,,,,,,,,,CR7 7QP,51.40048,-0.11333
-,,,,,,,,,,,,CR7 8HG,51.40467,-0.10406
-,,,,,,,,,,,,CR7 8QW,51.40286,-0.09259
-,,,,,,,,,,,,CR7 6BS,51.39018,-0.11729
-,,,,,,,,,,,,CR7 7PU,51.39728,-0.11405
-,,,,,,,,,,,,CR7 6AN,51.38906,-0.11248
-,,,,,,,,,,,,CR7 8LA,51.39941,-0.09414
-,,,,,,,,,,,,CR7 8RD,51.39789,-0.09724
-,,,,,,,,,,,,CR7 6HN,51.39665,-0.11666
-,,,,,,,,,,,,CR7 8BQ,51.40789,-0.11124
-,,,,,,,,,,,,CR7 8QH,51.40201,-0.09564
-,,,,,,,,,,,,CR7 7QE,51.39939,-0.10627
-,,,,,,,,,,,,CR7 8BS,51.40851,-0.10879
-,,,,,,,,,,,,CR7 8LN,51.40104,-0.09571
-,,,,,,,,,,,,CR7 8BD,51.40967,-0.10657
-,,,,,,,,,,,,CR7 6BU,51.38969,-0.11944
-,,,,,,,,,,,,CR7 6JU,51.39885,-0.11873
-,,,,,,,,,,,,CR7 8AD,51.40322,-0.105
-,,,,,,,,,,,,CR7 7DE,51.39833,-0.10704
-,,,,,,,,,,,,CR7 7HE,51.38991,-0.10805
-,,,,,,,,,,,,CR7 8RG,51.39594,-0.09396
-,,,,,,,,,,,,CR7 8AZ,51.40434,-0.10478
-,,,,,,,,,,,,CR7 7JZ,51.39141,-0.10761
-,,,,,,,,,,,,CR7 6EL,51.40004,-0.1198
-,,,,,,,,,,,,CR7 7QE,51.39939,-0.10627
-,,,,,,,,,,,,CR7 6AF,51.39158,-0.1159
-,,,,,,,,,,,,CR7 7QP,51.40048,-0.11333
-,,,,,,,,,,,,DA17 5LX,51.48282,0.14325
-,,,,,,,,,,,,DA17 5LT,51.48301,0.1419
-,,,,,,,,,,,,DA17 5LU,51.48311,0.14311
-,,,,,,,,,,,,DA17 5LX,51.48282,0.14325
-,,,,,,,,,,,,DA17 5NA,51.48254,0.14303
-,,,,,,,,,,,,DA17 5NA,51.48254,0.14303
-,,,,,,,,,,,,DA17 5NA,51.48254,0.14303
-,,,,,,,,,,,,DA17 5NA,51.48254,0.14303
-,,,,,,,,,,,,DA17 5PP,51.49083,0.14873
-,,,,,,,,,,,,DA17 5PS,51.49075,0.15006
-,,,,,,,,,,,,DA17 5PE,51.47877,0.1359
-,,,,,,,,,,,,DA17 5LE,51.48296,0.14532
-,,,,,,,,,,,,DA17 5HR,51.48447,0.13843
-,,,,,,,,,,,,DA17 5PA,51.47943,0.14132
-,,,,,,,,,,,,DA17 5QD,51.4917,0.14887
-,,,,,,,,,,,,DA17 6HA,51.48482,0.15063
-,,,,,,,,,,,,DA17 6HB,51.48395,0.1503
-,,,,,,,,,,,,DA17 6EY,51.48443,0.15096
-,,,,,,,,,,,,DA17 6HB,51.48395,0.1503
-,,,,,,,,,,,,DA17 6HE,51.48423,0.1531
-,,,,,,,,,,,,DA17 5ED,51.48488,0.146
-,,,,,,,,,,,,DA17 5ED,51.48488,0.146
-,,,,,,,,,,,,DA17 5ED,51.48488,0.146
-,,,,,,,,,,,,DA17 5EG,51.48491,0.14537
-,,,,,,,,,,,,DA17 5EG,51.48491,0.14537
-,,,,,,,,,,,,DA17 5HQ,51.49032,0.14013
-,,,,,,,,,,,,DA17 6EH,51.48925,0.15157
-,,,,,,,,,,,,DA17 5ET,51.48503,0.14194
-,,,,,,,,,,,,DA17 5PB,51.48008,0.13654
-,,,,,,,,,,,,DA17 5PB,51.48008,0.13654
-,,,,,,,,,,,,DA17 5QN,51.48606,0.14977
-,,,,,,,,,,,,DA17 5QN,51.48606,0.14977
-,,,,,,,,,,,,DA17 5PY,51.49118,0.1494
-,,,,,,,,,,,,DA17 5QA,51.4912,0.14877
-,,,,,,,,,,,,DA17 6JR,51.49351,0.15087
-,,,,,,,,,,,,DA17 5AJ,51.48852,0.14834
-,,,,,,,,,,,,DA17 5LR,51.48252,0.14228
-,,,,,,,,,,,,DA17 5EQ,51.48383,0.14583
-,,,,,,,,,,,,DA7 4UW,51.46454,0.12614
-,,,,,,,,,,,,DA7 5PL,51.46871,0.14328
-,,,,,,,,,,,,DA7 4NX,51.46223,0.13978
-,,,,,,,,,,,,DA7 6AS,51.45531,0.16157
-,,,,,,,,,,,,DA7 4AB,51.46379,0.13543
-,,,,,,,,,,,,DA7 5LB,51.47448,0.13439
-,,,,,,,,,,,,DA6 8JN,51.4543,0.12951
-,,,,,,,,,,,,DA6 8NY,51.4539,0.13827
-,,,,,,,,,,,,DA6 8JG,51.45361,0.13178
-,,,,,,,,,,,,DA7 4QE,51.4659,0.13706
-,,,,,,,,,,,,DA7 6LW,51.46062,0.16422
-,,,,,,,,,,,,DA7 5EU,51.47178,0.14129
-,,,,,,,,,,,,DA7 5NY,51.47654,0.14366
-,,,,,,,,,,,,DA7 6JS,51.4581,0.16698
-,,,,,,,,,,,,DA6 8HY,51.4538,0.12727
-,,,,,,,,,,,,DA7 5QY,51.4778,0.13437
-,,,,,,,,,,,,DA6 7NJ,51.45267,0.1496
-,,,,,,,,,,,,DA7 5RD,51.47876,0.13296
-,,,,,,,,,,,,DA7 5SJ,51.47703,0.12682
-,,,,,,,,,,,,DA6 8LJ,51.45471,0.13504
-,,,,,,,,,,,,DA7 5HF,51.47337,0.14315
-,,,,,,,,,,,,DA7 6DH,51.46138,0.15538
-,,,,,,,,,,,,DA7 5SZ,51.47473,0.12199
-,,,,,,,,,,,,DA7 6PG,51.46561,0.16118
-,,,,,,,,,,,,DA6 8JW,51.45258,0.13225
-,,,,,,,,,,,,DA7 5RP,51.4778,0.12828
-,,,,,,,,,,,,DA7 5EE,51.46954,0.15697
-,,,,,,,,,,,,DA7 5BL,51.46947,0.15097
+﻿Network,Category1,Category2,Category3,Category4,Category5,Category6,Category7,Category8,Category9,Postcode,Latitude,Longitude
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,DD1,56.4618,-2.97736
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,DD5,56.4797,-2.86337
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,DD6,56.4366,-2.92816
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,DG1,55.0733,-3.58566
+,Oxygen Concentrator ,,,,,,,,,DG10,55.321,-3.43921
+,Medicine Refrigeration ,,,,,,,,,DG11,55.1146,-3.3407
+,Medical Equipment - feeding and medication ,,,,,,,,,DG12,54.9897,-3.25136
+,Apnoea Monitor ,,,,,,,,,DG13,55.1744,-3.03233
+,Careline system ,,,,,,,,,DG14,55.0801,-2.98763
+,Medical dependant Electric showering ,,,,,,,,,DG2,55.0654,-3.65697
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,DG3,55.2369,-3.79898
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,DG4,55.3752,-3.95486
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,DG5,54.9215,-3.81294
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,DG6,54.8372,-4.05552
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,DG7,54.966,-4.00826
+,Oxygen Concentrator ,,,,,,,,,DG8,54.8748,-4.514
+,Medicine Refrigeration ,,,,,,,,,DG9,54.8783,-5.02299
+,Medical Equipment - feeding and medication ,,,,,,,,,EH1,55.9523,-3.19207
+,Apnoea Monitor ,,,,,,,,,EH10,55.9216,-3.21082
+,Careline system ,,,,,,,,,EH11,55.9334,-3.25136
+,Medical dependant Electric showering ,,,,,,,,,EH12,55.9412,-3.27459
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,EH13,55.9086,-3.24252
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,EH14,55.9117,-3.28064
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,EH15,55.9471,-3.11305
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,EH16,55.9238,-3.15102
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,EH17,55.9061,-3.14339
+,Oxygen Concentrator ,,,,,,,,,EH18,55.8766,-3.12173
+,Medicine Refrigeration ,,,,,,,,,EH19,55.8725,-3.10481
+,Medical Equipment - feeding and medication ,,,,,,,,,EH2,55.9532,-3.20047
+,Apnoea Monitor ,,,,,,,,,EH20,55.8787,-3.15359
+,Careline system ,,,,,,,,,EH21,55.9389,-3.04672
+,Medical dependant Electric showering ,,,,,,,,,EH22,55.8859,-3.06197
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,EH23,55.841,-3.05175
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,EH24,55.851,-3.13542
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,EH25,55.8593,-3.17773
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,EH26,55.8335,-3.22378
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,EH27,55.8895,-3.4246
+,Oxygen Concentrator ,,,,,,,,,EH28,55.9285,-3.40412
+,Medicine Refrigeration ,,,,,,,,,EH29,55.9569,-3.39566
+,Medical Equipment - feeding and medication ,,,,,,,,,EH3,55.9522,-3.20511
+,Apnoea Monitor ,,,,,,,,,EH30,55.9827,-3.3796
+,Careline system ,,,,,,,,,EH31,56.0377,-2.82053
+,Medical dependant Electric showering ,,,,,,,,,EH32,55.9664,-2.95212
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,EH33,55.9417,-2.94463
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,EH34,55.9105,-2.88561
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,EH35,55.9115,-2.94494
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,EH36,55.8554,-2.85429
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,EH37,55.8634,-2.96624
+,Oxygen Concentrator ,,,,,,,,,EH38,55.7852,-2.96181
+,Medicine Refrigeration ,,,,,,,,,EH39,56.0481,-2.73267
+,Medical Equipment - feeding and medication ,,,,,,,,,EH4,55.9623,-3.2558
+,Apnoea Monitor ,,,,,,,,,EH40,55.9903,-2.65117
+,Careline system ,,,,,,,,,EH41,55.9495,-2.77824
+,Medical dependant Electric showering ,,,,,,,,,EH42,55.9938,-2.52455
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,EH43,55.6239,-3.01163
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,EH44,55.621,-3.07046
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,EH45,55.6539,-3.19035
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,EH46,55.7344,-3.34326
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,EH47,55.8607,-3.66474
+,Oxygen Concentrator ,,,,,,,,,EH48,55.8983,-3.66075
+,Medicine Refrigeration ,,,,,,,,,EH49,55.9769,-3.60288
+,Medical Equipment - feeding and medication ,,,,,,,,,EH5,55.9746,-3.2194
+,Apnoea Monitor ,,,,,,,,,EH51,56.0116,-3.60532
+,Careline system ,,,,,,,,,EH52,55.9362,-3.48957
+,Medical dependant Electric showering ,,,,,,,,,EH53,55.8947,-3.47357
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,EH54,55.8917,-3.52482
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,EH55,55.8487,-3.57344
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,EH6,55.9712,-3.17378
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,EH7,55.9599,-3.16407
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,EH8,55.9499,-3.16632
+,Oxygen Concentrator ,,,,,,,,,EH9,55.9333,-3.1871
+,Medicine Refrigeration ,,,,,,,,,EH91,55.9272,-3.2907
+,Medical Equipment - feeding and medication ,,,,,,,,,EH95,55.9786,-3.25352
+,Apnoea Monitor ,,,,,,,,,EH99,55.9519,-3.19475
+,Careline system ,,,,,,,,,FK1,55.9889,-3.79292
+,Medical dependant Electric showering ,,,,,,,,,FK10,56.115,-3.78341
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,FK11,56.1499,-3.85117
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,FK12,56.1521,-3.80153
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,FK13,56.1502,-3.74253
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,FK14,56.1629,-3.66674
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,FK15,56.1999,-3.95236
+,Oxygen Concentrator ,,,,,,,,,FK16,56.1911,-4.05909
+,Medicine Refrigeration ,,,,,,,,,FK2,56.0053,-3.75819
+,Medical Equipment - feeding and medication ,,,,,,,,,FK3,56.012,-3.72041
+,Apnoea Monitor ,,,,,,,,,FK4,55.9976,-3.90755
+,Careline system ,,,,,,,,,FK5,56.0255,-3.82063
+,Medical dependant Electric showering ,,,,,,,,,FK6,56.0217,-3.91439
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,FK7,56.0997,-3.91826
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,FK8,56.129,-4.03387
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,FK9,56.1416,-3.94123
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,G1,55.8605,-4.24909
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,G11,55.8736,-4.31331
+,Oxygen Concentrator ,,,,,,,,,G12,55.8797,-4.30204
+,Medicine Refrigeration ,,,,,,,,,G13,55.8928,-4.34728
+,Medical Equipment - feeding and medication ,,,,,,,,,G14,55.8801,-4.35055
+,Apnoea Monitor ,,,,,,,,,G15,55.9104,-4.36696
+,Careline system ,,,,,,,,,G2,55.8635,-4.25591
+,Medical dependant Electric showering ,,,,,,,,,G20,55.8856,-4.28208
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,G21,55.8805,-4.22285
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,G22,55.8896,-4.2526
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,G23,55.9022,-4.28523
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,G3,55.8664,-4.27024
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,G31,55.8562,-4.20922
+,Oxygen Concentrator ,,,,,,,,,G32,55.8487,-4.16633
+,Medicine Refrigeration ,,,,,,,,,G33,55.8732,-4.16521
+,Medical Equipment - feeding and medication ,,,,,,,,,G34,55.8679,-4.1127
+,Apnoea Monitor ,,,,,,,,,G4,55.8681,-4.25141
+,Careline system ,,,,,,,,,G40,55.8473,-4.22076
+,Medical dependant Electric showering ,,,,,,,,,G41,55.8387,-4.28163
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,G42,55.8342,-4.25874
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,G43,55.8186,-4.29257
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,G44,55.8141,-4.2578
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,G45,55.8046,-4.23305
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,G46,55.8044,-4.30696
+,Oxygen Concentrator ,,,,,,,,,G5,55.8477,-4.25387
+,Medicine Refrigeration ,,,,,,,,,G51,55.8574,-4.3131
+,Medical Equipment - feeding and medication ,,,,,,,,,G52,55.8497,-4.35338
+,Apnoea Monitor ,,,,,,,,,G53,55.8208,-4.35228
+,Careline system ,,,,,,,,,G58,55.8582,-4.2595
+,Medical dependant Electric showering ,,,,,,,,,G60,55.9178,-4.44226
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,G61,55.9192,-4.33016
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,G62,55.9426,-4.32067
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,G63,56.0428,-4.37107
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,G64,55.911,-4.21797
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,G65,55.9721,-4.09972
+,Oxygen Concentrator ,,,,,,,,,G66,55.9403,-4.15444
+,Medicine Refrigeration ,,,,,,,,,G67,55.9479,-3.9857
+,Medical Equipment - feeding and medication ,,,,,,,,,G68,55.9532,-4.01084
+,Apnoea Monitor ,,,,,,,,,G69,55.8744,-4.10247
+,Careline system ,,,,,,,,,G70,55.9501,-3.98759
+,Medical dependant Electric showering ,,,,,,,,,G71,55.8219,-4.0759
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,G72,55.8047,-4.13068
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,G73,55.8219,-4.2064
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,G74,55.7678,-4.17807
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,G75,55.751,-4.19608
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,G76,55.7783,-4.27341
+,Oxygen Concentrator ,,,,,,,,,G77,55.7737,-4.33182
+,Medicine Refrigeration ,,,,,,,,,G78,55.7935,-4.4087
+,Medical Equipment - feeding and medication ,,,,,,,,,G79,55.771,-4.22308
+,Apnoea Monitor ,,,,,,,,,G80,55.8686,-4.2419
+,Careline system ,,,,,,,,,G81,55.912,-4.40713
+,Medical dependant Electric showering ,,,,,,,,,G82,55.9509,-4.57338
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,G83,56.0115,-4.5872
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,G84,56.0138,-4.75446
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,G9,55.8687,-4.24226
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,G90,55.8691,-4.24071
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,KA1,55.5971,-4.49707
+,Oxygen Concentrator ,,,,,,,,,KA10,55.5495,-4.64991
+,Medicine Refrigeration ,,,,,,,,,KA11,55.6177,-4.62959
+,Medical Equipment - feeding and medication ,,,,,,,,,KA12,55.6179,-4.66595
+,Apnoea Monitor ,,,,,,,,,KA13,55.6553,-4.70031
+,Careline system ,,,,,,,,,KA14,55.7404,-4.67155
+,Medical dependant Electric showering ,,,,,,,,,KA15,55.7484,-4.62702
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,KA16,55.6072,-4.33404
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,KA17,55.6102,-4.29397
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,KA18,55.4509,-4.24216
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,KA19,55.3465,-4.67001
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,KA2,55.5966,-4.56149
+,Oxygen Concentrator ,,,,,,,,,KA20,55.6407,-4.7532
+,Medicine Refrigeration ,,,,,,,,,KA21,55.6413,-4.78473
+,Medical Equipment - feeding and medication ,,,,,,,,,KA22,55.6487,-4.80764
+,Apnoea Monitor ,,,,,,,,,KA23,55.6891,-4.85306
+,Careline system ,,,,,,,,,KA24,55.7096,-4.71631
+,Medical dependant Electric showering ,,,,,,,,,KA25,55.7522,-4.68923
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,KA26,55.2202,-4.83616
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,KA27,55.5408,-5.16958
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,KA28,55.7544,-4.92465
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,KA29,55.7566,-4.85431
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,KA3,55.6431,-4.49687
+,Oxygen Concentrator ,,,,,,,,,KA30,55.7967,-4.86378
+,Medicine Refrigeration ,,,,,,,,,KA4,55.5996,-4.38484
+,Medical Equipment - feeding and medication ,,,,,,,,,KA5,55.5091,-4.38427
+,Apnoea Monitor ,,,,,,,,,KA6,55.4177,-4.50906
+,Careline system ,,,,,,,,,KA7,55.4504,-4.63097
+,Medical dependant Electric showering ,,,,,,,,,KA8,55.4715,-4.61378
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,KA9,55.4985,-4.60593
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,KY1,56.127,-3.14066
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,KY10,56.2299,-2.7008
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,KY11,56.0495,-3.412
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,KY12,56.0759,-3.48812
+,Oxygen Concentrator ,,,,,,,,,KY13,56.2082,-3.4315
+,Medicine Refrigeration ,,,,,,,,,KY14,56.311,-3.23252
+,Medical Equipment - feeding and medication ,,,,,,,,,KY15,56.3008,-3.05147
+,Apnoea Monitor ,,,,,,,,,KY16,56.3415,-2.81962
+,Careline system ,,,,,,,,,KY2,56.1223,-3.18284
+,Medical dependant Electric showering ,,,,,,,,,KY3,56.063,-3.23222
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,KY4,56.1138,-3.36176
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,KY5,56.1444,-3.29526
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,KY6,56.1966,-3.19664
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,KY7,56.2105,-3.15506
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,KY8,56.1972,-3.0123
+,Oxygen Concentrator ,,,,,,,,,KY9,56.2089,-2.83716
+,Medicine Refrigeration ,,,,,,,,,KY99,56.0547,-3.43743
+,Medical Equipment - feeding and medication ,,,,,,,,,ML1,55.7977,-3.9772
+,Apnoea Monitor ,,,,,,,,,ML10,55.6847,-4.062
+,Careline system ,,,,,,,,,ML11,55.6663,-3.7885
+,Medical dependant Electric showering ,,,,,,,,,ML12,55.5735,-3.5884
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,ML2,55.7766,-3.91558
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,ML3,55.771,-4.05283
+,Apnoea Monitor ,,,,,,,,,ML4,55.8187,-4.02139
+,Careline system ,,,,,,,,,ML5,55.8597,-4.03068
+,Medical dependant Electric showering ,,,,,,,,,ML6,55.8678,-3.96329
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,ML7,55.8297,-3.7955
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,ML8,55.7279,-3.83807
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,ML9,55.7255,-3.96853
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,PA1,55.8449,-4.42025
+,Oxygen Concentrator ,,,,,,,,,PA10,55.8329,-4.54943
+,Medicine Refrigeration ,,,,,,,,,PA11,55.8572,-4.58393
+,Medical Equipment - feeding and medication ,,,,,,,,,PA12,55.7967,-4.61896
+,Apnoea Monitor ,,,,,,,,,PA13,55.8896,-4.62542
+,Careline system ,,,,,,,,,PA14,55.9283,-4.66685
+,Medical dependant Electric showering ,,,,,,,,,PA15,55.9429,-4.74699
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,PA16,55.9427,-4.798
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,PA17,55.8693,-4.87489
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,PA18,55.8914,-4.88011
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,PA19,55.9524,-4.82131
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,PA2,55.8297,-4.43456
+,Oxygen Concentrator ,,,,,,,,,PA20,55.8343,-5.05696
+,Medicine Refrigeration ,,,,,,,,,PA23,55.954,-4.93321
+,Medical Equipment - feeding and medication ,,,,,,,,,PA3,55.8514,-4.44392
+,Apnoea Monitor ,,,,,,,,,PA4,55.8753,-4.39574
+,Careline system ,,,,,,,,,PA5,55.8316,-4.50997
+,Medical dependant Electric showering ,,,,,,,,,PA6,55.8629,-4.53436
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,PA7,55.9067,-4.50187
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,PA8,55.9013,-4.45319
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,PA9,55.8112,-4.55028
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,PA98,55.8606,-4.42976
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,TD1,55.6226,-2.81075
+,Oxygen Concentrator ,,,,,,,,,TD10,55.7162,-2.44214
+,Medicine Refrigeration ,,,,,,,,,TD11,55.7867,-2.31516
+,Medical Equipment - feeding and medication ,,,,,,,,,TD12,55.6529,-2.24188
+,Apnoea Monitor ,,,,,,,,,TD13,55.936,-2.38331
+,Careline system ,,,,,,,,,TD14,55.8671,-2.12259
+,Medical dependant Electric showering ,,,,,,,,,TD15,55.7509,-2.01297
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,TD2,55.7307,-2.75486
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,TD3,55.7016,-2.57323
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,TD4,55.6406,-2.67384
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,TD5,55.5894,-2.41908
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,TD6,55.5829,-2.69579
+,Oxygen Concentrator ,,,,,,,,,TD7,55.5379,-2.86951
+,Medicine Refrigeration ,,,,,,,,,TD8,55.476,-2.54332
+,Medical Equipment - feeding and medication ,,,,,,,,,TD9,55.3997,-2.77755
+,Apnoea Monitor ,,,,,,,,,BL0,53.6434,-2.31615
+,Careline system ,,,,,,,,,BL1,53.5889,-2.4406
+,Medical dependant Electric showering ,,,,,,,,,BL11,53.5723,-2.42538
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,BL2,53.5877,-2.39783
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,BL3,53.5661,-2.43199
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,BL4,53.5475,-2.40374
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,BL5,53.5513,-2.51698
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,BL6,53.5911,-2.54013
+,Oxygen Concentrator ,,,,,,,,,BL7,53.6281,-2.42301
+,Medicine Refrigeration ,,,,,,,,,BL78,53.5615,-2.40861
+,Medical Equipment - feeding and medication ,,,,,,,,,BL8,53.6017,-2.32344
+,Apnoea Monitor ,,,,,,,,,BL9,53.5921,-2.28889
+,Careline system ,,,,,,,,,CH1,53.1995,-2.90019
+,Medical dependant Electric showering ,,,,,,,,,CH2,53.2157,-2.87079
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,CH25,53.397,-3.01179
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,CH26,53.3657,-3.06591
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,CH27,53.4212,-3.04226
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,CH28,53.4005,-3.11194
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,CH29,53.3903,-3.17941
+,Oxygen Concentrator ,,,,,,,,,CH3,53.1677,-2.82548
+,Medicine Refrigeration ,,,,,,,,,CH30,53.379,-3.09844
+,Medical Equipment - feeding and medication ,,,,,,,,,CH31,53.3297,-3.09886
+,Apnoea Monitor ,,,,,,,,,CH32,53.362,-2.99763
+,Careline system ,,,,,,,,,CH33,53.2906,-3.06264
+,Medical dependant Electric showering ,,,,,,,,,CH34,53.283,-2.90925
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,CH4,53.1693,-2.93821
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,CH41,53.3948,-3.03093
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,CH42,53.3752,-3.02196
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,CH43,53.3829,-3.06013
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,CH44,53.4156,-3.03724
+,Oxygen Concentrator ,,,,,,,,,CH45,53.4283,-3.05078
+,Medicine Refrigeration ,,,,,,,,,CH46,53.4039,-3.11096
+,Medical Equipment - feeding and medication ,,,,,,,,,CH47,53.3959,-3.1702
+,Apnoea Monitor ,,,,,,,,,CH48,53.3726,-3.17084
+,Careline system ,,,,,,,,,CH49,53.3809,-3.10331
+,Medical dependant Electric showering ,,,,,,,,,CH5,53.2049,-3.03862
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,CH6,53.249,-3.14397
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,CH60,53.3269,-3.09643
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,CH61,53.3474,-3.10179
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,CH62,53.3358,-2.98218
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,CH63,53.3458,-3.01145
+,Oxygen Concentrator ,,,,,,,,,CH64,53.2884,-3.04912
+,Medicine Refrigeration ,,,,,,,,,CH65,53.2783,-2.90258
+,Medical Equipment - feeding and medication ,,,,,,,,,CH66,53.2781,-2.93614
+,Apnoea Monitor ,,,,,,,,,CH7,53.1694,-3.13395
+,Careline system ,,,,,,,,,CH70,53.1927,-2.92254
+,Medical dependant Electric showering ,,,,,,,,,CH8,53.2822,-3.24143
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,CH88,53.1779,-2.89582
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,CH99,53.1872,-2.88946
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,CW10,53.189,-2.44878
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,CW4,53.2039,-2.34092
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,CW6,53.1616,-2.66731
+,Oxygen Concentrator ,,,,,,,,,CW7,53.1907,-2.5273
+,Medicine Refrigeration ,,,,,,,,,CW8,53.254,-2.55938
+,Medical Equipment - feeding and medication ,,,,,,,,,CW9,53.2597,-2.50405
+,Apnoea Monitor ,,,,,,,,,L1,53.4024,-2.98036
+,Careline system ,,,,,,,,,L10,53.4736,-2.92829
+,Medical dependant Electric showering ,,,,,,,,,L11,53.4473,-2.91461
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,L12,53.4345,-2.89686
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,L13,53.4151,-2.92166
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,L14,53.4193,-2.88157
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,L15,53.3973,-2.92268
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,L16,53.3981,-2.89273
+,Oxygen Concentrator ,,,,,,,,,L17,53.3786,-2.94229
+,Medicine Refrigeration ,,,,,,,,,L18,53.3805,-2.90948
+,Medical Equipment - feeding and medication ,,,,,,,,,L19,53.3582,-2.90315
+,Apnoea Monitor ,,,,,,,,,L2,53.4068,-2.99014
+,Careline system ,,,,,,,,,L20,53.4523,-2.98999
+,Medical dependant Electric showering ,,,,,,,,,L21,53.4707,-3.00024
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,L22,53.4767,-3.02748
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,L23,53.4891,-3.02428
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,L24,53.3444,-2.84317
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,L25,53.3789,-2.86397
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,L26,53.3656,-2.83626
+,Oxygen Concentrator ,,,,,,,,,L27,53.388,-2.84034
+,Medicine Refrigeration ,,,,,,,,,L28,53.4352,-2.86652
+,Medical Equipment - feeding and medication ,,,,,,,,,L29,53.5053,-2.98794
+,Apnoea Monitor ,,,,,,,,,L3,53.4088,-2.98553
+,Careline system ,,,,,,,,,L30,53.4819,-2.97182
+,Medical dependant Electric showering ,,,,,,,,,L31,53.5133,-2.93851
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,L32,53.4786,-2.88935
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,L33,53.4886,-2.87602
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,L34,53.435,-2.81515
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,L35,53.4164,-2.78524
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,L36,53.4142,-2.84157
+,Oxygen Concentrator ,,,,,,,,,L37,53.5568,-3.0636
+,Medicine Refrigeration ,,,,,,,,,L38,53.5284,-3.05276
+,Medical Equipment - feeding and medication ,,,,,,,,,L39,53.563,-2.89347
+,Apnoea Monitor ,,,,,,,,,L4,53.4378,-2.96201
+,Careline system ,,,,,,,,,L40,53.5984,-2.84717
+,Medical dependant Electric showering ,,,,,,,,,L41,53.3943,-3.03082
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,L42,53.3745,-3.02267
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,L43,53.385,-3.0594
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,L44,53.4149,-3.03642
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,L45,53.4289,-3.05112
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,L46,53.4043,-3.11065
+,Oxygen Concentrator ,,,,,,,,,L47,53.3965,-3.1687
+,Medicine Refrigeration ,,,,,,,,,L48,53.3702,-3.16987
+,Medical Equipment - feeding and medication ,,,,,,,,,L49,53.3811,-3.10403
+,Apnoea Monitor ,,,,,,,,,L5,53.4248,-2.97764
+,Careline system ,,,,,,,,,L6,53.4186,-2.95326
+,Medical dependant Electric showering ,,,,,,,,,L60,53.3268,-3.09679
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,L61,53.3485,-3.10172
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,L62,53.335,-2.98243
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,L63,53.344,-3.01293
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,L64,53.2879,-3.0487
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,L65,53.2775,-2.90145
+,Oxygen Concentrator ,,,,,,,,,L66,53.2763,-2.93585
+,Medicine Refrigeration ,,,,,,,,,L67,53.4057,-2.96781
+,Medical Equipment - feeding and medication ,,,,,,,,,L68,53.4532,-2.96644
+,Apnoea Monitor ,,,,,,,,,L69,53.4011,-2.97534
+,Careline system ,,,,,,,,,L7,53.4055,-2.95027
+,Medical dependant Electric showering ,,,,,,,,,L70,53.4094,-2.97318
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,L71,53.4222,-2.97479
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,L72,53.4786,-2.98369
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,L73,53.3803,-2.97643
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,L74,53.3931,-2.98828
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,L75,53.4422,-2.98456
+,Oxygen Concentrator ,,,,,,,,,L8,53.3902,-2.9641
+,Medicine Refrigeration ,,,,,,,,,L80,53.4692,-2.96908
+,Medical Equipment - feeding and medication ,,,,,,,,,L9,53.4613,-2.95227
+,Apnoea Monitor ,,,,,,,,,LL11,53.059,-3.02683
+,Careline system ,,,,,,,,,LL12,53.086,-2.9903
+,Medical dependant Electric showering ,,,,,,,,,LL13,53.0363,-2.96341
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,LL14,52.9924,-3.05255
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,LL15,53.1053,-3.31518
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,LL16,53.1852,-3.43072
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,LL17,53.2554,-3.43872
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,LL18,53.3118,-3.47764
+,Oxygen Concentrator ,,,,,,,,,LL19,53.3314,-3.41081
+,Medicine Refrigeration ,,,,,,,,,LL20,52.961,-3.16225
+,Medical Equipment - feeding and medication ,,,,,,,,,LL21,52.9887,-3.40817
+,Apnoea Monitor ,,,,,,,,,LL22,53.2717,-3.59149
+,Careline system ,,,,,,,,,LL23,52.9059,-3.60228
+,Medical dependant Electric showering ,,,,,,,,,LL24,53.0604,-3.78653
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,LL25,53.0545,-3.87914
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,LL26,53.1392,-3.78739
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,LL27,53.1482,-3.82715
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,LL28,53.2889,-3.75905
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,LL29,53.2908,-3.71266
+,Oxygen Concentrator ,,,,,,,,,LL30,53.3173,-3.81804
+,Medicine Refrigeration ,,,,,,,,,LL31,53.2912,-3.81087
+,Medical Equipment - feeding and medication ,,,,,,,,,LL32,53.2616,-3.83998
+,Apnoea Monitor ,,,,,,,,,LL33,53.2499,-3.98368
+,Careline system ,,,,,,,,,LL34,53.2714,-3.91331
+,Medical dependant Electric showering ,,,,,,,,,LL35,52.5473,-4.04082
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,LL36,52.603,-4.06598
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,LL37,52.671,-4.07059
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,LL38,52.6989,-4.03762
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,LL39,52.7128,-4.00078
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,LL40,52.7552,-3.87675
+,Oxygen Concentrator ,,,,,,,,,LL41,52.9701,-3.9388
+,Medicine Refrigeration ,,,,,,,,,LL42,52.7262,-4.05391
+,Medical Equipment - feeding and medication ,,,,,,,,,LL43,52.7746,-4.09223
+,Apnoea Monitor ,,,,,,,,,LL44,52.7874,-4.09531
+,Careline system ,,,,,,,,,LL45,52.8201,-4.09708
+,Medical dependant Electric showering ,,,,,,,,,LL46,52.8563,-4.10777
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,LL47,52.902,-4.06252
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,LL48,52.9355,-4.07115
+,Apnoea Monitor ,,,,,,,,,LL49,52.9289,-4.13834
+,Careline system ,,,,,,,,,LL51,52.9728,-4.23734
+,Medical dependant Electric showering ,,,,,,,,,LL52,52.9248,-4.23744
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,LL53,52.8845,-4.48777
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,LL54,53.0605,-4.28604
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,LL55,53.1343,-4.21152
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,LL56,53.1877,-4.20005
+,Oxygen Concentrator ,,,,,,,,,LL57,53.2099,-4.11653
+,Medicine Refrigeration ,,,,,,,,,LL58,53.2791,-4.10074
+,Medical Equipment - feeding and medication ,,,,,,,,,LL59,53.2343,-4.15917
+,Apnoea Monitor ,,,,,,,,,LL60,53.216,-4.26811
+,Careline system ,,,,,,,,,LL61,53.1968,-4.25984
+,Medical dependant Electric showering ,,,,,,,,,LL62,53.2112,-4.38605
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,LL63,53.2196,-4.47068
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,LL64,53.2291,-4.51479
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,LL65,53.301,-4.5754
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,LL66,53.3809,-4.4058
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,LL67,53.4112,-4.45644
+,Oxygen Concentrator ,,,,,,,,,LL68,53.3985,-4.37509
+,Medicine Refrigeration ,,,,,,,,,LL69,53.3862,-4.31968
+,Medical Equipment - feeding and medication ,,,,,,,,,LL70,53.3638,-4.28813
+,Apnoea Monitor ,,,,,,,,,LL71,53.3272,-4.36876
+,Careline system ,,,,,,,,,LL72,53.3441,-4.24577
+,Medical dependant Electric showering ,,,,,,,,,LL73,53.3353,-4.24497
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,LL74,53.315,-4.23415
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,LL75,53.2835,-4.22109
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,LL76,53.3009,-4.23934
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,LL77,53.2592,-4.31225
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,LL78,53.3173,-4.26317
+,Oxygen Concentrator ,,,,,,,,,M1,53.4777,-2.23678
+,Medicine Refrigeration ,,,,,,,,,M10,53.5028,-2.1939
+,Medical Equipment - feeding and medication ,,,,,,,,,M11,53.4784,-2.18315
+,Apnoea Monitor ,,,,,,,,,M12,53.4657,-2.20585
+,Careline system ,,,,,,,,,M13,53.4622,-2.21719
+,Medical dependant Electric showering ,,,,,,,,,M14,53.4469,-2.22506
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,M15,53.4663,-2.25265
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,M16,53.456,-2.26513
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,M17,53.4692,-2.31555
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,M18,53.4616,-2.17276
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,M19,53.4377,-2.19552
+,Oxygen Concentrator ,,,,,,,,,M2,53.4803,-2.24466
+,Medicine Refrigeration ,,,,,,,,,M20,53.4251,-2.23167
+,Medical Equipment - feeding and medication ,,,,,,,,,M21,53.4389,-2.27342
+,Apnoea Monitor ,,,,,,,,,M22,53.3849,-2.26126
+,Careline system ,,,,,,,,,M23,53.3972,-2.28656
+,Medical dependant Electric showering ,,,,,,,,,M24,53.5522,-2.19889
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,M25,53.5332,-2.27995
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,M26,53.5621,-2.33392
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,M27,53.5122,-2.33814
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,M28,53.5164,-2.39827
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,M29,53.515,-2.47026
+,Oxygen Concentrator ,,,,,,,,,M3,53.4835,-2.25229
+,Medicine Refrigeration ,,,,,,,,,M30,53.4759,-2.3674
+,Medical Equipment - feeding and medication ,,,,,,,,,M31,53.4429,-2.38095
+,Apnoea Monitor ,,,,,,,,,M32,53.4501,-2.30837
+,Careline system ,,,,,,,,,M33,53.4226,-2.32482
+,Medical dependant Electric showering ,,,,,,,,,M34,53.4548,-2.116
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,M35,53.4978,-2.15271
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,M38,53.5298,-2.42025
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,M4,53.4849,-2.2307
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,M40,53.5027,-2.19392
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,M41,53.4511,-2.36269
+,Oxygen Concentrator ,,,,,,,,,M43,53.4831,-2.14935
+,Medicine Refrigeration ,,,,,,,,,M44,53.4407,-2.42714
+,Medical Equipment - feeding and medication ,,,,,,,,,M45,53.5446,-2.28973
+,Apnoea Monitor ,,,,,,,,,M46,53.5255,-2.49218
+,Careline system ,,,,,,,,,M5,53.4797,-2.28557
+,Medical dependant Electric showering ,,,,,,,,,M50,53.4766,-2.29005
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,M52,53.4504,-2.21543
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,M6,53.4916,-2.29578
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,M60,53.4847,-2.23313
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,M61,53.4864,-2.22937
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,M7,53.5043,-2.26174
+,Oxygen Concentrator ,,,,,,,,,M8,53.509,-2.24089
+,Medicine Refrigeration ,,,,,,,,,M9,53.5216,-2.2144
+,Medical Equipment - feeding and medication ,,,,,,,,,M90,53.3638,-2.27548
+,Apnoea Monitor ,,,,,,,,,M99,53.4858,-2.22905
+,Careline system ,,,,,,,,,OL10,53.5905,-2.22274
+,Medical dependant Electric showering ,,,,,,,,,PR25,53.6953,-2.69573
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,PR26,53.6893,-2.73753
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,PR6,53.6645,-2.61469
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,PR7,53.6488,-2.65278
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,PR8,53.6276,-3.00502
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,PR9,53.657,-2.97181
+,Oxygen Concentrator ,,,,,,,,,SK1,53.4082,-2.15385
+,Medicine Refrigeration ,,,,,,,,,SK2,53.3964,-2.13792
+,Medical Equipment - feeding and medication ,,,,,,,,,SK3,53.4,-2.17071
+,Apnoea Monitor ,,,,,,,,,SK4,53.4173,-2.17862
+,Careline system ,,,,,,,,,SK5,53.4323,-2.15381
+,Medical dependant Electric showering ,,,,,,,,,SK6,53.4057,-2.08174
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,SK7,53.3688,-2.14476
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,SK8,53.3813,-2.20886
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,SK9,53.3268,-2.23097
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,SY10,52.8391,-3.1083
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,SY11,52.8673,-3.03109
+,Oxygen Concentrator ,,,,,,,,,SY12,52.902,-2.89675
+,Medicine Refrigeration ,,,,,,,,,SY14,53.0279,-2.76304
+,Medical Equipment - feeding and medication ,,,,,,,,,SY16,52.5199,-3.31245
+,Apnoea Monitor ,,,,,,,,,SY17,52.517,-3.46162
+,Careline system ,,,,,,,,,SY19,52.5715,-3.59475
+,Medical dependant Electric showering ,,,,,,,,,SY20,52.6133,-3.82089
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,SY21,52.6582,-3.2004
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,SY22,52.7581,-3.18147
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,SY24,52.4691,-4.02535
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,WA1,53.3926,-2.58033
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,WA10,53.4538,-2.75283
+,Oxygen Concentrator ,,,,,,,,,WA11,53.4772,-2.7195
+,Medicine Refrigeration ,,,,,,,,,WA12,53.4534,-2.63424
+,Medical Equipment - feeding and medication ,,,,,,,,,WA13,53.3825,-2.46576
+,Apnoea Monitor ,,,,,,,,,WA14,53.3874,-2.35679
+,Careline system ,,,,,,,,,WA15,53.3844,-2.32897
+,Medical dependant Electric showering ,,,,,,,,,WA16,53.3045,-2.37117
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,WA2,53.4085,-2.58365
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,WA3,53.4522,-2.54836
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,WA4,53.3703,-2.58148
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,WA5,53.3998,-2.63274
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,WA55,53.3916,-2.60886
+,Oxygen Concentrator ,,,,,,,,,WA6,53.2756,-2.72425
+,Medicine Refrigeration ,,,,,,,,,WA7,53.3303,-2.70323
+,Medical Equipment - feeding and medication ,,,,,,,,,WA8,53.3725,-2.73944
+,Apnoea Monitor ,,,,,,,,,WA88,53.368,-2.76867
+,Careline system ,,,,,,,,,WA9,53.4371,-2.71988
+,Medical dependant Electric showering ,,,,,,,,,WN1,53.5511,-2.63004
+,"Stair Lift, Hoist, Elect bed ",,,,,,,,,WN2,53.5363,-2.58465
+,Nebuliser ,Apnoea Monitor ,Medicine Refrigeration ,,,,,,,WN3,53.5307,-2.64485
+,Heart & Lung Medical Equipment ,Careline system ,Medical Equipment - feeding and medication ,,,,,,,WN4,53.4973,-2.64342
+,Kidney Dialysis ,Medical dependant Electric showering ,,,,,,,,WN5,53.5326,-2.68485
+,Ventilator ,"Stair Lift, Hoist, Elect bed ",,,,,,,,WN6,53.5734,-2.66931
+,Oxygen Concentrator ,,,,,,,,,WN7,53.4973,-2.51816
+,Medicine Refrigeration ,,,,,,,,,WN8,53.5522,-2.77178

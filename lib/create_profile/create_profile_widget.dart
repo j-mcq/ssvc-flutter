@@ -29,6 +29,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
     _model.yourNameController ??= TextEditingController();
     _model.cityController ??= TextEditingController();
     _model.myBioController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -63,6 +64,7 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
             )
           : null,
       body: SafeArea(
+        top: true,
         child: Align(
           alignment: AlignmentDirectional(0.0, 0.0),
           child: Column(
@@ -135,7 +137,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -185,7 +188,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(50.0),
@@ -320,7 +324,8 @@ class _CreateProfileWidgetState extends State<CreateProfileWidget> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0x00000000),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(16.0),

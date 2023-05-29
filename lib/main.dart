@@ -22,6 +22,7 @@ void main() async {
   await FlutterFlowTheme.initialize();
 
   final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
 
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
@@ -90,7 +91,9 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       locale: _locale,
-      supportedLocales: const [Locale('en', '')],
+      supportedLocales: const [
+        Locale('en'),
+      ],
       theme: ThemeData(brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
@@ -112,7 +115,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'homePage';
+  String _currentPageName = 'dashboard';
   late Widget? _currentPage;
 
   @override
@@ -125,13 +128,16 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'homePage': HomePageWidget(),
+      'dashboard': DashboardWidget(),
       'scenario': ScenarioWidget(),
       'stockInformation': StockInformationWidget(),
       'scenarioCopy': ScenarioCopyWidget(),
       'stockItemDetails': StockItemDetailsWidget(),
+      'admin': AdminWidget(),
+      'scenarios': ScenariosWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
+
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],
       bottomNavigationBar: Visibility(
@@ -188,6 +194,22 @@ class _NavBarPageState extends State<NavBarPage> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_circle_outlined,
+                size: 24.0,
+              ),
+              label: '•',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.school_outlined,
+                size: 24.0,
+              ),
+              label: '•',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add_business_rounded,
                 size: 24.0,
               ),
               label: '•',

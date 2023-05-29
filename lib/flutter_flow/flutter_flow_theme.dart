@@ -299,9 +299,12 @@ class MobileTypography extends Typography {
         fontWeight: FontWeight.w500,
         fontSize: 11.0,
       );
-  String get bodyLargeFamily => '';
+  String get bodyLargeFamily => 'Outfit';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Roboto',
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
       );
   String get bodyMediumFamily => 'Outfit';
   TextStyle get bodyMedium => GoogleFonts.getFont(
@@ -408,9 +411,12 @@ class TabletTypography extends Typography {
         fontWeight: FontWeight.w500,
         fontSize: 11.0,
       );
-  String get bodyLargeFamily => '';
+  String get bodyLargeFamily => 'Outfit';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Roboto',
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
       );
   String get bodyMediumFamily => 'Outfit';
   TextStyle get bodyMedium => GoogleFonts.getFont(
@@ -517,9 +523,12 @@ class DesktopTypography extends Typography {
         fontWeight: FontWeight.w500,
         fontSize: 11.0,
       );
-  String get bodyLargeFamily => '';
+  String get bodyLargeFamily => 'Outfit';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Roboto',
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
       );
   String get bodyMediumFamily => 'Outfit';
   TextStyle get bodyMedium => GoogleFonts.getFont(

@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -59,6 +58,8 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -239,31 +240,8 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget>
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                     child: FFButtonWidget(
-                      onPressed: () async {
-                        final phoneNumberVal =
-                            _model.phoneNumberController.text;
-                        if (phoneNumberVal == null ||
-                            phoneNumberVal.isEmpty ||
-                            !phoneNumberVal.startsWith('+')) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                  'Phone Number is required and has to start with +.'),
-                            ),
-                          );
-                          return;
-                        }
-                        await authManager.beginPhoneAuth(
-                          context: context,
-                          phoneNumber: phoneNumberVal,
-                          onCodeSent: () async {
-                            context.goNamedAuth(
-                              'phoneVerify',
-                              mounted,
-                              ignoreRedirect: true,
-                            );
-                          },
-                        );
+                      onPressed: () {
+                        print('Button-Login pressed ...');
                       },
                       text: 'Sign In with Phone',
                       options: FFButtonOptions(
