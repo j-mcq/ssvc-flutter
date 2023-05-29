@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/instant_timer.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -62,6 +63,17 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
           }.withoutNulls,
         );
       }
+      // Every 1 second, check the stock levels
+      // CheckStockLevels
+      _model.instantTimer = InstantTimer.periodic(
+        duration: Duration(milliseconds: 1000),
+        callback: (timer) async {
+          await actions.refreshScenarioStockLevels(
+            widget.scenarioReference,
+          );
+        },
+        startImmediately: true,
+      );
     });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
@@ -2050,36 +2062,96 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                     MainAxisAlignment
                                                                         .spaceBetween,
                                                                 children: [
-                                                                  Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Response Items List',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .headlineSmall,
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            4.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          'Summary of the equipment required to respond to this scenario and the current stock levels.',
+                                                                  Expanded(
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                          'Response Items List',
                                                                           style:
-                                                                              FlutterFlowTheme.of(context).bodySmall,
+                                                                              FlutterFlowTheme.of(context).headlineSmall,
                                                                         ),
-                                                                      ),
-                                                                    ],
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              4.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Summary of the equipment required to respond to this scenario and the current stock levels.',
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).bodySmall,
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .end,
+                                                                      children: [
+                                                                        FFButtonWidget(
+                                                                          onPressed:
+                                                                              () async {
+                                                                            await actions.refreshScenarioStockLevels(
+                                                                              widget.scenarioReference,
+                                                                            );
+                                                                          },
+                                                                          text:
+                                                                              'Refresh Stock Check',
+                                                                          options:
+                                                                              FFButtonOptions(
+                                                                            height:
+                                                                                40.0,
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                24.0,
+                                                                                0.0,
+                                                                                24.0,
+                                                                                0.0),
+                                                                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                  color: Colors.white,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                ),
+                                                                            elevation:
+                                                                                3.0,
+                                                                            borderSide:
+                                                                                BorderSide(
+                                                                              color: Colors.transparent,
+                                                                              width: 1.0,
+                                                                            ),
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(50.0),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ),
@@ -2096,325 +2168,408 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   1.0,
                                                                   16.0,
                                                                   0.0),
-                                                      child: Container(
-                                                        width: double.infinity,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryBackground,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 0.0,
+                                                      child: StreamBuilder<
+                                                          List<
+                                                              ScenarioResultsRecord>>(
+                                                        stream:
+                                                            queryScenarioResultsRecord(
+                                                          parent: widget
+                                                              .scenarioReference,
+                                                          singleRecord: true,
+                                                        ),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          // Customize what your widget looks like when it's loading.
+                                                          if (!snapshot
+                                                              .hasData) {
+                                                            return Center(
+                                                              child: SizedBox(
+                                                                width: 50.0,
+                                                                height: 50.0,
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }
+                                                          List<ScenarioResultsRecord>
+                                                              containerScenarioResultsRecordList =
+                                                              snapshot.data!;
+                                                          final containerScenarioResultsRecord =
+                                                              containerScenarioResultsRecordList
+                                                                      .isNotEmpty
+                                                                  ? containerScenarioResultsRecordList
+                                                                      .first
+                                                                  : null;
+                                                          return Container(
+                                                            width:
+                                                                double.infinity,
+                                                            decoration:
+                                                                BoxDecoration(
                                                               color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .lineColor,
-                                                              offset: Offset(
-                                                                  0.0, 0.0),
-                                                            )
-                                                          ],
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    0.0),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    16.0),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    16.0),
-                                                          ),
-                                                        ),
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                          ),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Padding(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        12.0,
-                                                                        12.0,
-                                                                        12.0,
+                                                                  .secondaryBackground,
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  blurRadius:
+                                                                      0.0,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .lineColor,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0.0,
+                                                                          0.0),
+                                                                )
+                                                              ],
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
                                                                         0.0),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Expanded(
-                                                                      flex: 1,
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          'Response Item',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodySmall,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    Expanded(
-                                                                      flex: 2,
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          '',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodySmall,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    Expanded(
-                                                                      flex: 2,
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          'Number Required',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodySmall,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    Expanded(
-                                                                      flex: 2,
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          'Number In Stock',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodySmall,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        0.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        16.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        16.0),
                                                               ),
-                                                              Padding(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        16.0,
-                                                                        16.0,
-                                                                        16.0,
-                                                                        0.0),
-                                                                child: StreamBuilder<
-                                                                    List<
-                                                                        ScenarioResponseItemsRecord>>(
-                                                                  stream:
-                                                                      queryScenarioResponseItemsRecord(
-                                                                    parent: widget
-                                                                        .scenarioReference,
-                                                                  ),
-                                                                  builder: (context,
-                                                                      snapshot) {
-                                                                    // Customize what your widget looks like when it's loading.
-                                                                    if (!snapshot
-                                                                        .hasData) {
-                                                                      return Center(
-                                                                        child:
-                                                                            SizedBox(
-                                                                          width:
-                                                                              50.0,
-                                                                          height:
-                                                                              50.0,
+                                                            ),
+                                                            child: Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                              ),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            12.0,
+                                                                            12.0,
+                                                                            12.0,
+                                                                            0.0),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Expanded(
+                                                                          flex:
+                                                                              1,
                                                                           child:
-                                                                              CircularProgressIndicator(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primary,
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                8.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Text(
+                                                                              'Response Item',
+                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                            ),
                                                                           ),
                                                                         ),
-                                                                      );
-                                                                    }
-                                                                    List<ScenarioResponseItemsRecord>
-                                                                        listViewScenarioResponseItemsRecordList =
-                                                                        snapshot
-                                                                            .data!;
-                                                                    return ListView
-                                                                        .builder(
-                                                                      padding:
-                                                                          EdgeInsets
-                                                                              .zero,
-                                                                      shrinkWrap:
-                                                                          true,
-                                                                      scrollDirection:
-                                                                          Axis.vertical,
-                                                                      itemCount:
-                                                                          listViewScenarioResponseItemsRecordList
-                                                                              .length,
-                                                                      itemBuilder:
-                                                                          (context,
-                                                                              listViewIndex) {
-                                                                        final listViewScenarioResponseItemsRecord =
-                                                                            listViewScenarioResponseItemsRecordList[listViewIndex];
-                                                                        return Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              2.0),
+                                                                        Expanded(
+                                                                          flex:
+                                                                              2,
                                                                           child:
-                                                                              Container(
-                                                                            width:
-                                                                                double.infinity,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              boxShadow: [
-                                                                                BoxShadow(
-                                                                                  blurRadius: 0.0,
-                                                                                  color: FlutterFlowTheme.of(context).lineColor,
-                                                                                  offset: Offset(0.0, 1.0),
-                                                                                )
-                                                                              ],
-                                                                            ),
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                8.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
                                                                             child:
-                                                                                Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                children: [
-                                                                                  Expanded(
-                                                                                    flex: 1,
-                                                                                    child: Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      children: [
-                                                                                        Column(
-                                                                                          mainAxisSize: MainAxisSize.max,
-                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                          children: [
-                                                                                            Image.network(
-                                                                                              listViewScenarioResponseItemsRecord.imagePath,
-                                                                                              width: 100.0,
-                                                                                              height: 100.0,
-                                                                                              fit: BoxFit.cover,
-                                                                                            ),
-                                                                                          ],
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ),
-                                                                                  Expanded(
-                                                                                    flex: 2,
-                                                                                    child: Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      children: [
-                                                                                        Column(
-                                                                                          mainAxisSize: MainAxisSize.max,
-                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                          children: [
-                                                                                            AutoSizeText(
-                                                                                              listViewScenarioResponseItemsRecord.name.maybeHandleOverflow(
-                                                                                                maxChars: 32,
-                                                                                                replacement: '…',
-                                                                                              ),
-                                                                                              style: FlutterFlowTheme.of(context).titleMedium,
-                                                                                            ),
-                                                                                            if (responsiveVisibility(
-                                                                                              context: context,
-                                                                                              tabletLandscape: false,
-                                                                                              desktop: false,
-                                                                                            ))
-                                                                                              Padding(
-                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
-                                                                                                child: Text(
-                                                                                                  'user@domainname.com',
-                                                                                                  style: FlutterFlowTheme.of(context).bodySmall,
-                                                                                                ),
-                                                                                              ),
-                                                                                          ],
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ),
-                                                                                  if (responsiveVisibility(
-                                                                                    context: context,
-                                                                                    phone: false,
-                                                                                    tablet: false,
-                                                                                  ))
-                                                                                    Expanded(
-                                                                                      flex: 2,
-                                                                                      child: Text(
-                                                                                        listViewScenarioResponseItemsRecord.numberRequired.toString(),
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                      ),
-                                                                                    ),
-                                                                                  if (responsiveVisibility(
-                                                                                    context: context,
-                                                                                    phone: false,
-                                                                                    tablet: false,
-                                                                                  ))
-                                                                                    Expanded(
-                                                                                      flex: 2,
-                                                                                      child: StreamBuilder<ResponseItemsRecord>(
-                                                                                        stream: ResponseItemsRecord.getDocument(listViewScenarioResponseItemsRecord.responseItem!),
-                                                                                        builder: (context, snapshot) {
-                                                                                          // Customize what your widget looks like when it's loading.
-                                                                                          if (!snapshot.hasData) {
-                                                                                            return Center(
-                                                                                              child: SizedBox(
-                                                                                                width: 50.0,
-                                                                                                height: 50.0,
-                                                                                                child: CircularProgressIndicator(
-                                                                                                  color: FlutterFlowTheme.of(context).primary,
-                                                                                                ),
-                                                                                              ),
-                                                                                            );
-                                                                                          }
-                                                                                          final textResponseItemsRecord = snapshot.data!;
-                                                                                          return Text(
-                                                                                            textResponseItemsRecord.stock.toString(),
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                          );
-                                                                                        },
-                                                                                      ),
-                                                                                    ),
-                                                                                ],
+                                                                                Text(
+                                                                              '',
+                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        Expanded(
+                                                                          flex:
+                                                                              2,
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                8.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Text(
+                                                                              'Number Required',
+                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        Expanded(
+                                                                          flex:
+                                                                              2,
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                8.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Text(
+                                                                              'Number In Stock at closest depot',
+                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        Expanded(
+                                                                          flex:
+                                                                              2,
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                8.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Text(
+                                                                              'Number In Stock all SPEN',
+                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            16.0,
+                                                                            16.0,
+                                                                            16.0,
+                                                                            0.0),
+                                                                    child: StreamBuilder<
+                                                                        List<
+                                                                            ScenarioResponseItemsRecord>>(
+                                                                      stream:
+                                                                          queryScenarioResponseItemsRecord(
+                                                                        parent:
+                                                                            widget.scenarioReference,
+                                                                      ),
+                                                                      builder:
+                                                                          (context,
+                                                                              snapshot) {
+                                                                        // Customize what your widget looks like when it's loading.
+                                                                        if (!snapshot
+                                                                            .hasData) {
+                                                                          return Center(
+                                                                            child:
+                                                                                SizedBox(
+                                                                              width: 50.0,
+                                                                              height: 50.0,
+                                                                              child: CircularProgressIndicator(
+                                                                                color: FlutterFlowTheme.of(context).primary,
                                                                               ),
                                                                             ),
-                                                                          ),
+                                                                          );
+                                                                        }
+                                                                        List<ScenarioResponseItemsRecord>
+                                                                            listViewScenarioResponseItemsRecordList =
+                                                                            snapshot.data!;
+                                                                        return ListView
+                                                                            .builder(
+                                                                          padding:
+                                                                              EdgeInsets.zero,
+                                                                          shrinkWrap:
+                                                                              true,
+                                                                          scrollDirection:
+                                                                              Axis.vertical,
+                                                                          itemCount:
+                                                                              listViewScenarioResponseItemsRecordList.length,
+                                                                          itemBuilder:
+                                                                              (context, listViewIndex) {
+                                                                            final listViewScenarioResponseItemsRecord =
+                                                                                listViewScenarioResponseItemsRecordList[listViewIndex];
+                                                                            return Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 2.0),
+                                                                              child: Container(
+                                                                                width: double.infinity,
+                                                                                decoration: BoxDecoration(
+                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      blurRadius: 0.0,
+                                                                                      color: FlutterFlowTheme.of(context).lineColor,
+                                                                                      offset: Offset(0.0, 1.0),
+                                                                                    )
+                                                                                  ],
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+                                                                                  child: Row(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    children: [
+                                                                                      Expanded(
+                                                                                        flex: 1,
+                                                                                        child: Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Column(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                              children: [
+                                                                                                Image.network(
+                                                                                                  listViewScenarioResponseItemsRecord.imagePath,
+                                                                                                  width: 100.0,
+                                                                                                  height: 100.0,
+                                                                                                  fit: BoxFit.cover,
+                                                                                                ),
+                                                                                              ],
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                      Expanded(
+                                                                                        flex: 2,
+                                                                                        child: Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Column(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                              children: [
+                                                                                                AutoSizeText(
+                                                                                                  listViewScenarioResponseItemsRecord.name.maybeHandleOverflow(
+                                                                                                    maxChars: 32,
+                                                                                                    replacement: '…',
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).titleMedium,
+                                                                                                ),
+                                                                                                if (responsiveVisibility(
+                                                                                                  context: context,
+                                                                                                  tabletLandscape: false,
+                                                                                                  desktop: false,
+                                                                                                ))
+                                                                                                  Padding(
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                                                                                                    child: Text(
+                                                                                                      'user@domainname.com',
+                                                                                                      style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                              ],
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                      if (responsiveVisibility(
+                                                                                        context: context,
+                                                                                        phone: false,
+                                                                                        tablet: false,
+                                                                                      ))
+                                                                                        Expanded(
+                                                                                          flex: 2,
+                                                                                          child: Text(
+                                                                                            listViewScenarioResponseItemsRecord.numberRequired.toString(),
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                          ),
+                                                                                        ),
+                                                                                      if (responsiveVisibility(
+                                                                                        context: context,
+                                                                                        phone: false,
+                                                                                        tablet: false,
+                                                                                      ))
+                                                                                        Expanded(
+                                                                                          flex: 2,
+                                                                                          child: StreamBuilder<List<StockDepotMappingRecord>>(
+                                                                                            stream: queryStockDepotMappingRecord(
+                                                                                              queryBuilder: (stockDepotMappingRecord) => stockDepotMappingRecord.where('response_item', isEqualTo: listViewScenarioResponseItemsRecord.responseItem).where('depot', isEqualTo: containerScenarioResultsRecord!.nearestDepot),
+                                                                                              singleRecord: true,
+                                                                                            ),
+                                                                                            builder: (context, snapshot) {
+                                                                                              // Customize what your widget looks like when it's loading.
+                                                                                              if (!snapshot.hasData) {
+                                                                                                return Center(
+                                                                                                  child: SizedBox(
+                                                                                                    width: 50.0,
+                                                                                                    height: 50.0,
+                                                                                                    child: CircularProgressIndicator(
+                                                                                                      color: FlutterFlowTheme.of(context).primary,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                );
+                                                                                              }
+                                                                                              List<StockDepotMappingRecord> textStockDepotMappingRecordList = snapshot.data!;
+                                                                                              // Return an empty Container when the item does not exist.
+                                                                                              if (snapshot.data!.isEmpty) {
+                                                                                                return Container();
+                                                                                              }
+                                                                                              final textStockDepotMappingRecord = textStockDepotMappingRecordList.isNotEmpty ? textStockDepotMappingRecordList.first : null;
+                                                                                              return Text(
+                                                                                                textStockDepotMappingRecord!.numberInStock.toString(),
+                                                                                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                              );
+                                                                                            },
+                                                                                          ),
+                                                                                        ),
+                                                                                      if (responsiveVisibility(
+                                                                                        context: context,
+                                                                                        phone: false,
+                                                                                        tablet: false,
+                                                                                      ))
+                                                                                        Expanded(
+                                                                                          flex: 2,
+                                                                                          child: StreamBuilder<ResponseItemsRecord>(
+                                                                                            stream: ResponseItemsRecord.getDocument(listViewScenarioResponseItemsRecord.responseItem!),
+                                                                                            builder: (context, snapshot) {
+                                                                                              // Customize what your widget looks like when it's loading.
+                                                                                              if (!snapshot.hasData) {
+                                                                                                return Center(
+                                                                                                  child: SizedBox(
+                                                                                                    width: 50.0,
+                                                                                                    height: 50.0,
+                                                                                                    child: CircularProgressIndicator(
+                                                                                                      color: FlutterFlowTheme.of(context).primary,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                );
+                                                                                              }
+                                                                                              final textResponseItemsRecord = snapshot.data!;
+                                                                                              return Text(
+                                                                                                textResponseItemsRecord.stock.toString(),
+                                                                                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                              );
+                                                                                            },
+                                                                                          ),
+                                                                                        ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          },
                                                                         );
                                                                       },
-                                                                    );
-                                                                  },
-                                                                ),
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ),
+                                                            ),
+                                                          );
+                                                        },
                                                       ),
                                                     ),
                                                   ],
