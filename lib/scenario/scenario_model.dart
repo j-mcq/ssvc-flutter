@@ -34,9 +34,6 @@ class ScenarioModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? outageDurationControllerValidator;
   // Stores action output result for [Custom Action - saveScenario] action in Button widget.
   DocumentReference? outSaveScenarioInputs;
-  // State field(s) for searchAddress widget.
-  TextEditingController? searchAddressController;
-  String? Function(BuildContext, String?)? searchAddressControllerValidator;
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
@@ -52,7 +49,6 @@ class ScenarioModel extends FlutterFlowModel {
     sideBarNavModel.dispose();
     scenarioNameController?.dispose();
     outageDurationController?.dispose();
-    searchAddressController?.dispose();
   }
 
   /// Additional helper methods are added here.
