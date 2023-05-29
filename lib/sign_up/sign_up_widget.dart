@@ -305,6 +305,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       }
 
                                       await authManager.sendEmailVerification();
+                                      GoRouter.of(context).prepareAuthEvent();
+                                      await authManager.signOut();
+                                      GoRouter.of(context)
+                                          .clearRedirectLocation();
+
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
@@ -323,12 +328,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                   .secondary,
                                         ),
                                       );
-                                      GoRouter.of(context).prepareAuthEvent();
-                                      await authManager.signOut();
-                                      GoRouter.of(context)
-                                          .clearRedirectLocation();
 
-                                      context.goNamedAuth(
+                                      context.pushNamedAuth(
                                           'signIn', context.mounted);
                                     },
                                     child: Container(
