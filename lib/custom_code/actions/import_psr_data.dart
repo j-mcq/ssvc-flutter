@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<bool> importPsrData(String? filePath) async {
+Future<bool> importPsrData(String filePath) async {
   // Add your function code here!
   return true;
 }
