@@ -616,7 +616,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                         ),
                                         Container(
                                           width: double.infinity,
-                                          height: 600.0,
+                                          height: 700.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
