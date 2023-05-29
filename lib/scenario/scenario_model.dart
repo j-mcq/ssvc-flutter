@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/instant_timer.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -22,6 +23,7 @@ class ScenarioModel extends FlutterFlowModel {
 
   // Stores action output result for [Backend Call - Create Document] action in scenario widget.
   ScenarioRecord? outCreateScenario;
+  InstantTimer? instantTimer;
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
   // State field(s) for scenarioName widget.
@@ -43,6 +45,7 @@ class ScenarioModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    instantTimer?.cancel();
     sideBarNavModel.dispose();
     scenarioNameController?.dispose();
     outageDurationController?.dispose();
