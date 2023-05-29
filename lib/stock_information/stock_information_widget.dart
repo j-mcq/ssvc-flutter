@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/edit_active_response_item_widget.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
@@ -733,18 +734,10 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                     ),
                                                   ),
                                                   Expanded(
-                                                    child: StreamBuilder<
-                                                        List<
-                                                            StockDepotMappingRecord>>(
-                                                      stream:
-                                                          queryStockDepotMappingRecord(
-                                                        queryBuilder: (stockDepotMappingRecord) =>
-                                                            stockDepotMappingRecord.where(
-                                                                'response_item',
-                                                                isEqualTo:
-                                                                    listViewResponseItemsRecord
-                                                                        .reference),
-                                                      ),
+                                                    child: FutureBuilder<
+                                                        List<DepotsRecord>>(
+                                                      future:
+                                                          queryDepotsRecordOnce(),
                                                       builder:
                                                           (context, snapshot) {
                                                         // Customize what your widget looks like when it's loading.
@@ -762,44 +755,81 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                             ),
                                                           );
                                                         }
-                                                        List<StockDepotMappingRecord>
-                                                            columnStockDepotMappingRecordList =
+                                                        List<DepotsRecord>
+                                                            columnDepotsRecordList =
                                                             snapshot.data!;
                                                         return Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: List.generate(
-                                                              columnStockDepotMappingRecordList
+                                                              columnDepotsRecordList
                                                                   .length,
                                                               (columnIndex) {
-                                                            final columnStockDepotMappingRecord =
-                                                                columnStockDepotMappingRecordList[
+                                                            final columnDepotsRecord =
+                                                                columnDepotsRecordList[
                                                                     columnIndex];
                                                             return Row(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .max,
                                                               children: [
-                                                                Text(
-                                                                  columnStockDepotMappingRecord
-                                                                      .depotName,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
-                                                                ),
-                                                                Text(
-                                                                  ': ',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
-                                                                ),
-                                                                Text(
-                                                                  columnStockDepotMappingRecord
-                                                                      .numberInStock
-                                                                      .toString(),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
+                                                                FutureBuilder<
+                                                                    int>(
+                                                                  future:
+                                                                      queryActiveResponseItemsRecordCount(
+                                                                    queryBuilder: (activeResponseItemsRecord) => activeResponseItemsRecord.where(
+                                                                        'home_depot',
+                                                                        isEqualTo:
+                                                                            columnDepotsRecord.reference),
+                                                                  ),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              CircularProgressIndicator(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    int rowCount =
+                                                                        snapshot
+                                                                            .data!;
+                                                                    return Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Text(
+                                                                          columnDepotsRecord
+                                                                              .name,
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                        Text(
+                                                                          ': ',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                        Text(
+                                                                          rowCount
+                                                                              .toString(),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
                                                                 ),
                                                               ],
                                                             );
@@ -1009,8 +1039,14 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 32.0, 0.0, 0.0),
                                     child: StreamBuilder<
-                                        List<ResponseItemsRecord>>(
-                                      stream: queryResponseItemsRecord(),
+                                        List<ActiveResponseItemsRecord>>(
+                                      stream: queryActiveResponseItemsRecord(
+                                        queryBuilder:
+                                            (activeResponseItemsRecord) =>
+                                                activeResponseItemsRecord
+                                                    .orderBy(
+                                                        'response_item_name'),
+                                      ),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
                                         if (!snapshot.hasData) {
@@ -1026,8 +1062,8 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                             ),
                                           );
                                         }
-                                        List<ResponseItemsRecord>
-                                            chartResponseItemsRecordList =
+                                        List<ActiveResponseItemsRecord>
+                                            chartActiveResponseItemsRecordList =
                                             snapshot.data!;
                                         return Container(
                                           width: 300.0,
@@ -1036,8 +1072,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                             barData: [
                                               FFBarChartData(
                                                 yData:
-                                                    chartResponseItemsRecordList
-                                                        .map((d) => d.stock)
+                                                    chartActiveResponseItemsRecordList
+                                                        .map((d) =>
+                                                            d.chargingStatus)
                                                         .toList(),
                                                 color:
                                                     FlutterFlowTheme.of(context)
@@ -1045,8 +1082,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                               )
                                             ],
                                             xLabels:
-                                                chartResponseItemsRecordList
-                                                    .map((d) => d.name)
+                                                chartActiveResponseItemsRecordList
+                                                    .map((d) =>
+                                                        d.responseItemName)
                                                     .toList(),
                                             barWidth: 55.0,
                                             barBorderRadius:
@@ -1228,6 +1266,15 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                             .bodySmall,
                                       ),
                                     ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        'Actions',
+                                        textAlign: TextAlign.end,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodySmall,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1325,16 +1372,16 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  4.0,
+                                                                  10.0,
                                                                   0.0,
-                                                                  4.0,
+                                                                  10.0,
                                                                   0.0),
                                                       child:
                                                           LinearPercentIndicator(
                                                         percent:
                                                             listViewActiveResponseItemsRecord
                                                                 .chargingStatus,
-                                                        lineHeight: 20.0,
+                                                        lineHeight: 15.0,
                                                         animation: true,
                                                         progressColor:
                                                             FlutterFlowTheme.of(
@@ -1354,22 +1401,17 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyMedium
+                                                              .bodySmall
                                                               .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                color: FlutterFlowTheme.of(
+                                                                fontFamily: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .primaryText,
-                                                                fontSize: 14.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
+                                                                    .bodySmallFamily,
+                                                                fontSize: 10.0,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(
                                                                         FlutterFlowTheme.of(context)
-                                                                            .bodyMediumFamily),
+                                                                            .bodySmallFamily),
                                                               ),
                                                         ),
                                                         barRadius:
@@ -1412,6 +1454,17 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       ),
                                                     ),
                                                   Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      listViewActiveResponseItemsRecord
+                                                          .statusDescription,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
+                                                  ),
+                                                  Expanded(
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -1424,16 +1477,62 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                               MainAxisSize.max,
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .start,
+                                                                  .end,
                                                           children: [
-                                                            Expanded(
-                                                              flex: 1,
-                                                              child: Text(
-                                                                listViewActiveResponseItemsRecord
-                                                                    .statusDescription,
-                                                                style: FlutterFlowTheme.of(
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  enableDrag:
+                                                                      false,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (bottomSheetContext) {
+                                                                    return GestureDetector(
+                                                                      onTap: () => FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(
+                                                                              _unfocusNode),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.of(bottomSheetContext).viewInsets,
+                                                                        child:
+                                                                            EditActiveResponseItemWidget(
+                                                                          activeResponseItemReference:
+                                                                              listViewActiveResponseItemsRecord.reference,
+                                                                          homeDepotReference:
+                                                                              listViewActiveResponseItemsRecord.homeDepot!,
+                                                                          statusReference:
+                                                                              listViewActiveResponseItemsRecord.status!,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
+                                                              },
+                                                              child: Icon(
+                                                                Icons.edit,
+                                                                color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium,
+                                                                    .secondaryText,
+                                                                size: 24.0,
                                                               ),
                                                             ),
                                                           ],
