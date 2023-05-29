@@ -19,6 +19,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FAIRER_WARMTH }}'
-          channelId: live
-          projectId: ssvc
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SSVC_A97D5 }}'
+          projectId: ssvc-a97d5
