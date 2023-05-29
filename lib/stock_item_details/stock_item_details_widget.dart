@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/components/edit_stock_number_widget.dart';
 import '/components/refresh_stock_data_widget.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -1253,16 +1252,6 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                               .bodySmall,
                                                     ),
                                                   ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    'Action',
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall,
-                                                  ),
-                                                ),
                                               ],
                                             ),
                                           ),
@@ -1271,17 +1260,8 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 16.0, 16.0, 0.0),
                                             child: StreamBuilder<
-                                                List<StockDepotMappingRecord>>(
-                                              stream:
-                                                  queryStockDepotMappingRecord(
-                                                queryBuilder:
-                                                    (stockDepotMappingRecord) =>
-                                                        stockDepotMappingRecord
-                                                            .where(
-                                                                'response_item',
-                                                                isEqualTo: widget
-                                                                    .responseItemReference),
-                                              ),
+                                                List<DepotsRecord>>(
+                                              stream: queryDepotsRecord(),
                                               builder: (context, snapshot) {
                                                 // Customize what your widget looks like when it's loading.
                                                 if (!snapshot.hasData) {
@@ -1299,10 +1279,10 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                     ),
                                                   );
                                                 }
-                                                List<StockDepotMappingRecord>
-                                                    listViewStockDepotMappingRecordList =
+                                                List<DepotsRecord>
+                                                    listViewDepotsRecordList =
                                                     snapshot.data!;
-                                                if (listViewStockDepotMappingRecordList
+                                                if (listViewDepotsRecordList
                                                     .isEmpty) {
                                                   return RefreshStockDataWidget(
                                                     responseItemReference: widget
@@ -1316,12 +1296,12 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                   scrollDirection:
                                                       Axis.vertical,
                                                   itemCount:
-                                                      listViewStockDepotMappingRecordList
+                                                      listViewDepotsRecordList
                                                           .length,
                                                   itemBuilder:
                                                       (context, listViewIndex) {
-                                                    final listViewStockDepotMappingRecord =
-                                                        listViewStockDepotMappingRecordList[
+                                                    final listViewDepotsRecord =
+                                                        listViewDepotsRecordList[
                                                             listViewIndex];
                                                     return Padding(
                                                       padding:
@@ -1331,170 +1311,131 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                                   0.0,
                                                                   0.0,
                                                                   2.0),
-                                                      child: Container(
-                                                        width: double.infinity,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryBackground,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 0.0,
+                                                      child: FutureBuilder<int>(
+                                                        future:
+                                                            queryActiveResponseItemsRecordCount(
+                                                          queryBuilder: (activeResponseItemsRecord) =>
+                                                              activeResponseItemsRecord.where(
+                                                                  'home_depot',
+                                                                  isEqualTo:
+                                                                      listViewDepotsRecord
+                                                                          .reference),
+                                                        ),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          // Customize what your widget looks like when it's loading.
+                                                          if (!snapshot
+                                                              .hasData) {
+                                                            return Center(
+                                                              child: SizedBox(
+                                                                width: 50.0,
+                                                                height: 50.0,
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }
+                                                          int containerCount =
+                                                              snapshot.data!;
+                                                          return Container(
+                                                            width:
+                                                                double.infinity,
+                                                            decoration:
+                                                                BoxDecoration(
                                                               color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .lineColor,
-                                                              offset: Offset(
-                                                                  0.0, 1.0),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      12.0,
-                                                                      12.0,
-                                                                      12.0,
-                                                                      12.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Column(
+                                                                  .secondaryBackground,
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  blurRadius:
+                                                                      0.0,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .lineColor,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0.0,
+                                                                          1.0),
+                                                                )
+                                                              ],
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          12.0,
+                                                                          12.0,
+                                                                          12.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Expanded(
+                                                                    flex: 1,
+                                                                    child: Row(
                                                                       mainAxisSize:
                                                                           MainAxisSize
                                                                               .max,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
                                                                       children: [
-                                                                        AutoSizeText(
-                                                                          listViewStockDepotMappingRecord
-                                                                              .depotName
-                                                                              .maybeHandleOverflow(
-                                                                            maxChars:
-                                                                                32,
-                                                                            replacement:
-                                                                                '…',
-                                                                          ),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).titleMedium,
-                                                                        ),
-                                                                        if (responsiveVisibility(
-                                                                          context:
-                                                                              context,
-                                                                          tabletLandscape:
-                                                                              false,
-                                                                          desktop:
-                                                                              false,
-                                                                        ))
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0.0,
-                                                                                2.0,
-                                                                                0.0,
-                                                                                0.0),
-                                                                            child:
-                                                                                Text(
-                                                                              'user@domainname.com',
-                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                        Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            AutoSizeText(
+                                                                              listViewDepotsRecord.name.maybeHandleOverflow(
+                                                                                maxChars: 32,
+                                                                                replacement: '…',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).titleMedium,
                                                                             ),
-                                                                          ),
-                                                                      ],
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                                tablet: false,
-                                                              ))
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Text(
-                                                                    listViewStockDepotMappingRecord
-                                                                        .numberInStock
-                                                                        .toString(),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                ),
-                                                              Expanded(
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        InkWell(
-                                                                          splashColor:
-                                                                              Colors.transparent,
-                                                                          focusColor:
-                                                                              Colors.transparent,
-                                                                          hoverColor:
-                                                                              Colors.transparent,
-                                                                          highlightColor:
-                                                                              Colors.transparent,
-                                                                          onTap:
-                                                                              () async {
-                                                                            await showModalBottomSheet(
-                                                                              isScrollControlled: true,
-                                                                              backgroundColor: Colors.transparent,
+                                                                            if (responsiveVisibility(
                                                                               context: context,
-                                                                              builder: (bottomSheetContext) {
-                                                                                return GestureDetector(
-                                                                                  onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-                                                                                  child: Padding(
-                                                                                    padding: MediaQuery.of(bottomSheetContext).viewInsets,
-                                                                                    child: EditStockNumberWidget(
-                                                                                      stockDepotMapping: listViewStockDepotMappingRecord.reference,
-                                                                                      stockLevel: listViewStockDepotMappingRecord.numberInStock,
-                                                                                    ),
-                                                                                  ),
-                                                                                );
-                                                                              },
-                                                                            ).then((value) =>
-                                                                                setState(() {}));
-                                                                          },
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.edit,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
+                                                                              tabletLandscape: false,
+                                                                              desktop: false,
+                                                                            ))
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                                                                                child: Text(
+                                                                                  'user@domainname.com',
+                                                                                  style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                ),
+                                                                              ),
+                                                                          ],
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                  ],
-                                                                ),
+                                                                  ),
+                                                                  if (responsiveVisibility(
+                                                                    context:
+                                                                        context,
+                                                                    phone:
+                                                                        false,
+                                                                    tablet:
+                                                                        false,
+                                                                  ))
+                                                                    Expanded(
+                                                                      flex: 1,
+                                                                      child:
+                                                                          Text(
+                                                                        containerCount
+                                                                            .toString(),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium,
+                                                                      ),
+                                                                    ),
+                                                                ],
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ),
+                                                            ),
+                                                          );
+                                                        },
                                                       ),
                                                     );
                                                   },
