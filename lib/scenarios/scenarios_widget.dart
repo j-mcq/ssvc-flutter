@@ -980,6 +980,14 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
+                                    setState(() {
+                                      FFAppState().mapZoomLevel = 16;
+                                      FFAppState().polygonLatLngList = [];
+                                      FFAppState().circleRadius = 0.0;
+                                      FFAppState().circleLatLng = null;
+                                      FFAppState().mapCenterLocation = null;
+                                    });
+
                                     context.pushNamed('scenario');
                                   },
                                   text: 'Add Scenario',
