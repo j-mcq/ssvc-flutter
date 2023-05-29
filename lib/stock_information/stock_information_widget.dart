@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/edit_active_response_item_widget.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
@@ -1265,6 +1266,15 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                             .bodySmall,
                                       ),
                                     ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        'Actions',
+                                        textAlign: TextAlign.end,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodySmall,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1444,6 +1454,17 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       ),
                                                     ),
                                                   Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      listViewActiveResponseItemsRecord
+                                                          .statusDescription,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
+                                                  ),
+                                                  Expanded(
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -1456,16 +1477,62 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                               MainAxisSize.max,
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .start,
+                                                                  .end,
                                                           children: [
-                                                            Expanded(
-                                                              flex: 1,
-                                                              child: Text(
-                                                                listViewActiveResponseItemsRecord
-                                                                    .statusDescription,
-                                                                style: FlutterFlowTheme.of(
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  enableDrag:
+                                                                      false,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (bottomSheetContext) {
+                                                                    return GestureDetector(
+                                                                      onTap: () => FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(
+                                                                              _unfocusNode),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.of(bottomSheetContext).viewInsets,
+                                                                        child:
+                                                                            EditActiveResponseItemWidget(
+                                                                          activeResponseItemReference:
+                                                                              listViewActiveResponseItemsRecord.reference,
+                                                                          homeDepotReference:
+                                                                              listViewActiveResponseItemsRecord.homeDepot!,
+                                                                          statusReference:
+                                                                              listViewActiveResponseItemsRecord.status!,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
+                                                              },
+                                                              child: Icon(
+                                                                Icons.edit,
+                                                                color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium,
+                                                                    .secondaryText,
+                                                                size: 24.0,
                                                               ),
                                                             ),
                                                           ],

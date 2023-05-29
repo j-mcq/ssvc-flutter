@@ -20,6 +20,7 @@ import 'schema/scenario_household_responses_record.dart';
 import 'schema/scenario_response_items_record.dart';
 import 'schema/depots_record.dart';
 import 'schema/active_response_items_record.dart';
+import 'schema/response_item_status_options_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -42,6 +43,7 @@ export 'schema/scenario_household_responses_record.dart';
 export 'schema/scenario_response_items_record.dart';
 export 'schema/depots_record.dart';
 export 'schema/active_response_items_record.dart';
+export 'schema/response_item_status_options_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -850,6 +852,61 @@ Future<FFFirestorePage<ActiveResponseItemsRecord>>
         queryCollectionPage(
           ActiveResponseItemsRecord.collection,
           ActiveResponseItemsRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
+
+/// Functions to query ResponseItemStatusOptionsRecords (as a Stream and as a Future).
+Future<int> queryResponseItemStatusOptionsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ResponseItemStatusOptionsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ResponseItemStatusOptionsRecord>>
+    queryResponseItemStatusOptionsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+        queryCollection(
+          ResponseItemStatusOptionsRecord.collection,
+          ResponseItemStatusOptionsRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          limit: limit,
+          singleRecord: singleRecord,
+        );
+
+Future<List<ResponseItemStatusOptionsRecord>>
+    queryResponseItemStatusOptionsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+        queryCollectionOnce(
+          ResponseItemStatusOptionsRecord.collection,
+          ResponseItemStatusOptionsRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          limit: limit,
+          singleRecord: singleRecord,
+        );
+
+Future<FFFirestorePage<ResponseItemStatusOptionsRecord>>
+    queryResponseItemStatusOptionsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          ResponseItemStatusOptionsRecord.collection,
+          ResponseItemStatusOptionsRecord.fromSnapshot,
           queryBuilder: queryBuilder,
           nextPageMarker: nextPageMarker,
           pageSize: pageSize,
