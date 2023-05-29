@@ -329,13 +329,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      if (currentUserEmailVerified) {
-                                        context.pushNamedAuth(
-                                            'dashboard', context.mounted);
-                                      } else {
-                                        context.pushNamedAuth(
-                                            'verifyEmail', context.mounted);
-                                      }
+                                      context.pushNamedAuth(
+                                          'dashboard', context.mounted);
                                     },
                                     child: Container(
                                       width: 150.0,
