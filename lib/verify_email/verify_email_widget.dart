@@ -120,7 +120,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
                       child: Text(
-                        'You have not verified you Email address yet. Please click on the link in the email that was sent to you email.',
+                        'Please click on the link in the verification email that was sent to the email address you signed up with. Once you have, please log in again after clicking the button below.',
                         textAlign: TextAlign.start,
                         style: FlutterFlowTheme.of(context).bodySmall,
                       ),
@@ -130,23 +130,9 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 44.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          await authManager.sendEmailVerification();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Verification link sent',
-                                style: TextStyle(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).secondary,
-                            ),
-                          );
+                          context.pushNamed('signIn');
                         },
-                        text: 'Re-send Verification Email',
+                        text: 'Log In Again',
                         options: FFButtonOptions(
                           width: 270.0,
                           height: 50.0,
@@ -180,9 +166,23 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 44.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('signIn');
+                          await authManager.sendEmailVerification();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Verification link sent',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
                         },
-                        text: 'Log In Again',
+                        text: 'Re-send Verification Email',
                         options: FFButtonOptions(
                           width: 270.0,
                           height: 50.0,
