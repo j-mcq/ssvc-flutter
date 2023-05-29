@@ -71,13 +71,13 @@ class _PolyMapState extends State<PolyMap> {
   bool _isMarker = false;
   bool _isCircle = false;
   bool _isDataLoaded = false;
-  String _lastItemType = 'polygon'; // Default
+  String _lastItemType = 'polygon';
   bool _showPsrHouseholds = true;
   bool _showDepots = true;
   double _zoomLevel = 10; // Default
 
   gmf.LatLng _searchLatLng = gmf.LatLng(53.178703, -2.994242);
-  gmf.LatLng _map_center_location = gmf.LatLng(53.178703, -2.994242);
+  gmf.LatLng _mapCenterLocation = gmf.LatLng(53.178703, -2.994242);
 
   TextEditingController searchController = TextEditingController();
 
@@ -107,7 +107,7 @@ class _PolyMapState extends State<PolyMap> {
           await ScenarioRecord.getDocumentOnce(widget.scenario!);
 
       if (scenarioRecord.mapCenterLocation != null) {
-        _map_center_location = gmf.LatLng(
+        _mapCenterLocation = gmf.LatLng(
             scenarioRecord.mapCenterLocation!.latitude,
             scenarioRecord.mapCenterLocation!.longitude);
       }
@@ -115,10 +115,10 @@ class _PolyMapState extends State<PolyMap> {
         _zoomLevel = scenarioRecord.mapZoomLevel;
       }
     } else if (widget.currentLocation != null) {
-      _map_center_location = gmf.LatLng(
+      _mapCenterLocation = gmf.LatLng(
           widget.currentLocation!.latitude, widget.currentLocation!.longitude);
     }
-    if (_polygons.length == 0 && _circles.length == 0) {
+    if (_isDataLoaded == false) {
       await _loadMapData();
     }
     return true;
@@ -137,9 +137,9 @@ class _PolyMapState extends State<PolyMap> {
     FFAppState().mapZoomLevel = _zoomLevel;
   }
 
-  Future<void> searchLocation(String query) async {
+  Future<bool> searchLocation(String query) async {
     if (query.isEmpty) {
-      return;
+      return true;
     }
     final apiKey =
         'AIzaSyAEzM6c72bBO1ldCv-Xy-W7oUOl3Q8lf_U'; // TODO use api key from flutterflow config.
@@ -164,8 +164,11 @@ class _PolyMapState extends State<PolyMap> {
         _googleMapController.animateCamera(
           CameraUpdate.newLatLngZoom(_searchLatLng, 15),
         );
+      } else {
+        return true;
       }
     }
+    return false;
   }
 
   Future<void> _loadMapData() async {
@@ -195,6 +198,8 @@ class _PolyMapState extends State<PolyMap> {
             _setCircles(gmf.LatLng(element.latitude!, element.longitude!));
           });
         }
+
+        _isDataLoaded = true;
       }
       if (_showPsrHouseholds) {
         final psrHouseholds = await queryPsrRecordOnce();
@@ -370,7 +375,23 @@ class _PolyMapState extends State<PolyMap> {
                   padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 16),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      searchLocation(searchController.text);
+                      final noResults =
+                          await searchLocation(searchController.text);
+                      if (noResults) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'No results found',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                      }
                     },
                     text: 'Search',
                     icon: Icon(
@@ -429,7 +450,7 @@ class _PolyMapState extends State<PolyMap> {
                   }
                   return gmf.GoogleMap(
                     initialCameraPosition: gmf.CameraPosition(
-                      target: _map_center_location,
+                      target: _mapCenterLocation,
                       zoom: _zoomLevel,
                     ),
                     mapType: gmf.MapType.hybrid,
@@ -487,40 +508,6 @@ class _PolyMapState extends State<PolyMap> {
                     _clearAll();
                   },
                   text: 'Clear Polygon',
-                  options: FFButtonOptions(
-                    width: 130.0,
-                    height: 40.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.white,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    setState(() {
-                      _isPolygon = true;
-                      _isMarker = false;
-                      _isCircle = false;
-                    });
-                  },
-                  text: 'Add Polygon',
                   options: FFButtonOptions(
                     width: 130.0,
                     height: 40.0,
