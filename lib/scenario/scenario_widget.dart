@@ -444,8 +444,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       controller: _model
                                                               .outageDurationController ??=
                                                           TextEditingController(
-                                                        text:
-                                                            scenarioInputsContainerScenarioRecord
+                                                        text: scenarioInputsContainerScenarioRecord
+                                                                    .outageDuration ==
+                                                                0.0
+                                                            ? null
+                                                            : scenarioInputsContainerScenarioRecord
                                                                 .outageDuration
                                                                 .toString(),
                                                       ),
