@@ -1,10 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'sign_in_model.dart';
@@ -331,13 +329,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         return;
                                       }
 
-                                      if (currentUserEmailVerified) {
-                                        context.pushNamedAuth(
-                                            'dashboard', context.mounted);
-                                      } else {
-                                        context.pushNamedAuth(
-                                            'verifyEmail', context.mounted);
-                                      }
+                                      context.pushNamedAuth(
+                                          'dashboard', context.mounted);
                                     },
                                     child: Container(
                                       width: 150.0,
@@ -374,40 +367,6 @@ class _SignInWidgetState extends State<SignInWidget> {
                                   ),
                                 ],
                               ),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 8.0, 8.0),
-                                  child: FlutterFlowIconButton(
-                                    borderColor:
-                                        FlutterFlowTheme.of(context).lineColor,
-                                    borderRadius: 12.0,
-                                    borderWidth: 1.0,
-                                    buttonSize: 44.0,
-                                    icon: FaIcon(
-                                      FontAwesomeIcons.windows,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 16.0,
-                                    ),
-                                    onPressed: () async {
-                                      GoRouter.of(context).prepareAuthEvent();
-                                      final user = await authManager
-                                          .signInWithApple(context);
-                                      if (user == null) {
-                                        return;
-                                      }
-
-                                      context.goNamedAuth(
-                                          'dashboard', context.mounted);
-                                    },
-                                  ),
-                                ),
-                              ],
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(

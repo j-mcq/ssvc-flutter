@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -7,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -980,7 +982,36 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    context.pushNamed('scenario');
+                                    setState(() {
+                                      FFAppState().mapZoomLevel = 16;
+                                      FFAppState().polygonLatLngList = [];
+                                      FFAppState().circleRadius = 0.0;
+                                      FFAppState().circleLatLng = null;
+                                      FFAppState().mapCenterLocation = null;
+                                    });
+
+                                    final scenarioCreateData =
+                                        createScenarioRecordData();
+                                    var scenarioRecordReference =
+                                        ScenarioRecord.collection.doc();
+                                    await scenarioRecordReference
+                                        .set(scenarioCreateData);
+                                    _model.outCreateScenario =
+                                        ScenarioRecord.getDocumentFromData(
+                                            scenarioCreateData,
+                                            scenarioRecordReference);
+
+                                    context.pushNamed(
+                                      'scenario',
+                                      queryParams: {
+                                        'scenarioReference': serializeParam(
+                                          _model.outCreateScenario!.reference,
+                                          ParamType.DocumentReference,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+
+                                    setState(() {});
                                   },
                                   text: 'Add Scenario',
                                   icon: Icon(

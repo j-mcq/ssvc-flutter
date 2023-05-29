@@ -173,7 +173,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'verifyEmail',
               path: 'verifyEmail',
-              requireAuth: true,
               builder: (context, params) => VerifyEmailWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),

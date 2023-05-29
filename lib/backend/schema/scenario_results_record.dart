@@ -49,6 +49,11 @@ class ScenarioResultsRecord extends FirestoreRecord {
   String get nearestDepotName => _nearestDepotName ?? '';
   bool hasNearestDepotName() => _nearestDepotName != null;
 
+  // "response_coverage_all" field.
+  double? _responseCoverageAll;
+  double get responseCoverageAll => _responseCoverageAll ?? 0.0;
+  bool hasResponseCoverageAll() => _responseCoverageAll != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -60,6 +65,8 @@ class ScenarioResultsRecord extends FirestoreRecord {
         castToType<double>(snapshotData['number_of_response_items']);
     _nearestDepot = snapshotData['nearest_depot'] as DocumentReference?;
     _nearestDepotName = snapshotData['nearest_depot_name'] as String?;
+    _responseCoverageAll =
+        castToType<double>(snapshotData['response_coverage_all']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -101,6 +108,7 @@ Map<String, dynamic> createScenarioResultsRecordData({
   double? numberOfResponseItems,
   DocumentReference? nearestDepot,
   String? nearestDepotName,
+  double? responseCoverageAll,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -111,6 +119,7 @@ Map<String, dynamic> createScenarioResultsRecordData({
       'number_of_response_items': numberOfResponseItems,
       'nearest_depot': nearestDepot,
       'nearest_depot_name': nearestDepotName,
+      'response_coverage_all': responseCoverageAll,
     }.withoutNulls,
   );
 

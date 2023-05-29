@@ -1,5 +1,8 @@
 /// Automatic FlutterFlow imports
+import 'dart:math';
+
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:ssvc/components/enter_radius_widget.dart';
 import 'package:ssvc/flutter_flow/flutter_flow_google_map.dart';
 import 'package:ssvc/flutter_flow/flutter_flow_widgets.dart';
@@ -20,6 +23,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart' as gmf;
 import 'dart:collection';
 //import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:selectable_list/selectable_list.dart';
 
 class PolyMap extends StatefulWidget {
   const PolyMap({
@@ -38,6 +44,9 @@ class PolyMap extends StatefulWidget {
   @override
   _PolyMapState createState() => _PolyMapState();
 }
+
+final homeScaffoldKey = GlobalKey<ScaffoldState>();
+final searchScaffoldKey = GlobalKey<ScaffoldState>();
 
 class _PolyMapState extends State<PolyMap> {
   final _unfocusNode = FocusNode();
@@ -62,11 +71,15 @@ class _PolyMapState extends State<PolyMap> {
   bool _isMarker = false;
   bool _isCircle = false;
   bool _isDataLoaded = false;
-  String _lastItemType = 'polygon'; // Default
+  String _lastItemType = 'polygon';
   bool _showPsrHouseholds = true;
   bool _showDepots = true;
   double _zoomLevel = 10; // Default
-  gmf.LatLng _map_center_location = gmf.LatLng(53.178703, -2.994242);
+
+  gmf.LatLng _searchLatLng = gmf.LatLng(53.178703, -2.994242);
+  gmf.LatLng _mapCenterLocation = gmf.LatLng(53.178703, -2.994242);
+
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -94,7 +107,7 @@ class _PolyMapState extends State<PolyMap> {
           await ScenarioRecord.getDocumentOnce(widget.scenario!);
 
       if (scenarioRecord.mapCenterLocation != null) {
-        _map_center_location = gmf.LatLng(
+        _mapCenterLocation = gmf.LatLng(
             scenarioRecord.mapCenterLocation!.latitude,
             scenarioRecord.mapCenterLocation!.longitude);
       }
@@ -102,10 +115,10 @@ class _PolyMapState extends State<PolyMap> {
         _zoomLevel = scenarioRecord.mapZoomLevel;
       }
     } else if (widget.currentLocation != null) {
-      _map_center_location = gmf.LatLng(
+      _mapCenterLocation = gmf.LatLng(
           widget.currentLocation!.latitude, widget.currentLocation!.longitude);
     }
-    if (_polygons.length == 0 && _circles.length == 0) {
+    if (_isDataLoaded == false) {
       await _loadMapData();
     }
     return true;
@@ -122,6 +135,40 @@ class _PolyMapState extends State<PolyMap> {
     FFAppState().circleRadius = 0.0;
     FFAppState().mapCenterLocation = null;
     FFAppState().mapZoomLevel = _zoomLevel;
+  }
+
+  Future<bool> searchLocation(String query) async {
+    if (query.isEmpty) {
+      return true;
+    }
+    final apiKey =
+        'AIzaSyAEzM6c72bBO1ldCv-Xy-W7oUOl3Q8lf_U'; // TODO use api key from flutterflow config.
+
+    final url =
+        'https://maps.googleapis.com/maps/api/geocode/json?address=$query&key=$apiKey';
+
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+
+      if (data['status'] == 'OK' && data['results'].isNotEmpty) {
+        final location = data['results'][0]['geometry']['location'];
+        final lat = location['lat'];
+        final lng = location['lng'];
+
+        setState(() {
+          _searchLatLng = gmf.LatLng(lat, lng);
+        });
+
+        _googleMapController.animateCamera(
+          CameraUpdate.newLatLngZoom(_searchLatLng, 15),
+        );
+      } else {
+        return true;
+      }
+    }
+    return false;
   }
 
   Future<void> _loadMapData() async {
@@ -151,6 +198,8 @@ class _PolyMapState extends State<PolyMap> {
             _setCircles(gmf.LatLng(element.latitude!, element.longitude!));
           });
         }
+
+        _isDataLoaded = true;
       }
       if (_showPsrHouseholds) {
         final psrHouseholds = await queryPsrRecordOnce();
@@ -272,6 +321,108 @@ class _PolyMapState extends State<PolyMap> {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
+        Container(
+          width: MediaQuery.of(context).size.width - 294,
+          height: 100,
+          child: Row(children: [
+            Container(
+              width: 350,
+              child: TextFormField(
+                controller: searchController,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelText: 'Search for a postcode',
+                  labelStyle: FlutterFlowTheme.of(context).bodySmall,
+                  hintStyle: FlutterFlowTheme.of(context).bodySmall,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0x00000000),
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0x00000000),
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  filled: true,
+                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                ),
+                style: FlutterFlowTheme.of(context).bodyMedium,
+              ),
+            ),
+            Container(
+                width: 150,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 16),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      final noResults =
+                          await searchLocation(searchController.text);
+                      if (noResults) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'No results found',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                      }
+                    },
+                    text: 'Search',
+                    icon: Icon(
+                      Icons.search,
+                      size: 14,
+                    ),
+                    options: FFButtonOptions(
+                      width: 150,
+                      height: 40,
+                      padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).titleSmallFamily,
+                            color: Colors.white,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).titleSmallFamily),
+                          ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                )),
+          ]),
+        ),
         Row(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -299,7 +450,7 @@ class _PolyMapState extends State<PolyMap> {
                   }
                   return gmf.GoogleMap(
                     initialCameraPosition: gmf.CameraPosition(
-                      target: _map_center_location,
+                      target: _mapCenterLocation,
                       zoom: _zoomLevel,
                     ),
                     mapType: gmf.MapType.hybrid,
@@ -357,40 +508,6 @@ class _PolyMapState extends State<PolyMap> {
                     _clearAll();
                   },
                   text: 'Clear Polygon',
-                  options: FFButtonOptions(
-                    width: 130.0,
-                    height: 40.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.white,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
-                        ),
-                    elevation: 2.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    setState(() {
-                      _isPolygon = true;
-                      _isMarker = false;
-                      _isCircle = false;
-                    });
-                  },
-                  text: 'Add Polygon',
                   options: FFButtonOptions(
                     width: 130.0,
                     height: 40.0,

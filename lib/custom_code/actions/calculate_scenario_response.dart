@@ -103,7 +103,8 @@ Future<String?> calculateScenarioResponse(
       }
     }
 
-    final responseCoverage = await groupResponseItems(scenarioReference);
+    final responseCoverage =
+        await groupResponseItems(scenarioReference, nearestDepot.reference);
     saveScenarioResults(
         scenarioReference,
         impactedPsrHouseholds.length,
@@ -143,18 +144,28 @@ Future<DepotsRecord> getNearestDepot(Iterable<mtk.LatLng> polygons) async {
   // get polygon centroid
 }
 
-Future<double> groupResponseItems(DocumentReference scenarioReference) async {
-  final responseItemResults = await queryScenarioHouseholdResponsesRecordOnce(
+Future<double> groupResponseItems(
+    DocumentReference scenarioReference, DocumentReference closestDepot) async {
+  final responseItemRecords = await queryScenarioHouseholdResponsesRecordOnce(
       parent: scenarioReference);
+
   final responseItems = await queryResponseItemsRecordOnce();
+
+  final responseItemForClosestDepot = await queryStockDepotMappingRecordOnce(
+      queryBuilder: (query) => query.where('depot', isEqualTo: closestDepot));
 
   double responseCoverage = 0.0;
   double responseItemTypeCount = 0.0;
-  for (var responseItem in responseItems) {
+  for (var responseItemInDepot in responseItemForClosestDepot) {
+    final filtedResponseItem = responseItems
+        .where(
+            (element) => element.reference == responseItemInDepot.responseItem)
+        .first;
+
     double responseCoveragePerItem = 0.0;
     var itemCount = 0;
-    for (var responseItemResult in responseItemResults) {
-      if (responseItemResult.responseItem == responseItem.reference) {
+    for (var responseItemResult in responseItemRecords) {
+      if (responseItemResult.responseItem == responseItemInDepot.responseItem) {
         itemCount += 1;
       }
     }
@@ -163,18 +174,19 @@ Future<double> groupResponseItems(DocumentReference scenarioReference) async {
       final createScenarioResponseItemsCreateData =
           createScenarioResponseItemsRecordData(
               numberRequired: itemCount,
-              name: responseItem.name,
-              responseItem: responseItem.reference,
-              imagePath: responseItem.imageLink);
+              name: filtedResponseItem.name,
+              responseItem: responseItemInDepot.responseItem,
+              imagePath: filtedResponseItem.imageLink);
 
       var scenarioResponseItemsRecordReference =
           ScenarioResponseItemsRecord.createDoc(scenarioReference);
       await scenarioResponseItemsRecordReference
           .set(createScenarioResponseItemsCreateData);
-      if (itemCount < responseItem.stock!) {
+      if (itemCount < responseItemInDepot.numberInStock!) {
         responseCoveragePerItem = 1;
       } else {
-        responseCoveragePerItem = responseItem.stock! / itemCount;
+        responseCoveragePerItem =
+            responseItemInDepot.numberInStock! / itemCount;
       }
     }
 
