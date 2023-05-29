@@ -19,6 +19,7 @@ import 'schema/scenario_results_record.dart';
 import 'schema/scenario_household_responses_record.dart';
 import 'schema/scenario_response_items_record.dart';
 import 'schema/depots_record.dart';
+import 'schema/active_response_items_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,6 +41,7 @@ export 'schema/scenario_results_record.dart';
 export 'schema/scenario_household_responses_record.dart';
 export 'schema/scenario_response_items_record.dart';
 export 'schema/depots_record.dart';
+export 'schema/active_response_items_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -800,6 +802,59 @@ Future<FFFirestorePage<DepotsRecord>> queryDepotsRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
+
+/// Functions to query ActiveResponseItemsRecords (as a Stream and as a Future).
+Future<int> queryActiveResponseItemsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ActiveResponseItemsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ActiveResponseItemsRecord>> queryActiveResponseItemsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ActiveResponseItemsRecord.collection,
+      ActiveResponseItemsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ActiveResponseItemsRecord>> queryActiveResponseItemsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ActiveResponseItemsRecord.collection,
+      ActiveResponseItemsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<ActiveResponseItemsRecord>>
+    queryActiveResponseItemsRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+        queryCollectionPage(
+          ActiveResponseItemsRecord.collection,
+          ActiveResponseItemsRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
 
 Future<int> queryCollectionCount(
   Query collection, {
