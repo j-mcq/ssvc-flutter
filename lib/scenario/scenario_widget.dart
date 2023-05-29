@@ -1344,8 +1344,10 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       children: [
                                                                         FFButtonWidget(
                                                                           onPressed:
-                                                                              () {
-                                                                            print('Button pressed ...');
+                                                                              () async {
+                                                                            await actions.exportResponseList(
+                                                                              widget.scenarioReference,
+                                                                            );
                                                                           },
                                                                           text:
                                                                               'Export List',
@@ -2290,7 +2292,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 0.0),
                                                                             child:
                                                                                 Text(
-                                                                              'Number In Stock all SPEN',
+                                                                              'Total Number in Stock',
                                                                               style: FlutterFlowTheme.of(context).bodySmall,
                                                                             ),
                                                                           ),
@@ -2395,7 +2397,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                           children: [
                                                                                             Expanded(
                                                                                               child: Column(
-                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisSize: MainAxisSize.min,
                                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                                 children: [
                                                                                                   AutoSizeText(
