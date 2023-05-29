@@ -2427,17 +2427,19 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                         child: Row(
                                                                                           mainAxisSize: MainAxisSize.max,
                                                                                           children: [
-                                                                                            Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                              children: [
-                                                                                                Image.network(
-                                                                                                  listViewScenarioResponseItemsRecord.imagePath,
-                                                                                                  width: 100.0,
-                                                                                                  height: 100.0,
-                                                                                                  fit: BoxFit.cover,
-                                                                                                ),
-                                                                                              ],
+                                                                                            Expanded(
+                                                                                              child: Column(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Image.network(
+                                                                                                    listViewScenarioResponseItemsRecord.imagePath,
+                                                                                                    width: 100.0,
+                                                                                                    height: 100.0,
+                                                                                                    fit: BoxFit.cover,
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
                                                                                           ],
                                                                                         ),
@@ -2447,30 +2449,32 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                         child: Row(
                                                                                           mainAxisSize: MainAxisSize.max,
                                                                                           children: [
-                                                                                            Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                              children: [
-                                                                                                AutoSizeText(
-                                                                                                  listViewScenarioResponseItemsRecord.name.maybeHandleOverflow(
-                                                                                                    maxChars: 32,
-                                                                                                    replacement: '…',
-                                                                                                  ),
-                                                                                                  style: FlutterFlowTheme.of(context).titleMedium,
-                                                                                                ),
-                                                                                                if (responsiveVisibility(
-                                                                                                  context: context,
-                                                                                                  tabletLandscape: false,
-                                                                                                  desktop: false,
-                                                                                                ))
-                                                                                                  Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      'user@domainname.com',
-                                                                                                      style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                            Expanded(
+                                                                                              child: Column(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  AutoSizeText(
+                                                                                                    listViewScenarioResponseItemsRecord.name.maybeHandleOverflow(
+                                                                                                      maxChars: 32,
+                                                                                                      replacement: '…',
                                                                                                     ),
+                                                                                                    style: FlutterFlowTheme.of(context).titleMedium,
                                                                                                   ),
-                                                                                              ],
+                                                                                                  if (responsiveVisibility(
+                                                                                                    context: context,
+                                                                                                    tabletLandscape: false,
+                                                                                                    desktop: false,
+                                                                                                  ))
+                                                                                                    Padding(
+                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                                                                                                      child: Text(
+                                                                                                        'user@domainname.com',
+                                                                                                        style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
                                                                                           ],
                                                                                         ),
