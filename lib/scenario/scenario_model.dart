@@ -14,6 +14,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,7 @@ import 'package:provider/provider.dart';
 class ScenarioModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - Create Document] action in scenario widget.
   ScenarioRecord? outCreateScenario;
   InstantTimer? instantTimer;
@@ -29,9 +31,26 @@ class ScenarioModel extends FlutterFlowModel {
   // State field(s) for scenarioName widget.
   TextEditingController? scenarioNameController;
   String? Function(BuildContext, String?)? scenarioNameControllerValidator;
+  String? _scenarioNameControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Please enter a scenario name';
+    }
+
+    return null;
+  }
+
   // State field(s) for outageDuration widget.
   TextEditingController? outageDurationController;
   String? Function(BuildContext, String?)? outageDurationControllerValidator;
+  String? _outageDurationControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Please enter s scenario duration';
+    }
+
+    return null;
+  }
+
   // Stores action output result for [Custom Action - saveScenario] action in Button widget.
   DocumentReference? outSaveScenarioInputs;
   // State field(s) for GoogleMap widget.
@@ -42,6 +61,8 @@ class ScenarioModel extends FlutterFlowModel {
 
   void initState(BuildContext context) {
     sideBarNavModel = createModel(context, () => SideBarNavModel());
+    scenarioNameControllerValidator = _scenarioNameControllerValidator;
+    outageDurationControllerValidator = _outageDurationControllerValidator;
   }
 
   void dispose() {
