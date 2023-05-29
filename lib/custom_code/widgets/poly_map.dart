@@ -356,7 +356,7 @@ class _PolyMapState extends State<PolyMap> {
                     //Remove the last point setted at the polygon
                     _clearAll();
                   },
-                  text: 'Clear All',
+                  text: 'Clear Polygon',
                   options: FFButtonOptions(
                     width: 130.0,
                     height: 40.0,

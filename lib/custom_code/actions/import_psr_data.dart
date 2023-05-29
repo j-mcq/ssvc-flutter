@@ -32,13 +32,11 @@ Future<bool> importPsrData(String filePath) async {
     final rows = _fast_csv.parse(dataString);
 
     if (rows.length <= 1) {
-      print('Error importing PSR data: not rows found');
+      print('Error importing PSR data: no rows found');
       return false;
     }
 
     final psrOptions = await queryPsrCategoryOptionsRecordOnce();
-
-    final headers = rows.first;
 
     for (var row in rows.getRange(1, rows.length).toList()) {
       final psrCategoriesForHousehold = getPsrCategories(row, psrOptions);
@@ -50,21 +48,23 @@ Future<bool> importPsrData(String filePath) async {
 
       var psrRecordReference = PsrRecord.collection.doc();
       await psrRecordReference.set(psrCreateData);
-      final psrReference =
-          ScenarioRecord.getDocumentFromData(psrCreateData, psrRecordReference)
-              .reference;
+
+      final psrCategoriesReference = PsrCategoriesRecord.getDocumentFromData(
+              psrCreateData, psrRecordReference)
+          .reference;
 
       for (var psrCategory in psrCategoriesForHousehold) {
         final psrCategoriesCreateData =
             createPsrCategoriesRecordData(psrCategory: psrCategory.reference);
+
         var psrCategoriesRecordReference =
-            PsrCategoriesRecord.createDoc(psrReference);
+            PsrCategoriesRecord.createDoc(psrCategoriesReference);
+
         await psrCategoriesRecordReference.set(psrCategoriesCreateData);
       }
     }
   } on FirebaseException catch (e) {
-    // Handle any errors.
-    print(e);
+    print('Error importing PSR data: $e');
   }
 
   return true;
@@ -83,13 +83,11 @@ List<PsrCategoryOptionsRecord> getPsrCategories(
       }
     }
   }
-  // Add your function code here!
   return psrCategories;
 }
 
 PsrCategoryOptionsRecord? parsePsrCategory(
     psrCategoryColumn, List<PsrCategoryOptionsRecord> psrOptions) {
-  // Add your function code here!
   final psrCategory = psrOptions
       .firstWhere((element) => psrCategoryColumn.contains(element.name));
   return psrCategory;

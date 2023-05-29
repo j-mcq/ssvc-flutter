@@ -10,5 +10,19 @@ import 'package:flutter/material.dart';
 
 Future<double> calculateTotalScenarioCoveragePercentage() async {
   // Add your function code here!
-  return 0;
+  try {
+    int scenarioCount = 0;
+    int scenarioCoverCheck = 0;
+
+    final scenarioResults = await queryScenarioResultsRecordOnce();
+
+    for (var scenario in scenarioResults) {
+      scenarioCount++;
+      if (scenario.responseCoverage == 1) scenarioCoverCheck++;
+    }
+    return scenarioCoverCheck / scenarioCount;
+  } catch (e) {
+    print('Error calculating total scenario coverage percentage: $e');
+    return 0;
+  }
 }

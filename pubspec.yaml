@@ -109,6 +109,8 @@ dependencies:
   maps_toolkit: ^2.0.1
   flutter_spinkit: ^5.1.0
   fast_csv: ^0.1.44
+  file_saver: ^0.2.4
+  csv: ^5.0.2
 
 dev_dependencies:
   flutter_launcher_icons: 0.12.0
