@@ -1295,93 +1295,94 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                     MainAxisAlignment
                                                                         .spaceBetween,
                                                                 children: [
-                                                                  Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Prioritiesd PSR Responses',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .headlineSmall,
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            4.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          'Summary of the types of PSR customers impacted by the scenario and the response items required.',
+                                                                  Expanded(
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                          'Prioritiesd PSR Responses',
                                                                           style:
-                                                                              FlutterFlowTheme.of(context).bodySmall,
+                                                                              FlutterFlowTheme.of(context).headlineSmall,
                                                                         ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      FFButtonWidget(
-                                                                        onPressed:
-                                                                            () {
-                                                                          print(
-                                                                              'Button pressed ...');
-                                                                        },
-                                                                        text:
-                                                                            'Export List',
-                                                                        options:
-                                                                            FFButtonOptions(
-                                                                          width:
-                                                                              150.0,
-                                                                          height:
-                                                                              40.0,
+                                                                        Padding(
                                                                           padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0.0,
-                                                                              0.0,
+                                                                              4.0,
                                                                               0.0,
                                                                               0.0),
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          textStyle: FlutterFlowTheme.of(context)
-                                                                              .titleSmall
-                                                                              .override(
-                                                                                fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
-                                                                                color: Colors.white,
-                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
-                                                                              ),
-                                                                          borderSide:
-                                                                              BorderSide(
-                                                                            color:
-                                                                                Colors.transparent,
-                                                                            width:
-                                                                                1.0,
+                                                                          child:
+                                                                              Text(
+                                                                            'Summary of the types of PSR customers impacted by the scenario and the response items required.',
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).bodySmall,
                                                                           ),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(50.0),
                                                                         ),
-                                                                      ),
-                                                                    ],
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .end,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .end,
+                                                                      children: [
+                                                                        FFButtonWidget(
+                                                                          onPressed:
+                                                                              () {
+                                                                            print('Button pressed ...');
+                                                                          },
+                                                                          text:
+                                                                              'Export List',
+                                                                          options:
+                                                                              FFButtonOptions(
+                                                                            width:
+                                                                                150.0,
+                                                                            height:
+                                                                                40.0,
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                  color: Colors.white,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                ),
+                                                                            borderSide:
+                                                                                BorderSide(
+                                                                              color: Colors.transparent,
+                                                                              width: 1.0,
+                                                                            ),
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(50.0),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ),
@@ -2096,63 +2097,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       ],
                                                                     ),
                                                                   ),
-                                                                  Expanded(
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .end,
-                                                                      children: [
-                                                                        FFButtonWidget(
-                                                                          onPressed:
-                                                                              () async {
-                                                                            await actions.refreshScenarioStockLevels(
-                                                                              widget.scenarioReference,
-                                                                            );
-                                                                          },
-                                                                          text:
-                                                                              'Refresh Stock Check',
-                                                                          options:
-                                                                              FFButtonOptions(
-                                                                            height:
-                                                                                40.0,
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                24.0,
-                                                                                0.0,
-                                                                                24.0,
-                                                                                0.0),
-                                                                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0.0,
-                                                                                0.0,
-                                                                                0.0,
-                                                                                0.0),
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primary,
-                                                                            textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
-                                                                                  color: Colors.white,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
-                                                                                ),
-                                                                            elevation:
-                                                                                3.0,
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: Colors.transparent,
-                                                                              width: 1.0,
-                                                                            ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(50.0),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
                                                                 ],
                                                               ),
                                                             ),
@@ -2427,17 +2371,19 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                         child: Row(
                                                                                           mainAxisSize: MainAxisSize.max,
                                                                                           children: [
-                                                                                            Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                              children: [
-                                                                                                Image.network(
-                                                                                                  listViewScenarioResponseItemsRecord.imagePath,
-                                                                                                  width: 100.0,
-                                                                                                  height: 100.0,
-                                                                                                  fit: BoxFit.cover,
-                                                                                                ),
-                                                                                              ],
+                                                                                            Expanded(
+                                                                                              child: Column(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Image.network(
+                                                                                                    listViewScenarioResponseItemsRecord.imagePath,
+                                                                                                    width: 100.0,
+                                                                                                    height: 100.0,
+                                                                                                    fit: BoxFit.cover,
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
                                                                                           ],
                                                                                         ),
@@ -2447,30 +2393,32 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                         child: Row(
                                                                                           mainAxisSize: MainAxisSize.max,
                                                                                           children: [
-                                                                                            Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                              children: [
-                                                                                                AutoSizeText(
-                                                                                                  listViewScenarioResponseItemsRecord.name.maybeHandleOverflow(
-                                                                                                    maxChars: 32,
-                                                                                                    replacement: '…',
-                                                                                                  ),
-                                                                                                  style: FlutterFlowTheme.of(context).titleMedium,
-                                                                                                ),
-                                                                                                if (responsiveVisibility(
-                                                                                                  context: context,
-                                                                                                  tabletLandscape: false,
-                                                                                                  desktop: false,
-                                                                                                ))
-                                                                                                  Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      'user@domainname.com',
-                                                                                                      style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                            Expanded(
+                                                                                              child: Column(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  AutoSizeText(
+                                                                                                    listViewScenarioResponseItemsRecord.name.maybeHandleOverflow(
+                                                                                                      maxChars: 32,
+                                                                                                      replacement: '…',
                                                                                                     ),
+                                                                                                    style: FlutterFlowTheme.of(context).titleMedium,
                                                                                                   ),
-                                                                                              ],
+                                                                                                  if (responsiveVisibility(
+                                                                                                    context: context,
+                                                                                                    tabletLandscape: false,
+                                                                                                    desktop: false,
+                                                                                                  ))
+                                                                                                    Padding(
+                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                                                                                                      child: Text(
+                                                                                                        'user@domainname.com',
+                                                                                                        style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
                                                                                           ],
                                                                                         ),
