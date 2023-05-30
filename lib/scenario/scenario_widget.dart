@@ -1972,11 +1972,16 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                   FFBarChartData(
                                                                                     yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberRequired).toList(),
                                                                                     color: FlutterFlowTheme.of(context).tertiary,
+                                                                                  ),
+                                                                                  FFBarChartData(
+                                                                                    yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberInClosestDepot).toList(),
+                                                                                    color: Color(0xFF6F28CB),
                                                                                   )
                                                                                 ],
                                                                                 xLabels: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.name).toList(),
                                                                                 barWidth: 55.0,
                                                                                 barBorderRadius: BorderRadius.circular(0.0),
+                                                                                barSpace: 0.0,
                                                                                 groupSpace: 5.0,
                                                                                 alignment: BarChartAlignment.spaceEvenly,
                                                                                 chartStylingInfo: ChartStylingInfo(
@@ -2009,6 +2014,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 child: FlutterFlowChartLegendWidget(
                                                                                   entries: [
                                                                                     LegendEntry(FlutterFlowTheme.of(context).tertiary, 'Required for Scenario'),
+                                                                                    LegendEntry(Color(0xFF6F28CB), 'Stock in Closest Depot'),
                                                                                   ],
                                                                                   width: 200.0,
                                                                                   height: 50.0,
@@ -2442,35 +2448,9 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                         ))
                                                                                           Expanded(
                                                                                             flex: 2,
-                                                                                            child: StreamBuilder<List<StockDepotMappingRecord>>(
-                                                                                              stream: queryStockDepotMappingRecord(
-                                                                                                queryBuilder: (stockDepotMappingRecord) => stockDepotMappingRecord.where('response_item', isEqualTo: listViewScenarioResponseItemsRecord.responseItem).where('depot', isEqualTo: containerScenarioResultsRecord!.nearestDepot),
-                                                                                                singleRecord: true,
-                                                                                              ),
-                                                                                              builder: (context, snapshot) {
-                                                                                                // Customize what your widget looks like when it's loading.
-                                                                                                if (!snapshot.hasData) {
-                                                                                                  return Center(
-                                                                                                    child: SizedBox(
-                                                                                                      width: 50.0,
-                                                                                                      height: 50.0,
-                                                                                                      child: CircularProgressIndicator(
-                                                                                                        color: FlutterFlowTheme.of(context).primary,
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                  );
-                                                                                                }
-                                                                                                List<StockDepotMappingRecord> textStockDepotMappingRecordList = snapshot.data!;
-                                                                                                // Return an empty Container when the item does not exist.
-                                                                                                if (snapshot.data!.isEmpty) {
-                                                                                                  return Container();
-                                                                                                }
-                                                                                                final textStockDepotMappingRecord = textStockDepotMappingRecordList.isNotEmpty ? textStockDepotMappingRecordList.first : null;
-                                                                                                return Text(
-                                                                                                  listViewScenarioResponseItemsRecord.numberInClosestDepot.toString(),
-                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                );
-                                                                                              },
+                                                                                            child: Text(
+                                                                                              listViewScenarioResponseItemsRecord.numberInClosestDepot.toString(),
+                                                                                              style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                             ),
                                                                                           ),
                                                                                         if (responsiveVisibility(
@@ -2480,27 +2460,9 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                         ))
                                                                                           Expanded(
                                                                                             flex: 2,
-                                                                                            child: StreamBuilder<ResponseItemsRecord>(
-                                                                                              stream: ResponseItemsRecord.getDocument(listViewScenarioResponseItemsRecord.responseItem!),
-                                                                                              builder: (context, snapshot) {
-                                                                                                // Customize what your widget looks like when it's loading.
-                                                                                                if (!snapshot.hasData) {
-                                                                                                  return Center(
-                                                                                                    child: SizedBox(
-                                                                                                      width: 50.0,
-                                                                                                      height: 50.0,
-                                                                                                      child: CircularProgressIndicator(
-                                                                                                        color: FlutterFlowTheme.of(context).primary,
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                  );
-                                                                                                }
-                                                                                                final textResponseItemsRecord = snapshot.data!;
-                                                                                                return Text(
-                                                                                                  listViewScenarioResponseItemsRecord.numberInAllDepots.toString(),
-                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                );
-                                                                                              },
+                                                                                            child: Text(
+                                                                                              listViewScenarioResponseItemsRecord.numberInAllDepots.toString(),
+                                                                                              style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                             ),
                                                                                           ),
                                                                                       ],
