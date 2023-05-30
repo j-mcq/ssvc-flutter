@@ -587,13 +587,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                           0.0,
                                                                           0.0),
                                                               child: Text(
-                                                                formatNumber(
-                                                                  _model
-                                                                      .totalResponseItems,
-                                                                  formatType:
-                                                                      FormatType
-                                                                          .compact,
-                                                                ),
+                                                                cardTotalResponseItemsCount
+                                                                    .toString(),
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
