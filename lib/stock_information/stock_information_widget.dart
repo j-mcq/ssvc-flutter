@@ -1622,11 +1622,14 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
                                     ),
-                                    child: custom_widgets
-                                        .SortableGridResponseItems(
-                                      width: MediaQuery.of(context).size.width *
-                                          1.0,
-                                      height: 600.0,
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 8.0, 0.0),
+                                      child: custom_widgets
+                                          .SortableGridResponseItems(
+                                        width: 100.0,
+                                        height: 600.0,
+                                      ),
                                     ),
                                   ),
                                 ],
