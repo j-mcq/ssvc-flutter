@@ -796,7 +796,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget>
                                                                             animation:
                                                                                 true,
                                                                             progressColor:
-                                                                                FlutterFlowTheme.of(context).primary,
+                                                                                functions.formatPercentageBar(containerScenarioResultsRecord!.responseCoverage),
                                                                             backgroundColor:
                                                                                 FlutterFlowTheme.of(context).lineColor,
                                                                             center:
