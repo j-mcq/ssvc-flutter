@@ -10,6 +10,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -18,12 +19,20 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class StockInformationModel extends FlutterFlowModel {
+  ///  Local state fields for this page.
+
+  String? responseItemFilter;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   ResponseItemsRecord? outCreateResponseItem;
+  // State field(s) for responseItemFilter widget.
+  TextEditingController? responseItemFilterController;
+  String? Function(BuildContext, String?)?
+      responseItemFilterControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -33,6 +42,7 @@ class StockInformationModel extends FlutterFlowModel {
 
   void dispose() {
     sideBarNavModel.dispose();
+    responseItemFilterController?.dispose();
   }
 
   /// Additional helper methods are added here.
