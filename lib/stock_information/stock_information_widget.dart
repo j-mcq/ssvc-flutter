@@ -1156,6 +1156,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                 child: StreamBuilder<
                                     List<ActiveResponseItemsRecord>>(
                                   stream: queryActiveResponseItemsRecord(
+                                    queryBuilder: (activeResponseItemsRecord) =>
+                                        activeResponseItemsRecord
+                                            .orderBy('response_item_name'),
                                     limit: 50,
                                   ),
                                   builder: (context, snapshot) {
