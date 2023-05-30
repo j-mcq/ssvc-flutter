@@ -674,138 +674,145 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       mainAxisAlignment:
                                                           MainAxisAlignment.end,
                                                       children: [
-                                                        FFButtonWidget(
-                                                          onPressed: () async {
-                                                            if (_model.formKey
-                                                                        .currentState ==
-                                                                    null ||
-                                                                !_model.formKey
-                                                                    .currentState!
-                                                                    .validate()) {
-                                                              return;
-                                                            }
-                                                            _model.outSaveScenarioInputs =
-                                                                await actions
-                                                                    .saveScenario(
-                                                              widget.scenarioReference !=
-                                                                      null
-                                                                  ? widget
-                                                                      .scenarioReference
-                                                                  : null,
-                                                              double.tryParse(_model
-                                                                  .outageDurationController
-                                                                  .text),
-                                                              _model
-                                                                  .scenarioNameController
-                                                                  .text,
-                                                            );
-                                                            _model.outCalculateScenarioResponse =
-                                                                await actions
-                                                                    .calculateScenarioResponse(
-                                                              _model
-                                                                  .outSaveScenarioInputs!,
-                                                            );
-                                                            if (_model.outCalculateScenarioResponse !=
-                                                                    null &&
-                                                                _model.outCalculateScenarioResponse !=
-                                                                    '') {
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'There was a problem calculating the scenario response: ${_model.outCalculateScenarioResponse}',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                  ),
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          4000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondary,
-                                                                ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      16.0),
+                                                          child: FFButtonWidget(
+                                                            onPressed:
+                                                                () async {
+                                                              if (_model.formKey
+                                                                          .currentState ==
+                                                                      null ||
+                                                                  !_model
+                                                                      .formKey
+                                                                      .currentState!
+                                                                      .validate()) {
+                                                                return;
+                                                              }
+                                                              _model.outSaveScenarioInputs =
+                                                                  await actions
+                                                                      .saveScenario(
+                                                                widget.scenarioReference !=
+                                                                        null
+                                                                    ? widget
+                                                                        .scenarioReference
+                                                                    : null,
+                                                                double.tryParse(
+                                                                    _model
+                                                                        .outageDurationController
+                                                                        .text),
+                                                                _model
+                                                                    .scenarioNameController
+                                                                    .text,
                                                               );
-                                                            } else {
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'Calculations completed successfully',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                  ),
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          4000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondary,
-                                                                ),
+                                                              _model.outCalculateScenarioResponse =
+                                                                  await actions
+                                                                      .calculateScenarioResponse(
+                                                                _model
+                                                                    .outSaveScenarioInputs!,
                                                               );
-                                                            }
-
-                                                            setState(() {});
-                                                          },
-                                                          text:
-                                                              'Save Inputs & Calculate Response',
-                                                          options:
-                                                              FFButtonOptions(
-                                                            width: 300,
-                                                            height: 40,
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        0,
-                                                                        0,
-                                                                        0),
-                                                            iconPadding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        0,
-                                                                        0,
-                                                                        0),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            textStyle:
-                                                                FlutterFlowTheme.of(
+                                                              if (_model.outCalculateScenarioResponse !=
+                                                                      null &&
+                                                                  _model.outCalculateScenarioResponse !=
+                                                                      '') {
+                                                                ScaffoldMessenger.of(
                                                                         context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .titleSmallFamily,
-                                                                      color: Colors
-                                                                          .white,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      'There was a problem calculating the scenario response: ${_model.outCalculateScenarioResponse}',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
                                                                     ),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              width: 1,
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      'Calculations completed successfully',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                              }
+
+                                                              setState(() {});
+                                                            },
+                                                            text:
+                                                                'Save Inputs & Calculate Response',
+                                                            options:
+                                                                FFButtonOptions(
+                                                              width: 300.0,
+                                                              height: 40.0,
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              iconPadding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                              textStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                        color: Colors
+                                                                            .white,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                      ),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                width: 1.0,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          50.0),
                                                             ),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        50),
                                                           ),
                                                         ),
                                                       ],
@@ -1208,7 +1215,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                         percent: containerScenarioResultsRecord != null ? containerScenarioResultsRecord!.responseCoverage : 0.0,
                                                                                         lineHeight: 20,
                                                                                         animation: true,
-                                                                                        progressColor: FlutterFlowTheme.of(context).primary,
+                                                                                        progressColor: functions.formatPercentageBar(containerScenarioResultsRecord!.responseCoverage),
                                                                                         backgroundColor: FlutterFlowTheme.of(context).lineColor,
                                                                                         center: Text(
                                                                                           containerScenarioResultsRecord != null ? functions.formatPercentage(containerScenarioResultsRecord!.responseCoverage)! : 'no data',
@@ -1720,7 +1727,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     flex: 1,
                                                                                     child: Text(
                                                                                       listViewScenarioHouseholdResponsesRecord.needsRecharging.toString(),
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                            color: listViewScenarioHouseholdResponsesRecord.needsRecharging ? FlutterFlowTheme.of(context).error : Color(0x00000000),
+                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                          ),
                                                                                     ),
                                                                                   ),
                                                                                 Expanded(
