@@ -265,6 +265,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                           .spaceBetween,
                                                   children: [
                                                     Expanded(
+                                                      flex: 3,
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -457,6 +458,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                           .spaceBetween,
                                                   children: [
                                                     Expanded(
+                                                      flex: 3,
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
