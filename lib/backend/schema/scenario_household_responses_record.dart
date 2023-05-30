@@ -59,6 +59,11 @@ class ScenarioHouseholdResponsesRecord extends FirestoreRecord {
   double get highestResilienceScore => _highestResilienceScore ?? 0.0;
   bool hasHighestResilienceScore() => _highestResilienceScore != null;
 
+  // "needs_recharging" field.
+  bool? _needsRecharging;
+  bool get needsRecharging => _needsRecharging ?? false;
+  bool hasNeedsRecharging() => _needsRecharging != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -72,6 +77,7 @@ class ScenarioHouseholdResponsesRecord extends FirestoreRecord {
     _priority = castToType<double>(snapshotData['priority']);
     _highestResilienceScore =
         castToType<double>(snapshotData['highest_resilience_score']);
+    _needsRecharging = snapshotData['needs_recharging'] as bool?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -121,6 +127,7 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
   String? psrCategories,
   double? priority,
   double? highestResilienceScore,
+  bool? needsRecharging,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -133,6 +140,7 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
       'psr_categories': psrCategories,
       'priority': priority,
       'highest_resilience_score': highestResilienceScore,
+      'needs_recharging': needsRecharging,
     }.withoutNulls,
   );
 
