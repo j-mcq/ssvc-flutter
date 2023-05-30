@@ -34,6 +34,16 @@ class ScenarioResponseItemsRecord extends FirestoreRecord {
   String get imagePath => _imagePath ?? '';
   bool hasImagePath() => _imagePath != null;
 
+  // "number_in_closest_depot" field.
+  int? _numberInClosestDepot;
+  int get numberInClosestDepot => _numberInClosestDepot ?? 0;
+  bool hasNumberInClosestDepot() => _numberInClosestDepot != null;
+
+  // "number_in_all_depots" field.
+  int? _numberInAllDepots;
+  int get numberInAllDepots => _numberInAllDepots ?? 0;
+  bool hasNumberInAllDepots() => _numberInAllDepots != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -41,6 +51,8 @@ class ScenarioResponseItemsRecord extends FirestoreRecord {
     _responseItem = snapshotData['response_item'] as DocumentReference?;
     _numberRequired = snapshotData['number_required'] as int?;
     _imagePath = snapshotData['image_path'] as String?;
+    _numberInClosestDepot = snapshotData['number_in_closest_depot'] as int?;
+    _numberInAllDepots = snapshotData['number_in_all_depots'] as int?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -82,6 +94,8 @@ Map<String, dynamic> createScenarioResponseItemsRecordData({
   DocumentReference? responseItem,
   int? numberRequired,
   String? imagePath,
+  int? numberInClosestDepot,
+  int? numberInAllDepots,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -89,6 +103,8 @@ Map<String, dynamic> createScenarioResponseItemsRecordData({
       'response_item': responseItem,
       'number_required': numberRequired,
       'image_path': imagePath,
+      'number_in_closest_depot': numberInClosestDepot,
+      'number_in_all_depots': numberInAllDepots,
     }.withoutNulls,
   );
 
