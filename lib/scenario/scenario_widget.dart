@@ -2293,7 +2293,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 Padding(
                                                                               padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                                                                               child: Text(
-                                                                                'Total Number in Stock',
+                                                                                'Total Number in all Depots',
                                                                                 style: FlutterFlowTheme.of(context).bodySmall,
                                                                               ),
                                                                             ),
@@ -2467,7 +2467,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                                 }
                                                                                                 final textStockDepotMappingRecord = textStockDepotMappingRecordList.isNotEmpty ? textStockDepotMappingRecordList.first : null;
                                                                                                 return Text(
-                                                                                                  textStockDepotMappingRecord!.numberInStock.toString(),
+                                                                                                  listViewScenarioResponseItemsRecord.numberInClosestDepot.toString(),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                                 );
                                                                                               },
@@ -2497,7 +2497,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                                 }
                                                                                                 final textResponseItemsRecord = snapshot.data!;
                                                                                                 return Text(
-                                                                                                  textResponseItemsRecord.stock.toString(),
+                                                                                                  listViewScenarioResponseItemsRecord.numberInAllDepots.toString(),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                                 );
                                                                                               },
