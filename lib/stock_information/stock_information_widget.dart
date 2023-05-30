@@ -1068,7 +1068,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                             _model.responseItemFilterController,
                                         onChanged: (_) => EasyDebounce.debounce(
                                           '_model.responseItemFilterController',
-                                          Duration(milliseconds: 2000),
+                                          Duration(milliseconds: 1000),
                                           () async {
                                             setState(() {
                                               _model.responseItemFilter = _model
