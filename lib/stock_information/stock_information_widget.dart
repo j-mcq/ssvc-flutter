@@ -1613,26 +1613,15 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 1.0,
-                                    height: 600.0,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 8.0, 0.0),
-                                      child: custom_widgets
-                                          .SortableGridResponseItems(
-                                        width: 100.0,
-                                        height: 600.0,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                children: [],
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 8.0, 0.0),
+                                child: custom_widgets.SortableGridResponseItems(
+                                  width: 100.0,
+                                  height: 600.0,
+                                ),
                               ),
                             ],
                           ),
