@@ -80,10 +80,11 @@ Future<String?> calculateScenarioResponse(
       double householdPowerConsumption =
           mappedPsrCategory.powerConsumption * outageDuration;
 
-      final recommendedResponseItem = await calculateResponseItem(
-          householdPowerConsumption, responseItemOptions);
+      RecommendedResponseItem recommendedResponseItem =
+          await calculateResponseItem(
+              householdPowerConsumption, responseItemOptions);
 
-      if (recommendedResponseItem!.responseItem != null) {
+      if (recommendedResponseItem.responseItem != null) {
         recommendedResponseItems.add(recommendedResponseItem.responseItem!);
         totalCost += recommendedResponseItem.responseItem!.unitPrice;
         totalResponseItems += 1;
@@ -154,60 +155,65 @@ Future<double> calculateResponseCoverage(
     DocumentReference scenarioReference,
     DocumentReference closestDepot,
     List<ResponseItemsRecord> recommendedResponseItems) async {
-  final responseItemRecords = await queryScenarioHouseholdResponsesRecordOnce(
-      parent: scenarioReference);
-
   final responseItems = await queryResponseItemsRecordOnce();
 
-  final responseItemForClosestDepot = await queryStockDepotMappingRecordOnce(
-      queryBuilder: (query) => query.where('depot', isEqualTo: closestDepot));
-
+  final responseItemsInAllDepots = await queryActiveResponseItemsRecordOnce();
+  final responseItemsForClosestDepot = responseItemsInAllDepots
+      .where((element) => element.homeDepot == closestDepot)
+      .toList();
+  final numberInAllDepots = responseItemsInAllDepots.length;
   double responseCoverage = 0.0;
-  double responseItemTypeCount = 0.0;
-  for (var responseItemInDepot in responseItemForClosestDepot) {
-    final filtedResponseItem = responseItems
-        .where(
-            (element) => element.reference == responseItemInDepot.responseItem)
-        .first;
+  int itemTypesNeeded = 0;
 
-    double responseCoveragePerItem = 0.0;
-    var itemCount = 0;
-    for (var responseItemResult in responseItemRecords) {
-      if (responseItemResult.responseItem == responseItemInDepot.responseItem) {
-        itemCount += 1;
-      }
+// find total of that response item in closest depot
+  for (var responseItem in responseItems) {
+    final itemsInClosestDepotCount = responseItemsForClosestDepot
+        .where((element) => element.responseItem == responseItem.reference)
+        .length;
+    final recommendedResponseItemsCount = recommendedResponseItems
+        .where((element) => element.reference == responseItem.reference)
+        .length;
+
+    if (recommendedResponseItemsCount == 0) {
+      continue;
     }
-    if (itemCount > 0) {
-      responseItemTypeCount += 1;
-      final createScenarioResponseItemsCreateData =
-          createScenarioResponseItemsRecordData(
-              numberRequired: itemCount,
-              name: filtedResponseItem.name,
-              responseItem: responseItemInDepot.responseItem,
-              imagePath: filtedResponseItem.imageLink);
+    final itemCoverage =
+        itemsInClosestDepotCount / recommendedResponseItemsCount;
+    responseCoverage += itemCoverage <= 1 ? itemCoverage : 1;
+    itemTypesNeeded += 1;
 
-      var scenarioResponseItemsRecordReference =
-          ScenarioResponseItemsRecord.createDoc(scenarioReference);
-      await scenarioResponseItemsRecordReference
-          .set(createScenarioResponseItemsCreateData);
-      if (itemCount < responseItemInDepot.numberInStock!) {
-        responseCoveragePerItem = 1;
-      } else {
-        responseCoveragePerItem =
-            responseItemInDepot.numberInStock! / itemCount;
-      }
-    }
-
-    responseCoverage += responseCoveragePerItem;
+    await saveScenarioResponseItems(
+        recommendedResponseItemsCount,
+        itemsInClosestDepotCount,
+        numberInAllDepots,
+        responseItem,
+        scenarioReference);
   }
 
-  double percentageCoverage = 0;
-  if (responseItemTypeCount > 0) {
-    percentageCoverage = double.parse(
-        (responseCoverage / responseItemTypeCount).toStringAsPrecision(2));
-  }
+  return responseCoverage / itemTypesNeeded;
+}
 
-  return percentageCoverage;
+Future<void> saveScenarioResponseItems(
+    int numberRequired,
+    int numberInClosestDepot,
+    int numberInAllDepots,
+    ResponseItemsRecord responseItem,
+    DocumentReference scenarioReference) async {
+  final itemCoverage = numberInClosestDepot / numberRequired;
+  final createScenarioResponseItemsCreateData =
+      createScenarioResponseItemsRecordData(
+          numberRequired: numberRequired,
+          name: responseItem.name,
+          responseItem: responseItem.reference,
+          imagePath: responseItem.imageLink,
+          numberInClosestDepot: numberInClosestDepot,
+          numberInAllDepots: numberInAllDepots,
+          coverage: itemCoverage <= 1 ? itemCoverage : 1);
+
+  var scenarioResponseItemsRecordReference =
+      ScenarioResponseItemsRecord.createDoc(scenarioReference);
+  await scenarioResponseItemsRecordReference
+      .set(createScenarioResponseItemsCreateData);
 }
 
 deletePreviousResults(DocumentReference scenarioReference) async {
@@ -232,7 +238,7 @@ deletePreviousResults(DocumentReference scenarioReference) async {
   });
 }
 
-Future<RecommendedResponseItem?> calculateResponseItem(
+Future<RecommendedResponseItem> calculateResponseItem(
     double requiredBatteryCapacity,
     List<ResponseItemsRecord> responseItemOptions) async {
   RecommendedResponseItem recommendedResponseItem =

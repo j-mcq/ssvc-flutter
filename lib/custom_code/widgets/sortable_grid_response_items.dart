@@ -31,115 +31,76 @@ class SortableGridResponseItems extends StatefulWidget {
 }
 
 class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
-  final List<String>? titlesTest = [
-    'Address',
-    'Postcode',
-    'User',
-    'Support Eligibility',
-    'Support Requests',
-    'Original EPC Rating',
-    'EPC Rating',
-    'Heating Data',
-    'Energy Supplier',
-    // 'prePaymentMeter',
-    // 'housingSituation',
-    // 'financialSituation',
-    // 'grossHouseholdIncome',
-    // 'councilTaxBand',
-    'Benefits Data',
-    // 'occupantsUnder5',
-    // 'occupants5To17',
-    // 'occupants18To60',
-    // 'occupants61To66',
-    // 'occupantsOver66',
-    // 'originalWallDescription',
-    // 'wallDescription',
-    // 'originalWallInsulation',
-    // 'wallInsulation',
-    // 'originalRoofDescription',
-    // 'roofDescription',
-    // 'originalRoofInsulation',
-    // 'roofInsulation',
-    // 'originalFloorDescription',
-    // 'floorDescription',
-    // 'originalFloorInsulation',
-    // 'floorInsulation',
-    // 'originalWindowDescription',
-    // 'Window Description',
+  final List<String> fieldTitles = [
+    'Item Id',
+    'Response Item',
+    'Current Charge (%)',
+    'Home Depot',
+    'Location',
+    'Status',
+    'Is Available?',
   ];
-  final List<String>? fieldsTest = [
-    'address',
-    'postcode',
-    'userName',
-    'supportEligibility',
-    'supportRequests',
-    'originalEpcRating',
-    'epcRating',
-    'heatingData',
-    'energySupplier',
-    // 'prePaymentMeter',
-    // 'housingSituation',
-    // 'financialSituation',
-    // 'grossHouseholdIncome',
-    // 'councilTaxBand',
-    'benefitsData',
-    // 'occupantsUnder5',
-    // 'occupants5To17',
-    // 'occupants18To60',
-    // 'occupants61To66',
-    // 'occupantsOver66',
-    // 'originalWallDescription',
-    // 'wallDescription',
-    // 'originalWallInsulation',
-    // 'wallInsulation',
-    // 'originalRoofDescription',
-    // 'roofDescription',
-    // 'originalRoofInsulation',
-    // 'roofInsulation',
-    // 'originalFloorDescription',
-    // 'floorDescription',
-    // 'originalFloorInsulation',
-    // 'floorInsulation',
-    // 'originalWindowDescription',
-    // 'windowDescription',
+  final List<String> fields = [
+    'unitId',
+    'responseItem',
+    'chargeStatus',
+    'homeDepot',
+    'location',
+    'statusDescription',
+    'isAvailable',
   ];
 
-  //
-  final List<String>? typeTest = [
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
-    'text',
+  final List<PlutoColumnType> fieldTypes = [
+    PlutoColumnType.text(),
+    PlutoColumnType.text(),
+    PlutoColumnType.number(
+      negative: false,
+      format: '%',
+      applyFormatOnInit: true,
+      allowFirstDot: false,
+    ),
+    PlutoColumnType.text(),
+    PlutoColumnType.text(),
+    PlutoColumnType.text(),
+    PlutoColumnType.text(),
+  ];
+
+  final List<bool> readOnlyFields = [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+  ];
+  final List<Widget Function(PlutoColumnRendererContext)?> renderers = [
+    null,
+    null,
+    (rendererContext) {
+      Color textColor = Colors.black;
+
+      if (rendererContext.cell.value >= 80) {
+        textColor = Colors.green;
+      } else if (rendererContext.cell.value < 80 &&
+          rendererContext.cell.value >= 50) {
+        textColor = Colors.orange;
+      } else if (rendererContext.cell.value < 50) {
+        textColor = Colors.red;
+      }
+
+      return Text(
+        rendererContext.cell.value.toString(),
+        style: TextStyle(
+          color: textColor,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    },
+    null,
+    null,
+    null,
+    null,
   ];
 
   late final PlutoGridStateManager stateManager;
@@ -155,30 +116,30 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
 
   @override
   Widget build(BuildContext context) {
-    final List<PlutoColumnType> types = [];
-    // convert string types to PlutoColumnType
-    typeTest!.forEach((e) => {
-          if (e == 'text')
-            {types.add(PlutoColumnType.text())}
-          else if (e == 'number')
-            {types.add(PlutoColumnType.number())}
-          else if (e == 'date')
-            {types.add(PlutoColumnType.date())}
-        });
-
     final List<PlutoColumn> columns = <PlutoColumn>[];
     // create columns
-    for (var i = 0; i < titlesTest!.length; i++) {
+    for (var i = 0; i < 7; i++) {
       columns.add(PlutoColumn(
-        title: titlesTest![i],
-        field: fieldsTest![i],
-        type: PlutoColumnType.text(),
-      ));
+          title: fieldTitles[i],
+          field: fields[i],
+          type: fieldTypes[i],
+          readOnly: readOnlyFields[i],
+          renderer: renderers[i]));
     }
+    final plutoGridLocaleText =
+        PlutoGridLocaleText(filterContains: 'Filter column');
+
+    final plutogridStyleConfig = PlutoGridStyleConfig(
+      enableColumnBorderVertical: false,
+      borderColor: Color(0xFFDCF5FF),
+      gridBorderColor: Colors.white,
+    );
+    final plutoGridConfiguration = PlutoGridConfiguration(
+        style: plutogridStyleConfig, localeText: plutoGridLocaleText);
 
     return Container(
       child: FutureBuilder<List<PlutoRow>>(
-        //   future: getDataForAllProperties(),
+        future: getData(),
         builder: (context, snapshot) {
           //   Customize what your widget looks like when it's loading.
           if (!snapshot.hasData) {
@@ -199,7 +160,7 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
-                    width: MediaQuery.of(context).size.width - 368,
+                    width: MediaQuery.of(context).size.width - 280,
                     height: 1000,
                     child: PlutoGrid(
                       columns: columns,
@@ -211,7 +172,7 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
                       onChanged: (PlutoGridOnChangedEvent event) {
                         print(event);
                       },
-                      configuration: const PlutoGridConfiguration(),
+                      configuration: plutoGridConfiguration,
                     ))
               ],
             ),
@@ -230,166 +191,22 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
   }
 }
 
-// Future<List<PlutoRow>> getDataForAllProperties() async {
-//   final List<PlutoRow> rows = [];
-
-//   final properyRecords = await queryPropertiesRecordOnce();
-//   final supportOptionRecords = await querySupportOptionsRecordOnce();
-//   for (var propertyRecord in properyRecords) {
-//     List<UsersRecord> userRecords = [];
-//     List<UserRequestsRecord> userRequestsRecords = [];
-//     String userRequestList = '';
-
-//     try {
-//       if (propertyRecord.owner != null) {
-//         //  userRecord = await UsersRecord.getDocumentOnce(propertyRecord.owner!);
-//         userRecords = await queryUsersRecordOnce(
-//           queryBuilder: (user) =>
-//               user.where('uid', isEqualTo: propertyRecord.owner!.id),
-//         );
-
-//         if (userRecords.length > 0) {
-//           try {
-//             userRequestsRecords = await queryUserRequestsRecordOnce(
-//                 parent: userRecords.first.reference);
-
-//             for (var userRequestsRecord in userRequestsRecords) {
-//               userRequestList += supportOptionRecords
-//                       .where((element) =>
-//                           element.reference ==
-//                           userRequestsRecord.supportOption!)
-//                       .first
-//                       .name! +
-//                   ', ';
-//             }
-//           } catch (e) {
-//             print('Error processing user request records: ' + e.toString());
-//           }
-//         }
-//       }
-//     } catch (e) {
-//       print('Error processing user records: ' + e.toString());
-//     }
-
-//     // use hardcoded collection to allow iterating over bools as fields for heating, energy supplier and benefits.
-//     final property = FirebaseFirestore.instance
-//         .collection('properties')
-//         .doc(propertyRecord.reference.id);
-//     final epcDataRecords =
-//         await queryEpcDataRecordOnce(parent: propertyRecord.reference);
-
-//     final heatingDataRecords = await property.collection('heating_data').get();
-//     String heatingDataList =
-//         await getStringListFromCollection(heatingDataRecords);
-
-//     final energySupplierDataRecords =
-//         await property.collection('energy_supplier_data').get();
-//     String energySupplierDataList =
-//         await getStringListFromCollection(energySupplierDataRecords);
-
-//     final benefitsDataRecords =
-//         await property.collection('benefits_data').get();
-//     String benefitsDataList =
-//         await getStringListFromCollection(benefitsDataRecords);
-
-//     final financeDataRecords =
-//         await queryFinanceDataRecordOnce(parent: propertyRecord.reference);
-//     final occupantsDataRecords =
-//         await queryOccupantDataRecordOnce(parent: propertyRecord.reference);
-
-//     List<SupportOptionsEligibilityRecord> supportEligibilityRecords = [];
-//     String supportEligibilityList = '';
-//     try {
-//       supportEligibilityRecords =
-//           await querySupportOptionsEligibilityRecordOnce(
-//               parent: propertyRecord.reference);
-//       for (var supportEligibilityRecord in supportEligibilityRecords) {
-//         supportEligibilityList +=
-//             supportEligibilityRecord.supportOptionName! + ', ';
-//       }
-//     } catch (e) {
-//       print('Error processing support eligibility records: ' + e.toString());
-//     }
-
-//     rows.add(PlutoRow(
-//       cells: {
-//         'address': PlutoCell(value: propertyRecord.address1!),
-//         'postcode': PlutoCell(value: propertyRecord.postCode!),
-//         'userName': PlutoCell(
-//             value: userRecords.length > 0 ? userRecords.first.email : ''),
-//         'supportEligibility': PlutoCell(value: supportEligibilityList),
-//         'supportRequests': PlutoCell(value: userRequestList),
-//         'originalEpcRating': PlutoCell(
-//             value: epcDataRecords.length > 0
-//                 ? epcDataRecords.first.originalEpcRating!
-//                 : ''),
-//         'epcRating': PlutoCell(
-//             value: epcDataRecords.length > 0
-//                 ? epcDataRecords.first.epcRating!
-//                 : ''),
-//         'heatingData': PlutoCell(value: heatingDataList),
-//         'energySupplier': PlutoCell(value: energySupplierDataList),
-//         // 'prePaymentMeter':
-//         //     PlutoCell(value: financeDataRecords.first.hasPrePaymentMeter),
-//         // 'housingSituation':
-//         //     PlutoCell(value: financeDataRecords.first.housingSituation),
-//         // 'financialSituation':
-//         //     PlutoCell(value: financeDataRecords.first.financialSituation),
-//         // 'grossHouseholdIncome':
-//         //     PlutoCell(value: financeDataRecords.first.grossHouseholdIncome),
-//         // 'councilTaxBand':
-//         //     PlutoCell(value: financeDataRecords.first.councilTaxBand),
-//         'benefitsData': PlutoCell(value: benefitsDataList),
-//         // 'occupantsUnder5': PlutoCell(
-//         //     value: occupantsDataRecords.first.occupantsUnder5.toString()),
-//         // 'occupants5To17': PlutoCell(
-//         //     value: occupantsDataRecords.first.occupants5To17.toString()),
-//         // 'occupants18To60': PlutoCell(
-//         //     value: occupantsDataRecords.first.occupants18To60.toString()),
-//         // 'occupants61To66': PlutoCell(
-//         //     value: occupantsDataRecords.first.occupants61To66.toString()),
-//         // 'occupantsOver66': PlutoCell(
-//         //     value: occupantsDataRecords.first.occupantsOver66.toString()),
-//         // 'originalWallDescription':
-//         //     PlutoCell(value: epcDataRecords.first.originalWallDescription),
-//         // 'wallDescription':
-//         //     PlutoCell(value: epcDataRecords.first.wallDescription),
-//         // 'originalWallInsulation':
-//         //     PlutoCell(value: epcDataRecords.first.originalWallInsulation),
-//         // 'wallInsulation': PlutoCell(value: epcDataRecords.first.wallInsulation),
-//         // 'originalRoofDescription':
-//         //     PlutoCell(value: epcDataRecords.first.originalRoofDescription),
-//         // 'roofDescription':
-//         //     PlutoCell(value: epcDataRecords.first.roofDescription),
-//         // 'originalRoofInsulation':
-//         //     PlutoCell(value: epcDataRecords.first.originalRoofInsulation),
-//         // 'roofInsulation': PlutoCell(value: epcDataRecords.first.roofInsualtion),
-//         // 'originalFloorDescription':
-//         //     PlutoCell(value: epcDataRecords.first.originalFloorDescription),
-//         // 'floorDescription':
-//         //     PlutoCell(value: epcDataRecords.first.floorDescription),
-//         // 'originalFloorInsulation':
-//         //     PlutoCell(value: epcDataRecords.first.originalFloorInsulation),
-//         // 'floorInsulation':
-//         //     PlutoCell(value: epcDataRecords.first.floorInsulation),
-//         // 'originalWindowDescription':
-//         //     PlutoCell(value: epcDataRecords.first.originalWindowsDescription),
-//         // 'windowDescription':
-//         //     PlutoCell(value: epcDataRecords.first.windowsDescription),
-//       },
-//     ));
-//   }
-//   return rows;
-// }
-
-Future<String> getStringListFromCollection(
-    QuerySnapshot<Map<String, dynamic>> collection) async {
-  String list = '';
-
-  for (var key in collection.docs.first.data().keys) {
-    if (collection.docs.first.data()[key] == true) {
-      list += key.toString() + ', ';
-    }
+Future<List<PlutoRow>> getData() async {
+  final List<PlutoRow> rows = [];
+  final activeResponseItems = await queryActiveResponseItemsRecordOnce();
+  for (ActiveResponseItemsRecord activeResponseItem in activeResponseItems) {
+    rows.add(PlutoRow(
+      cells: {
+        'unitId': PlutoCell(value: activeResponseItem.reference.id),
+        'responseItem': PlutoCell(value: activeResponseItem.responseItemName),
+        'chargeStatus': PlutoCell(value: activeResponseItem.chargingStatus),
+        'homeDepot': PlutoCell(value: activeResponseItem.homeDepotName),
+        'location': PlutoCell(value: activeResponseItem.location),
+        'statusDescription':
+            PlutoCell(value: activeResponseItem.statusDescription),
+        'isAvailable': PlutoCell(value: activeResponseItem.isAvailable),
+      },
+    ));
   }
-  return list;
+  return rows;
 }
