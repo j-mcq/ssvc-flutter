@@ -47,6 +47,8 @@ class ScenarioModel extends FlutterFlowModel {
 
   // Stores action output result for [Custom Action - saveScenario] action in Button widget.
   DocumentReference? outSaveScenarioInputs;
+  // Stores action output result for [Custom Action - calculateScenarioResponse] action in Button widget.
+  String? outCalculateScenarioResponse;
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
