@@ -63,6 +63,7 @@ Future importResponseItemsData(String filePath) async {
         statusDescription: row[2],
         imageLink: responseItem.imageLink,
         chargingStatus: double.parse(row[5]),
+        isAvailable: row[6] == 'TRUE' ? true : false,
       );
 
       var responseRecordReference = ActiveResponseItemsRecord.collection.doc();
