@@ -3,7 +3,6 @@ import '/backend/backend.dart';
 import '/components/edit_active_response_item_widget.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -993,138 +992,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                   },
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 16.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Total Stock',
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineSmall,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 1.0, 0.0, 0.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 400.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 0.0,
-                                        color: FlutterFlowTheme.of(context)
-                                            .lineColor,
-                                        offset: Offset(0.0, 0.0),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(0.0),
-                                      bottomRight: Radius.circular(0.0),
-                                      topLeft: Radius.circular(16.0),
-                                      topRight: Radius.circular(16.0),
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 32.0, 0.0, 0.0),
-                                    child: StreamBuilder<
-                                        List<ActiveResponseItemsRecord>>(
-                                      stream: queryActiveResponseItemsRecord(
-                                        queryBuilder:
-                                            (activeResponseItemsRecord) =>
-                                                activeResponseItemsRecord
-                                                    .orderBy(
-                                                        'response_item_name'),
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: CircularProgressIndicator(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        List<ActiveResponseItemsRecord>
-                                            chartActiveResponseItemsRecordList =
-                                            snapshot.data!;
-                                        return Container(
-                                          width: 300.0,
-                                          height: 400.0,
-                                          child: FlutterFlowBarChart(
-                                            barData: [
-                                              FFBarChartData(
-                                                yData:
-                                                    chartActiveResponseItemsRecordList
-                                                        .map((d) =>
-                                                            d.chargingStatus)
-                                                        .toList(),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                              )
-                                            ],
-                                            xLabels:
-                                                chartActiveResponseItemsRecordList
-                                                    .map((d) =>
-                                                        d.responseItemName)
-                                                    .toList(),
-                                            barWidth: 55.0,
-                                            barBorderRadius:
-                                                BorderRadius.circular(0.0),
-                                            groupSpace: 5.0,
-                                            alignment:
-                                                BarChartAlignment.spaceEvenly,
-                                            chartStylingInfo: ChartStylingInfo(
-                                              enableTooltip: true,
-                                              backgroundColor: Colors.white,
-                                              showGrid: true,
-                                              borderColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .lineColor,
-                                              borderWidth: 1.0,
-                                            ),
-                                            axisBounds: AxisBounds(),
-                                            xAxisLabelInfo: AxisLabelInfo(
-                                              title: 'Response Item',
-                                              titleTextStyle: TextStyle(
-                                                fontSize: 14.0,
-                                              ),
-                                              showLabels: true,
-                                              labelInterval: 10.0,
-                                            ),
-                                            yAxisLabelInfo: AxisLabelInfo(
-                                              title: 'Items in Stock',
-                                              titleTextStyle: TextStyle(
-                                                fontSize: 14.0,
-                                              ),
-                                              showLabels: true,
-                                              labelInterval: 10.0,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -1132,7 +999,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
-                          16.0, 32.0, 16.0, 24.0),
+                          16.0, 16.0, 16.0, 24.0),
                       child: Container(
                         width: MediaQuery.of(context).size.width * 1.0,
                         decoration: BoxDecoration(
