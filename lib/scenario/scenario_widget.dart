@@ -1729,7 +1729,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                       listViewScenarioHouseholdResponsesRecord.needsRecharging.toString(),
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                             fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                            color: listViewScenarioHouseholdResponsesRecord.needsRecharging ? FlutterFlowTheme.of(context).error : Color(0x00000000),
+                                                                                            color: listViewScenarioHouseholdResponsesRecord.needsRecharging ? FlutterFlowTheme.of(context).error : FlutterFlowTheme.of(context).primaryText,
                                                                                             useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                           ),
                                                                                     ),
