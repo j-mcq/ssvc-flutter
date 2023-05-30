@@ -69,7 +69,7 @@ Future<String?> calculateScenarioResponse(
 
     var totalCost = 0.0;
     var totalResponseItems = 0.0;
-    var responseItems = [];
+    List<ResponseItemsRecord> recommendedResponseItems = [];
 
     final responseItemOptions = await queryResponseItemsRecordOnce();
 
@@ -83,20 +83,22 @@ Future<String?> calculateScenarioResponse(
       final recommendedResponseItem = await calculateResponseItem(
           householdPowerConsumption, responseItemOptions);
 
-      if (recommendedResponseItem != null) {
-        totalCost += recommendedResponseItem.unitPrice;
+      if (recommendedResponseItem!.responseItem != null) {
+        recommendedResponseItems.add(recommendedResponseItem.responseItem!);
+        totalCost += recommendedResponseItem.responseItem!.unitPrice;
         totalResponseItems += 1;
 
         final createScenarioHouseholdResponsesCreateData =
             createScenarioHouseholdResponsesRecordData(
-                cost: recommendedResponseItem.unitPrice,
-                responseItemName: recommendedResponseItem.name,
-                responseItem: recommendedResponseItem.reference,
+                cost: recommendedResponseItem.responseItem!.unitPrice,
+                responseItemName: recommendedResponseItem.responseItem!.name,
+                responseItem: recommendedResponseItem.responseItem!.reference,
                 postcode: psrHousehold.postcode,
                 psrCategories: mappedPsrCategory.names,
                 scenario: scenarioReference,
                 powerRequired: householdPowerConsumption,
-                highestResilienceScore: mappedPsrCategory.maxResilienceScore);
+                highestResilienceScore: mappedPsrCategory.maxResilienceScore,
+                needsRecharging: recommendedResponseItem.needsRecharging);
 
         var scenarioHouseholdResponsesRecordReference =
             ScenarioHouseholdResponsesRecord.createDoc(scenarioReference);
@@ -105,8 +107,9 @@ Future<String?> calculateScenarioResponse(
       }
     }
 
-    final responseCoverage =
-        await groupResponseItems(scenarioReference, nearestDepot.reference);
+    final responseCoverage = await calculateResponseCoverage(
+        scenarioReference, nearestDepot.reference, recommendedResponseItems);
+
     saveScenarioResults(
         scenarioReference,
         impactedPsrHouseholds.length,
@@ -115,6 +118,7 @@ Future<String?> calculateScenarioResponse(
         responseCoverage,
         nearestDepot.reference,
         nearestDepot.name);
+
     return null;
   } catch (e) {
     print('Error calculating scenario response: ' + e.toString());
@@ -146,8 +150,10 @@ Future<DepotsRecord> getNearestDepot(Iterable<mtk.LatLng> polygons) async {
   // get polygon centroid
 }
 
-Future<double> groupResponseItems(
-    DocumentReference scenarioReference, DocumentReference closestDepot) async {
+Future<double> calculateResponseCoverage(
+    DocumentReference scenarioReference,
+    DocumentReference closestDepot,
+    List<ResponseItemsRecord> recommendedResponseItems) async {
   final responseItemRecords = await queryScenarioHouseholdResponsesRecordOnce(
       parent: scenarioReference);
 
@@ -226,20 +232,26 @@ deletePreviousResults(DocumentReference scenarioReference) async {
   });
 }
 
-Future<ResponseItemsRecord?> calculateResponseItem(
+Future<RecommendedResponseItem?> calculateResponseItem(
     double requiredBatteryCapacity,
     List<ResponseItemsRecord> responseItemOptions) async {
-  // loop through all response items and find the first one that has enough capacity
-  var recommendedResponseItem;
+  RecommendedResponseItem recommendedResponseItem =
+      RecommendedResponseItem(null, false);
+
+  // Find the first response item that has enough capacity
   for (var responseItem in responseItemOptions) {
     if (responseItem.totalEnergyStorageCapacity >= requiredBatteryCapacity) {
-      recommendedResponseItem = responseItem;
+      recommendedResponseItem.responseItem = responseItem;
+      break; // Exit the loop once a suitable response item is found
     }
   }
-  // if no response item has enough capacity, return the largest one
-  if (recommendedResponseItem == null) {
-    recommendedResponseItem = responseItemOptions.last;
+
+  // If no response item has enough capacity, return the largest one
+  if (recommendedResponseItem.responseItem == null) {
+    recommendedResponseItem.responseItem = responseItemOptions.last;
+    recommendedResponseItem.needsRecharging = true;
   }
+
   return recommendedResponseItem;
 }
 
@@ -277,6 +289,12 @@ class MappedPsrCategory {
   final double powerConsumption;
   final double maxResilienceScore;
   MappedPsrCategory(this.names, this.powerConsumption, this.maxResilienceScore);
+}
+
+class RecommendedResponseItem {
+  ResponseItemsRecord? responseItem;
+  bool needsRecharging;
+  RecommendedResponseItem(this.responseItem, this.needsRecharging);
 }
 
 Future<bool> saveScenarioResults(
