@@ -1584,46 +1584,49 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 16.0, 0.0, 12.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Response Item Details',
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Response Item Details',
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineSmall,
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 0.0, 0.0),
-                                    child: Icon(
-                                      Icons.all_inbox_sharp,
-                                      color: Colors.black,
-                                      size: 22.0,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 0.0, 0.0),
+                                      child: Icon(
+                                        Icons.all_inbox_sharp,
+                                        color: Colors.black,
+                                        size: 22.0,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [],
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 0.0, 8.0, 0.0),
-                                child: custom_widgets.SortableGridResponseItems(
-                                  width: 100.0,
-                                  height: 600.0,
+                                  ],
                                 ),
-                              ),
-                            ],
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 0.0, 8.0, 0.0),
+                                  child:
+                                      custom_widgets.SortableGridResponseItems(
+                                    width: 100.0,
+                                    height: 600.0,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
