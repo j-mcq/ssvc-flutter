@@ -64,6 +64,11 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
   DocumentReference? get status => _status;
   bool hasStatus() => _status != null;
 
+  // "isAvailable" field.
+  bool? _isAvailable;
+  bool get isAvailable => _isAvailable ?? false;
+  bool hasIsAvailable() => _isAvailable != null;
+
   void _initializeFields() {
     _dateAdded = snapshotData['date_added'] as DateTime?;
     _imageLink = snapshotData['image_link'] as String?;
@@ -75,6 +80,7 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
     _homeDepotName = snapshotData['home_depot_name'] as String?;
     _responseItemName = snapshotData['response_item_name'] as String?;
     _status = snapshotData['status'] as DocumentReference?;
+    _isAvailable = snapshotData['isAvailable'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -115,6 +121,7 @@ Map<String, dynamic> createActiveResponseItemsRecordData({
   String? homeDepotName,
   String? responseItemName,
   DocumentReference? status,
+  bool? isAvailable,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -128,6 +135,7 @@ Map<String, dynamic> createActiveResponseItemsRecordData({
       'home_depot_name': homeDepotName,
       'response_item_name': responseItemName,
       'status': status,
+      'isAvailable': isAvailable,
     }.withoutNulls,
   );
 
