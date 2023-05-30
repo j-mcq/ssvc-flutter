@@ -1561,6 +1561,23 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                             .bodySmall,
                                                                       ),
                                                                     ),
+                                                                  if (responsiveVisibility(
+                                                                    context:
+                                                                        context,
+                                                                    phone:
+                                                                        false,
+                                                                    tablet:
+                                                                        false,
+                                                                  ))
+                                                                    Expanded(
+                                                                      flex: 1,
+                                                                      child:
+                                                                          Text(
+                                                                        'Will need recharging?',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodySmall,
+                                                                      ),
+                                                                    ),
                                                                   Expanded(
                                                                     flex: 1,
                                                                     child: Text(
@@ -1741,6 +1758,18 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     flex: 1,
                                                                                     child: Text(
                                                                                       listViewScenarioHouseholdResponsesRecord.responseItemName,
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                    ),
+                                                                                  ),
+                                                                                if (responsiveVisibility(
+                                                                                  context: context,
+                                                                                  phone: false,
+                                                                                  tablet: false,
+                                                                                ))
+                                                                                  Expanded(
+                                                                                    flex: 1,
+                                                                                    child: Text(
+                                                                                      listViewScenarioHouseholdResponsesRecord.needsRecharging.toString(),
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                     ),
                                                                                   ),
