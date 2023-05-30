@@ -746,7 +746,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   .showSnackBar(
                                                                 SnackBar(
                                                                   content: Text(
-                                                                    'Calculations completed successfully',
+                                                                    'There was a problem calculating the scenario response: ${_model.outCalculateScenarioResponse}',
                                                                     style:
                                                                         TextStyle(
                                                                       color: FlutterFlowTheme.of(
@@ -769,7 +769,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   .showSnackBar(
                                                                 SnackBar(
                                                                   content: Text(
-                                                                    'There was a problem calculating the scenario response: ${_model.outCalculateScenarioResponse}',
+                                                                    'Calculations completed successfully',
                                                                     style:
                                                                         TextStyle(
                                                                       color: FlutterFlowTheme.of(
