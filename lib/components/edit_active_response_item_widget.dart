@@ -135,7 +135,8 @@ class _EditActiveResponseItemWidgetState
                               controller:
                                   _model.homeDepotDropDownValueController ??=
                                       FormFieldController<String>(
-                                _model.homeDepotDropDownValue ??= '',
+                                _model.homeDepotDropDownValue ??=
+                                    widget.homeDepotReference?.id,
                               ),
                               options: homeDepotDropDownDepotsRecordList
                                   .map((e) => e.reference.id)
@@ -207,7 +208,8 @@ class _EditActiveResponseItemWidgetState
                               controller:
                                   _model.statusDropDownValueController ??=
                                       FormFieldController<String>(
-                                _model.statusDropDownValue ??= '',
+                                _model.statusDropDownValue ??=
+                                    widget.statusReference?.id,
                               ),
                               options:
                                   statusDropDownResponseItemStatusOptionsRecordList
