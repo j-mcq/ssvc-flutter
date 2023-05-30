@@ -127,6 +127,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                       child: TextFormField(
                                         controller:
                                             _model.emailAddressController,
+                                        autofillHints: [AutofillHints.email],
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Email Address',
@@ -184,6 +185,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
+                                        keyboardType:
+                                            TextInputType.emailAddress,
                                         validator: _model
                                             .emailAddressControllerValidator
                                             .asValidator(context),
