@@ -111,6 +111,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : DashboardWidget(),
             ),
             FFRoute(
+              name: 'stockInformation',
+              path: 'stockInformation',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'stockInformation')
+                  : StockInformationWidget(),
+            ),
+            FFRoute(
               name: 'scenario',
               path: 'scenario',
               requireAuth: true,
@@ -120,14 +128,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       scenarioReference: params.getParam('scenarioReference',
                           ParamType.DocumentReference, false, ['scenario']),
                     ),
-            ),
-            FFRoute(
-              name: 'stockInformation',
-              path: 'stockInformation',
-              requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'stockInformation')
-                  : StockInformationWidget(),
             ),
             FFRoute(
               name: 'scenarioCopy',

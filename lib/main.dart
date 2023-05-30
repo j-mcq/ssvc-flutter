@@ -129,8 +129,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'dashboard': DashboardWidget(),
-      'scenario': ScenarioWidget(),
       'stockInformation': StockInformationWidget(),
+      'scenario': ScenarioWidget(),
       'scenarioCopy': ScenarioCopyWidget(),
       'stockItemDetails': StockItemDetailsWidget(),
       'admin': AdminWidget(),
@@ -169,7 +169,7 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.school_outlined,
+                Icons.account_circle_outlined,
                 size: 24.0,
               ),
               label: '•',
@@ -177,7 +177,7 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.account_circle_outlined,
+                Icons.school_outlined,
                 size: 24.0,
               ),
               label: '•',
