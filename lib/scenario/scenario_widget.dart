@@ -698,11 +698,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                16.0,
-                                                                16.0,
-                                                                16.0,
-                                                                16.0),
+                                                            .fromSTEB(0.0, 0.0,
+                                                                16.0, 0.0),
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -734,11 +731,62 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   .scenarioNameController
                                                                   .text,
                                                             );
-                                                            await actions
-                                                                .calculateScenarioResponse(
+                                                            _model.outCalculateScenarioResponse =
+                                                                await actions
+                                                                    .calculateScenarioResponse(
                                                               _model
                                                                   .outSaveScenarioInputs,
                                                             );
+                                                            if (_model.outCalculateScenarioResponse !=
+                                                                    null &&
+                                                                _model.outCalculateScenarioResponse !=
+                                                                    '') {
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Calculations completed successfully',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondary,
+                                                                ),
+                                                              );
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'There was a problem calculating the scenario response: ${_model.outCalculateScenarioResponse}',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondary,
+                                                                ),
+                                                              );
+                                                            }
 
                                                             setState(() {});
                                                           },
