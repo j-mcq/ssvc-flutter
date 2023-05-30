@@ -24,9 +24,9 @@ double scenarioPercentage() {
 }
 
 Color formatPercentageBar(double percentage) {
-  if (percentage >= 0.8) {
+  if (percentage >= 0.9) {
     return Colors.green;
-  } else if (percentage < 0.8 && percentage >= 0.5) {
+  } else if (percentage < 0.9 && percentage >= 0.6) {
     return Colors.orange;
   } else {
     return Colors.red;
