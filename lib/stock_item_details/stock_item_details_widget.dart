@@ -1314,11 +1314,16 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                       child: FutureBuilder<int>(
                                                         future:
                                                             queryActiveResponseItemsRecordCount(
-                                                          queryBuilder: (activeResponseItemsRecord) =>
-                                                              activeResponseItemsRecord.where(
+                                                          queryBuilder: (activeResponseItemsRecord) => activeResponseItemsRecord
+                                                              .where(
                                                                   'home_depot',
                                                                   isEqualTo:
                                                                       listViewDepotsRecord
+                                                                          .reference)
+                                                              .where(
+                                                                  'response_item',
+                                                                  isEqualTo:
+                                                                      clipContainerResponseItemsRecord
                                                                           .reference),
                                                         ),
                                                         builder: (context,

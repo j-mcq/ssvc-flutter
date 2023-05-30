@@ -776,10 +776,15 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                     int>(
                                                                   future:
                                                                       queryActiveResponseItemsRecordCount(
-                                                                    queryBuilder: (activeResponseItemsRecord) => activeResponseItemsRecord.where(
-                                                                        'home_depot',
-                                                                        isEqualTo:
-                                                                            columnDepotsRecord.reference),
+                                                                    queryBuilder: (activeResponseItemsRecord) => activeResponseItemsRecord
+                                                                        .where(
+                                                                            'home_depot',
+                                                                            isEqualTo: columnDepotsRecord
+                                                                                .reference)
+                                                                        .where(
+                                                                            'response_item',
+                                                                            isEqualTo:
+                                                                                listViewResponseItemsRecord.reference),
                                                                   ),
                                                                   builder: (context,
                                                                       snapshot) {
@@ -1150,7 +1155,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                     10.0, 16.0, 0.0, 0.0),
                                 child: StreamBuilder<
                                     List<ActiveResponseItemsRecord>>(
-                                  stream: queryActiveResponseItemsRecord(),
+                                  stream: queryActiveResponseItemsRecord(
+                                    limit: 50,
+                                  ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
                                     if (!snapshot.hasData) {
