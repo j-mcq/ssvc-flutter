@@ -69,27 +69,29 @@ Future<String?> calculateScenarioResponse(
 
     var totalCost = 0.0;
     var totalResponseItems = 0.0;
+    var responseItems = [];
+
+    final responseItemOptions = await queryResponseItemsRecordOnce();
 
     for (var psrHousehold in impactedPsrHouseholds) {
       final mappedPsrCategory =
           await getPsrCategoryData(psrHousehold, psrCategoryOptionsRecords);
 
-      final householdPowerConsumption =
+      double householdPowerConsumption =
           mappedPsrCategory.powerConsumption * outageDuration;
 
-      final responseItem =
-          await calculateResponseItem(householdPowerConsumption);
+      final recommendedResponseItem = await calculateResponseItem(
+          householdPowerConsumption, responseItemOptions);
 
-      if (responseItem != null) {
-        totalCost +=
-            responseItem.unitPrice != null ? responseItem.unitPrice! : 0;
+      if (recommendedResponseItem != null) {
+        totalCost += recommendedResponseItem.unitPrice;
         totalResponseItems += 1;
 
         final createScenarioHouseholdResponsesCreateData =
             createScenarioHouseholdResponsesRecordData(
-                cost: responseItem.unitPrice,
-                responseItemName: responseItem.name,
-                responseItem: responseItem.reference,
+                cost: recommendedResponseItem.unitPrice,
+                responseItemName: recommendedResponseItem.name,
+                responseItem: recommendedResponseItem.reference,
                 postcode: psrHousehold.postcode,
                 psrCategories: mappedPsrCategory.names,
                 scenario: scenarioReference,
@@ -225,17 +227,20 @@ deletePreviousResults(DocumentReference scenarioReference) async {
 }
 
 Future<ResponseItemsRecord?> calculateResponseItem(
-    double requiredBatteryCapacity) async {
-  // get all available respone items
-  final responseItems = await queryResponseItemsRecordOnce(
-      queryBuilder: (query) => query.orderBy('total_energy_storage_capacity'));
-
-  for (var responseItem in responseItems) {
-    if (responseItem.totalEnergyStorageCapacity! >= requiredBatteryCapacity) {
-      return responseItem;
+    double requiredBatteryCapacity,
+    List<ResponseItemsRecord> responseItemOptions) async {
+  // loop through all response items and find the first one that has enough capacity
+  var recommendedResponseItem;
+  for (var responseItem in responseItemOptions) {
+    if (responseItem.totalEnergyStorageCapacity >= requiredBatteryCapacity) {
+      recommendedResponseItem = responseItem;
     }
   }
-  return null;
+  // if no response item has enough capacity, return the largest one
+  if (recommendedResponseItem == null) {
+    recommendedResponseItem = responseItemOptions.last;
+  }
+  return recommendedResponseItem;
 }
 
 Future<MappedPsrCategory> getPsrCategoryData(PsrRecord psrHousehold,
