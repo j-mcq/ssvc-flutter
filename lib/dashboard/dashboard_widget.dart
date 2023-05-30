@@ -471,7 +471,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: FutureBuilder<int>(
-                                          future: queryPsrRecordCount(),
+                                          future:
+                                              queryActiveResponseItemsRecordCount(),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
                                             if (!snapshot.hasData) {
@@ -488,7 +489,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                 ),
                                               );
                                             }
-                                            int cardTotalUsersCount =
+                                            int cardTotalResponseItemsCount =
                                                 snapshot.data!;
                                             return Container(
                                               width: double.infinity,
