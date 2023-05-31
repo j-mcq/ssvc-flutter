@@ -422,14 +422,12 @@ class _ScenariosWidgetState extends State<ScenariosWidget> {
                                                                               .start,
                                                                       children: [
                                                                         AutoSizeText(
-                                                                          listViewScenarioRecord
-                                                                              .name
-                                                                              .maybeHandleOverflow(
-                                                                            maxChars:
-                                                                                32,
-                                                                            replacement:
-                                                                                '…',
-                                                                          ),
+                                                                          listViewScenarioRecord.name != null && listViewScenarioRecord.name != ''
+                                                                              ? listViewScenarioRecord.name
+                                                                              : ''.maybeHandleOverflow(
+                                                                                  maxChars: 32,
+                                                                                  replacement: '…',
+                                                                                ),
                                                                           style:
                                                                               FlutterFlowTheme.of(context).titleMedium,
                                                                         ),
