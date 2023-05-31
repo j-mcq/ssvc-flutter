@@ -322,11 +322,11 @@ class _PolyMapState extends State<PolyMap> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width - 294,
+          width: MediaQuery.of(context).size.width,
           height: 100,
           child: Row(children: [
             Container(
-              width: 350,
+              width: MediaQuery.of(context).size.width * .5,
               child: TextFormField(
                 controller: searchController,
                 obscureText: false,
@@ -427,7 +427,10 @@ class _PolyMapState extends State<PolyMap> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Container(
-              width: MediaQuery.of(context).size.width - 294,
+              width: responsiveVisibility(
+                      context: context, phone: false, tablet: false)
+                  ? MediaQuery.of(context).size.width - 294
+                  : MediaQuery.of(context).size.width - 64,
               height: 500,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primary,
@@ -493,7 +496,7 @@ class _PolyMapState extends State<PolyMap> {
           ],
         ),
         Container(
-          width: MediaQuery.of(context).size.width - 294,
+          width: MediaQuery.of(context).size.width,
           height: 100,
           decoration: BoxDecoration(),
           child: Row(
