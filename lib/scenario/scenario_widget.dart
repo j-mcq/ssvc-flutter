@@ -582,7 +582,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                           0,
                                                                           0),
                                                               child: Text(
-                                                                'Location information and properties impacted',
+                                                                'Click the map below to add points to create a outage area polygon',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodySmall,

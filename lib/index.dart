@@ -14,3 +14,6 @@ export '/stock_item_details/stock_item_details_widget.dart'
 export '/admin/admin_widget.dart' show AdminWidget;
 export '/scenarios/scenarios_widget.dart' show ScenariosWidget;
 export '/verify_email/verify_email_widget.dart' show VerifyEmailWidget;
+export '/psr_categories/psr_categories_widget.dart' show PsrCategoriesWidget;
+export '/psr_category_details/psr_category_details_widget.dart'
+    show PsrCategoryDetailsWidget;

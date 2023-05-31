@@ -165,6 +165,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'verifyEmail',
               path: 'verifyEmail',
               builder: (context, params) => VerifyEmailWidget(),
+            ),
+            FFRoute(
+              name: 'psrCategories',
+              path: 'psr-categories',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'psrCategories')
+                  : PsrCategoriesWidget(),
+            ),
+            FFRoute(
+              name: 'psrCategoryDetails',
+              path: 'psr-category-details',
+              requireAuth: true,
+              builder: (context, params) => PsrCategoryDetailsWidget(
+                psrCategoryOptionsReference: params.getParam(
+                    'psrCategoryOptionsReference',
+                    ParamType.DocumentReference,
+                    false,
+                    ['psr_category_options']),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
