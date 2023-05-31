@@ -2043,7 +2043,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 ),
                                                                               ),
                                                                               Align(
-                                                                                alignment: AlignmentDirectional(-0.9, -0.9),
+                                                                                alignment: AlignmentDirectional(-0.6, -0.9),
                                                                                 child: FlutterFlowChartLegendWidget(
                                                                                   entries: [
                                                                                     LegendEntry(FlutterFlowTheme.of(context).tertiary, 'Required for Scenario'),
@@ -2055,7 +2055,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                   textPadding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                   padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                                                                                   borderWidth: 1.0,
-                                                                                  borderColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  borderColor: Color(0x00FFFFFF),
                                                                                   indicatorSize: 10.0,
                                                                                 ),
                                                                               ),
