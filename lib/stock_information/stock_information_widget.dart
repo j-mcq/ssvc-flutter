@@ -505,7 +505,20 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       Expanded(
                                         flex: 1,
                                         child: Text(
-                                          'Unit Cost',
+                                          'Unit Cost (£)',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodySmall,
+                                        ),
+                                      ),
+                                    if (responsiveVisibility(
+                                      context: context,
+                                      phone: false,
+                                      tablet: false,
+                                    ))
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          'Stock ',
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall,
                                         ),
@@ -719,6 +732,21 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                             ),
                                                           ),
                                                         ),
+                                                        if (responsiveVisibility(
+                                                          context: context,
+                                                          phone: false,
+                                                        ))
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Text(
+                                                              listViewResponseItemsRecord
+                                                                  .unitPrice
+                                                                  .toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                            ),
+                                                          ),
                                                       ],
                                                     ),
                                                   ),
@@ -833,22 +861,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                             }),
                                                           );
                                                         },
-                                                      ),
-                                                    ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                  ))
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        listViewResponseItemsRecord
-                                                            .unitPrice
-                                                            .toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium,
                                                       ),
                                                     ),
                                                   if (responsiveVisibility(
