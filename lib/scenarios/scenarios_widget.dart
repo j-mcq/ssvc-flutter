@@ -463,7 +463,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget> {
                                                               Expanded(
                                                                 flex: 1,
                                                                 child: Text(
-                                                                  '${listViewScenarioRecord.name != null && listViewScenarioRecord.name != '' ? listViewScenarioRecord.outageDuration.toString() : ''} Hour(s)',
+                                                                  '${listViewScenarioRecord.outageDuration != null ? listViewScenarioRecord.outageDuration.toString() : ''} Hour(s)',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium,

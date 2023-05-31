@@ -684,7 +684,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText:
-                                                    'Estimated Power Consumption (Wh)',
+                                                    'Estimated Power Consumption (W)',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
