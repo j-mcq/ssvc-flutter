@@ -798,6 +798,21 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       ),
                                                                     );
                                                                   }
+
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'scenario',
+                                                                    queryParams:
+                                                                        {
+                                                                      'scenarioReference':
+                                                                          serializeParam(
+                                                                        widget
+                                                                            .scenarioReference,
+                                                                        ParamType
+                                                                            .DocumentReference,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                  );
                                                                 } else {
                                                                   if (_model.formKey
                                                                               .currentState ==

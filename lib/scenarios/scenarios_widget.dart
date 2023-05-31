@@ -344,11 +344,6 @@ class _ScenariosWidgetState extends State<ScenariosWidget> {
                                                     List<ScenarioResultsRecord>
                                                         containerScenarioResultsRecordList =
                                                         snapshot.data!;
-                                                    // Return an empty Container when the item does not exist.
-                                                    if (snapshot
-                                                        .data!.isEmpty) {
-                                                      return Container();
-                                                    }
                                                     final containerScenarioResultsRecord =
                                                         containerScenarioResultsRecordList
                                                                 .isNotEmpty
