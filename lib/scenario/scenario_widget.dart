@@ -720,75 +720,104 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       .validate()) {
                                                                 return;
                                                               }
-                                                              _model.outSaveScenarioInputs =
-                                                                  await actions
-                                                                      .saveScenario(
-                                                                widget.scenarioReference !=
-                                                                        null
-                                                                    ? widget
-                                                                        .scenarioReference
-                                                                    : null,
-                                                                double.tryParse(
-                                                                    _model
+                                                              if (_model.scenarioNameController
+                                                                          .text !=
+                                                                      null &&
+                                                                  _model.scenarioNameController
+                                                                          .text !=
+                                                                      '') {
+                                                                if (_model.outageDurationController
+                                                                            .text !=
+                                                                        null &&
+                                                                    _model.outageDurationController
+                                                                            .text !=
+                                                                        '') {
+                                                                  _model.outSaveScenarioInputs =
+                                                                      await actions
+                                                                          .saveScenario(
+                                                                    widget.scenarioReference !=
+                                                                            null
+                                                                        ? widget
+                                                                            .scenarioReference
+                                                                        : null,
+                                                                    double.tryParse(_model
                                                                         .outageDurationController
                                                                         .text),
-                                                                _model
-                                                                    .scenarioNameController
-                                                                    .text,
-                                                              );
-                                                              _model.outCalculateScenarioResponse =
-                                                                  await actions
-                                                                      .calculateScenarioResponse(
-                                                                _model
-                                                                    .outSaveScenarioInputs,
-                                                              );
-                                                              if (_model.outCalculateScenarioResponse !=
-                                                                      null &&
-                                                                  _model.outCalculateScenarioResponse !=
-                                                                      '') {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'There was a problem calculating the scenario response: ${_model.outCalculateScenarioResponse}',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryText,
+                                                                    _model
+                                                                        .scenarioNameController
+                                                                        .text,
+                                                                  );
+                                                                  _model.outCalculateScenarioResponse =
+                                                                      await actions
+                                                                          .calculateScenarioResponse(
+                                                                    _model
+                                                                        .outSaveScenarioInputs,
+                                                                  );
+                                                                  if (_model.outCalculateScenarioResponse !=
+                                                                          null &&
+                                                                      _model.outCalculateScenarioResponse !=
+                                                                          '') {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'There was a problem calculating the scenario response: ${_model.outCalculateScenarioResponse}',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
                                                                       ),
-                                                                    ),
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            4000),
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .secondary,
-                                                                  ),
-                                                                );
+                                                                    );
+                                                                  } else {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'Calculations completed successfully',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            FlutterFlowTheme.of(context).secondary,
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                } else {
+                                                                  if (_model.formKey
+                                                                              .currentState ==
+                                                                          null ||
+                                                                      !_model
+                                                                          .formKey
+                                                                          .currentState!
+                                                                          .validate()) {
+                                                                    return;
+                                                                  }
+                                                                }
                                                               } else {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'Calculations completed successfully',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryText,
-                                                                      ),
-                                                                    ),
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            4000),
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .secondary,
-                                                                  ),
-                                                                );
+                                                                if (_model.formKey
+                                                                            .currentState ==
+                                                                        null ||
+                                                                    !_model
+                                                                        .formKey
+                                                                        .currentState!
+                                                                        .validate()) {
+                                                                  return;
+                                                                }
                                                               }
 
                                                               setState(() {});
