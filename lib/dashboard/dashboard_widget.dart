@@ -350,6 +350,8 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                       8.0, 4.0, 4.0, 4.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       FutureBuilder<int>(
                                         future: queryPsrRecordCount(),
