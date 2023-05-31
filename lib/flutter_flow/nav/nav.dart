@@ -122,34 +122,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'scenario',
               path: 'scenario',
               requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'scenario')
-                  : ScenarioWidget(
-                      scenarioReference: params.getParam('scenarioReference',
-                          ParamType.DocumentReference, false, ['scenario']),
-                    ),
+              builder: (context, params) => ScenarioWidget(
+                scenarioReference: params.getParam('scenarioReference',
+                    ParamType.DocumentReference, false, ['scenario']),
+              ),
             ),
             FFRoute(
               name: 'scenarioCopy',
               path: 'scenarioCopy',
               requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'scenarioCopy')
-                  : ScenarioCopyWidget(),
+              builder: (context, params) => ScenarioCopyWidget(),
             ),
             FFRoute(
               name: 'stockItemDetails',
               path: 'stockItemDetails',
               requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'stockItemDetails')
-                  : StockItemDetailsWidget(
-                      responseItemReference: params.getParam(
-                          'responseItemReference',
-                          ParamType.DocumentReference,
-                          false,
-                          ['response_items']),
-                    ),
+              builder: (context, params) => StockItemDetailsWidget(
+                responseItemReference: params.getParam('responseItemReference',
+                    ParamType.DocumentReference, false, ['response_items']),
+              ),
             ),
             FFRoute(
               name: 'admin',

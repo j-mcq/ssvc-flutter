@@ -11,7 +11,6 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -56,7 +55,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
     super.initState();
     _model = createModel(context, () => StockInformationModel());
 
-    _model.responseItemFilterController ??= TextEditingController();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -485,18 +483,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          '',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodySmall,
-                                        ),
-                                      ),
-                                    ),
                                     if (responsiveVisibility(
                                       context: context,
                                       phone: false,
@@ -735,116 +721,119 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       ],
                                                     ),
                                                   ),
-                                                  Expanded(
-                                                    child: FutureBuilder<
-                                                        List<DepotsRecord>>(
-                                                      future:
-                                                          queryDepotsRecordOnce(),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50.0,
-                                                              height: 50.0,
-                                                              child:
-                                                                  CircularProgressIndicator(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        List<DepotsRecord>
-                                                            columnDepotsRecordList =
-                                                            snapshot.data!;
-                                                        return Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: List.generate(
-                                                              columnDepotsRecordList
-                                                                  .length,
-                                                              (columnIndex) {
-                                                            final columnDepotsRecord =
-                                                                columnDepotsRecordList[
-                                                                    columnIndex];
-                                                            return Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                FutureBuilder<
-                                                                    int>(
-                                                                  future:
-                                                                      queryActiveResponseItemsRecordCount(
-                                                                    queryBuilder: (activeResponseItemsRecord) => activeResponseItemsRecord
-                                                                        .where(
-                                                                            'home_depot',
-                                                                            isEqualTo: columnDepotsRecord
-                                                                                .reference)
-                                                                        .where(
-                                                                            'response_item',
-                                                                            isEqualTo:
-                                                                                listViewResponseItemsRecord.reference),
-                                                                  ),
-                                                                  builder: (context,
-                                                                      snapshot) {
-                                                                    // Customize what your widget looks like when it's loading.
-                                                                    if (!snapshot
-                                                                        .hasData) {
-                                                                      return Center(
-                                                                        child:
-                                                                            SizedBox(
-                                                                          width:
-                                                                              50.0,
-                                                                          height:
-                                                                              50.0,
-                                                                          child:
-                                                                              CircularProgressIndicator(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primary,
-                                                                          ),
-                                                                        ),
-                                                                      );
-                                                                    }
-                                                                    int rowCount =
-                                                                        snapshot
-                                                                            .data!;
-                                                                    return Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Text(
-                                                                          columnDepotsRecord
-                                                                              .name,
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
-                                                                        ),
-                                                                        Text(
-                                                                          ': ',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
-                                                                        ),
-                                                                        Text(
-                                                                          rowCount
-                                                                              .toString(),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
-                                                                        ),
-                                                                      ],
-                                                                    );
-                                                                  },
+                                                  if (responsiveVisibility(
+                                                    context: context,
+                                                    phone: false,
+                                                    tablet: false,
+                                                  ))
+                                                    Expanded(
+                                                      child: FutureBuilder<
+                                                          List<DepotsRecord>>(
+                                                        future:
+                                                            queryDepotsRecordOnce(),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          // Customize what your widget looks like when it's loading.
+                                                          if (!snapshot
+                                                              .hasData) {
+                                                            return Center(
+                                                              child: SizedBox(
+                                                                width: 50.0,
+                                                                height: 50.0,
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
                                                                 ),
-                                                              ],
+                                                              ),
                                                             );
-                                                          }),
-                                                        );
-                                                      },
+                                                          }
+                                                          List<DepotsRecord>
+                                                              columnDepotsRecordList =
+                                                              snapshot.data!;
+                                                          return Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: List.generate(
+                                                                columnDepotsRecordList
+                                                                    .length,
+                                                                (columnIndex) {
+                                                              final columnDepotsRecord =
+                                                                  columnDepotsRecordList[
+                                                                      columnIndex];
+                                                              return Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  FutureBuilder<
+                                                                      int>(
+                                                                    future:
+                                                                        queryActiveResponseItemsRecordCount(
+                                                                      queryBuilder: (activeResponseItemsRecord) => activeResponseItemsRecord
+                                                                          .where(
+                                                                              'home_depot',
+                                                                              isEqualTo: columnDepotsRecord
+                                                                                  .reference)
+                                                                          .where(
+                                                                              'response_item',
+                                                                              isEqualTo: listViewResponseItemsRecord.reference),
+                                                                    ),
+                                                                    builder:
+                                                                        (context,
+                                                                            snapshot) {
+                                                                      // Customize what your widget looks like when it's loading.
+                                                                      if (!snapshot
+                                                                          .hasData) {
+                                                                        return Center(
+                                                                          child:
+                                                                              SizedBox(
+                                                                            width:
+                                                                                50.0,
+                                                                            height:
+                                                                                50.0,
+                                                                            child:
+                                                                                CircularProgressIndicator(
+                                                                              color: FlutterFlowTheme.of(context).primary,
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      }
+                                                                      int rowCount =
+                                                                          snapshot
+                                                                              .data!;
+                                                                      return Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Text(
+                                                                            columnDepotsRecord.name,
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).bodyMedium,
+                                                                          ),
+                                                                          Text(
+                                                                            ': ',
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).bodyMedium,
+                                                                          ),
+                                                                          Text(
+                                                                            rowCount.toString(),
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).bodyMedium,
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            }),
+                                                          );
+                                                        },
+                                                      ),
                                                     ),
-                                                  ),
                                                   if (responsiveVisibility(
                                                     context: context,
                                                     phone: false,
@@ -1058,121 +1047,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 16.0, 20.0, 16.0),
-                                        child: TextFormField(
-                                          controller: _model
-                                              .responseItemFilterController,
-                                          onChanged: (_) =>
-                                              EasyDebounce.debounce(
-                                            '_model.responseItemFilterController',
-                                            Duration(milliseconds: 1000),
-                                            () async {
-                                              setState(() {
-                                                _model.responseItemFilter = _model
-                                                    .responseItemFilterController
-                                                    .text;
-                                              });
-                                            },
-                                          ),
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Filter Results',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodySmall,
-                                            hintText: 'Enter filter term',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodySmall,
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(50.0),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(50.0),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(50.0),
-                                            ),
-                                            focusedErrorBorder:
-                                                OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
-                                                width: 2.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(50.0),
-                                            ),
-                                            filled: true,
-                                            fillColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20.0, 24.0, 0.0, 24.0),
-                                            suffixIcon: _model
-                                                    .responseItemFilterController!
-                                                    .text
-                                                    .isNotEmpty
-                                                ? InkWell(
-                                                    onTap: () async {
-                                                      _model
-                                                          .responseItemFilterController
-                                                          ?.clear();
-                                                      setState(() {
-                                                        _model.responseItemFilter =
-                                                            _model
-                                                                .responseItemFilterController
-                                                                .text;
-                                                      });
-                                                      setState(() {});
-                                                    },
-                                                    child: Icon(
-                                                      Icons.clear,
-                                                      color: Color(0xFF757575),
-                                                      size: 22.0,
-                                                    ),
-                                                  )
-                                                : null,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                          validator: _model
-                                              .responseItemFilterControllerValidator
-                                              .asValidator(context),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 12.0, 12.0, 0.0),
@@ -1250,15 +1124,20 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                 .bodySmall,
                                           ),
                                         ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          'Status',
-                                          textAlign: TextAlign.start,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodySmall,
+                                      if (responsiveVisibility(
+                                        context: context,
+                                        phone: false,
+                                        tablet: false,
+                                      ))
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            'Status',
+                                            textAlign: TextAlign.start,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodySmall,
+                                          ),
                                         ),
-                                      ),
                                       Expanded(
                                         flex: 1,
                                         child: Text(
@@ -1612,16 +1491,12 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [],
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       8.0, 0.0, 8.0, 0.0),
                                   child:
                                       custom_widgets.SortableGridResponseItems(
-                                    width: 100.0,
+                                    width: double.infinity,
                                     height: 600.0,
                                   ),
                                 ),
