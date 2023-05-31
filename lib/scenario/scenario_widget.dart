@@ -712,15 +712,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
-                                                              if (_model.formKey
-                                                                          .currentState ==
-                                                                      null ||
-                                                                  !_model
-                                                                      .formKey
-                                                                      .currentState!
-                                                                      .validate()) {
-                                                                return;
-                                                              }
                                                               if (_model.scenarioNameController
                                                                           .text !=
                                                                       null &&
