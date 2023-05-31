@@ -1034,19 +1034,15 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                 .titleMedium,
                                                           ),
                                                         ),
-                                                        if (responsiveVisibility(
-                                                          context: context,
-                                                          tablet: false,
-                                                        ))
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              'Number of Response Items Required',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .titleMedium,
-                                                            ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                            'Number of Response Items Required',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .titleMedium,
                                                           ),
+                                                        ),
                                                         if (responsiveVisibility(
                                                           context: context,
                                                           phone: false,
@@ -1061,28 +1057,24 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   .titleMedium,
                                                             ),
                                                           ),
-                                                        if (responsiveVisibility(
-                                                          context: context,
-                                                          tablet: false,
-                                                        ))
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          10.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                'Scenario Coverage',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleMedium,
-                                                              ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Text(
+                                                              'Scenario Coverage',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .titleMedium,
                                                             ),
                                                           ),
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -1695,17 +1687,13 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     ],
                                                                                   ),
                                                                                 ),
-                                                                                if (responsiveVisibility(
-                                                                                  context: context,
-                                                                                  tablet: false,
-                                                                                ))
-                                                                                  Expanded(
-                                                                                    flex: 1,
-                                                                                    child: Text(
-                                                                                      listViewScenarioHouseholdResponsesRecord.psrCategories,
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                    ),
+                                                                                Expanded(
+                                                                                  flex: 1,
+                                                                                  child: Text(
+                                                                                    listViewScenarioHouseholdResponsesRecord.psrCategories,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                   ),
+                                                                                ),
                                                                                 if (responsiveVisibility(
                                                                                   context: context,
                                                                                   phone: false,
