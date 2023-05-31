@@ -85,6 +85,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
         body: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (responsiveVisibility(
               context: context,
@@ -483,6 +484,14 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        'Item Name',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodySmall,
+                                      ),
+                                    ),
                                     if (responsiveVisibility(
                                       context: context,
                                       phone: false,
@@ -491,7 +500,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       Expanded(
                                         flex: 1,
                                         child: Text(
-                                          'Total Stock Level',
+                                          'Unit Cost (£)',
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall,
                                         ),
@@ -504,7 +513,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       Expanded(
                                         flex: 1,
                                         child: Text(
-                                          'Unit Cost',
+                                          'Stock ',
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall,
                                         ),
@@ -727,6 +736,23 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                     tablet: false,
                                                   ))
                                                     Expanded(
+                                                      flex: 1,
+                                                      child: Text(
+                                                        listViewResponseItemsRecord
+                                                            .unitPrice
+                                                            .toString(),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
+                                                      ),
+                                                    ),
+                                                  if (responsiveVisibility(
+                                                    context: context,
+                                                    phone: false,
+                                                    tablet: false,
+                                                  ))
+                                                    Expanded(
                                                       child: FutureBuilder<
                                                           List<DepotsRecord>>(
                                                         future:
@@ -837,22 +863,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                   if (responsiveVisibility(
                                                     context: context,
                                                     phone: false,
-                                                  ))
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        listViewResponseItemsRecord
-                                                            .unitPrice
-                                                            .toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium,
-                                                      ),
-                                                    ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
+                                                    tablet: false,
                                                   ))
                                                     Expanded(
                                                       flex: 1,
