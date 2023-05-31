@@ -609,15 +609,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(16, 0, 16, 0),
                                               child: Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: 700,
+                                                width: double.infinity,
+                                                height: 700.0,
                                                 child: custom_widgets.PolyMap(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: 700,
+                                                  width: double.infinity,
+                                                  height: 700.0,
                                                   scenario:
                                                       widget.scenarioReference !=
                                                               null
@@ -1985,7 +1981,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 ),
                                                                               ),
                                                                               Align(
-                                                                                alignment: AlignmentDirectional(-0.9, -0.9),
+                                                                                alignment: AlignmentDirectional(-0.6, -0.9),
                                                                                 child: FlutterFlowChartLegendWidget(
                                                                                   entries: [
                                                                                     LegendEntry(FlutterFlowTheme.of(context).tertiary, 'Required for Scenario'),
@@ -1994,11 +1990,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                   width: 200,
                                                                                   height: 50,
                                                                                   textStyle: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                  textPadding: EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
-                                                                                  borderWidth: 1,
-                                                                                  borderColor: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                  indicatorSize: 10,
+                                                                                  textPadding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                                                                  borderWidth: 1.0,
+                                                                                  borderColor: Color(0x00FFFFFF),
+                                                                                  indicatorSize: 10.0,
                                                                                 ),
                                                                               ),
                                                                             ],
@@ -2229,6 +2225,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 context,
                                                                             phone:
                                                                                 false,
+                                                                            tablet:
+                                                                                false,
                                                                           ))
                                                                             Expanded(
                                                                               flex: 1,
@@ -2354,6 +2352,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                         if (responsiveVisibility(
                                                                                           context: context,
                                                                                           phone: false,
+                                                                                          tablet: false,
                                                                                         ))
                                                                                           Expanded(
                                                                                             flex: 1,
