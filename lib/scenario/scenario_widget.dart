@@ -637,16 +637,10 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   .fromSTEB(
                                                       16.0, 0.0, 16.0, 0.0),
                                               child: Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    1.0,
+                                                width: double.infinity,
                                                 height: 700.0,
                                                 child: custom_widgets.PolyMap(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      1.0,
+                                                  width: double.infinity,
                                                   height: 700.0,
                                                   scenario:
                                                       widget.scenarioReference !=
@@ -2300,6 +2294,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 context,
                                                                             phone:
                                                                                 false,
+                                                                            tablet:
+                                                                                false,
                                                                           ))
                                                                             Expanded(
                                                                               flex: 1,
@@ -2424,6 +2420,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                         if (responsiveVisibility(
                                                                                           context: context,
                                                                                           phone: false,
+                                                                                          tablet: false,
                                                                                         ))
                                                                                           Expanded(
                                                                                             flex: 1,
