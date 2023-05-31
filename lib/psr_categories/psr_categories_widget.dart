@@ -195,7 +195,7 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                             Expanded(
                                               flex: 1,
                                               child: Text(
-                                                'Estimated Power Consumption',
+                                                'Estimated Power Consumption (W)',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
