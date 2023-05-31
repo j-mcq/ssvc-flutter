@@ -2340,6 +2340,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 context,
                                                                             phone:
                                                                                 false,
+                                                                            tablet:
+                                                                                false,
                                                                           ))
                                                                             Expanded(
                                                                               flex: 2,
