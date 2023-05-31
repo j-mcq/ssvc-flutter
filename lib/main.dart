@@ -130,9 +130,6 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'dashboard': DashboardWidget(),
       'stockInformation': StockInformationWidget(),
-      'scenario': ScenarioWidget(),
-      'scenarioCopy': ScenarioCopyWidget(),
-      'stockItemDetails': StockItemDetailsWidget(),
       'admin': AdminWidget(),
       'scenarios': ScenariosWidget(),
     };
@@ -161,10 +158,10 @@ class _NavBarPageState extends State<NavBarPage> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.add_business_rounded,
+                Icons.dashboard,
                 size: 24.0,
               ),
-              label: '•',
+              label: 'Dashboard',
               tooltip: '',
             ),
             BottomNavigationBarItem(
@@ -172,47 +169,23 @@ class _NavBarPageState extends State<NavBarPage> {
                 Icons.account_circle_outlined,
                 size: 24.0,
               ),
-              label: '•',
+              label: 'Stock',
               tooltip: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.school_outlined,
+                Icons.admin_panel_settings,
                 size: 24.0,
               ),
-              label: '•',
+              label: 'Admin',
               tooltip: '',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.school_outlined,
+                Icons.science,
                 size: 24.0,
               ),
-              label: '•',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_circle_outlined,
-                size: 24.0,
-              ),
-              label: '•',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.school_outlined,
-                size: 24.0,
-              ),
-              label: '•',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.add_business_rounded,
-                size: 24.0,
-              ),
-              label: '•',
+              label: 'Scenarios',
               tooltip: '',
             )
           ],

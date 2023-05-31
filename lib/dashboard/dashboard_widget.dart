@@ -224,17 +224,40 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall,
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 8.0, 0.0),
-                                          child: Text(
-                                            'Percentage of user defined scenarios that are covered by the current stock levels',
-                                            textAlign: TextAlign.center,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall,
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          tablet: false,
+                                          tabletLandscape: false,
+                                          desktop: false,
+                                        ))
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 8.0, 0.0),
+                                            child: Text(
+                                              'Scenario coverage',
+                                              textAlign: TextAlign.start,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall,
+                                            ),
                                           ),
-                                        ),
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          phone: false,
+                                        ))
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 8.0, 0.0),
+                                            child: Text(
+                                              'Percentage of user defined scenarios that are covered by the current stock levels',
+                                              textAlign: TextAlign.start,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodySmall,
+                                            ),
+                                          ),
                                         Expanded(
                                           child: Padding(
                                             padding:
@@ -254,57 +277,58 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    12.0),
-                                                        child:
-                                                            CircularPercentIndicator(
-                                                          percent: _model
-                                                              .totalScenarioCoverage!,
-                                                          radius: 50.0,
-                                                          lineWidth: 12.0,
-                                                          animation: true,
-                                                          progressColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .alternate,
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .lineColor,
-                                                          center: Text(
-                                                            formatNumber(
-                                                              _model
-                                                                  .totalScenarioCoverage,
-                                                              formatType:
-                                                                  FormatType
-                                                                      .percent,
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      12.0),
+                                                          child:
+                                                              CircularPercentIndicator(
+                                                            percent: _model
+                                                                .totalScenarioCoverage!,
+                                                            radius: 50.0,
+                                                            lineWidth: 12.0,
+                                                            animation: true,
+                                                            progressColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .lineColor,
+                                                            center: Text(
+                                                              formatNumber(
+                                                                _model
+                                                                    .totalScenarioCoverage,
+                                                                formatType:
+                                                                    FormatType
+                                                                        .percent,
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Outfit',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .alternate,
+                                                                    fontSize:
+                                                                        14.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                  ),
                                                             ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Outfit',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .alternate,
-                                                                  fontSize:
-                                                                      14.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
                                                           ),
                                                         ),
                                                       ),

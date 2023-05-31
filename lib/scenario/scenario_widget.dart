@@ -666,8 +666,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                   Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                16.0, 0.0),
+                                                            .fromSTEB(
+                                                                0, 0, 16, 0),
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -677,11 +677,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      16.0),
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 16),
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
@@ -771,22 +768,22 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                 'Save Inputs & Calculate Response',
                                                             options:
                                                                 FFButtonOptions(
-                                                              width: 300.0,
-                                                              height: 40.0,
+                                                              width: 300,
+                                                              height: 40,
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          0),
                                                               iconPadding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          0),
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .primary,
@@ -806,12 +803,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   BorderSide(
                                                                 color: Colors
                                                                     .transparent,
-                                                                width: 1.0,
+                                                                width: 1,
                                                               ),
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          50.0),
+                                                                          50),
                                                             ),
                                                           ),
                                                         ),
@@ -982,23 +979,17 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       children: [
-                                                        if (responsiveVisibility(
-                                                          context: context,
-                                                          phone: false,
-                                                          tablet: false,
-                                                        ))
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              'PSR Housholds Impacted',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .titleMedium,
-                                                            ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                            'PSR Housholds Impacted',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .titleMedium,
                                                           ),
+                                                        ),
                                                         if (responsiveVisibility(
                                                           context: context,
-                                                          phone: false,
                                                           tablet: false,
                                                         ))
                                                           Expanded(
@@ -1026,7 +1017,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                           ),
                                                         if (responsiveVisibility(
                                                           context: context,
-                                                          phone: false,
                                                           tablet: false,
                                                         ))
                                                           Expanded(
@@ -1159,42 +1149,28 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 FlutterFlowTheme.of(context).bodyMedium,
                                                                           ),
                                                                         ),
-                                                                      if (responsiveVisibility(
-                                                                        context:
-                                                                            context,
-                                                                        phone:
-                                                                            false,
-                                                                      ))
-                                                                        Expanded(
-                                                                          flex:
-                                                                              1,
-                                                                          child:
-                                                                              Text(
-                                                                            containerScenarioResultsRecord != null
-                                                                                ? containerScenarioResultsRecord!.numberOfResponseItems.toString()
-                                                                                : '',
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).bodyMedium,
-                                                                          ),
+                                                                      Expanded(
+                                                                        flex: 1,
+                                                                        child:
+                                                                            Text(
+                                                                          containerScenarioResultsRecord != null
+                                                                              ? containerScenarioResultsRecord!.numberOfResponseItems.toString()
+                                                                              : '',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
                                                                         ),
-                                                                      if (responsiveVisibility(
-                                                                        context:
-                                                                            context,
-                                                                        phone:
-                                                                            false,
-                                                                      ))
-                                                                        Expanded(
-                                                                          flex:
-                                                                              1,
-                                                                          child:
-                                                                              Text(
-                                                                            containerScenarioResultsRecord != null
-                                                                                ? containerScenarioResultsRecord!.nearestDepotName
-                                                                                : '',
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).bodyMedium,
-                                                                          ),
+                                                                      ),
+                                                                      Expanded(
+                                                                        flex: 1,
+                                                                        child:
+                                                                            Text(
+                                                                          containerScenarioResultsRecord != null
+                                                                              ? containerScenarioResultsRecord!.nearestDepotName
+                                                                              : '',
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
                                                                         ),
+                                                                      ),
                                                                       Expanded(
                                                                         flex: 1,
                                                                         child:
@@ -1661,18 +1637,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                             ),
                                                                                             style: FlutterFlowTheme.of(context).titleMedium,
                                                                                           ),
-                                                                                          if (responsiveVisibility(
-                                                                                            context: context,
-                                                                                            tabletLandscape: false,
-                                                                                            desktop: false,
-                                                                                          ))
-                                                                                            Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
-                                                                                              child: Text(
-                                                                                                'user@domainname.com',
-                                                                                                style: FlutterFlowTheme.of(context).bodySmall,
-                                                                                              ),
-                                                                                            ),
                                                                                         ],
                                                                                       ),
                                                                                     ],
@@ -1680,7 +1644,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 ),
                                                                                 if (responsiveVisibility(
                                                                                   context: context,
-                                                                                  phone: false,
                                                                                   tablet: false,
                                                                                 ))
                                                                                   Expanded(
@@ -1834,32 +1797,29 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         MainAxisAlignment
                                                                             .spaceBetween,
                                                                     children: [
-                                                                      Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            'Response Items Required',
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).headlineSmall,
-                                                                          ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
-                                                                                4,
-                                                                                0,
-                                                                                0),
-                                                                            child:
-                                                                                Text(
-                                                                              'Summary of the types of PSR customers impacted by the scenario',
-                                                                              style: FlutterFlowTheme.of(context).bodySmall,
+                                                                      Expanded(
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              'Response Items Required',
+                                                                              style: FlutterFlowTheme.of(context).headlineSmall,
                                                                             ),
-                                                                          ),
-                                                                        ],
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                                                              child: Text(
+                                                                                'Summary of the types of PSR customers impacted by the scenario',
+                                                                                style: FlutterFlowTheme.of(context).bodySmall,
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1988,7 +1948,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         child:
                                                                             Container(
                                                                           width:
-                                                                              300,
+                                                                              double.infinity,
                                                                           height:
                                                                               300,
                                                                           child:
@@ -2006,10 +1966,10 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                   )
                                                                                 ],
                                                                                 xLabels: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.name).toList(),
-                                                                                barWidth: 55.0,
-                                                                                barBorderRadius: BorderRadius.circular(0.0),
-                                                                                barSpace: 0.0,
-                                                                                groupSpace: 5.0,
+                                                                                barWidth: 55,
+                                                                                barBorderRadius: BorderRadius.circular(0),
+                                                                                barSpace: 0,
+                                                                                groupSpace: 5,
                                                                                 alignment: BarChartAlignment.spaceEvenly,
                                                                                 chartStylingInfo: ChartStylingInfo(
                                                                                   enableTooltip: true,
@@ -2266,7 +2226,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         children: [
                                                                           Expanded(
                                                                             flex:
-                                                                                1,
+                                                                                2,
                                                                             child:
                                                                                 Padding(
                                                                               padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
@@ -2276,18 +2236,22 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                          Expanded(
-                                                                            flex:
-                                                                                2,
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                                                                              child: Text(
-                                                                                '',
-                                                                                style: FlutterFlowTheme.of(context).bodySmall,
+                                                                          if (responsiveVisibility(
+                                                                            context:
+                                                                                context,
+                                                                            phone:
+                                                                                false,
+                                                                          ))
+                                                                            Expanded(
+                                                                              flex: 1,
+                                                                              child: Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                                                                                child: Text(
+                                                                                  '',
+                                                                                  style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                ),
                                                                               ),
                                                                             ),
-                                                                          ),
                                                                           Expanded(
                                                                             flex:
                                                                                 2,
@@ -2312,18 +2276,22 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                          Expanded(
-                                                                            flex:
-                                                                                2,
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                                                                              child: Text(
-                                                                                'Total Number in all Depots',
-                                                                                style: FlutterFlowTheme.of(context).bodySmall,
+                                                                          if (responsiveVisibility(
+                                                                            context:
+                                                                                context,
+                                                                            phone:
+                                                                                false,
+                                                                          ))
+                                                                            Expanded(
+                                                                              flex: 2,
+                                                                              child: Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                                                                                child: Text(
+                                                                                  'Total Number in all Depots',
+                                                                                  style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                ),
                                                                               ),
                                                                             ),
-                                                                          ),
                                                                         ],
                                                                       ),
                                                                     ),
@@ -2393,28 +2361,32 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     child: Row(
                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                       children: [
-                                                                                        Expanded(
-                                                                                          flex: 1,
-                                                                                          child: Row(
-                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                            children: [
-                                                                                              Expanded(
-                                                                                                child: Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                  children: [
-                                                                                                    Image.network(
-                                                                                                      listViewScenarioResponseItemsRecord.imagePath,
-                                                                                                      width: 100,
-                                                                                                      height: 100,
-                                                                                                      fit: BoxFit.cover,
-                                                                                                    ),
-                                                                                                  ],
+                                                                                        if (responsiveVisibility(
+                                                                                          context: context,
+                                                                                          phone: false,
+                                                                                        ))
+                                                                                          Expanded(
+                                                                                            flex: 1,
+                                                                                            child: Row(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              children: [
+                                                                                                Expanded(
+                                                                                                  child: Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                    children: [
+                                                                                                      Image.network(
+                                                                                                        listViewScenarioResponseItemsRecord.imagePath,
+                                                                                                        width: 100,
+                                                                                                        height: 100,
+                                                                                                        fit: BoxFit.cover,
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
                                                                                                 ),
-                                                                                              ),
-                                                                                            ],
+                                                                                              ],
+                                                                                            ),
                                                                                           ),
-                                                                                        ),
                                                                                         Expanded(
                                                                                           flex: 2,
                                                                                           child: Row(
@@ -2432,48 +2404,26 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                                       ),
                                                                                                       style: FlutterFlowTheme.of(context).titleMedium,
                                                                                                     ),
-                                                                                                    if (responsiveVisibility(
-                                                                                                      context: context,
-                                                                                                      tabletLandscape: false,
-                                                                                                      desktop: false,
-                                                                                                    ))
-                                                                                                      Padding(
-                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
-                                                                                                        child: Text(
-                                                                                                          'user@domainname.com',
-                                                                                                          style: FlutterFlowTheme.of(context).bodySmall,
-                                                                                                        ),
-                                                                                                      ),
                                                                                                   ],
                                                                                                 ),
                                                                                               ),
                                                                                             ],
                                                                                           ),
                                                                                         ),
-                                                                                        if (responsiveVisibility(
-                                                                                          context: context,
-                                                                                          phone: false,
-                                                                                          tablet: false,
-                                                                                        ))
-                                                                                          Expanded(
-                                                                                            flex: 2,
-                                                                                            child: Text(
-                                                                                              listViewScenarioResponseItemsRecord.numberRequired.toString(),
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                            ),
+                                                                                        Expanded(
+                                                                                          flex: 2,
+                                                                                          child: Text(
+                                                                                            listViewScenarioResponseItemsRecord.numberRequired.toString(),
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                           ),
-                                                                                        if (responsiveVisibility(
-                                                                                          context: context,
-                                                                                          phone: false,
-                                                                                          tablet: false,
-                                                                                        ))
-                                                                                          Expanded(
-                                                                                            flex: 2,
-                                                                                            child: Text(
-                                                                                              listViewScenarioResponseItemsRecord.numberInClosestDepot.toString(),
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                            ),
+                                                                                        ),
+                                                                                        Expanded(
+                                                                                          flex: 2,
+                                                                                          child: Text(
+                                                                                            listViewScenarioResponseItemsRecord.numberInClosestDepot.toString(),
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                           ),
+                                                                                        ),
                                                                                         if (responsiveVisibility(
                                                                                           context: context,
                                                                                           phone: false,
