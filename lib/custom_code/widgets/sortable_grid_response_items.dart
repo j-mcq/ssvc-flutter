@@ -160,7 +160,10 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
-                    width: MediaQuery.of(context).size.width - 280,
+                    width: responsiveVisibility(
+                            context: context, phone: false, tablet: false)
+                        ? MediaQuery.of(context).size.width - 294
+                        : MediaQuery.of(context).size.width - 64,
                     height: 1000,
                     child: PlutoGrid(
                       columns: columns,
