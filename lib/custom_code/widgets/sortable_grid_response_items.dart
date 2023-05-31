@@ -55,7 +55,7 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
     PlutoColumnType.text(),
     PlutoColumnType.number(
       negative: false,
-      format: '%',
+      format: '0.00',
       applyFormatOnInit: true,
       allowFirstDot: false,
     ),
@@ -80,12 +80,12 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
     (rendererContext) {
       Color textColor = Colors.black;
 
-      if (rendererContext.cell.value >= 80) {
+      if (rendererContext.cell.value >= .90) {
         textColor = Colors.green;
-      } else if (rendererContext.cell.value < 80 &&
-          rendererContext.cell.value >= 50) {
+      } else if (rendererContext.cell.value < .90 &&
+          rendererContext.cell.value >= .60) {
         textColor = Colors.orange;
-      } else if (rendererContext.cell.value < 50) {
+      } else {
         textColor = Colors.red;
       }
 
