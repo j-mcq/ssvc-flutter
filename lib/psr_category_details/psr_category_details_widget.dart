@@ -101,7 +101,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                 child: SideBarNavWidget(
                   oneBG: FlutterFlowTheme.of(context).secondaryBackground,
                   twoBG: FlutterFlowTheme.of(context).secondaryBackground,
-                  threeColor: FlutterFlowTheme.of(context).primaryBackground,
+                  threeColor: FlutterFlowTheme.of(context).secondaryBackground,
                   fourColor: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
               ),

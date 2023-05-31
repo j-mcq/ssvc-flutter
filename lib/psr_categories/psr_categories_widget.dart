@@ -66,7 +66,7 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                 updateCallback: () => setState(() {}),
                 child: SideBarNavWidget(
                   oneBG: FlutterFlowTheme.of(context).secondaryBackground,
-                  twoBG: FlutterFlowTheme.of(context).primaryBackground,
+                  twoBG: FlutterFlowTheme.of(context).secondaryBackground,
                   threeColor: FlutterFlowTheme.of(context).secondaryBackground,
                   fourColor: FlutterFlowTheme.of(context).secondaryBackground,
                 ),

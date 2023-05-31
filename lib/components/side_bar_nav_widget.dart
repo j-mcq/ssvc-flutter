@@ -14,12 +14,14 @@ class SideBarNavWidget extends StatefulWidget {
     this.twoBG,
     this.threeColor,
     this.fourColor,
+    this.psrCategoriesColour,
   }) : super(key: key);
 
   final Color? oneBG;
   final Color? twoBG;
   final Color? threeColor;
   final Color? fourColor;
+  final Color? psrCategoriesColour;
 
   @override
   _SideBarNavWidgetState createState() => _SideBarNavWidgetState();
@@ -260,7 +262,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                   width: double.infinity,
                   height: 48.0,
                   decoration: BoxDecoration(
-                    color: widget.threeColor,
+                    color: widget.psrCategoriesColour,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Padding(
@@ -278,7 +280,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                           ),
                         ),
                         Text(
-                          'PSR Needs',
+                          'PSR Categories',
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],
