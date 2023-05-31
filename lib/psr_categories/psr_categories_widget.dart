@@ -1,11 +1,8 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -564,82 +561,6 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                   ],
                                 ),
                               ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 16.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    setState(() {
-                                      FFAppState().mapZoomLevel = 16;
-                                      FFAppState().polygonLatLngList = [];
-                                      FFAppState().circleRadius = 0.0;
-                                      FFAppState().circleLatLng = null;
-                                      FFAppState().mapCenterLocation = null;
-                                    });
-
-                                    final scenarioCreateData =
-                                        createScenarioRecordData();
-                                    var scenarioRecordReference =
-                                        ScenarioRecord.collection.doc();
-                                    await scenarioRecordReference
-                                        .set(scenarioCreateData);
-                                    _model.outCreateScenario =
-                                        ScenarioRecord.getDocumentFromData(
-                                            scenarioCreateData,
-                                            scenarioRecordReference);
-
-                                    context.pushNamed(
-                                      'scenario',
-                                      queryParams: {
-                                        'scenarioReference': serializeParam(
-                                          _model.outCreateScenario!.reference,
-                                          ParamType.DocumentReference,
-                                        ),
-                                      }.withoutNulls,
-                                    );
-
-                                    setState(() {});
-                                  },
-                                  text: 'Add Scenario',
-                                  icon: Icon(
-                                    Icons.add_rounded,
-                                    size: 15.0,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: 200.0,
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily,
-                                          color: Colors.white,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmallFamily),
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(50.0),
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
                         ],
