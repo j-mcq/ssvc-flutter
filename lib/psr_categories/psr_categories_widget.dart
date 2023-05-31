@@ -366,25 +366,26 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                                       MainAxisSize
                                                                           .max,
                                                                   children: [
-                                                                    Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        AutoSizeText(
-                                                                          listViewPsrCategoryOptionsRecord.name != null && listViewPsrCategoryOptionsRecord.name != ''
-                                                                              ? listViewPsrCategoryOptionsRecord.name
-                                                                              : ''.maybeHandleOverflow(
-                                                                                  maxChars: 32,
-                                                                                  replacement: '…',
-                                                                                ),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).titleMedium,
-                                                                        ),
-                                                                      ],
+                                                                    Expanded(
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          AutoSizeText(
+                                                                            listViewPsrCategoryOptionsRecord.name != null && listViewPsrCategoryOptionsRecord.name != ''
+                                                                                ? listViewPsrCategoryOptionsRecord.name
+                                                                                : ''.maybeHandleOverflow(
+                                                                                    maxChars: 32,
+                                                                                    replacement: '…',
+                                                                                  ),
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).titleMedium,
+                                                                          ),
+                                                                        ],
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
