@@ -2297,7 +2297,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                         children: [
                                                                           Expanded(
                                                                             flex:
-                                                                                1,
+                                                                                2,
                                                                             child:
                                                                                 Padding(
                                                                               padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
@@ -2307,18 +2307,22 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                          Expanded(
-                                                                            flex:
-                                                                                1,
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
-                                                                              child: Text(
-                                                                                '',
-                                                                                style: FlutterFlowTheme.of(context).bodySmall,
+                                                                          if (responsiveVisibility(
+                                                                            context:
+                                                                                context,
+                                                                            phone:
+                                                                                false,
+                                                                          ))
+                                                                            Expanded(
+                                                                              flex: 1,
+                                                                              child: Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                                                                child: Text(
+                                                                                  '',
+                                                                                  style: FlutterFlowTheme.of(context).bodySmall,
+                                                                                ),
                                                                               ),
                                                                             ),
-                                                                          ),
                                                                           Expanded(
                                                                             flex:
                                                                                 2,
@@ -2427,28 +2431,32 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     child: Row(
                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                       children: [
-                                                                                        Expanded(
-                                                                                          flex: 1,
-                                                                                          child: Row(
-                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                            children: [
-                                                                                              Expanded(
-                                                                                                child: Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                  children: [
-                                                                                                    Image.network(
-                                                                                                      listViewScenarioResponseItemsRecord.imagePath,
-                                                                                                      width: 100.0,
-                                                                                                      height: 100.0,
-                                                                                                      fit: BoxFit.cover,
-                                                                                                    ),
-                                                                                                  ],
+                                                                                        if (responsiveVisibility(
+                                                                                          context: context,
+                                                                                          phone: false,
+                                                                                        ))
+                                                                                          Expanded(
+                                                                                            flex: 1,
+                                                                                            child: Row(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              children: [
+                                                                                                Expanded(
+                                                                                                  child: Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                    children: [
+                                                                                                      Image.network(
+                                                                                                        listViewScenarioResponseItemsRecord.imagePath,
+                                                                                                        width: 100.0,
+                                                                                                        height: 100.0,
+                                                                                                        fit: BoxFit.cover,
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
                                                                                                 ),
-                                                                                              ),
-                                                                                            ],
+                                                                                              ],
+                                                                                            ),
                                                                                           ),
-                                                                                        ),
                                                                                         Expanded(
                                                                                           flex: 2,
                                                                                           child: Row(
