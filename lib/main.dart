@@ -132,6 +132,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'stockInformation': StockInformationWidget(),
       'admin': AdminWidget(),
       'scenarios': ScenariosWidget(),
+      'psrCategories': PsrCategoriesWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -186,6 +187,14 @@ class _NavBarPageState extends State<NavBarPage> {
                 size: 24.0,
               ),
               label: 'Scenarios',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.medical_services,
+                size: 24.0,
+              ),
+              label: 'PSR Categories',
               tooltip: '',
             )
           ],
