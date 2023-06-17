@@ -54,6 +54,7 @@ class _PolyMapState extends State<PolyMap> {
 
   // Maps
   Set<gmf.Marker> _markers = HashSet<gmf.Marker>();
+  List<gmf.LatLng> _markerPositions = <gmf.LatLng>[];
   Set<gmf.Polygon> _polygons = HashSet<gmf.Polygon>();
   Set<gmf.Circle> _circles = HashSet<gmf.Circle>();
   late gmf.GoogleMapController _googleMapController;
@@ -66,13 +67,14 @@ class _PolyMapState extends State<PolyMap> {
   int _circleIdCounter = 1;
   int _markerIdCounter = 1;
 
+  gmf.PolygonId _selectedPolygonId = gmf.PolygonId('polygon_id_1');
   // Type controllers
-  bool _isPolygon = true; // Default
-  bool _isMarker = false;
+  bool _isPolygon = false; // Default
+  bool _isMarker = true;
   bool _isCircle = false;
   bool _isDataLoaded = false;
   String _lastItemType = 'polygon';
-  bool _showPsrHouseholds = true;
+  bool _showPsrHouseholds = false;
   bool _showDepots = true;
   double _zoomLevel = 10; // Default
 
@@ -229,6 +231,7 @@ class _PolyMapState extends State<PolyMap> {
   void _setPolygon() {
     if (_polygons.length == 0) {
       final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
+      _selectedPolygonId = gmf.PolygonId(polygonIdVal);
       _polygons.add(gmf.Polygon(
         polygonId: gmf.PolygonId(polygonIdVal),
         points: polygonLatLngs.map((e) => e.latLng).toList(),
@@ -270,16 +273,102 @@ class _PolyMapState extends State<PolyMap> {
   void _setMarkers(gmf.LatLng point, bool isDepot, String title) {
     final String markerIdVal = 'marker_id_$_markerIdCounter';
     _markerIdCounter++;
+
     setState(() {
       _markers.add(gmf.Marker(
         markerId: gmf.MarkerId(markerIdVal),
         position: point,
+        draggable: true,
         icon: isDepot ? _markerIcon : BitmapDescriptor.defaultMarker,
-        infoWindow: InfoWindow(
-            title: title,
-            snippet:
-                'latitude: ${point.latitude} longitude: ${point.longitude}'),
+        onTap: () => this._markers.remove(gmf.MarkerId(markerIdVal)),
+        onDragEnd: (newPosition) => {
+          _markers
+              .firstWhere(
+                  (marker) => marker.markerId == gmf.MarkerId(markerIdVal))
+              .copyWith(positionParam: newPosition)
+        },
       ));
+    });
+  }
+
+  void createPolygon() {
+    final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
+    _selectedPolygonId = gmf.PolygonId(polygonIdVal);
+    _polygons.add(gmf.Polygon(
+      polygonId: gmf.PolygonId(polygonIdVal),
+      points: polygonLatLngs.map((e) => e.latLng).toList(),
+      strokeWidth: 2,
+      strokeColor: Colors.yellow,
+      fillColor: Colors.yellow.withOpacity(0.15),
+    ));
+  }
+
+  void _setPolygonMarkers(
+      gmf.LatLng point, bool isDepot, String title, gmf.PolygonId? polygonId) {
+    final String markerIdVal = 'marker_id_$_markerIdCounter';
+    _markerIdCounter++;
+
+    if (_polygons.length == 0) {
+      createPolygon();
+    }
+
+    setState(() {
+      _markerPositions.add(point);
+      _markers.add(gmf.Marker(
+        markerId: gmf.MarkerId(markerIdVal),
+        position: point,
+        draggable: true,
+        icon: isDepot ? _markerIcon : BitmapDescriptor.defaultMarker,
+        onTap: () => removeMarker(gmf.MarkerId(markerIdVal)),
+        onDragEnd: (newPosition) => {
+          updatePolygonMarkerPosition(
+              newPosition, gmf.MarkerId(markerIdVal), polygonId)
+        },
+      ));
+
+      updatePolygonMarkerPosition(point, null, polygonId);
+    });
+  }
+
+  removeMarker(gmf.MarkerId markerId) {
+    int index = 0;
+    Polygon polygon = _polygons
+        .firstWhere((polygon) => polygon.polygonId == _selectedPolygonId);
+
+    for (var marker in _markers) {
+      if (marker.markerId == markerId) {
+        setState(() {
+          _markers.remove(marker);
+          polygon.points.removeAt(index);
+        });
+        _markerPositions.removeAt(index);
+      }
+      index += 1;
+    }
+  }
+
+  void updatePolygonMarkerPosition(gmf.LatLng newPosition,
+      gmf.MarkerId? markerId, gmf.PolygonId? polygonId) {
+    List<PolygonLatLng> polygonLatLngs = [];
+
+    int index = 0;
+    for (var marker in _markers) {
+      if (marker.markerId == markerId) {
+        marker.copyWith(positionParam: newPosition);
+
+        polygonLatLngs.add(PolygonLatLng(latLng: newPosition));
+        _markerPositions[index] = newPosition;
+      } else {
+        polygonLatLngs.add(PolygonLatLng(latLng: _markerPositions[index]));
+      }
+      index += 1;
+    }
+
+    Polygon polygon =
+        _polygons.firstWhere((polygon) => polygon.polygonId == polygonId);
+    setState(() {
+      polygon.points.clear();
+      polygon.points.addAll(polygonLatLngs.map((e) => e.latLng).toList());
     });
   }
 
@@ -478,8 +567,9 @@ class _PolyMapState extends State<PolyMap> {
                         });
                       } else if (_isMarker) {
                         setState(() {
-                          _markers.clear();
-                          _setMarkers(point, false, '');
+                          // _markers.clear();
+                          _setPolygonMarkers(
+                              point, false, '', _selectedPolygonId);
                         });
                       } else if (_isCircle) {
                         setState(() {
