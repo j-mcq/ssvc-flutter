@@ -66,6 +66,14 @@ class PsrCategoryOptionsRecord extends FirestoreRecord {
   @override
   String toString() =>
       'PsrCategoryOptionsRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is PsrCategoryOptionsRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createPsrCategoryOptionsRecordData({

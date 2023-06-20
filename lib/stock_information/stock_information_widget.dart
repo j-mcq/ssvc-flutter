@@ -32,7 +32,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
   late StockInformationModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
   var hasContainerTriggered = false;
   final animationsMap = {
     'containerOnActionTriggerAnimation': AnimationInfo(
@@ -69,7 +68,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -78,7 +76,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -232,7 +230,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
 
                                               context.pushNamed(
                                                 'stockItemDetails',
-                                                queryParams: {
+                                                queryParameters: {
                                                   'responseItemReference':
                                                       serializeParam(
                                                     _model
@@ -627,7 +625,8 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                 context
                                                                     .pushNamed(
                                                                   'stockItemDetails',
-                                                                  queryParams: {
+                                                                  queryParameters:
+                                                                      {
                                                                     'responseItemReference':
                                                                         serializeParam(
                                                                       listViewResponseItemsRecord
@@ -697,7 +696,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                           context
                                                                               .pushNamed(
                                                                             'stockItemDetails',
-                                                                            queryParams:
+                                                                            queryParameters:
                                                                                 {
                                                                               'responseItemReference': serializeParam(
                                                                                 listViewResponseItemsRecord.reference,
@@ -906,7 +905,8 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                 context
                                                                     .pushNamed(
                                                                   'stockItemDetails',
-                                                                  queryParams: {
+                                                                  queryParameters:
+                                                                      {
                                                                     'responseItemReference':
                                                                         serializeParam(
                                                                       listViewResponseItemsRecord
@@ -1397,14 +1397,14 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                     context:
                                                                         context,
                                                                     builder:
-                                                                        (bottomSheetContext) {
+                                                                        (context) {
                                                                       return GestureDetector(
                                                                         onTap: () =>
-                                                                            FocusScope.of(context).requestFocus(_unfocusNode),
+                                                                            FocusScope.of(context).requestFocus(_model.unfocusNode),
                                                                         child:
                                                                             Padding(
                                                                           padding:
-                                                                              MediaQuery.of(bottomSheetContext).viewInsets,
+                                                                              MediaQuery.of(context).viewInsets,
                                                                           child:
                                                                               EditActiveResponseItemWidget(
                                                                             activeResponseItemReference:

@@ -148,12 +148,9 @@ class _EditActiveResponseItemWidgetState
                                   () => _model.homeDepotDropDownValue = val),
                               width: 300.0,
                               height: 50.0,
-                              searchHintTextStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
                               hintText: 'Selet the home depot for this item',
-                              searchHintText: 'Search for an item...',
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -223,12 +220,9 @@ class _EditActiveResponseItemWidgetState
                                   () => _model.statusDropDownValue = val),
                               width: 300.0,
                               height: 50.0,
-                              searchHintTextStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
                               hintText: 'Selet the status for this item',
-                              searchHintText: 'Search for an item...',
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:

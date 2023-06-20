@@ -14,25 +14,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'psr_category_details_model.dart';
-export 'psr_category_details_model.dart';
+import 'depot_details_model.dart';
+export 'depot_details_model.dart';
 
-class PsrCategoryDetailsWidget extends StatefulWidget {
-  const PsrCategoryDetailsWidget({
+class DepotDetailsWidget extends StatefulWidget {
+  const DepotDetailsWidget({
     Key? key,
-    this.psrCategoryOptionsReference,
+    required this.depotReference,
   }) : super(key: key);
 
-  final DocumentReference? psrCategoryOptionsReference;
+  final DocumentReference? depotReference;
 
   @override
-  _PsrCategoryDetailsWidgetState createState() =>
-      _PsrCategoryDetailsWidgetState();
+  _DepotDetailsWidgetState createState() => _DepotDetailsWidgetState();
 }
 
-class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
+class _DepotDetailsWidgetState extends State<DepotDetailsWidget>
     with TickerProviderStateMixin {
-  late PsrCategoryDetailsModel _model;
+  late DepotDetailsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var hasContainerTriggered = false;
@@ -55,7 +54,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => PsrCategoryDetailsModel());
+    _model = createModel(context, () => DepotDetailsModel());
 
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -135,9 +134,9 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 32.0, 16.0, 0.0),
-                          child: StreamBuilder<PsrCategoryOptionsRecord>(
-                            stream: PsrCategoryOptionsRecord.getDocument(
-                                widget.psrCategoryOptionsReference!),
+                          child: StreamBuilder<DepotsRecord>(
+                            stream: DepotsRecord.getDocument(
+                                widget.depotReference!),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
                               if (!snapshot.hasData) {
@@ -152,7 +151,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                   ),
                                 );
                               }
-                              final categoryContainerPsrCategoryOptionsRecord =
+                              final categoryContainerDepotsRecord =
                                   snapshot.data!;
                               return Container(
                                 width: double.infinity,
@@ -218,7 +217,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'PSR Category Details',
+                                                      'Depot Details',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -395,15 +394,15 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                     20.0, 0.0, 20.0, 16.0),
                                             child: TextFormField(
                                               controller:
-                                                  _model.itemNameController ??=
+                                                  _model.depotNameController ??=
                                                       TextEditingController(
                                                 text:
-                                                    categoryContainerPsrCategoryOptionsRecord
+                                                    categoryContainerDepotsRecord
                                                         .name,
                                               ),
                                               obscureText: false,
                                               decoration: InputDecoration(
-                                                labelText: 'Category Name',
+                                                labelText: 'Depot Name',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
@@ -470,7 +469,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                               validator: _model
-                                                  .itemNameControllerValidator
+                                                  .depotNameControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
@@ -483,10 +482,9 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                               height: 60.0,
                                               decoration: BoxDecoration(),
                                               child: StreamBuilder<
-                                                  List<
-                                                      PsrCategoryGroupOptionsRecord>>(
+                                                  List<DepotOwnersRecord>>(
                                                 stream:
-                                                    queryPsrCategoryGroupOptionsRecord(),
+                                                    queryDepotOwnersRecord(),
                                                 builder: (context, snapshot) {
                                                   // Customize what your widget looks like when it's loading.
                                                   if (!snapshot.hasData) {
@@ -503,31 +501,31 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                       ),
                                                     );
                                                   }
-                                                  List<PsrCategoryGroupOptionsRecord>
-                                                      statusDropDownPsrCategoryGroupOptionsRecordList =
+                                                  List<DepotOwnersRecord>
+                                                      depotOwnerDepotOwnersRecordList =
                                                       snapshot.data!;
                                                   return FlutterFlowDropDown<
                                                       String>(
                                                     controller: _model
-                                                            .statusDropDownValueController ??=
+                                                            .depotOwnerValueController ??=
                                                         FormFieldController<
                                                             String>(
-                                                      _model.statusDropDownValue ??=
-                                                          categoryContainerPsrCategoryOptionsRecord
-                                                              .psrGroup?.id,
+                                                      _model.depotOwnerValue ??=
+                                                          categoryContainerDepotsRecord
+                                                              .depotOwner?.id,
                                                     ),
                                                     options:
-                                                        statusDropDownPsrCategoryGroupOptionsRecordList
+                                                        depotOwnerDepotOwnersRecordList
                                                             .map((e) =>
                                                                 e.reference.id)
                                                             .toList(),
                                                     optionLabels:
-                                                        statusDropDownPsrCategoryGroupOptionsRecordList
+                                                        depotOwnerDepotOwnersRecordList
                                                             .map((e) => e.name)
                                                             .toList(),
                                                     onChanged: (val) =>
                                                         setState(() => _model
-                                                                .statusDropDownValue =
+                                                                .depotOwnerValue =
                                                             val),
                                                     width: double.infinity,
                                                     height: 50.0,
@@ -536,7 +534,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                                 context)
                                                             .bodyMedium,
                                                     hintText:
-                                                        'Select the PSR Group Category',
+                                                        'Select the Depot Owner',
                                                     icon: Icon(
                                                       Icons
                                                           .keyboard_arrow_down_rounded,
@@ -572,17 +570,16 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20.0, 0.0, 20.0, 16.0),
                                             child: TextFormField(
-                                              controller: _model
-                                                      .resilienceScoreController ??=
-                                                  TextEditingController(
+                                              controller:
+                                                  _model.postcodeController ??=
+                                                      TextEditingController(
                                                 text:
-                                                    categoryContainerPsrCategoryOptionsRecord
-                                                        .resilienceScore
-                                                        .toString(),
+                                                    categoryContainerDepotsRecord
+                                                        .postcode,
                                               ),
                                               obscureText: false,
                                               decoration: InputDecoration(
-                                                labelText: 'Resilience Score',
+                                                labelText: 'Depot Postcode',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
@@ -652,101 +649,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                       .numberWithOptions(
                                                   signed: true, decimal: true),
                                               validator: _model
-                                                  .resilienceScoreControllerValidator
-                                                  .asValidator(context),
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .allow(RegExp('[0-9]'))
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20.0, 0.0, 20.0, 16.0),
-                                            child: TextFormField(
-                                              controller: _model
-                                                      .estimatedEnergyConsumptionController ??=
-                                                  TextEditingController(
-                                                text:
-                                                    categoryContainerPsrCategoryOptionsRecord
-                                                        .powerConsumption
-                                                        .toString(),
-                                              ),
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText:
-                                                    'Estimated Power Consumption (W)',
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.0),
-                                                ),
-                                                filled: true,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                contentPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(20.0, 24.0,
-                                                            0.0, 24.0),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                              keyboardType: const TextInputType
-                                                      .numberWithOptions(
-                                                  signed: true, decimal: true),
-                                              validator: _model
-                                                  .estimatedEnergyConsumptionControllerValidator
+                                                  .postcodeControllerValidator
                                                   .asValidator(context),
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
@@ -848,27 +751,24 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                         return;
                                                       }
 
-                                                      final psrCategoryOptionsUpdateData =
-                                                          createPsrCategoryOptionsRecordData(
+                                                      final depotsUpdateData =
+                                                          createDepotsRecordData(
                                                         name: _model
-                                                            .itemNameController
+                                                            .depotNameController
                                                             .text,
-                                                        resilienceScore: double
-                                                            .tryParse(_model
-                                                                .resilienceScoreController
-                                                                .text),
-                                                        powerConsumption: double
-                                                            .tryParse(_model
-                                                                .estimatedEnergyConsumptionController
-                                                                .text),
+                                                        ownerName: _model
+                                                            .depotOwnerValue,
+                                                        postcode: _model
+                                                            .postcodeController
+                                                            .text,
                                                       );
                                                       await widget
-                                                          .psrCategoryOptionsReference!
+                                                          .depotReference!
                                                           .update(
-                                                              psrCategoryOptionsUpdateData);
+                                                              depotsUpdateData);
 
-                                                      context.pushNamed(
-                                                          'psrCategories');
+                                                      context
+                                                          .pushNamed('depots');
                                                     },
                                                     text: 'Save Changes',
                                                     options: FFButtonOptions(

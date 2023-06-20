@@ -20,7 +20,6 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
   late VerifyEmailModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -54,7 +53,6 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -63,7 +61,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,

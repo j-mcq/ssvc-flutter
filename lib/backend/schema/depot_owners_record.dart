@@ -6,8 +6,8 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class ResponseItemStatusOptionsRecord extends FirestoreRecord {
-  ResponseItemStatusOptionsRecord._(
+class DepotOwnersRecord extends FirestoreRecord {
+  DepotOwnersRecord._(
     DocumentReference reference,
     Map<String, dynamic> data,
   ) : super(reference, data) {
@@ -24,45 +24,40 @@ class ResponseItemStatusOptionsRecord extends FirestoreRecord {
   }
 
   static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('response_item_status_options');
+      FirebaseFirestore.instance.collection('depot_owners');
 
-  static Stream<ResponseItemStatusOptionsRecord> getDocument(
-          DocumentReference ref) =>
-      ref
-          .snapshots()
-          .map((s) => ResponseItemStatusOptionsRecord.fromSnapshot(s));
+  static Stream<DepotOwnersRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => DepotOwnersRecord.fromSnapshot(s));
 
-  static Future<ResponseItemStatusOptionsRecord> getDocumentOnce(
-          DocumentReference ref) =>
-      ref.get().then((s) => ResponseItemStatusOptionsRecord.fromSnapshot(s));
+  static Future<DepotOwnersRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => DepotOwnersRecord.fromSnapshot(s));
 
-  static ResponseItemStatusOptionsRecord fromSnapshot(
-          DocumentSnapshot snapshot) =>
-      ResponseItemStatusOptionsRecord._(
+  static DepotOwnersRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      DepotOwnersRecord._(
         snapshot.reference,
         mapFromFirestore(snapshot.data() as Map<String, dynamic>),
       );
 
-  static ResponseItemStatusOptionsRecord getDocumentFromData(
+  static DepotOwnersRecord getDocumentFromData(
     Map<String, dynamic> data,
     DocumentReference reference,
   ) =>
-      ResponseItemStatusOptionsRecord._(reference, mapFromFirestore(data));
+      DepotOwnersRecord._(reference, mapFromFirestore(data));
 
   @override
   String toString() =>
-      'ResponseItemStatusOptionsRecord(reference: ${reference.path}, data: $snapshotData)';
+      'DepotOwnersRecord(reference: ${reference.path}, data: $snapshotData)';
 
   @override
   int get hashCode => reference.path.hashCode;
 
   @override
   bool operator ==(other) =>
-      other is ResponseItemStatusOptionsRecord &&
+      other is DepotOwnersRecord &&
       reference.path.hashCode == other.reference.path.hashCode;
 }
 
-Map<String, dynamic> createResponseItemStatusOptionsRecordData({
+Map<String, dynamic> createDepotOwnersRecordData({
   String? name,
 }) {
   final firestoreData = mapToFirestore(

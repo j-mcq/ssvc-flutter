@@ -34,7 +34,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
   late ScenarioModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
   LatLng? currentUserLocationValue;
 
   @override
@@ -51,7 +50,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -74,7 +72,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
     }
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         resizeToAvoidBottomInset: false,
@@ -793,7 +791,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                   context
                                                                       .pushNamed(
                                                                     'scenario',
-                                                                    queryParams:
+                                                                    queryParameters:
                                                                         {
                                                                       'scenarioReference':
                                                                           serializeParam(
