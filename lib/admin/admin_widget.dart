@@ -72,6 +72,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                   twoBG: FlutterFlowTheme.of(context).secondaryBackground,
                   threeColor: FlutterFlowTheme.of(context).secondaryBackground,
                   fourColor: FlutterFlowTheme.of(context).primaryBackground,
+                  psrCategoriesColour:
+                      FlutterFlowTheme.of(context).secondaryBackground,
+                  depotColor: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
               ),
             Expanded(

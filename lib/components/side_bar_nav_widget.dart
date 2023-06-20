@@ -15,6 +15,7 @@ class SideBarNavWidget extends StatefulWidget {
     this.threeColor,
     this.fourColor,
     this.psrCategoriesColour,
+    this.depotColor,
   }) : super(key: key);
 
   final Color? oneBG;
@@ -22,6 +23,7 @@ class SideBarNavWidget extends StatefulWidget {
   final Color? threeColor;
   final Color? fourColor;
   final Color? psrCategoriesColour;
+  final Color? depotColor;
 
   @override
   _SideBarNavWidgetState createState() => _SideBarNavWidgetState();
@@ -297,7 +299,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                 highlightColor: Colors.transparent,
                 onTap: () async {
                   context.pushNamed(
-                    'psrCategories',
+                    'depots',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
@@ -310,7 +312,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                   width: double.infinity,
                   height: 48.0,
                   decoration: BoxDecoration(
-                    color: widget.psrCategoriesColour,
+                    color: widget.depotColor,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Padding(
@@ -409,7 +411,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                   width: double.infinity,
                   height: 48.0,
                   decoration: BoxDecoration(
-                    color: widget.fourColor,
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Padding(

@@ -98,6 +98,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                   twoBG: FlutterFlowTheme.of(context).secondaryBackground,
                   threeColor: FlutterFlowTheme.of(context).primaryBackground,
                   fourColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  psrCategoriesColour:
+                      FlutterFlowTheme.of(context).secondaryBackground,
+                  depotColor: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
               ),
             Expanded(
