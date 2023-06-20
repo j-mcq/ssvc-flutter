@@ -26,6 +26,7 @@ class AdminModel extends FlutterFlowModel {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
   bool isDataUploading1 = false;
@@ -51,8 +52,11 @@ class AdminModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     sideBarNavModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

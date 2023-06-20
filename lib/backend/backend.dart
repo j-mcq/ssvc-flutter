@@ -21,6 +21,7 @@ import 'schema/scenario_response_items_record.dart';
 import 'schema/depots_record.dart';
 import 'schema/active_response_items_record.dart';
 import 'schema/response_item_status_options_record.dart';
+import 'schema/depot_owners_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,6 +45,7 @@ export 'schema/scenario_response_items_record.dart';
 export 'schema/depots_record.dart';
 export 'schema/active_response_items_record.dart';
 export 'schema/response_item_status_options_record.dart';
+export 'schema/depot_owners_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -912,6 +914,58 @@ Future<FFFirestorePage<ResponseItemStatusOptionsRecord>>
           pageSize: pageSize,
           isStream: isStream,
         );
+
+/// Functions to query DepotOwnersRecords (as a Stream and as a Future).
+Future<int> queryDepotOwnersRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DepotOwnersRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<DepotOwnersRecord>> queryDepotOwnersRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DepotOwnersRecord.collection,
+      DepotOwnersRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DepotOwnersRecord>> queryDepotOwnersRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DepotOwnersRecord.collection,
+      DepotOwnersRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<DepotOwnersRecord>> queryDepotOwnersRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      DepotOwnersRecord.collection,
+      DepotOwnersRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
 
 Future<int> queryCollectionCount(
   Query collection, {

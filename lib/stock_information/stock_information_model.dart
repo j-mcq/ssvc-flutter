@@ -25,6 +25,7 @@ class StockInformationModel extends FlutterFlowModel {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
@@ -37,8 +38,11 @@ class StockInformationModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     sideBarNavModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

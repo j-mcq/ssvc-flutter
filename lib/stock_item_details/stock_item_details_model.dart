@@ -22,6 +22,7 @@ import 'package:provider/provider.dart';
 class StockItemDetailsModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
@@ -71,12 +72,15 @@ class StockItemDetailsModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     sideBarNavModel.dispose();
     itemNameController?.dispose();
     descriptionController?.dispose();
     unitPriceController?.dispose();
     energyCapacityController?.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

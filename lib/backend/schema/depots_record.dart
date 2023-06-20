@@ -34,12 +34,30 @@ class DepotsRecord extends FirestoreRecord {
   double get radiusOfInfluence => _radiusOfInfluence ?? 0.0;
   bool hasRadiusOfInfluence() => _radiusOfInfluence != null;
 
+  // "location_name" field.
+  String? _locationName;
+  String get locationName => _locationName ?? '';
+  bool hasLocationName() => _locationName != null;
+
+  // "owner_name" field.
+  String? _ownerName;
+  String get ownerName => _ownerName ?? '';
+  bool hasOwnerName() => _ownerName != null;
+
+  // "depot_owner" field.
+  DocumentReference? _depotOwner;
+  DocumentReference? get depotOwner => _depotOwner;
+  bool hasDepotOwner() => _depotOwner != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _location = snapshotData['location'] as LatLng?;
     _postcode = snapshotData['postcode'] as String?;
     _radiusOfInfluence =
         castToType<double>(snapshotData['radius_of_influence']);
+    _locationName = snapshotData['location_name'] as String?;
+    _ownerName = snapshotData['owner_name'] as String?;
+    _depotOwner = snapshotData['depot_owner'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -65,6 +83,14 @@ class DepotsRecord extends FirestoreRecord {
   @override
   String toString() =>
       'DepotsRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is DepotsRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createDepotsRecordData({
@@ -72,6 +98,9 @@ Map<String, dynamic> createDepotsRecordData({
   LatLng? location,
   String? postcode,
   double? radiusOfInfluence,
+  String? locationName,
+  String? ownerName,
+  DocumentReference? depotOwner,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -79,6 +108,9 @@ Map<String, dynamic> createDepotsRecordData({
       'location': location,
       'postcode': postcode,
       'radius_of_influence': radiusOfInfluence,
+      'location_name': locationName,
+      'owner_name': ownerName,
+      'depot_owner': depotOwner,
     }.withoutNulls,
   );
 

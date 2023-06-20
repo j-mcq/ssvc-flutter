@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 class PsrCategoryDetailsModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
@@ -42,11 +43,14 @@ class PsrCategoryDetailsModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     sideBarNavModel.dispose();
     itemNameController?.dispose();
     resilienceScoreController?.dispose();
     estimatedEnergyConsumptionController?.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

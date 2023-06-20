@@ -51,9 +51,9 @@ class FFAppState extends ChangeNotifier {
 
   void updatePolygonLatLngListAtIndex(
     int _index,
-    Function(LatLng) updateFn,
+    LatLng Function(LatLng) updateFn,
   ) {
-    updateFn(_polygonLatLngList[_index]);
+    _polygonLatLngList[_index] = updateFn(_polygonLatLngList[_index]);
   }
 
   double _circleRadius = 0.0;
@@ -102,4 +102,16 @@ LatLng? _latLngFromString(String? val) {
   final lat = double.parse(split.first);
   final lng = double.parse(split.last);
   return LatLng(lat, lng);
+}
+
+void _safeInit(Function() initializeField) {
+  try {
+    initializeField();
+  } catch (_) {}
+}
+
+Future _safeInitAsync(Function() initializeField) async {
+  try {
+    await initializeField();
+  } catch (_) {}
 }
