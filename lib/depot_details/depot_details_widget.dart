@@ -100,6 +100,9 @@ class _DepotDetailsWidgetState extends State<DepotDetailsWidget>
                   twoBG: FlutterFlowTheme.of(context).secondaryBackground,
                   threeColor: FlutterFlowTheme.of(context).secondaryBackground,
                   fourColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  psrCategoriesColour:
+                      FlutterFlowTheme.of(context).secondaryBackground,
+                  depotColor: FlutterFlowTheme.of(context).primaryBackground,
                 ),
               ),
             Expanded(

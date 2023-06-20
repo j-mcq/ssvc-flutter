@@ -101,6 +101,9 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                   twoBG: FlutterFlowTheme.of(context).secondaryBackground,
                   threeColor: FlutterFlowTheme.of(context).secondaryBackground,
                   fourColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  psrCategoriesColour:
+                      FlutterFlowTheme.of(context).primaryBackground,
+                  depotColor: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
               ),
             Expanded(
