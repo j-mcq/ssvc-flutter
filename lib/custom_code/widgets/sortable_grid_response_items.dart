@@ -69,7 +69,7 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
     true,
     true,
     true,
-    true,
+    false,
     true,
     true,
     true,
@@ -104,6 +104,15 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
   ];
 
   late final PlutoGridStateManager stateManager;
+
+  void saveData() async {
+    var exported = const Utf8Encoder()
+        .convert(pluto_grid_export.PlutoGridExport.exportCSV(stateManager));
+
+    // use file_saver from pub.dev
+    await FileSaver.instance
+        .saveFile(name: 'export.csv', bytes: exported, ext: '.csv');
+  }
 
   void exportToCsv() async {
     var exported = const Utf8Encoder()
@@ -185,6 +194,14 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
               children: [
                 TextButton(
                     onPressed: exportToCsv, child: const Text('Export to CSV'))
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TextButton(
+                    onPressed: saveData, child: const Text('Export to CSV'))
               ],
             )
           ]);
