@@ -48,22 +48,33 @@ class PolyMap extends StatefulWidget {
 final homeScaffoldKey = GlobalKey<ScaffoldState>();
 final searchScaffoldKey = GlobalKey<ScaffoldState>();
 
+class PolygonMarkerSet {
+  gmf.PolygonId id;
+  Set<gmf.Marker> markers;
+  PolygonMarkerSet(this.id, this.markers);
+}
+
 class _PolyMapState extends State<PolyMap> {
   final _unfocusNode = FocusNode();
   // Location
 
   // Maps
   Set<gmf.Marker> _markers = HashSet<gmf.Marker>();
+  Set<gmf.Marker> _polygonMarkers = HashSet<gmf.Marker>();
+  Set<PolygonMarkerSet> _polygonMarkerSet = HashSet<PolygonMarkerSet>();
   List<gmf.LatLng> _markerPositions = <gmf.LatLng>[];
   Set<gmf.Polygon> _polygons = HashSet<gmf.Polygon>();
   Set<gmf.Circle> _circles = HashSet<gmf.Circle>();
   late gmf.GoogleMapController _googleMapController;
   late gmf.BitmapDescriptor _markerIcon;
+  late gmf.BitmapDescriptor _depotMarkerIcon;
+  late gmf.BitmapDescriptor _draggableMarkerIcon;
   List<PolygonLatLng> polygonLatLngs = <PolygonLatLng>[];
   late double radius;
 
   //ids
   int _polygonIdCounter = 1;
+  int _polygonMarkerSetIdCounter = 1;
   int _circleIdCounter = 1;
   int _markerIdCounter = 1;
 
@@ -128,8 +139,11 @@ class _PolyMapState extends State<PolyMap> {
 
   // This function is to change the marker icon
   void _setMarkerIcon() async {
-    _markerIcon = await gmf.BitmapDescriptor.fromAssetImage(
+    _depotMarkerIcon = await gmf.BitmapDescriptor.fromAssetImage(
         ImageConfiguration(), 'assets/images/depot-32.png');
+
+    _draggableMarkerIcon = await gmf.BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(size: Size(20, 20)), 'assets/images/move.png');
   }
 
   _clearAppState() {
@@ -279,6 +293,8 @@ class _PolyMapState extends State<PolyMap> {
         markerId: gmf.MarkerId(markerIdVal),
         position: point,
         draggable: true,
+        anchor: Offset(0.5,
+            0.5), // This is not working - https://github.com/flutter/flutter/issues/80578
         icon: isDepot ? _markerIcon : BitmapDescriptor.defaultMarker,
         onTap: () => this._markers.remove(gmf.MarkerId(markerIdVal)),
         onDragEnd: (newPosition) => {
@@ -301,10 +317,13 @@ class _PolyMapState extends State<PolyMap> {
       strokeColor: Colors.yellow,
       fillColor: Colors.yellow.withOpacity(0.15),
     ));
+
+    _polygonMarkerSet
+        .add(PolygonMarkerSet(_selectedPolygonId, [] as Set<Marker>));
   }
 
   void _setPolygonMarkers(
-      gmf.LatLng point, bool isDepot, String title, gmf.PolygonId? polygonId) {
+      gmf.LatLng point, bool isDepot, String title, gmf.PolygonId polygonId) {
     final String markerIdVal = 'marker_id_$_markerIdCounter';
     _markerIdCounter++;
 
@@ -312,20 +331,26 @@ class _PolyMapState extends State<PolyMap> {
       createPolygon();
     }
 
+    final marker = gmf.Marker(
+      markerId: gmf.MarkerId(markerIdVal),
+      position: point,
+      draggable: true,
+      icon: _draggableMarkerIcon,
+      anchor: Offset(0.5, 0.5),
+      onTap: () => removeMarker(gmf.MarkerId(markerIdVal)),
+      onDragEnd: (newPosition) => {
+        updatePolygonMarkerPosition(
+            newPosition, gmf.MarkerId(markerIdVal), polygonId)
+      },
+    );
+
     setState(() {
       _markerPositions.add(point);
-      _markers.add(gmf.Marker(
-        markerId: gmf.MarkerId(markerIdVal),
-        position: point,
-        draggable: true,
-        icon: isDepot ? _markerIcon : BitmapDescriptor.defaultMarker,
-        onTap: () => removeMarker(gmf.MarkerId(markerIdVal)),
-        onDragEnd: (newPosition) => {
-          updatePolygonMarkerPosition(
-              newPosition, gmf.MarkerId(markerIdVal), polygonId)
-        },
-      ));
-
+      _polygonMarkers.add(marker);
+      _polygonMarkerSet
+          .firstWhere((element) => element.id == polygonId)
+          .markers
+          .addAll(_polygonMarkers);
       updatePolygonMarkerPosition(point, null, polygonId);
     });
   }
@@ -376,13 +401,23 @@ class _PolyMapState extends State<PolyMap> {
   void _clearAll() {
     setState(() {
       _polygons.clear();
+      clearPolygonMarkers(0);
+      _markers.clear();
+
       polygonLatLngs.clear();
       FFAppState().polygonLatLngList.clear();
       _circles.clear();
       FFAppState().circleLatLng = null;
       FFAppState().circleRadius = 0.0;
-      // _markers.clear();
     });
+  }
+
+  clearPolygonMarkers(int polygonIndex) {
+    for (var marker in _markers) {
+      if (_polygonMarkers.contains(marker.markerId)) {
+        _markers.remove(marker);
+      }
+    }
   }
 
   bool rayCastIntersect(LatLng tap, LatLng vertA, LatLng vertB) {
