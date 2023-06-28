@@ -515,14 +515,9 @@ class _DepotDetailsWidgetState extends State<DepotDetailsWidget>
                                                             String>(
                                                       _model.depotOwnerValue ??=
                                                           categoryContainerDepotsRecord
-                                                              .depotOwner?.id,
+                                                              .ownerName,
                                                     ),
                                                     options:
-                                                        depotOwnerDepotOwnersRecordList
-                                                            .map((e) =>
-                                                                e.reference.id)
-                                                            .toList(),
-                                                    optionLabels:
                                                         depotOwnerDepotOwnersRecordList
                                                             .map((e) => e.name)
                                                             .toList(),
