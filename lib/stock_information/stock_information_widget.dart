@@ -758,111 +758,15 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                     tablet: false,
                                                   ))
                                                     Expanded(
-                                                      child: FutureBuilder<
-                                                          List<DepotsRecord>>(
-                                                        future:
-                                                            queryDepotsRecordOnce(),
-                                                        builder: (context,
-                                                            snapshot) {
-                                                          // Customize what your widget looks like when it's loading.
-                                                          if (!snapshot
-                                                              .hasData) {
-                                                            return Center(
-                                                              child: SizedBox(
-                                                                width: 50.0,
-                                                                height: 50.0,
-                                                                child:
-                                                                    CircularProgressIndicator(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                ),
-                                                              ),
-                                                            );
-                                                          }
-                                                          List<DepotsRecord>
-                                                              columnDepotsRecordList =
-                                                              snapshot.data!;
-                                                          return Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: List.generate(
-                                                                columnDepotsRecordList
-                                                                    .length,
-                                                                (columnIndex) {
-                                                              final columnDepotsRecord =
-                                                                  columnDepotsRecordList[
-                                                                      columnIndex];
-                                                              return Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  FutureBuilder<
-                                                                      int>(
-                                                                    future:
-                                                                        queryActiveResponseItemsRecordCount(
-                                                                      queryBuilder: (activeResponseItemsRecord) => activeResponseItemsRecord
-                                                                          .where(
-                                                                              'home_depot',
-                                                                              isEqualTo: columnDepotsRecord
-                                                                                  .reference)
-                                                                          .where(
-                                                                              'response_item',
-                                                                              isEqualTo: listViewResponseItemsRecord.reference),
-                                                                    ),
-                                                                    builder:
-                                                                        (context,
-                                                                            snapshot) {
-                                                                      // Customize what your widget looks like when it's loading.
-                                                                      if (!snapshot
-                                                                          .hasData) {
-                                                                        return Center(
-                                                                          child:
-                                                                              SizedBox(
-                                                                            width:
-                                                                                50.0,
-                                                                            height:
-                                                                                50.0,
-                                                                            child:
-                                                                                CircularProgressIndicator(
-                                                                              color: FlutterFlowTheme.of(context).primary,
-                                                                            ),
-                                                                          ),
-                                                                        );
-                                                                      }
-                                                                      int rowCount =
-                                                                          snapshot
-                                                                              .data!;
-                                                                      return Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Text(
-                                                                            columnDepotsRecord.name,
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).bodyMedium,
-                                                                          ),
-                                                                          Text(
-                                                                            ': ',
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).bodyMedium,
-                                                                          ),
-                                                                          Text(
-                                                                            rowCount.toString(),
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).bodyMedium,
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            }),
-                                                          );
-                                                        },
+                                                      flex: 1,
+                                                      child: Text(
+                                                        listViewResponseItemsRecord
+                                                            .stock
+                                                            .toString(),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
                                                       ),
                                                     ),
                                                   if (responsiveVisibility(
