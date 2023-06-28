@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,19 +17,20 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'stock_information_model.dart';
-export 'stock_information_model.dart';
+import 'stock_information_copy_model.dart';
+export 'stock_information_copy_model.dart';
 
-class StockInformationWidget extends StatefulWidget {
-  const StockInformationWidget({Key? key}) : super(key: key);
+class StockInformationCopyWidget extends StatefulWidget {
+  const StockInformationCopyWidget({Key? key}) : super(key: key);
 
   @override
-  _StockInformationWidgetState createState() => _StockInformationWidgetState();
+  _StockInformationCopyWidgetState createState() =>
+      _StockInformationCopyWidgetState();
 }
 
-class _StockInformationWidgetState extends State<StockInformationWidget>
+class _StockInformationCopyWidgetState extends State<StockInformationCopyWidget>
     with TickerProviderStateMixin {
-  late StockInformationModel _model;
+  late StockInformationCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var hasContainerTriggered = false;
@@ -51,7 +53,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => StockInformationModel());
+    _model = createModel(context, () => StockInformationCopyModel());
 
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -516,7 +518,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       Expanded(
                                         flex: 1,
                                         child: Text(
-                                          'Total Stock ',
+                                          'Stock ',
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall,
                                         ),
@@ -1454,6 +1456,74 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                           ),
                         ),
                       ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          16.0, 16.0, 16.0, 24.0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 1.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: Color(0x33000000),
+                              offset: Offset(0.0, 2.0),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(16.0),
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 16.0, 0.0, 12.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Response Item Details',
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineSmall,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 0.0, 0.0),
+                                      child: Icon(
+                                        Icons.all_inbox_sharp,
+                                        color: Colors.black,
+                                        size: 22.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 0.0, 8.0, 0.0),
+                                  child:
+                                      custom_widgets.SortableGridResponseItems(
+                                    width: double.infinity,
+                                    height: 600.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

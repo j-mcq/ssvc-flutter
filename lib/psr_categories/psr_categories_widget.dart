@@ -264,7 +264,7 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Expanded(
-                                            flex: 1,
+                                            flex: 2,
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(8.0, 0.0, 0.0, 0.0),
@@ -323,14 +323,11 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                   context: context,
                                                   phone: false,
                                                 ))
-                                                  Expanded(
-                                                    child: Text(
-                                                      'Electrically Dependant',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall,
-                                                    ),
+                                                  Text(
+                                                    'Electrically Dependant',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodySmall,
                                                   ),
                                                 ToggleIcon(
                                                   onPressed: () async {
@@ -444,7 +441,7 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                             MainAxisSize.max,
                                                         children: [
                                                           Expanded(
-                                                            flex: 1,
+                                                            flex: 2,
                                                             child: InkWell(
                                                               splashColor: Colors
                                                                   .transparent,
@@ -476,30 +473,27 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                                     MainAxisSize
                                                                         .max,
                                                                 children: [
-                                                                  Expanded(
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        AutoSizeText(
-                                                                          listViewPsrCategoryOptionsRecord
-                                                                              .name
-                                                                              .maybeHandleOverflow(
-                                                                            maxChars:
-                                                                                32,
-                                                                            replacement:
-                                                                                '…',
-                                                                          ),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).titleMedium,
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      AutoSizeText(
+                                                                        listViewPsrCategoryOptionsRecord
+                                                                            .name
+                                                                            .maybeHandleOverflow(
+                                                                          maxChars:
+                                                                              32,
+                                                                          replacement:
+                                                                              '…',
                                                                         ),
-                                                                      ],
-                                                                    ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .titleMedium,
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ],
                                                               ),
@@ -582,6 +576,7 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                             ),
                                                           ),
                                                           Expanded(
+                                                            flex: 1,
                                                             child: Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
@@ -782,7 +777,7 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                             MainAxisSize.max,
                                                         children: [
                                                           Expanded(
-                                                            flex: 1,
+                                                            flex: 2,
                                                             child: InkWell(
                                                               splashColor: Colors
                                                                   .transparent,
@@ -814,30 +809,27 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                                     MainAxisSize
                                                                         .max,
                                                                 children: [
-                                                                  Expanded(
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        AutoSizeText(
-                                                                          listViewPsrCategoryOptionsRecord
-                                                                              .name
-                                                                              .maybeHandleOverflow(
-                                                                            maxChars:
-                                                                                32,
-                                                                            replacement:
-                                                                                '…',
-                                                                          ),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).titleMedium,
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      AutoSizeText(
+                                                                        listViewPsrCategoryOptionsRecord
+                                                                            .name
+                                                                            .maybeHandleOverflow(
+                                                                          maxChars:
+                                                                              32,
+                                                                          replacement:
+                                                                              '…',
                                                                         ),
-                                                                      ],
-                                                                    ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .titleMedium,
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ],
                                                               ),
