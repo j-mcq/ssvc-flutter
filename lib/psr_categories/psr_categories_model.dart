@@ -21,11 +21,6 @@ class PsrCategoriesModel extends FlutterFlowModel {
   final unfocusNode = FocusNode();
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
-  // State field(s) for Checkbox widget.
-
-  Map<PsrCategoryOptionsRecord, bool> checkboxValueMap = {};
-  List<PsrCategoryOptionsRecord> get checkboxCheckedItems =>
-      checkboxValueMap.entries.where((e) => e.value).map((e) => e.key).toList();
 
   /// Initialization and disposal methods.
 

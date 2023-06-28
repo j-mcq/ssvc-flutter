@@ -593,15 +593,26 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                                       MainAxisAlignment
                                                                           .center,
                                                                   children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .check,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryText,
-                                                                      size:
-                                                                          24.0,
-                                                                    ),
+                                                                    if (listViewPsrCategoryOptionsRecord
+                                                                        .electricallyDependant)
+                                                                      Icon(
+                                                                        Icons
+                                                                            .check,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        size:
+                                                                            24.0,
+                                                                      ),
+                                                                    if (!listViewPsrCategoryOptionsRecord
+                                                                        .electricallyDependant)
+                                                                      Icon(
+                                                                        Icons
+                                                                            .clear,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        size:
+                                                                            26.0,
+                                                                      ),
                                                                   ],
                                                                 ),
                                                               ),
@@ -946,45 +957,26 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                                       MainAxisAlignment
                                                                           .center,
                                                                   children: [
-                                                                    Align(
-                                                                      alignment:
-                                                                          AlignmentDirectional(
-                                                                              0.0,
-                                                                              0.0),
-                                                                      child:
-                                                                          Theme(
-                                                                        data:
-                                                                            ThemeData(
-                                                                          checkboxTheme:
-                                                                              CheckboxThemeData(
-                                                                            visualDensity:
-                                                                                VisualDensity.compact,
-                                                                            materialTapTargetSize:
-                                                                                MaterialTapTargetSize.shrinkWrap,
-                                                                            shape:
-                                                                                RoundedRectangleBorder(
-                                                                              borderRadius: BorderRadius.circular(4.0),
-                                                                            ),
-                                                                          ),
-                                                                          unselectedWidgetColor:
-                                                                              FlutterFlowTheme.of(context).secondaryText,
-                                                                        ),
-                                                                        child:
-                                                                            Checkbox(
-                                                                          value: _model.checkboxValueMap[listViewPsrCategoryOptionsRecord] ??=
-                                                                              listViewPsrCategoryOptionsRecord.electricallyDependant,
-                                                                          onChanged:
-                                                                              (newValue) async {
-                                                                            setState(() =>
-                                                                                _model.checkboxValueMap[listViewPsrCategoryOptionsRecord] = newValue!);
-                                                                          },
-                                                                          activeColor:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          checkColor:
-                                                                              FlutterFlowTheme.of(context).info,
-                                                                        ),
+                                                                    if (listViewPsrCategoryOptionsRecord
+                                                                        .electricallyDependant)
+                                                                      Icon(
+                                                                        Icons
+                                                                            .check,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        size:
+                                                                            24.0,
                                                                       ),
-                                                                    ),
+                                                                    if (listViewPsrCategoryOptionsRecord
+                                                                        .electricallyDependant)
+                                                                      Icon(
+                                                                        Icons
+                                                                            .clear,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        size:
+                                                                            26.0,
+                                                                      ),
                                                                   ],
                                                                 ),
                                                               ),
