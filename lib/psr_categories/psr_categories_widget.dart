@@ -585,50 +585,24 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                                 ),
                                                               Expanded(
                                                                 flex: 1,
-                                                                child: Align(
-                                                                  alignment:
-                                                                      AlignmentDirectional(
-                                                                          -1.0,
-                                                                          0.0),
-                                                                  child: Theme(
-                                                                    data:
-                                                                        ThemeData(
-                                                                      checkboxTheme:
-                                                                          CheckboxThemeData(
-                                                                        visualDensity:
-                                                                            VisualDensity.compact,
-                                                                        materialTapTargetSize:
-                                                                            MaterialTapTargetSize.shrinkWrap,
-                                                                        shape:
-                                                                            RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(4.0),
-                                                                        ),
-                                                                      ),
-                                                                      unselectedWidgetColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .secondaryText,
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Icon(
+                                                                      Icons
+                                                                          .check,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                      size:
+                                                                          24.0,
                                                                     ),
-                                                                    child:
-                                                                        Checkbox(
-                                                                      value: _model
-                                                                              .checkboxValueMap1[listViewPsrCategoryOptionsRecord] ??=
-                                                                          listViewPsrCategoryOptionsRecord
-                                                                              .electricallyDependant,
-                                                                      onChanged:
-                                                                          (newValue) async {
-                                                                        setState(() =>
-                                                                            _model.checkboxValueMap1[listViewPsrCategoryOptionsRecord] =
-                                                                                newValue!);
-                                                                      },
-                                                                      activeColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .primary,
-                                                                      checkColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .info,
-                                                                    ),
-                                                                  ),
+                                                                  ],
                                                                 ),
                                                               ),
                                                               Expanded(
@@ -964,50 +938,54 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                                 ),
                                                               Expanded(
                                                                 flex: 1,
-                                                                child: Align(
-                                                                  alignment:
-                                                                      AlignmentDirectional(
-                                                                          -1.0,
-                                                                          0.0),
-                                                                  child: Theme(
-                                                                    data:
-                                                                        ThemeData(
-                                                                      checkboxTheme:
-                                                                          CheckboxThemeData(
-                                                                        visualDensity:
-                                                                            VisualDensity.compact,
-                                                                        materialTapTargetSize:
-                                                                            MaterialTapTargetSize.shrinkWrap,
-                                                                        shape:
-                                                                            RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(4.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              0.0,
+                                                                              0.0),
+                                                                      child:
+                                                                          Theme(
+                                                                        data:
+                                                                            ThemeData(
+                                                                          checkboxTheme:
+                                                                              CheckboxThemeData(
+                                                                            visualDensity:
+                                                                                VisualDensity.compact,
+                                                                            materialTapTargetSize:
+                                                                                MaterialTapTargetSize.shrinkWrap,
+                                                                            shape:
+                                                                                RoundedRectangleBorder(
+                                                                              borderRadius: BorderRadius.circular(4.0),
+                                                                            ),
+                                                                          ),
+                                                                          unselectedWidgetColor:
+                                                                              FlutterFlowTheme.of(context).secondaryText,
+                                                                        ),
+                                                                        child:
+                                                                            Checkbox(
+                                                                          value: _model.checkboxValueMap[listViewPsrCategoryOptionsRecord] ??=
+                                                                              listViewPsrCategoryOptionsRecord.electricallyDependant,
+                                                                          onChanged:
+                                                                              (newValue) async {
+                                                                            setState(() =>
+                                                                                _model.checkboxValueMap[listViewPsrCategoryOptionsRecord] = newValue!);
+                                                                          },
+                                                                          activeColor:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          checkColor:
+                                                                              FlutterFlowTheme.of(context).info,
                                                                         ),
                                                                       ),
-                                                                      unselectedWidgetColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .secondaryText,
                                                                     ),
-                                                                    child:
-                                                                        Checkbox(
-                                                                      value: _model
-                                                                              .checkboxValueMap2[listViewPsrCategoryOptionsRecord] ??=
-                                                                          listViewPsrCategoryOptionsRecord
-                                                                              .electricallyDependant,
-                                                                      onChanged:
-                                                                          (newValue) async {
-                                                                        setState(() =>
-                                                                            _model.checkboxValueMap2[listViewPsrCategoryOptionsRecord] =
-                                                                                newValue!);
-                                                                      },
-                                                                      activeColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .primary,
-                                                                      checkColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .info,
-                                                                    ),
-                                                                  ),
+                                                                  ],
                                                                 ),
                                                               ),
                                                               Expanded(

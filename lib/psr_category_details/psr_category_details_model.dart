@@ -16,6 +16,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class PsrCategoryDetailsModel extends FlutterFlowModel {
+  ///  Local state fields for this page.
+
+  bool? isElectricallyDependent;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -35,6 +39,8 @@ class PsrCategoryDetailsModel extends FlutterFlowModel {
   TextEditingController? estimatedEnergyConsumptionController;
   String? Function(BuildContext, String?)?
       estimatedEnergyConsumptionControllerValidator;
+  // State field(s) for Checkbox widget.
+  bool? checkboxValue;
 
   /// Initialization and disposal methods.
 

@@ -517,14 +517,9 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                             String>(
                                                       _model.statusDropDownValue ??=
                                                           categoryContainerPsrCategoryOptionsRecord
-                                                              .psrGroup?.id,
+                                                              .psrGroupName,
                                                     ),
                                                     options:
-                                                        statusDropDownPsrCategoryGroupOptionsRecordList
-                                                            .map((e) =>
-                                                                e.reference.id)
-                                                            .toList(),
-                                                    optionLabels:
                                                         statusDropDownPsrCategoryGroupOptionsRecordList
                                                             .map((e) => e.name)
                                                             .toList(),
@@ -828,6 +823,64 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                 ),
                                               ),
                                             ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    22.0, 0.0, 0.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Theme(
+                                                  data: ThemeData(
+                                                    checkboxTheme:
+                                                        CheckboxThemeData(
+                                                      visualDensity:
+                                                          VisualDensity.compact,
+                                                      materialTapTargetSize:
+                                                          MaterialTapTargetSize
+                                                              .shrinkWrap,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                      ),
+                                                    ),
+                                                    unselectedWidgetColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryText,
+                                                  ),
+                                                  child: Checkbox(
+                                                    value: _model
+                                                            .checkboxValue ??=
+                                                        categoryContainerPsrCategoryOptionsRecord
+                                                            .electricallyDependant,
+                                                    onChanged:
+                                                        (newValue) async {
+                                                      setState(() =>
+                                                          _model.checkboxValue =
+                                                              newValue!);
+                                                    },
+                                                    activeColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    checkColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .info,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Is electrically dependant?',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
@@ -866,6 +919,9 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                             .tryParse(_model
                                                                 .estimatedEnergyConsumptionController
                                                                 .text),
+                                                        electricallyDependant:
+                                                            _model
+                                                                .checkboxValue,
                                                       ));
 
                                                       context.pushNamed(
