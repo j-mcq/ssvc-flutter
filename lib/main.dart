@@ -130,11 +130,11 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'dashboard': DashboardWidget(),
-      'stockInformation': StockInformationWidget(),
-      'admin': AdminWidget(),
       'scenarios': ScenariosWidget(),
+      'stockInformation': StockInformationWidget(),
       'psrCategories': PsrCategoriesWidget(),
       'depots': DepotsWidget(),
+      'admin': AdminWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -169,22 +169,6 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.account_circle_outlined,
-                size: 24.0,
-              ),
-              label: 'Stock',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.admin_panel_settings,
-                size: 24.0,
-              ),
-              label: 'Admin',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
                 Icons.science,
                 size: 24.0,
               ),
@@ -193,10 +177,10 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.medical_services,
+                Icons.all_inbox,
                 size: 24.0,
               ),
-              label: 'PSR Categories',
+              label: 'Stock',
               tooltip: '',
             ),
             BottomNavigationBarItem(
@@ -205,6 +189,22 @@ class _NavBarPageState extends State<NavBarPage> {
                 size: 24.0,
               ),
               label: 'PSR Categories',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.store_outlined,
+                size: 24.0,
+              ),
+              label: 'Depots',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.admin_panel_settings,
+                size: 24.0,
+              ),
+              label: 'Admin',
               tooltip: '',
             )
           ],
