@@ -58,7 +58,8 @@ class ScenarioResultsRecord extends FirestoreRecord {
 
   void _initializeFields() {
     _scenario = snapshotData['scenario'] as DocumentReference?;
-    _psrHouseholdsImpacted = snapshotData['psr_households_impacted'] as int?;
+    _psrHouseholdsImpacted =
+        castToType<int>(snapshotData['psr_households_impacted']);
     _responseCoverage = castToType<double>(snapshotData['response_coverage']);
     _totalCost = castToType<double>(snapshotData['total_cost']);
     _numberOfResponseItems =

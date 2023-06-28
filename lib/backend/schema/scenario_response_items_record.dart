@@ -54,10 +54,11 @@ class ScenarioResponseItemsRecord extends FirestoreRecord {
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _responseItem = snapshotData['response_item'] as DocumentReference?;
-    _numberRequired = snapshotData['number_required'] as int?;
+    _numberRequired = castToType<int>(snapshotData['number_required']);
     _imagePath = snapshotData['image_path'] as String?;
-    _numberInClosestDepot = snapshotData['number_in_closest_depot'] as int?;
-    _numberInAllDepots = snapshotData['number_in_all_depots'] as int?;
+    _numberInClosestDepot =
+        castToType<int>(snapshotData['number_in_closest_depot']);
+    _numberInAllDepots = castToType<int>(snapshotData['number_in_all_depots']);
     _coverage = castToType<double>(snapshotData['coverage']);
   }
 

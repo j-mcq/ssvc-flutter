@@ -312,17 +312,19 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                     0.0),
                                                         child: FFButtonWidget(
                                                           onPressed: () async {
-                                                            final selectedFile =
-                                                                await selectFile();
-                                                            if (selectedFile !=
+                                                            final selectedFiles =
+                                                                await selectFiles(
+                                                              multiFile: false,
+                                                            );
+                                                            if (selectedFiles !=
                                                                 null) {
                                                               setState(() =>
                                                                   _model.isDataUploading1 =
                                                                       true);
-                                                              FFUploadedFile?
-                                                                  selectedUploadedFile;
-                                                              String?
-                                                                  downloadUrl;
+                                                              var selectedUploadedFiles =
+                                                                  <FFUploadedFile>[];
+                                                              var downloadUrls =
+                                                                  <String>[];
                                                               try {
                                                                 showUploadMessage(
                                                                   context,
@@ -330,22 +332,31 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                   showLoading:
                                                                       true,
                                                                 );
-                                                                selectedUploadedFile =
-                                                                    FFUploadedFile(
-                                                                  name: selectedFile
-                                                                      .storagePath
-                                                                      .split(
-                                                                          '/')
-                                                                      .last,
-                                                                  bytes:
-                                                                      selectedFile
-                                                                          .bytes,
-                                                                );
-                                                                downloadUrl = await uploadData(
-                                                                    selectedFile
-                                                                        .storagePath,
-                                                                    selectedFile
-                                                                        .bytes);
+                                                                selectedUploadedFiles =
+                                                                    selectedFiles
+                                                                        .map((f) =>
+                                                                            FFUploadedFile(
+                                                                              name: f.storagePath.split('/').last,
+                                                                              bytes: f.bytes,
+                                                                            ))
+                                                                        .toList();
+
+                                                                downloadUrls = (await Future
+                                                                        .wait(
+                                                                  selectedFiles
+                                                                      .map(
+                                                                    (f) async =>
+                                                                        await uploadData(
+                                                                            f.storagePath,
+                                                                            f.bytes),
+                                                                  ),
+                                                                ))
+                                                                    .where((u) =>
+                                                                        u !=
+                                                                        null)
+                                                                    .map((u) =>
+                                                                        u!)
+                                                                    .toList();
                                                               } finally {
                                                                 ScaffoldMessenger.of(
                                                                         context)
@@ -353,15 +364,21 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                 _model.isDataUploading1 =
                                                                     false;
                                                               }
-                                                              if (selectedUploadedFile !=
-                                                                      null &&
-                                                                  downloadUrl !=
-                                                                      null) {
+                                                              if (selectedUploadedFiles
+                                                                          .length ==
+                                                                      selectedFiles
+                                                                          .length &&
+                                                                  downloadUrls
+                                                                          .length ==
+                                                                      selectedFiles
+                                                                          .length) {
                                                                 setState(() {
                                                                   _model.uploadedLocalFile1 =
-                                                                      selectedUploadedFile!;
+                                                                      selectedUploadedFiles
+                                                                          .first;
                                                                   _model.uploadedFileUrl1 =
-                                                                      downloadUrl!;
+                                                                      downloadUrls
+                                                                          .first;
                                                                 });
                                                                 showUploadMessage(
                                                                   context,
@@ -505,17 +522,19 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                     0.0),
                                                         child: FFButtonWidget(
                                                           onPressed: () async {
-                                                            final selectedFile =
-                                                                await selectFile();
-                                                            if (selectedFile !=
+                                                            final selectedFiles =
+                                                                await selectFiles(
+                                                              multiFile: false,
+                                                            );
+                                                            if (selectedFiles !=
                                                                 null) {
                                                               setState(() =>
                                                                   _model.isDataUploading2 =
                                                                       true);
-                                                              FFUploadedFile?
-                                                                  selectedUploadedFile;
-                                                              String?
-                                                                  downloadUrl;
+                                                              var selectedUploadedFiles =
+                                                                  <FFUploadedFile>[];
+                                                              var downloadUrls =
+                                                                  <String>[];
                                                               try {
                                                                 showUploadMessage(
                                                                   context,
@@ -523,22 +542,31 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                   showLoading:
                                                                       true,
                                                                 );
-                                                                selectedUploadedFile =
-                                                                    FFUploadedFile(
-                                                                  name: selectedFile
-                                                                      .storagePath
-                                                                      .split(
-                                                                          '/')
-                                                                      .last,
-                                                                  bytes:
-                                                                      selectedFile
-                                                                          .bytes,
-                                                                );
-                                                                downloadUrl = await uploadData(
-                                                                    selectedFile
-                                                                        .storagePath,
-                                                                    selectedFile
-                                                                        .bytes);
+                                                                selectedUploadedFiles =
+                                                                    selectedFiles
+                                                                        .map((f) =>
+                                                                            FFUploadedFile(
+                                                                              name: f.storagePath.split('/').last,
+                                                                              bytes: f.bytes,
+                                                                            ))
+                                                                        .toList();
+
+                                                                downloadUrls = (await Future
+                                                                        .wait(
+                                                                  selectedFiles
+                                                                      .map(
+                                                                    (f) async =>
+                                                                        await uploadData(
+                                                                            f.storagePath,
+                                                                            f.bytes),
+                                                                  ),
+                                                                ))
+                                                                    .where((u) =>
+                                                                        u !=
+                                                                        null)
+                                                                    .map((u) =>
+                                                                        u!)
+                                                                    .toList();
                                                               } finally {
                                                                 ScaffoldMessenger.of(
                                                                         context)
@@ -546,15 +574,21 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                 _model.isDataUploading2 =
                                                                     false;
                                                               }
-                                                              if (selectedUploadedFile !=
-                                                                      null &&
-                                                                  downloadUrl !=
-                                                                      null) {
+                                                              if (selectedUploadedFiles
+                                                                          .length ==
+                                                                      selectedFiles
+                                                                          .length &&
+                                                                  downloadUrls
+                                                                          .length ==
+                                                                      selectedFiles
+                                                                          .length) {
                                                                 setState(() {
                                                                   _model.uploadedLocalFile2 =
-                                                                      selectedUploadedFile!;
+                                                                      selectedUploadedFiles
+                                                                          .first;
                                                                   _model.uploadedFileUrl2 =
-                                                                      downloadUrl!;
+                                                                      downloadUrls
+                                                                          .first;
                                                                 });
                                                                 showUploadMessage(
                                                                   context,

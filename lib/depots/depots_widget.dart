@@ -193,7 +193,7 @@ class _DepotsWidgetState extends State<DepotsWidget> {
                                             Expanded(
                                               flex: 1,
                                               child: Text(
-                                                'Location',
+                                                'Postcode',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
@@ -385,12 +385,12 @@ class _DepotsWidgetState extends State<DepotsWidget> {
                                                               Expanded(
                                                                 flex: 1,
                                                                 child: Text(
-                                                                  listViewDepotsRecord.locationName !=
+                                                                  listViewDepotsRecord.postcode !=
                                                                               null &&
-                                                                          listViewDepotsRecord.locationName !=
+                                                                          listViewDepotsRecord.postcode !=
                                                                               ''
                                                                       ? listViewDepotsRecord
-                                                                          .locationName
+                                                                          .postcode
                                                                       : '',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
@@ -488,7 +488,7 @@ class _DepotsWidgetState extends State<DepotsWidget> {
                                                                                   builder: (alertDialogContext) {
                                                                                     return AlertDialog(
                                                                                       title: Text('Delete Scenario'),
-                                                                                      content: Text('Are you sure you want to delete this PSR Category?'),
+                                                                                      content: Text('Are you sure you want to delete this depot?'),
                                                                                       actions: [
                                                                                         TextButton(
                                                                                           onPressed: () => Navigator.pop(alertDialogContext, false),

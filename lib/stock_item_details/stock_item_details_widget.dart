@@ -516,15 +516,13 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                       }
                                                     }
 
-                                                    final responseItemsUpdateData =
-                                                        createResponseItemsRecordData(
-                                                      imageLink: _model
-                                                          .uploadedFileUrl,
-                                                    );
                                                     await clipContainerResponseItemsRecord
                                                         .reference
                                                         .update(
-                                                            responseItemsUpdateData);
+                                                            createResponseItemsRecordData(
+                                                      imageLink: _model
+                                                          .uploadedFileUrl,
+                                                    ));
                                                   },
                                                   child: Container(
                                                     width: 350.0,
@@ -1156,8 +1154,10 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                             .responseItemReference,
                                                       );
 
-                                                      final responseItemsUpdateData =
-                                                          createResponseItemsRecordData(
+                                                      await widget
+                                                          .responseItemReference!
+                                                          .update(
+                                                              createResponseItemsRecordData(
                                                         name: _model
                                                             .itemNameController
                                                             .text,
@@ -1186,11 +1186,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                         stock: _model
                                                             .outCalculateTotalStockLevels
                                                             ?.toDouble(),
-                                                      );
-                                                      await widget
-                                                          .responseItemReference!
-                                                          .update(
-                                                              responseItemsUpdateData);
+                                                      ));
 
                                                       context.pushNamed(
                                                           'stockInformation');

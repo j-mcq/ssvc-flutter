@@ -754,8 +754,10 @@ class _DepotDetailsWidgetState extends State<DepotDetailsWidget>
                                                         return;
                                                       }
 
-                                                      final depotsUpdateData =
-                                                          createDepotsRecordData(
+                                                      await widget
+                                                          .depotReference!
+                                                          .update(
+                                                              createDepotsRecordData(
                                                         name: _model
                                                             .depotNameController
                                                             .text,
@@ -764,11 +766,7 @@ class _DepotDetailsWidgetState extends State<DepotDetailsWidget>
                                                         postcode: _model
                                                             .postcodeController
                                                             .text,
-                                                      );
-                                                      await widget
-                                                          .depotReference!
-                                                          .update(
-                                                              depotsUpdateData);
+                                                      ));
 
                                                       context
                                                           .pushNamed('depots');
