@@ -29,9 +29,9 @@ class PsrCategoryDetailsModel extends FlutterFlowModel {
   // State field(s) for itemName widget.
   TextEditingController? itemNameController;
   String? Function(BuildContext, String?)? itemNameControllerValidator;
-  // State field(s) for statusDropDown widget.
-  String? statusDropDownValue;
-  FormFieldController<String>? statusDropDownValueController;
+  // State field(s) for psrgroupDropDown widget.
+  String? psrgroupDropDownValue;
+  FormFieldController<String>? psrgroupDropDownValueController;
   // State field(s) for resilienceScore widget.
   TextEditingController? resilienceScoreController;
   String? Function(BuildContext, String?)? resilienceScoreControllerValidator;
