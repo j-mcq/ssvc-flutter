@@ -371,7 +371,7 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                         ],
                                       ),
                                     ),
-                                    if (_model.toggleView)
+                                    if (!_model.toggleView)
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
@@ -745,7 +745,7 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                           },
                                         ),
                                       ),
-                                    if (!_model.toggleView)
+                                    if (_model.toggleView)
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
