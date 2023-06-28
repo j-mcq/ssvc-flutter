@@ -128,18 +128,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
+              name: 'scenarioCopy',
+              path: 'scenarioCopy',
+              requireAuth: true,
+              builder: (context, params) => ScenarioCopyWidget(),
+            ),
+            FFRoute(
               name: 'stockInformation',
               path: 'stockInformation',
               requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'stockInformation')
                   : StockInformationWidget(),
-            ),
-            FFRoute(
-              name: 'scenarioCopy',
-              path: 'scenarioCopy',
-              requireAuth: true,
-              builder: (context, params) => ScenarioCopyWidget(),
             ),
             FFRoute(
               name: 'stockItemDetails',

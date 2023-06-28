@@ -161,17 +161,6 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                   Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(8.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: Icon(
-                                                      Icons.medical_services,
-                                                      color: Colors.black,
-                                                      size: 24.0,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
                                                             .fromSTEB(16.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -180,6 +169,17 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .headlineSmall,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(8.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: Icon(
+                                                      Icons.medical_services,
+                                                      color: Colors.black,
+                                                      size: 24.0,
                                                     ),
                                                   ),
                                                 ],

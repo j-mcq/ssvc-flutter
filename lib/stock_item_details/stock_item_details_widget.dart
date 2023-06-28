@@ -89,6 +89,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
         body: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (responsiveVisibility(
               context: context,
@@ -222,12 +223,32 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
-                                                      'Stock Item Detais',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          'Stock Item Detais',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
                                                               .headlineSmall,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      8.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Icon(
+                                                            Icons
+                                                                .all_inbox_sharp,
+                                                            color: Colors.black,
+                                                            size: 22.0,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                     Padding(
                                                       padding:
