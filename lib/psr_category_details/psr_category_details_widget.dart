@@ -536,26 +536,26 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                       );
                                                     }
                                                     List<PsrCategoryGroupOptionsRecord>
-                                                        statusDropDownPsrCategoryGroupOptionsRecordList =
+                                                        psrgroupDropDownPsrCategoryGroupOptionsRecordList =
                                                         snapshot.data!;
                                                     return FlutterFlowDropDown<
                                                         String>(
                                                       controller: _model
-                                                              .statusDropDownValueController ??=
+                                                              .psrgroupDropDownValueController ??=
                                                           FormFieldController<
                                                               String>(
-                                                        _model.statusDropDownValue ??=
+                                                        _model.psrgroupDropDownValue ??=
                                                             categoryContainerPsrCategoryOptionsRecord
                                                                 .psrGroupName,
                                                       ),
                                                       options:
-                                                          statusDropDownPsrCategoryGroupOptionsRecordList
+                                                          psrgroupDropDownPsrCategoryGroupOptionsRecordList
                                                               .map(
                                                                   (e) => e.name)
                                                               .toList(),
                                                       onChanged: (val) =>
                                                           setState(() => _model
-                                                                  .statusDropDownValue =
+                                                                  .psrgroupDropDownValue =
                                                               val),
                                                       width: double.infinity,
                                                       height: 50.0,
@@ -980,6 +980,8 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                           electricallyDependant:
                                                               _model
                                                                   .checkboxValue,
+                                                          psrGroupName: _model
+                                                              .psrgroupDropDownValue,
                                                         ));
 
                                                         context.pushNamed(
