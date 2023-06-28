@@ -517,14 +517,9 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                             String>(
                                                       _model.statusDropDownValue ??=
                                                           categoryContainerPsrCategoryOptionsRecord
-                                                              .psrGroup?.id,
+                                                              .psrGroupName,
                                                     ),
                                                     options:
-                                                        statusDropDownPsrCategoryGroupOptionsRecordList
-                                                            .map((e) =>
-                                                                e.reference.id)
-                                                            .toList(),
-                                                    optionLabels:
                                                         statusDropDownPsrCategoryGroupOptionsRecordList
                                                             .map((e) => e.name)
                                                             .toList(),
