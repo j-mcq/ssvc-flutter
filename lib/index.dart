@@ -19,3 +19,5 @@ export '/psr_category_details/psr_category_details_widget.dart'
     show PsrCategoryDetailsWidget;
 export '/depots/depots_widget.dart' show DepotsWidget;
 export '/depot_details/depot_details_widget.dart' show DepotDetailsWidget;
+export '/stock_information_copy/stock_information_copy_widget.dart'
+    show StockInformationCopyWidget;
