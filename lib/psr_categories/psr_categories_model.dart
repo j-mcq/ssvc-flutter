@@ -23,21 +23,9 @@ class PsrCategoriesModel extends FlutterFlowModel {
   late SideBarNavModel sideBarNavModel;
   // State field(s) for Checkbox widget.
 
-  Map<PsrCategoryOptionsRecord, bool> checkboxValueMap1 = {};
-  List<PsrCategoryOptionsRecord> get checkboxCheckedItems1 =>
-      checkboxValueMap1.entries
-          .where((e) => e.value)
-          .map((e) => e.key)
-          .toList();
-
-  // State field(s) for Checkbox widget.
-
-  Map<PsrCategoryOptionsRecord, bool> checkboxValueMap2 = {};
-  List<PsrCategoryOptionsRecord> get checkboxCheckedItems2 =>
-      checkboxValueMap2.entries
-          .where((e) => e.value)
-          .map((e) => e.key)
-          .toList();
+  Map<PsrCategoryOptionsRecord, bool> checkboxValueMap = {};
+  List<PsrCategoryOptionsRecord> get checkboxCheckedItems =>
+      checkboxValueMap.entries.where((e) => e.value).map((e) => e.key).toList();
 
   /// Initialization and disposal methods.
 
