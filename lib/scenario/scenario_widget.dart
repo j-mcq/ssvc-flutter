@@ -225,11 +225,32 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text(
-                                                          'Scenario',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .headlineSmall,
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              'Scenario',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .headlineSmall,
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          8.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: Icon(
+                                                                Icons.science,
+                                                                color: Colors
+                                                                    .black,
+                                                                size: 24.0,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                         Padding(
                                                           padding:

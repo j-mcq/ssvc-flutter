@@ -289,242 +289,226 @@ class _DepotsWidgetState extends State<DepotsWidget> {
                                                                 12.0,
                                                                 12.0,
                                                                 12.0),
-                                                    child: StreamBuilder<
-                                                        DepotOwnersRecord>(
-                                                      stream: DepotOwnersRecord
-                                                          .getDocument(
-                                                              listViewDepotsRecord
-                                                                  .depotOwner!),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50.0,
-                                                              height: 50.0,
-                                                              child:
-                                                                  CircularProgressIndicator(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        final rowDepotOwnersRecord =
-                                                            snapshot.data!;
-                                                        return Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Expanded(
-                                                              flex: 1,
-                                                              child: InkWell(
-                                                                splashColor: Colors
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
                                                                     .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  context
-                                                                      .pushNamed(
-                                                                    'depotDetails',
-                                                                    queryParameters:
-                                                                        {
-                                                                      'depotReference':
-                                                                          serializeParam(
-                                                                        listViewDepotsRecord
-                                                                            .reference,
-                                                                        ParamType
-                                                                            .DocumentReference,
-                                                                      ),
-                                                                    }.withoutNulls,
-                                                                  );
-                                                                },
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child:
-                                                                          Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          AutoSizeText(
-                                                                            listViewDepotsRecord.name != null && listViewDepotsRecord.name != ''
-                                                                                ? listViewDepotsRecord.name
-                                                                                : ''.maybeHandleOverflow(
-                                                                                    maxChars: 32,
-                                                                                    replacement: '…',
-                                                                                  ),
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).titleMedium,
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            if (responsiveVisibility(
-                                                              context: context,
-                                                              phone: false,
-                                                              tablet: false,
-                                                            ))
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Text(
-                                                                  listViewDepotsRecord.postcode !=
-                                                                              null &&
-                                                                          listViewDepotsRecord.postcode !=
-                                                                              ''
-                                                                      ? listViewDepotsRecord
-                                                                          .postcode
-                                                                      : '',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
-                                                                ),
-                                                              ),
-                                                            if (responsiveVisibility(
-                                                              context: context,
-                                                              phone: false,
-                                                            ))
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Text(
-                                                                  listViewDepotsRecord
-                                                                              .depotOwner !=
-                                                                          null
-                                                                      ? rowDepotOwnersRecord
-                                                                          .name
-                                                                      : '',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
-                                                                ),
-                                                              ),
-                                                            Expanded(
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .end,
-                                                                children: [
-                                                                  Row(
+                                                            onTap: () async {
+                                                              context.pushNamed(
+                                                                'depotDetails',
+                                                                queryParameters:
+                                                                    {
+                                                                  'depotReference':
+                                                                      serializeParam(
+                                                                    listViewDepotsRecord
+                                                                        .reference,
+                                                                    ParamType
+                                                                        .DocumentReference,
+                                                                  ),
+                                                                }.withoutNulls,
+                                                              );
+                                                            },
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Expanded(
+                                                                  child: Column(
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .end,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
                                                                     children: [
-                                                                      InkWell(
-                                                                        splashColor:
-                                                                            Colors.transparent,
-                                                                        focusColor:
-                                                                            Colors.transparent,
-                                                                        hoverColor:
-                                                                            Colors.transparent,
-                                                                        highlightColor:
-                                                                            Colors.transparent,
-                                                                        onTap:
-                                                                            () async {
-                                                                          context
-                                                                              .pushNamed(
-                                                                            'depotDetails',
-                                                                            queryParameters:
-                                                                                {
-                                                                              'depotReference': serializeParam(
-                                                                                listViewDepotsRecord.reference,
-                                                                                ParamType.DocumentReference,
-                                                                              ),
-                                                                            }.withoutNulls,
-                                                                          );
-                                                                        },
-                                                                        child:
-                                                                            Icon(
-                                                                          Icons
-                                                                              .edit,
-                                                                          color:
-                                                                              Colors.black,
-                                                                          size:
-                                                                              24.0,
+                                                                      AutoSizeText(
+                                                                        listViewDepotsRecord
+                                                                            .name
+                                                                            .maybeHandleOverflow(
+                                                                          maxChars:
+                                                                              32,
+                                                                          replacement:
+                                                                              '…',
                                                                         ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .titleMedium,
                                                                       ),
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        if (responsiveVisibility(
+                                                          context: context,
+                                                          phone: false,
+                                                          tablet: false,
+                                                        ))
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Text(
+                                                              listViewDepotsRecord
+                                                                              .postcode !=
+                                                                          null &&
+                                                                      listViewDepotsRecord
+                                                                              .postcode !=
+                                                                          ''
+                                                                  ? listViewDepotsRecord
+                                                                      .postcode
+                                                                  : '',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                            ),
+                                                          ),
+                                                        if (responsiveVisibility(
+                                                          context: context,
+                                                          phone: false,
+                                                        ))
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Text(
+                                                              listViewDepotsRecord
+                                                                  .ownerName,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                            ),
+                                                          ),
+                                                        Expanded(
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      context
+                                                                          .pushNamed(
+                                                                        'depotDetails',
+                                                                        queryParameters:
+                                                                            {
+                                                                          'depotReference':
+                                                                              serializeParam(
+                                                                            listViewDepotsRecord.reference,
+                                                                            ParamType.DocumentReference,
+                                                                          ),
+                                                                        }.withoutNulls,
+                                                                      );
+                                                                    },
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .edit,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      size:
+                                                                          24.0,
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
                                                                             16.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                        child:
-                                                                            InkWell(
-                                                                          splashColor:
-                                                                              Colors.transparent,
-                                                                          focusColor:
-                                                                              Colors.transparent,
-                                                                          hoverColor:
-                                                                              Colors.transparent,
-                                                                          highlightColor:
-                                                                              Colors.transparent,
-                                                                          onTap:
-                                                                              () async {
-                                                                            var confirmDialogResponse = await showDialog<bool>(
-                                                                                  context: context,
-                                                                                  builder: (alertDialogContext) {
-                                                                                    return AlertDialog(
-                                                                                      title: Text('Delete Scenario'),
-                                                                                      content: Text('Are you sure you want to delete this depot?'),
-                                                                                      actions: [
-                                                                                        TextButton(
-                                                                                          onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                          child: Text('Cancel'),
-                                                                                        ),
-                                                                                        TextButton(
-                                                                                          onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                          child: Text('Confirm'),
-                                                                                        ),
-                                                                                      ],
-                                                                                    );
-                                                                                  },
-                                                                                ) ??
-                                                                                false;
-                                                                            if (confirmDialogResponse) {
-                                                                              await listViewDepotsRecord.reference.delete();
-                                                                            }
-                                                                          },
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.delete_outline,
-                                                                            color:
-                                                                                Colors.black,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                        ),
+                                                                    child:
+                                                                        InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        var confirmDialogResponse = await showDialog<bool>(
+                                                                              context: context,
+                                                                              builder: (alertDialogContext) {
+                                                                                return AlertDialog(
+                                                                                  title: Text('Delete Scenario'),
+                                                                                  content: Text('Are you sure you want to delete this depot?'),
+                                                                                  actions: [
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                      child: Text('Cancel'),
+                                                                                    ),
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                      child: Text('Confirm'),
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                            ) ??
+                                                                            false;
+                                                                        if (confirmDialogResponse) {
+                                                                          await listViewDepotsRecord
+                                                                              .reference
+                                                                              .delete();
+                                                                        }
+                                                                      },
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .delete_outline,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        size:
+                                                                            24.0,
                                                                       ),
-                                                                    ],
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
