@@ -211,20 +211,23 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                           ),
                                           FFButtonWidget(
                                             onPressed: () async {
-                                              final responseItemsCreateData =
-                                                  createResponseItemsRecordData(
-                                                imageLink:
-                                                    FFAppState().defautImage,
-                                              );
                                               var responseItemsRecordReference =
                                                   ResponseItemsRecord.collection
                                                       .doc();
                                               await responseItemsRecordReference
-                                                  .set(responseItemsCreateData);
+                                                  .set(
+                                                      createResponseItemsRecordData(
+                                                imageLink:
+                                                    FFAppState().defautImage,
+                                              ));
                                               _model.outCreateResponseItem =
                                                   ResponseItemsRecord
                                                       .getDocumentFromData(
-                                                          responseItemsCreateData,
+                                                          createResponseItemsRecordData(
+                                                            imageLink:
+                                                                FFAppState()
+                                                                    .defautImage,
+                                                          ),
                                                           responseItemsRecordReference);
                                               await actions.buildDepotMappings(
                                                 _model.outCreateResponseItem!

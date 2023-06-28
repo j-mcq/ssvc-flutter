@@ -288,13 +288,11 @@ class _EditActiveResponseItemWidgetState
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          final activeResponseItemsUpdateData =
-                              createActiveResponseItemsRecordData(
+                          await widget.activeResponseItemReference!
+                              .update(createActiveResponseItemsRecordData(
                             homeDepotName: _model.homeDepotDropDownValue,
                             statusDescription: _model.statusDropDownValue,
-                          );
-                          await widget.activeResponseItemReference!
-                              .update(activeResponseItemsUpdateData);
+                          ));
                           Navigator.pop(context);
                         },
                         text: 'Confirm',

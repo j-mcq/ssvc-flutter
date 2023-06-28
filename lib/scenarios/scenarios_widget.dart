@@ -720,15 +720,13 @@ class _ScenariosWidgetState extends State<ScenariosWidget> {
                                       FFAppState().mapCenterLocation = null;
                                     });
 
-                                    final scenarioCreateData =
-                                        createScenarioRecordData();
                                     var scenarioRecordReference =
                                         ScenarioRecord.collection.doc();
                                     await scenarioRecordReference
-                                        .set(scenarioCreateData);
+                                        .set(createScenarioRecordData());
                                     _model.outCreateScenario =
                                         ScenarioRecord.getDocumentFromData(
-                                            scenarioCreateData,
+                                            createScenarioRecordData(),
                                             scenarioRecordReference);
 
                                     context.pushNamed(

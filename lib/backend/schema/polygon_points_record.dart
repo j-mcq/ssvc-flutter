@@ -34,7 +34,7 @@ class PolygonPointsRecord extends FirestoreRecord {
   void _initializeFields() {
     _latitude = castToType<double>(snapshotData['latitude']);
     _longitude = castToType<double>(snapshotData['longitude']);
-    _index = snapshotData['index'] as int?;
+    _index = castToType<int>(snapshotData['index']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>

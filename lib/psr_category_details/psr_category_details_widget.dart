@@ -851,8 +851,10 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                         return;
                                                       }
 
-                                                      final psrCategoryOptionsUpdateData =
-                                                          createPsrCategoryOptionsRecordData(
+                                                      await widget
+                                                          .psrCategoryOptionsReference!
+                                                          .update(
+                                                              createPsrCategoryOptionsRecordData(
                                                         name: _model
                                                             .itemNameController
                                                             .text,
@@ -864,11 +866,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                             .tryParse(_model
                                                                 .estimatedEnergyConsumptionController
                                                                 .text),
-                                                      );
-                                                      await widget
-                                                          .psrCategoryOptionsReference!
-                                                          .update(
-                                                              psrCategoryOptionsUpdateData);
+                                                      ));
 
                                                       context.pushNamed(
                                                           'psrCategories');

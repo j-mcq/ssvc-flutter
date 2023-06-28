@@ -41,7 +41,7 @@ class StockDepotMappingRecord extends FirestoreRecord {
 
   void _initializeFields() {
     _responseItemName = snapshotData['response_item_name'] as String?;
-    _numberInStock = snapshotData['number_in_stock'] as int?;
+    _numberInStock = castToType<int>(snapshotData['number_in_stock']);
     _responseItem = snapshotData['response_item'] as DocumentReference?;
     _depot = snapshotData['depot'] as DocumentReference?;
     _depotName = snapshotData['depot_name'] as String?;
