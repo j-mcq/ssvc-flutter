@@ -13,3 +13,4 @@ export 'calculate_total_scenario_coverage_percentage.dart'
     show calculateTotalScenarioCoveragePercentage;
 export 'refresh_scenario_stock_levels.dart' show refreshScenarioStockLevels;
 export 'export_response_list.dart' show exportResponseList;
+export 'export_psr_categories.dart' show exportPsrCategories;

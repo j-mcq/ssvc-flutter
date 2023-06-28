@@ -34,11 +34,17 @@ class PsrCategoryOptionsRecord extends FirestoreRecord {
   double get powerConsumption => _powerConsumption ?? 0.0;
   bool hasPowerConsumption() => _powerConsumption != null;
 
+  // "electrically_dependant" field.
+  bool? _electricallyDependant;
+  bool get electricallyDependant => _electricallyDependant ?? false;
+  bool hasElectricallyDependant() => _electricallyDependant != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _psrGroup = snapshotData['psr_group'] as DocumentReference?;
     _resilienceScore = castToType<double>(snapshotData['resilience_score']);
     _powerConsumption = castToType<double>(snapshotData['power_consumption']);
+    _electricallyDependant = snapshotData['electrically_dependant'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -81,6 +87,7 @@ Map<String, dynamic> createPsrCategoryOptionsRecordData({
   DocumentReference? psrGroup,
   double? resilienceScore,
   double? powerConsumption,
+  bool? electricallyDependant,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -88,6 +95,7 @@ Map<String, dynamic> createPsrCategoryOptionsRecordData({
       'psr_group': psrGroup,
       'resilience_score': resilienceScore,
       'power_consumption': powerConsumption,
+      'electrically_dependant': electricallyDependant,
     }.withoutNulls,
   );
 
