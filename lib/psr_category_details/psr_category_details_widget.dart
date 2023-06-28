@@ -523,6 +523,7 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget>
                                                         statusDropDownPsrCategoryGroupOptionsRecordList
                                                             .map((e) => e.name)
                                                             .toList(),
+                                                    optionLabels: ['Option 1'],
                                                     onChanged: (val) =>
                                                         setState(() => _model
                                                                 .statusDropDownValue =

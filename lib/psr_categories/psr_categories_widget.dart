@@ -414,315 +414,289 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 2.0),
-                                                  child: StreamBuilder<
-                                                      PsrCategoryGroupOptionsRecord>(
-                                                    stream: PsrCategoryGroupOptionsRecord
-                                                        .getDocument(
-                                                            listViewPsrCategoryOptionsRecord
-                                                                .psrGroup!),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50.0,
-                                                            height: 50.0,
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primary,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      final containerPsrCategoryGroupOptionsRecord =
-                                                          snapshot.data!;
-                                                      return Container(
-                                                        width: double.infinity,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          blurRadius: 0.0,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryBackground,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 0.0,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .lineColor,
-                                                              offset: Offset(
-                                                                  0.0, 1.0),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      12.0,
-                                                                      12.0,
-                                                                      12.0,
-                                                                      12.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: InkWell(
-                                                                  splashColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  focusColor: Colors
+                                                              .lineColor,
+                                                          offset:
+                                                              Offset(0.0, 1.0),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  12.0,
+                                                                  12.0,
+                                                                  12.0,
+                                                                  12.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
                                                                       .transparent,
-                                                                  hoverColor: Colors
-                                                                      .transparent,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  onTap:
-                                                                      () async {
-                                                                    context
-                                                                        .pushNamed(
-                                                                      'psrCategoryDetails',
-                                                                      queryParameters:
-                                                                          {
-                                                                        'psrCategoryOptionsReference':
-                                                                            serializeParam(
+                                                              onTap: () async {
+                                                                context
+                                                                    .pushNamed(
+                                                                  'psrCategoryDetails',
+                                                                  queryParameters:
+                                                                      {
+                                                                    'psrCategoryOptionsReference':
+                                                                        serializeParam(
+                                                                      listViewPsrCategoryOptionsRecord
+                                                                          .reference,
+                                                                      ParamType
+                                                                          .DocumentReference,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        AutoSizeText(
                                                                           listViewPsrCategoryOptionsRecord
-                                                                              .reference,
-                                                                          ParamType
-                                                                              .DocumentReference,
+                                                                              .name
+                                                                              .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                32,
+                                                                            replacement:
+                                                                                '…',
+                                                                          ),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).titleMedium,
                                                                         ),
-                                                                      }.withoutNulls,
-                                                                    );
-                                                                  },
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            AutoSizeText(
-                                                                              listViewPsrCategoryOptionsRecord.name != null && listViewPsrCategoryOptionsRecord.name != ''
-                                                                                  ? listViewPsrCategoryOptionsRecord.name
-                                                                                  : ''.maybeHandleOverflow(
-                                                                                      maxChars: 32,
-                                                                                      replacement: '…',
-                                                                                    ),
-                                                                              style: FlutterFlowTheme.of(context).titleMedium,
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ],
+                                                                      ],
+                                                                    ),
                                                                   ),
-                                                                ),
+                                                                ],
                                                               ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                                tablet: false,
-                                                              ))
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Text(
-                                                                    containerPsrCategoryGroupOptionsRecord !=
-                                                                            null
-                                                                        ? listViewPsrCategoryOptionsRecord
-                                                                            .powerConsumption
-                                                                            .toString()
-                                                                        : '',
-                                                                    style: FlutterFlowTheme.of(
+                                                            ),
+                                                          ),
+                                                          if (responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                            tablet: false,
+                                                          ))
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Text(
+                                                                listViewPsrCategoryOptionsRecord
+                                                                    .powerConsumption
+                                                                    .toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ),
+                                                          if (responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                          ))
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Text(
+                                                                listViewPsrCategoryOptionsRecord
+                                                                    .resilienceScore
+                                                                    .toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ),
+                                                          if (responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                          ))
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Text(
+                                                                listViewPsrCategoryOptionsRecord
+                                                                    .psrGroupName,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ),
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                if (listViewPsrCategoryOptionsRecord
+                                                                    .electricallyDependant)
+                                                                  Icon(
+                                                                    Icons.check,
+                                                                    color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .bodyMedium,
+                                                                        .secondaryText,
+                                                                    size: 24.0,
                                                                   ),
-                                                                ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                              ))
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Text(
-                                                                    containerPsrCategoryGroupOptionsRecord !=
-                                                                            null
-                                                                        ? listViewPsrCategoryOptionsRecord
-                                                                            .resilienceScore
-                                                                            .toString()
-                                                                        : '',
-                                                                    style: FlutterFlowTheme.of(
+                                                                if (!listViewPsrCategoryOptionsRecord
+                                                                    .electricallyDependant)
+                                                                  Icon(
+                                                                    Icons.clear,
+                                                                    color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .bodyMedium,
+                                                                        .secondaryText,
+                                                                    size: 26.0,
                                                                   ),
-                                                                ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                              ))
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Text(
-                                                                    containerPsrCategoryGroupOptionsRecord
-                                                                        .name,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                ),
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Row(
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
                                                                           .max,
                                                                   mainAxisAlignment:
                                                                       MainAxisAlignment
-                                                                          .center,
+                                                                          .end,
                                                                   children: [
-                                                                    if (listViewPsrCategoryOptionsRecord
-                                                                        .electricallyDependant)
-                                                                      Icon(
+                                                                    InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        context
+                                                                            .pushNamed(
+                                                                          'psrCategoryDetails',
+                                                                          queryParameters:
+                                                                              {
+                                                                            'psrCategoryOptionsReference':
+                                                                                serializeParam(
+                                                                              listViewPsrCategoryOptionsRecord.reference,
+                                                                              ParamType.DocumentReference,
+                                                                            ),
+                                                                          }.withoutNulls,
+                                                                        );
+                                                                      },
+                                                                      child:
+                                                                          Icon(
                                                                         Icons
-                                                                            .check,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
+                                                                            .edit,
+                                                                        color: Colors
+                                                                            .black,
                                                                         size:
                                                                             24.0,
                                                                       ),
-                                                                    if (!listViewPsrCategoryOptionsRecord
-                                                                        .electricallyDependant)
-                                                                      Icon(
-                                                                        Icons
-                                                                            .clear,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
-                                                                        size:
-                                                                            26.0,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          16.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {
+                                                                          var confirmDialogResponse = await showDialog<bool>(
+                                                                                context: context,
+                                                                                builder: (alertDialogContext) {
+                                                                                  return AlertDialog(
+                                                                                    title: Text('Delete Scenario'),
+                                                                                    content: Text('Are you sure you want to delete this PSR Category?'),
+                                                                                    actions: [
+                                                                                      TextButton(
+                                                                                        onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                        child: Text('Cancel'),
+                                                                                      ),
+                                                                                      TextButton(
+                                                                                        onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                        child: Text('Confirm'),
+                                                                                      ),
+                                                                                    ],
+                                                                                  );
+                                                                                },
+                                                                              ) ??
+                                                                              false;
+                                                                          if (confirmDialogResponse) {
+                                                                            await listViewPsrCategoryOptionsRecord.reference.delete();
+                                                                          }
+                                                                        },
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .delete_outline,
+                                                                          color:
+                                                                              Colors.black,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
                                                                       ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .end,
-                                                                      children: [
-                                                                        InkWell(
-                                                                          splashColor:
-                                                                              Colors.transparent,
-                                                                          focusColor:
-                                                                              Colors.transparent,
-                                                                          hoverColor:
-                                                                              Colors.transparent,
-                                                                          highlightColor:
-                                                                              Colors.transparent,
-                                                                          onTap:
-                                                                              () async {
-                                                                            context.pushNamed(
-                                                                              'psrCategoryDetails',
-                                                                              queryParameters: {
-                                                                                'psrCategoryOptionsReference': serializeParam(
-                                                                                  listViewPsrCategoryOptionsRecord.reference,
-                                                                                  ParamType.DocumentReference,
-                                                                                ),
-                                                                              }.withoutNulls,
-                                                                            );
-                                                                          },
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.edit,
-                                                                            color:
-                                                                                Colors.black,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                        ),
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              InkWell(
-                                                                            splashColor:
-                                                                                Colors.transparent,
-                                                                            focusColor:
-                                                                                Colors.transparent,
-                                                                            hoverColor:
-                                                                                Colors.transparent,
-                                                                            highlightColor:
-                                                                                Colors.transparent,
-                                                                            onTap:
-                                                                                () async {
-                                                                              var confirmDialogResponse = await showDialog<bool>(
-                                                                                    context: context,
-                                                                                    builder: (alertDialogContext) {
-                                                                                      return AlertDialog(
-                                                                                        title: Text('Delete Scenario'),
-                                                                                        content: Text('Are you sure you want to delete this PSR Category?'),
-                                                                                        actions: [
-                                                                                          TextButton(
-                                                                                            onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                            child: Text('Cancel'),
-                                                                                          ),
-                                                                                          TextButton(
-                                                                                            onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                            child: Text('Confirm'),
-                                                                                          ),
-                                                                                        ],
-                                                                                      );
-                                                                                    },
-                                                                                  ) ??
-                                                                                  false;
-                                                                              if (confirmDialogResponse) {
-                                                                                await listViewPsrCategoryOptionsRecord.reference.delete();
-                                                                              }
-                                                                            },
-                                                                            child:
-                                                                                Icon(
-                                                                              Icons.delete_outline,
-                                                                              color: Colors.black,
-                                                                              size: 24.0,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ],
                                                                     ),
                                                                   ],
                                                                 ),
-                                                              ),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ),
-                                                      );
-                                                    },
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
                                                 );
                                               },
@@ -778,315 +752,289 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 2.0),
-                                                  child: StreamBuilder<
-                                                      PsrCategoryGroupOptionsRecord>(
-                                                    stream: PsrCategoryGroupOptionsRecord
-                                                        .getDocument(
-                                                            listViewPsrCategoryOptionsRecord
-                                                                .psrGroup!),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50.0,
-                                                            height: 50.0,
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primary,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      final containerPsrCategoryGroupOptionsRecord =
-                                                          snapshot.data!;
-                                                      return Container(
-                                                        width: double.infinity,
-                                                        decoration:
-                                                            BoxDecoration(
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          blurRadius: 0.0,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryBackground,
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              blurRadius: 0.0,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .lineColor,
-                                                              offset: Offset(
-                                                                  0.0, 1.0),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      12.0,
-                                                                      12.0,
-                                                                      12.0,
-                                                                      12.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: InkWell(
-                                                                  splashColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  focusColor: Colors
+                                                              .lineColor,
+                                                          offset:
+                                                              Offset(0.0, 1.0),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  12.0,
+                                                                  12.0,
+                                                                  12.0,
+                                                                  12.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
                                                                       .transparent,
-                                                                  hoverColor: Colors
-                                                                      .transparent,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  onTap:
-                                                                      () async {
-                                                                    context
-                                                                        .pushNamed(
-                                                                      'psrCategoryDetails',
-                                                                      queryParameters:
-                                                                          {
-                                                                        'psrCategoryOptionsReference':
-                                                                            serializeParam(
+                                                              onTap: () async {
+                                                                context
+                                                                    .pushNamed(
+                                                                  'psrCategoryDetails',
+                                                                  queryParameters:
+                                                                      {
+                                                                    'psrCategoryOptionsReference':
+                                                                        serializeParam(
+                                                                      listViewPsrCategoryOptionsRecord
+                                                                          .reference,
+                                                                      ParamType
+                                                                          .DocumentReference,
+                                                                    ),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        AutoSizeText(
                                                                           listViewPsrCategoryOptionsRecord
-                                                                              .reference,
-                                                                          ParamType
-                                                                              .DocumentReference,
+                                                                              .name
+                                                                              .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                32,
+                                                                            replacement:
+                                                                                '…',
+                                                                          ),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).titleMedium,
                                                                         ),
-                                                                      }.withoutNulls,
-                                                                    );
-                                                                  },
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            AutoSizeText(
-                                                                              listViewPsrCategoryOptionsRecord.name != null && listViewPsrCategoryOptionsRecord.name != ''
-                                                                                  ? listViewPsrCategoryOptionsRecord.name
-                                                                                  : ''.maybeHandleOverflow(
-                                                                                      maxChars: 32,
-                                                                                      replacement: '…',
-                                                                                    ),
-                                                                              style: FlutterFlowTheme.of(context).titleMedium,
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ],
+                                                                      ],
+                                                                    ),
                                                                   ),
-                                                                ),
+                                                                ],
                                                               ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                                tablet: false,
-                                                              ))
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Text(
-                                                                    containerPsrCategoryGroupOptionsRecord !=
-                                                                            null
-                                                                        ? listViewPsrCategoryOptionsRecord
-                                                                            .powerConsumption
-                                                                            .toString()
-                                                                        : '',
-                                                                    style: FlutterFlowTheme.of(
+                                                            ),
+                                                          ),
+                                                          if (responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                            tablet: false,
+                                                          ))
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Text(
+                                                                listViewPsrCategoryOptionsRecord
+                                                                    .powerConsumption
+                                                                    .toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ),
+                                                          if (responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                          ))
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Text(
+                                                                listViewPsrCategoryOptionsRecord
+                                                                    .resilienceScore
+                                                                    .toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ),
+                                                          if (responsiveVisibility(
+                                                            context: context,
+                                                            phone: false,
+                                                          ))
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Text(
+                                                                listViewPsrCategoryOptionsRecord
+                                                                    .psrGroupName,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ),
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                if (listViewPsrCategoryOptionsRecord
+                                                                    .electricallyDependant)
+                                                                  Icon(
+                                                                    Icons.check,
+                                                                    color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .bodyMedium,
+                                                                        .secondaryText,
+                                                                    size: 24.0,
                                                                   ),
-                                                                ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                              ))
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Text(
-                                                                    containerPsrCategoryGroupOptionsRecord !=
-                                                                            null
-                                                                        ? listViewPsrCategoryOptionsRecord
-                                                                            .resilienceScore
-                                                                            .toString()
-                                                                        : '',
-                                                                    style: FlutterFlowTheme.of(
+                                                                if (!listViewPsrCategoryOptionsRecord
+                                                                    .electricallyDependant)
+                                                                  Icon(
+                                                                    Icons.clear,
+                                                                    color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .bodyMedium,
+                                                                        .secondaryText,
+                                                                    size: 26.0,
                                                                   ),
-                                                                ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                              ))
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Text(
-                                                                    containerPsrCategoryGroupOptionsRecord
-                                                                        .name,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                ),
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Row(
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
                                                                           .max,
                                                                   mainAxisAlignment:
                                                                       MainAxisAlignment
-                                                                          .center,
+                                                                          .end,
                                                                   children: [
-                                                                    if (listViewPsrCategoryOptionsRecord
-                                                                        .electricallyDependant)
-                                                                      Icon(
+                                                                    InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        context
+                                                                            .pushNamed(
+                                                                          'psrCategoryDetails',
+                                                                          queryParameters:
+                                                                              {
+                                                                            'psrCategoryOptionsReference':
+                                                                                serializeParam(
+                                                                              listViewPsrCategoryOptionsRecord.reference,
+                                                                              ParamType.DocumentReference,
+                                                                            ),
+                                                                          }.withoutNulls,
+                                                                        );
+                                                                      },
+                                                                      child:
+                                                                          Icon(
                                                                         Icons
-                                                                            .check,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
+                                                                            .edit,
+                                                                        color: Colors
+                                                                            .black,
                                                                         size:
                                                                             24.0,
                                                                       ),
-                                                                    if (listViewPsrCategoryOptionsRecord
-                                                                        .electricallyDependant)
-                                                                      Icon(
-                                                                        Icons
-                                                                            .clear,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
-                                                                        size:
-                                                                            26.0,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          16.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {
+                                                                          var confirmDialogResponse = await showDialog<bool>(
+                                                                                context: context,
+                                                                                builder: (alertDialogContext) {
+                                                                                  return AlertDialog(
+                                                                                    title: Text('Delete Scenario'),
+                                                                                    content: Text('Are you sure you want to delete this PSR Category?'),
+                                                                                    actions: [
+                                                                                      TextButton(
+                                                                                        onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                        child: Text('Cancel'),
+                                                                                      ),
+                                                                                      TextButton(
+                                                                                        onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                        child: Text('Confirm'),
+                                                                                      ),
+                                                                                    ],
+                                                                                  );
+                                                                                },
+                                                                              ) ??
+                                                                              false;
+                                                                          if (confirmDialogResponse) {
+                                                                            await listViewPsrCategoryOptionsRecord.reference.delete();
+                                                                          }
+                                                                        },
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .delete_outline,
+                                                                          color:
+                                                                              Colors.black,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
                                                                       ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .end,
-                                                                      children: [
-                                                                        InkWell(
-                                                                          splashColor:
-                                                                              Colors.transparent,
-                                                                          focusColor:
-                                                                              Colors.transparent,
-                                                                          hoverColor:
-                                                                              Colors.transparent,
-                                                                          highlightColor:
-                                                                              Colors.transparent,
-                                                                          onTap:
-                                                                              () async {
-                                                                            context.pushNamed(
-                                                                              'psrCategoryDetails',
-                                                                              queryParameters: {
-                                                                                'psrCategoryOptionsReference': serializeParam(
-                                                                                  listViewPsrCategoryOptionsRecord.reference,
-                                                                                  ParamType.DocumentReference,
-                                                                                ),
-                                                                              }.withoutNulls,
-                                                                            );
-                                                                          },
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.edit,
-                                                                            color:
-                                                                                Colors.black,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                        ),
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              InkWell(
-                                                                            splashColor:
-                                                                                Colors.transparent,
-                                                                            focusColor:
-                                                                                Colors.transparent,
-                                                                            hoverColor:
-                                                                                Colors.transparent,
-                                                                            highlightColor:
-                                                                                Colors.transparent,
-                                                                            onTap:
-                                                                                () async {
-                                                                              var confirmDialogResponse = await showDialog<bool>(
-                                                                                    context: context,
-                                                                                    builder: (alertDialogContext) {
-                                                                                      return AlertDialog(
-                                                                                        title: Text('Delete Scenario'),
-                                                                                        content: Text('Are you sure you want to delete this PSR Category?'),
-                                                                                        actions: [
-                                                                                          TextButton(
-                                                                                            onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                            child: Text('Cancel'),
-                                                                                          ),
-                                                                                          TextButton(
-                                                                                            onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                            child: Text('Confirm'),
-                                                                                          ),
-                                                                                        ],
-                                                                                      );
-                                                                                    },
-                                                                                  ) ??
-                                                                                  false;
-                                                                              if (confirmDialogResponse) {
-                                                                                await listViewPsrCategoryOptionsRecord.reference.delete();
-                                                                              }
-                                                                            },
-                                                                            child:
-                                                                                Icon(
-                                                                              Icons.delete_outline,
-                                                                              color: Colors.black,
-                                                                              size: 24.0,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ],
                                                                     ),
                                                                   ],
                                                                 ),
-                                                              ),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ),
-                                                      );
-                                                    },
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
                                                 );
                                               },

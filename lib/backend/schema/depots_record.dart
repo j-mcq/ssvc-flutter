@@ -44,11 +44,6 @@ class DepotsRecord extends FirestoreRecord {
   String get ownerName => _ownerName ?? '';
   bool hasOwnerName() => _ownerName != null;
 
-  // "depot_owner" field.
-  DocumentReference? _depotOwner;
-  DocumentReference? get depotOwner => _depotOwner;
-  bool hasDepotOwner() => _depotOwner != null;
-
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _location = snapshotData['location'] as LatLng?;
@@ -57,7 +52,6 @@ class DepotsRecord extends FirestoreRecord {
         castToType<double>(snapshotData['radius_of_influence']);
     _locationName = snapshotData['location_name'] as String?;
     _ownerName = snapshotData['owner_name'] as String?;
-    _depotOwner = snapshotData['depot_owner'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -100,7 +94,6 @@ Map<String, dynamic> createDepotsRecordData({
   double? radiusOfInfluence,
   String? locationName,
   String? ownerName,
-  DocumentReference? depotOwner,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -110,7 +103,6 @@ Map<String, dynamic> createDepotsRecordData({
       'radius_of_influence': radiusOfInfluence,
       'location_name': locationName,
       'owner_name': ownerName,
-      'depot_owner': depotOwner,
     }.withoutNulls,
   );
 
