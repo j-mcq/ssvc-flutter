@@ -1599,6 +1599,23 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                             .bodySmall,
                                                                       ),
                                                                     ),
+                                                                  if (responsiveVisibility(
+                                                                    context:
+                                                                        context,
+                                                                    phone:
+                                                                        false,
+                                                                    tablet:
+                                                                        false,
+                                                                  ))
+                                                                    Expanded(
+                                                                      flex: 1,
+                                                                      child:
+                                                                          Text(
+                                                                        'Depot',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodySmall,
+                                                                      ),
+                                                                    ),
                                                                   Expanded(
                                                                     flex: 1,
                                                                     child: Text(
@@ -1774,6 +1791,22 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     flex: 1,
                                                                                     child: Text(
                                                                                       listViewScenarioHouseholdResponsesRecord.needsRecharging.toString(),
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                            color: listViewScenarioHouseholdResponsesRecord.needsRecharging ? FlutterFlowTheme.of(context).error : FlutterFlowTheme.of(context).primaryText,
+                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                          ),
+                                                                                    ),
+                                                                                  ),
+                                                                                if (responsiveVisibility(
+                                                                                  context: context,
+                                                                                  phone: false,
+                                                                                  tablet: false,
+                                                                                ))
+                                                                                  Expanded(
+                                                                                    flex: 1,
+                                                                                    child: Text(
+                                                                                      listViewScenarioHouseholdResponsesRecord.closestDepotName,
                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                             fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                             color: listViewScenarioHouseholdResponsesRecord.needsRecharging ? FlutterFlowTheme.of(context).error : FlutterFlowTheme.of(context).primaryText,
@@ -2085,7 +2118,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 child: FlutterFlowChartLegendWidget(
                                                                                   entries: [
                                                                                     LegendEntry(FlutterFlowTheme.of(context).tertiary, 'Required for Scenario'),
-                                                                                    LegendEntry(Color(0xFF6F28CB), 'Stock in Closest Depot'),
+                                                                                    LegendEntry(Color(0xFF6F28CB), 'Stock in Closest Depots'),
                                                                                   ],
                                                                                   width: 200,
                                                                                   height: 50,
@@ -2464,11 +2497,14 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                                     children: [
-                                                                                                      Image.network(
-                                                                                                        listViewScenarioResponseItemsRecord.imagePath,
-                                                                                                        width: 100,
-                                                                                                        height: 100,
-                                                                                                        fit: BoxFit.cover,
+                                                                                                      Padding(
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                                                                                                        child: Image.network(
+                                                                                                          listViewScenarioResponseItemsRecord.imagePath,
+                                                                                                          width: 100.0,
+                                                                                                          height: 100.0,
+                                                                                                          fit: BoxFit.cover,
+                                                                                                        ),
                                                                                                       ),
                                                                                                     ],
                                                                                                   ),
