@@ -319,8 +319,7 @@ class _PolyMapState extends State<PolyMap> {
       fillColor: Colors.yellow.withOpacity(0.15),
     ));
 
-    _polygonMarkerSet
-        .add(PolygonMarkerSet(_selectedPolygonId, [] as Set<Marker>));
+    _polygonMarkerSet.add(PolygonMarkerSet(_selectedPolygonId, Set<Marker>()));
   }
 
   void _setPolygonMarkers(
@@ -352,8 +351,16 @@ class _PolyMapState extends State<PolyMap> {
           .firstWhere((element) => element.id == polygonId)
           .markers
           .addAll(_polygonMarkers);
+      updateMarkers();
       updatePolygonMarkerPosition(point, null, polygonId);
     });
+  }
+
+  updateMarkers() {
+    _markers = _polygonMarkers;
+    // for (var markerSet in _polygonMarkerSet) {
+    //   _markers.addAll(markerSet.markers);
+    // }
   }
 
   removeMarker(gmf.MarkerId markerId) {
@@ -402,23 +409,18 @@ class _PolyMapState extends State<PolyMap> {
   void _clearAll() {
     setState(() {
       _polygons.clear();
-      clearPolygonMarkers(0);
-      _markers.clear();
+      _polygonMarkers.clear();
+      _markerPositions.clear();
 
+      _markers.clear();
       polygonLatLngs.clear();
-      FFAppState().polygonLatLngList.clear();
       _circles.clear();
+
+      FFAppState().polygonLatLngList.clear();
+
       FFAppState().circleLatLng = null;
       FFAppState().circleRadius = 0.0;
     });
-  }
-
-  clearPolygonMarkers(int polygonIndex) {
-    for (var marker in _markers) {
-      if (_polygonMarkers.contains(marker.markerId)) {
-        _markers.remove(marker);
-      }
-    }
   }
 
   bool rayCastIntersect(LatLng tap, LatLng vertA, LatLng vertB) {
