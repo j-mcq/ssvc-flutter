@@ -140,7 +140,9 @@ class _EditActiveResponseItemWidgetState
                                   _model.homeDepotDropDownValueController ??=
                                       FormFieldController<String>(
                                 _model.homeDepotDropDownValue ??=
-                                    widget.statusReference?.id,
+                                    widget.homeDepotReference != null
+                                        ? widget.homeDepotReference?.id
+                                        : '',
                               ),
                               options: homeDepotDropDownDepotsRecordList
                                   .map((e) => e.reference.id)
