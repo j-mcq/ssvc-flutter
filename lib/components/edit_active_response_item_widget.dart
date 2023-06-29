@@ -114,7 +114,10 @@ class _EditActiveResponseItemWidgetState
                     children: [
                       Expanded(
                         child: StreamBuilder<List<DepotsRecord>>(
-                          stream: queryDepotsRecord(),
+                          stream: queryDepotsRecord(
+                            queryBuilder: (depotsRecord) =>
+                                depotsRecord.orderBy('name'),
+                          ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -136,7 +139,9 @@ class _EditActiveResponseItemWidgetState
                                   _model.homeDepotDropDownValueController ??=
                                       FormFieldController<String>(
                                 _model.homeDepotDropDownValue ??=
-                                    widget.homeDepotReference?.id,
+                                    widget.homeDepotReference != null
+                                        ? widget.homeDepotReference?.id
+                                        : '',
                               ),
                               options: homeDepotDropDownDepotsRecordList
                                   .map((e) => e.reference.id)
@@ -184,7 +189,10 @@ class _EditActiveResponseItemWidgetState
                       Expanded(
                         child: StreamBuilder<
                             List<ResponseItemStatusOptionsRecord>>(
-                          stream: queryResponseItemStatusOptionsRecord(),
+                          stream: queryResponseItemStatusOptionsRecord(
+                            queryBuilder: (responseItemStatusOptionsRecord) =>
+                                responseItemStatusOptionsRecord.orderBy('name'),
+                          ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -206,7 +214,9 @@ class _EditActiveResponseItemWidgetState
                                   _model.statusDropDownValueController ??=
                                       FormFieldController<String>(
                                 _model.statusDropDownValue ??=
-                                    widget.statusReference?.id,
+                                    widget.statusReference != null
+                                        ? widget.statusReference?.id
+                                        : '',
                               ),
                               options:
                                   statusDropDownResponseItemStatusOptionsRecordList

@@ -536,12 +536,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                               var downloadUrls =
                                                                   <String>[];
                                                               try {
-                                                                showUploadMessage(
-                                                                  context,
-                                                                  'Uploading file...',
-                                                                  showLoading:
-                                                                      true,
-                                                                );
                                                                 selectedUploadedFiles =
                                                                     selectedFiles
                                                                         .map((f) =>
@@ -568,9 +562,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                         u!)
                                                                     .toList();
                                                               } finally {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .hideCurrentSnackBar();
                                                                 _model.isDataUploading2 =
                                                                     false;
                                                               }
@@ -590,25 +581,48 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                       downloadUrls
                                                                           .first;
                                                                 });
-                                                                showUploadMessage(
-                                                                  context,
-                                                                  'Success!',
-                                                                );
                                                               } else {
                                                                 setState(() {});
-                                                                showUploadMessage(
-                                                                  context,
-                                                                  'Failed to upload file',
-                                                                );
                                                                 return;
                                                               }
                                                             }
 
-                                                            await actions
-                                                                .importResponseItemsData(
+                                                            _model.outImportResponseItemData =
+                                                                await actions
+                                                                    .importResponseItemsData(
                                                               _model
                                                                   .uploadedFileUrl2,
                                                             );
+                                                            if (!(_model.outImportResponseItemData !=
+                                                                    null &&
+                                                                _model.outImportResponseItemData !=
+                                                                    '')) {
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    _model
+                                                                        .outImportResponseItemData!,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondary,
+                                                                ),
+                                                              );
+                                                            }
+
+                                                            setState(() {});
                                                           },
                                                           text:
                                                               'Import Response Items',

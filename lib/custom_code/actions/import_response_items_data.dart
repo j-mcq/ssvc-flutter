@@ -41,13 +41,12 @@ Future<String?> importResponseItemsData(String filePath) async {
     for (var row in rows.getRange(1, rows.length).toList()) {
       final responseItem = parseResponseItems(row[0], responseItemOptions);
       if (responseItem == null) {
-                 
-        return 'Error importing Response Item data: no response item found with name ${row[0]}');
+        return 'Error importing Response Item data: no response item found with name ${row[0]}';
       }
 
       final homeDepot = parseDepots(row[1], depotOptions);
       if (homeDepot == null) {
-       return  'Error importing Response Item data: no depot found with name: ${row[1]}';
+        return 'Error importing Response Item data: no depot found with name: ${row[1]}';
       }
 
       final activeResponseItemCreateData = createActiveResponseItemsRecordData(
@@ -66,7 +65,7 @@ Future<String?> importResponseItemsData(String filePath) async {
       await responseRecordReference.set(activeResponseItemCreateData);
     }
   } on FirebaseException catch (e) {
-   return 'Error importing PSR data: $e';
+    return 'Error importing PSR data: $e';
   }
 
   return null;
