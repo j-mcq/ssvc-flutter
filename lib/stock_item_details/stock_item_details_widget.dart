@@ -1030,15 +1030,14 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                             queryActiveResponseItemsRecordCount(
                                                           queryBuilder: (activeResponseItemsRecord) => activeResponseItemsRecord
                                                               .where(
-                                                                  'response_item_name',
-                                                                  isEqualTo:
-                                                                      clipContainerResponseItemsRecord
-                                                                          .name)
+                                                                  'response_item',
+                                                                  isEqualTo: widget
+                                                                      .responseItemReference)
                                                               .where(
-                                                                  'home_depot_name',
+                                                                  'home_depot',
                                                                   isEqualTo:
                                                                       listViewDepotsRecord
-                                                                          .name),
+                                                                          .reference),
                                                         ),
                                                         builder: (context,
                                                             snapshot) {

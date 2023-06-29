@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -149,7 +150,7 @@ class _AddActiveResponseItemWidgetState
                                 height: 50.0,
                                 textStyle:
                                     FlutterFlowTheme.of(context).bodyMedium,
-                                hintText: 'Selet the response item type',
+                                hintText: 'Select the response item type',
                                 icon: Icon(
                                   Icons.keyboard_arrow_down_rounded,
                                   color: FlutterFlowTheme.of(context)
@@ -222,7 +223,7 @@ class _AddActiveResponseItemWidgetState
                                 height: 50.0,
                                 textStyle:
                                     FlutterFlowTheme.of(context).bodyMedium,
-                                hintText: 'Selet the home depot for this item',
+                                hintText: 'Select the home depot for this item',
                                 icon: Icon(
                                   Icons.keyboard_arrow_down_rounded,
                                   color: FlutterFlowTheme.of(context)
@@ -299,7 +300,7 @@ class _AddActiveResponseItemWidgetState
                                 height: 50.0,
                                 textStyle:
                                     FlutterFlowTheme.of(context).bodyMedium,
-                                hintText: 'Selet the status for this item',
+                                hintText: 'Select the status for this item',
                                 icon: Icon(
                                   Icons.keyboard_arrow_down_rounded,
                                   color: FlutterFlowTheme.of(context)
@@ -379,6 +380,18 @@ class _AddActiveResponseItemWidgetState
                             if (_model.statusDropDownValue == null) {
                               return;
                             }
+                            _model.outDepotReference =
+                                await actions.getDepotReference(
+                              _model.statusDropDownValue!,
+                            );
+                            _model.outStatusReference =
+                                await actions.getStatusReference(
+                              _model.statusDropDownValue!,
+                            );
+                            _model.outResponseItemReference =
+                                await actions.getResponseItemReference(
+                              _model.resonseItemTypeValue!,
+                            );
 
                             await ActiveResponseItemsRecord.collection
                                 .doc()
@@ -390,12 +403,13 @@ class _AddActiveResponseItemWidgetState
                                   homeDepotName: _model.homeDepotDropDownValue,
                                   responseItemName: _model.statusDropDownValue,
                                   isAvailable: true,
-                                  statusReference: _model.statusDropDownValue,
-                                  responseItemReference:
-                                      _model.resonseItemTypeValue,
-                                  depotReference: _model.homeDepotDropDownValue,
+                                  status: _model.outStatusReference,
+                                  responseItem: _model.outResponseItemReference,
+                                  homeDepot: _model.outDepotReference,
                                 ));
                             Navigator.pop(context);
+
+                            setState(() {});
                           },
                           text: 'Add',
                           options: FFButtonOptions(
@@ -423,7 +437,7 @@ class _AddActiveResponseItemWidgetState
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(25.0),
-                            hoverColor: Color(0xFF2B16ED),
+                            hoverColor: FlutterFlowTheme.of(context).alternate,
                             hoverTextColor: Colors.white,
                           ),
                         ),

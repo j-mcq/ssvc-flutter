@@ -21,8 +21,8 @@ class EditActiveResponseItemWidget extends StatefulWidget {
   }) : super(key: key);
 
   final DocumentReference? activeResponseItemReference;
-  final String? homeDepotReference;
-  final String? statusReference;
+  final DocumentReference? homeDepotReference;
+  final DocumentReference? statusReference;
 
   @override
   _EditActiveResponseItemWidgetState createState() =>
@@ -139,10 +139,7 @@ class _EditActiveResponseItemWidgetState
                                   _model.homeDepotDropDownValueController ??=
                                       FormFieldController<String>(
                                 _model.homeDepotDropDownValue ??=
-                                    widget.homeDepotReference != null &&
-                                            widget.homeDepotReference != ''
-                                        ? widget.homeDepotReference
-                                        : '',
+                                    widget.statusReference?.id,
                               ),
                               options: homeDepotDropDownDepotsRecordList
                                   .map((e) => e.reference.id)
@@ -156,7 +153,7 @@ class _EditActiveResponseItemWidgetState
                               height: 50.0,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
-                              hintText: 'Selet the home depot for this item',
+                              hintText: 'Select the home depot for this item',
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -215,9 +212,8 @@ class _EditActiveResponseItemWidgetState
                                   _model.statusDropDownValueController ??=
                                       FormFieldController<String>(
                                 _model.statusDropDownValue ??=
-                                    widget.statusReference != null &&
-                                            widget.statusReference != ''
-                                        ? widget.statusReference
+                                    widget.statusReference != null
+                                        ? widget.statusReference?.id
                                         : '',
                               ),
                               options:
@@ -234,7 +230,7 @@ class _EditActiveResponseItemWidgetState
                               height: 50.0,
                               textStyle:
                                   FlutterFlowTheme.of(context).bodyMedium,
-                              hintText: 'Selet the status for this item',
+                              hintText: 'Select the status for this item',
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
                                 color:
@@ -333,7 +329,7 @@ class _EditActiveResponseItemWidgetState
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(25.0),
-                          hoverColor: Color(0xFF2B16ED),
+                          hoverColor: FlutterFlowTheme.of(context).alternate,
                           hoverTextColor: Colors.white,
                         ),
                       ),

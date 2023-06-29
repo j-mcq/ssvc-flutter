@@ -33,28 +33,3 @@ Color formatPercentageBar(double percentage) {
     return Colors.red;
   }
 }
-
-DocumentReference? getResponseItemDocumentReference(String responseItemId) {
-  return null;
-}
-
-DocumentReference? getStatusDocumentReference(String? statusId) {
-  return null;
-}
-
-DocumentReference? getDepotDocumentReference(String depotId) {
-  // get documentReference for depot based on depotName
-  return null;
-}
-
-String? getStatusName(String statusReferenceId) {
-  return null;
-}
-
-String? getResponseItemName(String responseItemId) {
-  return null;
-}
-
-String? getDepotName(String depotId) {
-  return null;
-}
