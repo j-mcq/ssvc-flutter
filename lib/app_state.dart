@@ -94,14 +94,29 @@ class FFAppState extends ChangeNotifier {
     _defautImage = _value;
   }
 
-  PolygonListStruct _polygonList = PolygonListStruct();
-  PolygonListStruct get polygonList => _polygonList;
-  set polygonList(PolygonListStruct _value) {
+  List<PolygonListStruct> _polygonList = [];
+  List<PolygonListStruct> get polygonList => _polygonList;
+  set polygonList(List<PolygonListStruct> _value) {
     _polygonList = _value;
   }
 
-  void updatePolygonListStruct(Function(PolygonListStruct) updateFn) {
-    updateFn(_polygonList);
+  void addToPolygonList(PolygonListStruct _value) {
+    _polygonList.add(_value);
+  }
+
+  void removeFromPolygonList(PolygonListStruct _value) {
+    _polygonList.remove(_value);
+  }
+
+  void removeAtIndexFromPolygonList(int _index) {
+    _polygonList.removeAt(_index);
+  }
+
+  void updatePolygonListAtIndex(
+    int _index,
+    PolygonListStruct Function(PolygonListStruct) updateFn,
+  ) {
+    _polygonList[_index] = updateFn(_polygonList[_index]);
   }
 }
 
