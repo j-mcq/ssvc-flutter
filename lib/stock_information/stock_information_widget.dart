@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -210,86 +211,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                               ),
                                             ],
                                           ),
-                                          FFButtonWidget(
-                                            onPressed: () async {
-                                              var responseItemsRecordReference =
-                                                  ResponseItemsRecord.collection
-                                                      .doc();
-                                              await responseItemsRecordReference
-                                                  .set(
-                                                      createResponseItemsRecordData(
-                                                imageLink:
-                                                    FFAppState().defautImage,
-                                              ));
-                                              _model.outCreateResponseItem =
-                                                  ResponseItemsRecord
-                                                      .getDocumentFromData(
-                                                          createResponseItemsRecordData(
-                                                            imageLink:
-                                                                FFAppState()
-                                                                    .defautImage,
-                                                          ),
-                                                          responseItemsRecordReference);
-                                              await actions.buildDepotMappings(
-                                                _model.outCreateResponseItem!
-                                                    .reference,
-                                              );
-
-                                              context.pushNamed(
-                                                'stockItemDetails',
-                                                queryParameters: {
-                                                  'responseItemReference':
-                                                      serializeParam(
-                                                    _model
-                                                        .outCreateResponseItem!
-                                                        .reference,
-                                                    ParamType.DocumentReference,
-                                                  ),
-                                                }.withoutNulls,
-                                              );
-
-                                              setState(() {});
-                                            },
-                                            text: 'Add Response Item Type',
-                                            icon: Icon(
-                                              Icons.add_rounded,
-                                              size: 15.0,
-                                            ),
-                                            options: FFButtonOptions(
-                                              width: 200.0,
-                                              height: 40.0,
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleSmallFamily,
-                                                        color: Colors.white,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmallFamily),
-                                                      ),
-                                              elevation: 3.0,
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(50.0),
-                                            ),
-                                          ),
                                         ],
                                       ),
                                     ),
@@ -460,28 +381,114 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Response Item Types',
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 16.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 0.0, 0.0),
+                                          child: Text(
+                                            'Response Item Types',
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineSmall,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 0.0, 0.0, 0.0),
+                                          child: Icon(
+                                            Icons.all_inbox_sharp,
+                                            color: Colors.black,
+                                            size: 22.0,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 0.0, 0.0),
-                                    child: Icon(
-                                      Icons.all_inbox_sharp,
-                                      color: Colors.black,
-                                      size: 22.0,
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        var responseItemsRecordReference =
+                                            ResponseItemsRecord.collection
+                                                .doc();
+                                        await responseItemsRecordReference
+                                            .set(createResponseItemsRecordData(
+                                          imageLink: FFAppState().defautImage,
+                                        ));
+                                        _model.outCreateResponseItem =
+                                            ResponseItemsRecord.getDocumentFromData(
+                                                createResponseItemsRecordData(
+                                                  imageLink:
+                                                      FFAppState().defautImage,
+                                                ),
+                                                responseItemsRecordReference);
+                                        await actions.buildDepotMappings(
+                                          _model
+                                              .outCreateResponseItem!.reference,
+                                        );
+
+                                        context.pushNamed(
+                                          'stockItemDetails',
+                                          queryParameters: {
+                                            'responseItemReference':
+                                                serializeParam(
+                                              _model.outCreateResponseItem!
+                                                  .reference,
+                                              ParamType.DocumentReference,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+
+                                        setState(() {});
+                                      },
+                                      text: 'Add Response Item Type',
+                                      icon: Icon(
+                                        Icons.add_rounded,
+                                        size: 15.0,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 250.0,
+                                        height: 40.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily,
+                                              color: Colors.white,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmallFamily),
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -917,7 +924,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                             children: [
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 8.0, 0.0),
+                                    0.0, 0.0, 16.0, 16.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -1082,19 +1089,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       Expanded(
                                         flex: 1,
                                         child: Text(
-                                          'Current Location',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodySmall,
-                                        ),
-                                      ),
-                                    if (responsiveVisibility(
-                                      context: context,
-                                      phone: false,
-                                      tablet: false,
-                                    ))
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text(
                                           'Status',
                                           textAlign: TextAlign.start,
                                           style: FlutterFlowTheme.of(context)
@@ -1227,10 +1221,10 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                 .chargingStatus,
                                                         lineHeight: 15.0,
                                                         animation: true,
-                                                        progressColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
+                                                        progressColor: functions
+                                                            .formatPercentageBar(
+                                                                listViewActiveResponseItemsRecord
+                                                                    .chargingStatus),
                                                         backgroundColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -1275,22 +1269,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       child: Text(
                                                         listViewActiveResponseItemsRecord
                                                             .homeDepotName,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium,
-                                                      ),
-                                                    ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                  ))
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        listViewActiveResponseItemsRecord
-                                                            .location!
-                                                            .toString(),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

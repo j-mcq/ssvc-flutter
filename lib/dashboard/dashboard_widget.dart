@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -294,10 +295,10 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                             radius: 50.0,
                                                             lineWidth: 12.0,
                                                             animation: true,
-                                                            progressColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .alternate,
+                                                            progressColor: functions
+                                                                .formatPercentageBar(
+                                                                    _model
+                                                                        .outTotalScenarioCoveragePercentage!),
                                                             backgroundColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
