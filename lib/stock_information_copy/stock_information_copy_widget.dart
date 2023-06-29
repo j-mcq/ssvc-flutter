@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/components/add_active_response_item_widget.dart';
 import '/components/edit_active_response_item_widget.dart';
 import '/components/side_bar_nav_widget.dart';
@@ -446,6 +447,10 @@ class _StockInformationCopyWidgetState extends State<StockInformationCopyWidget>
                                             ),
                                           }.withoutNulls,
                                         );
+
+                                        setState(() {
+                                          FFAppState().polygonList = [];
+                                        });
 
                                         setState(() {});
                                       },
