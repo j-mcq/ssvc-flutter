@@ -54,20 +54,20 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
   bool get isAvailable => _isAvailable ?? false;
   bool hasIsAvailable() => _isAvailable != null;
 
-  // "status_reference" field.
-  String? _statusReference;
-  String get statusReference => _statusReference ?? '';
-  bool hasStatusReference() => _statusReference != null;
+  // "status" field.
+  DocumentReference? _status;
+  DocumentReference? get status => _status;
+  bool hasStatus() => _status != null;
 
-  // "response_item_reference" field.
-  String? _responseItemReference;
-  String get responseItemReference => _responseItemReference ?? '';
-  bool hasResponseItemReference() => _responseItemReference != null;
+  // "response_item" field.
+  DocumentReference? _responseItem;
+  DocumentReference? get responseItem => _responseItem;
+  bool hasResponseItem() => _responseItem != null;
 
-  // "depot_reference" field.
-  String? _depotReference;
-  String get depotReference => _depotReference ?? '';
-  bool hasDepotReference() => _depotReference != null;
+  // "home_depot" field.
+  DocumentReference? _homeDepot;
+  DocumentReference? get homeDepot => _homeDepot;
+  bool hasHomeDepot() => _homeDepot != null;
 
   void _initializeFields() {
     _dateAdded = snapshotData['date_added'] as DateTime?;
@@ -78,9 +78,9 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
     _homeDepotName = snapshotData['home_depot_name'] as String?;
     _responseItemName = snapshotData['response_item_name'] as String?;
     _isAvailable = snapshotData['isAvailable'] as bool?;
-    _statusReference = snapshotData['status_reference'] as String?;
-    _responseItemReference = snapshotData['response_item_reference'] as String?;
-    _depotReference = snapshotData['depot_reference'] as String?;
+    _status = snapshotData['status'] as DocumentReference?;
+    _responseItem = snapshotData['response_item'] as DocumentReference?;
+    _homeDepot = snapshotData['home_depot'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -127,9 +127,9 @@ Map<String, dynamic> createActiveResponseItemsRecordData({
   String? homeDepotName,
   String? responseItemName,
   bool? isAvailable,
-  String? statusReference,
-  String? responseItemReference,
-  String? depotReference,
+  DocumentReference? status,
+  DocumentReference? responseItem,
+  DocumentReference? homeDepot,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -141,9 +141,9 @@ Map<String, dynamic> createActiveResponseItemsRecordData({
       'home_depot_name': homeDepotName,
       'response_item_name': responseItemName,
       'isAvailable': isAvailable,
-      'status_reference': statusReference,
-      'response_item_reference': responseItemReference,
-      'depot_reference': depotReference,
+      'status': status,
+      'response_item': responseItem,
+      'home_depot': homeDepot,
     }.withoutNulls,
   );
 
