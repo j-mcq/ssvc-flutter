@@ -2135,7 +2135,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     color: FlutterFlowTheme.of(context).tertiary,
                                                                                   ),
                                                                                   FFBarChartData(
-                                                                                    yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberInClosestDepot).toList(),
+                                                                                    yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberInAllDepots).toList(),
                                                                                     color: Color(0xFF6F28CB),
                                                                                   )
                                                                                 ],
@@ -2175,7 +2175,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 child: FlutterFlowChartLegendWidget(
                                                                                   entries: [
                                                                                     LegendEntry(FlutterFlowTheme.of(context).tertiary, 'Required for Scenario'),
-                                                                                    LegendEntry(Color(0xFF6F28CB), 'Stock in Closest Depots'),
+                                                                                    LegendEntry(Color(0xFF6F28CB), 'Total in Stock'),
                                                                                   ],
                                                                                   width: 200.0,
                                                                                   height: 50.0,
