@@ -323,11 +323,14 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                   context: context,
                                                   phone: false,
                                                 ))
-                                                  Text(
-                                                    'Electrically Dependant',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall,
+                                                  Expanded(
+                                                    child: Text(
+                                                      'Electrically Dependant',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodySmall,
+                                                    ),
                                                   ),
                                                 ToggleIcon(
                                                   onPressed: () async {
@@ -481,17 +484,19 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                                         CrossAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                      AutoSizeText(
-                                                                        listViewPsrCategoryOptionsRecord
-                                                                            .name
-                                                                            .maybeHandleOverflow(
-                                                                          maxChars:
-                                                                              32,
-                                                                          replacement:
-                                                                              '…',
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .titleMedium,
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          AutoSizeText(
+                                                                            listViewPsrCategoryOptionsRecord.name.maybeHandleOverflow(
+                                                                              maxChars: 32,
+                                                                              replacement: '…',
+                                                                            ),
+                                                                            style:
+                                                                                FlutterFlowTheme.of(context).titleMedium,
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ],
                                                                   ),
