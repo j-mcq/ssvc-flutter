@@ -249,19 +249,6 @@ class _ScenariosWidgetState extends State<ScenariosWidget> {
                                                 ),
                                               ),
                                             ),
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            phone: false,
-                                            tablet: false,
-                                          ))
-                                            Expanded(
-                                              child: Text(
-                                                'Total Cost',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall,
-                                              ),
-                                            ),
                                           Expanded(
                                             flex: 1,
                                             child: Text(
@@ -552,31 +539,6 @@ class _ScenariosWidgetState extends State<ScenariosWidget> {
                                                                 ],
                                                               ),
                                                             ),
-                                                            if (responsiveVisibility(
-                                                              context: context,
-                                                              phone: false,
-                                                            ))
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Text(
-                                                                  containerScenarioResultsRecord !=
-                                                                          null
-                                                                      ? formatNumber(
-                                                                          containerScenarioResultsRecord!
-                                                                              .totalCost,
-                                                                          formatType:
-                                                                              FormatType.decimal,
-                                                                          decimalType:
-                                                                              DecimalType.automatic,
-                                                                          currency:
-                                                                              '£',
-                                                                        )
-                                                                      : '',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium,
-                                                                ),
-                                                              ),
                                                             Expanded(
                                                               child: Column(
                                                                 mainAxisSize:
