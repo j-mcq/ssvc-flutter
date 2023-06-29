@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -100,4 +102,30 @@ Map<String, dynamic> createPsrCategoryOptionsRecordData({
   );
 
   return firestoreData;
+}
+
+class PsrCategoryOptionsRecordDocumentEquality
+    implements Equality<PsrCategoryOptionsRecord> {
+  const PsrCategoryOptionsRecordDocumentEquality();
+
+  @override
+  bool equals(PsrCategoryOptionsRecord? e1, PsrCategoryOptionsRecord? e2) {
+    return e1?.name == e2?.name &&
+        e1?.resilienceScore == e2?.resilienceScore &&
+        e1?.powerConsumption == e2?.powerConsumption &&
+        e1?.electricallyDependant == e2?.electricallyDependant &&
+        e1?.psrGroupName == e2?.psrGroupName;
+  }
+
+  @override
+  int hash(PsrCategoryOptionsRecord? e) => const ListEquality().hash([
+        e?.name,
+        e?.resilienceScore,
+        e?.powerConsumption,
+        e?.electricallyDependant,
+        e?.psrGroupName
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is PsrCategoryOptionsRecord;
 }

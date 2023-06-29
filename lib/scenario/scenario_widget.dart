@@ -1090,8 +1090,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   4.0, 0.0, 4.0, 24.0),
                                           child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
+                                            width: MediaQuery.sizeOf(context)
                                                     .width *
                                                 1.0,
                                             decoration: BoxDecoration(

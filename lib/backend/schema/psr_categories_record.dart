@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -82,4 +84,21 @@ Map<String, dynamic> createPsrCategoriesRecordData({
   );
 
   return firestoreData;
+}
+
+class PsrCategoriesRecordDocumentEquality
+    implements Equality<PsrCategoriesRecord> {
+  const PsrCategoriesRecordDocumentEquality();
+
+  @override
+  bool equals(PsrCategoriesRecord? e1, PsrCategoriesRecord? e2) {
+    return e1?.psrCategory == e2?.psrCategory && e1?.owner == e2?.owner;
+  }
+
+  @override
+  int hash(PsrCategoriesRecord? e) =>
+      const ListEquality().hash([e?.psrCategory, e?.owner]);
+
+  @override
+  bool isValidKey(Object? o) => o is PsrCategoriesRecord;
 }

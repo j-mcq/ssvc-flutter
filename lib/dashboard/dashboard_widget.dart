@@ -195,8 +195,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                   height: 250.0,
                                   constraints: BoxConstraints(
                                     maxWidth:
-                                        MediaQuery.of(context).size.width *
-                                            0.38,
+                                        MediaQuery.sizeOf(context).width * 0.38,
                                   ),
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
@@ -435,11 +434,10 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                       ),
                                                     ),
                                                     Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.4,
+                                                      width: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width *
+                                                          0.4,
                                                       decoration: BoxDecoration(
                                                         color: FlutterFlowTheme
                                                                 .of(context)
@@ -579,11 +577,11 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                         ),
                                                       ),
                                                       Container(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.4,
+                                                        width:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width *
+                                                                0.4,
                                                         decoration:
                                                             BoxDecoration(
                                                           color: FlutterFlowTheme

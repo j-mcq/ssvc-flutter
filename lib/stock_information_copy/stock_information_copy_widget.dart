@@ -226,10 +226,9 @@ class _StockInformationCopyWidgetState extends State<StockInformationCopyWidget>
                                       if (Theme.of(context).brightness ==
                                           Brightness.dark)
                                         Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
@@ -357,7 +356,7 @@ class _StockInformationCopyWidgetState extends State<StockInformationCopyWidget>
                       padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 32.0, 16.0, 24.0),
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 1.0,
+                        width: MediaQuery.sizeOf(context).width * 1.0,
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
@@ -898,7 +897,7 @@ class _StockInformationCopyWidgetState extends State<StockInformationCopyWidget>
                       padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 16.0, 16.0, 24.0),
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 1.0,
+                        width: MediaQuery.sizeOf(context).width * 1.0,
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
@@ -970,8 +969,9 @@ class _StockInformationCopyWidgetState extends State<StockInformationCopyWidget>
                                                       .requestFocus(
                                                           _model.unfocusNode),
                                               child: Padding(
-                                                padding: MediaQuery.of(context)
-                                                    .viewInsets,
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
                                                 child:
                                                     AddActiveResponseItemWidget(),
                                               ),
@@ -1333,7 +1333,7 @@ class _StockInformationCopyWidgetState extends State<StockInformationCopyWidget>
                                                                       child:
                                                                           Padding(
                                                                         padding:
-                                                                            MediaQuery.of(context).viewInsets,
+                                                                            MediaQuery.viewInsetsOf(context),
                                                                         child:
                                                                             EditActiveResponseItemWidget(
                                                                           activeResponseItemReference:
@@ -1441,7 +1441,7 @@ class _StockInformationCopyWidgetState extends State<StockInformationCopyWidget>
                       padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 16.0, 16.0, 24.0),
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 1.0,
+                        width: MediaQuery.sizeOf(context).width * 1.0,
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,

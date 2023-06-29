@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -156,4 +158,44 @@ Map<String, dynamic> createResponseItemsRecordData({
   );
 
   return firestoreData;
+}
+
+class ResponseItemsRecordDocumentEquality
+    implements Equality<ResponseItemsRecord> {
+  const ResponseItemsRecordDocumentEquality();
+
+  @override
+  bool equals(ResponseItemsRecord? e1, ResponseItemsRecord? e2) {
+    return e1?.name == e2?.name &&
+        e1?.description == e2?.description &&
+        e1?.dateAdded == e2?.dateAdded &&
+        e1?.imageLink == e2?.imageLink &&
+        e1?.unitPrice == e2?.unitPrice &&
+        e1?.stock == e2?.stock &&
+        e1?.depotName == e2?.depotName &&
+        e1?.totalEnergyStorageCapacity == e2?.totalEnergyStorageCapacity &&
+        e1?.surgePower == e2?.surgePower &&
+        e1?.weight == e2?.weight &&
+        e1?.baselinePower == e2?.baselinePower &&
+        e1?.depot == e2?.depot;
+  }
+
+  @override
+  int hash(ResponseItemsRecord? e) => const ListEquality().hash([
+        e?.name,
+        e?.description,
+        e?.dateAdded,
+        e?.imageLink,
+        e?.unitPrice,
+        e?.stock,
+        e?.depotName,
+        e?.totalEnergyStorageCapacity,
+        e?.surgePower,
+        e?.weight,
+        e?.baselinePower,
+        e?.depot
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is ResponseItemsRecord;
 }

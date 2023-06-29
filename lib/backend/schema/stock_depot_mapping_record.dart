@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -100,4 +102,30 @@ Map<String, dynamic> createStockDepotMappingRecordData({
   );
 
   return firestoreData;
+}
+
+class StockDepotMappingRecordDocumentEquality
+    implements Equality<StockDepotMappingRecord> {
+  const StockDepotMappingRecordDocumentEquality();
+
+  @override
+  bool equals(StockDepotMappingRecord? e1, StockDepotMappingRecord? e2) {
+    return e1?.responseItemName == e2?.responseItemName &&
+        e1?.numberInStock == e2?.numberInStock &&
+        e1?.responseItem == e2?.responseItem &&
+        e1?.depot == e2?.depot &&
+        e1?.depotName == e2?.depotName;
+  }
+
+  @override
+  int hash(StockDepotMappingRecord? e) => const ListEquality().hash([
+        e?.responseItemName,
+        e?.numberInStock,
+        e?.responseItem,
+        e?.depot,
+        e?.depotName
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is StockDepotMappingRecord;
 }

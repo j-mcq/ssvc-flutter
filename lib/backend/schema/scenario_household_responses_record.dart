@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -153,4 +155,41 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
   );
 
   return firestoreData;
+}
+
+class ScenarioHouseholdResponsesRecordDocumentEquality
+    implements Equality<ScenarioHouseholdResponsesRecord> {
+  const ScenarioHouseholdResponsesRecordDocumentEquality();
+
+  @override
+  bool equals(ScenarioHouseholdResponsesRecord? e1,
+      ScenarioHouseholdResponsesRecord? e2) {
+    return e1?.responseItem == e2?.responseItem &&
+        e1?.cost == e2?.cost &&
+        e1?.responseItemName == e2?.responseItemName &&
+        e1?.scenario == e2?.scenario &&
+        e1?.powerRequired == e2?.powerRequired &&
+        e1?.postcode == e2?.postcode &&
+        e1?.psrCategories == e2?.psrCategories &&
+        e1?.priority == e2?.priority &&
+        e1?.highestResilienceScore == e2?.highestResilienceScore &&
+        e1?.needsRecharging == e2?.needsRecharging;
+  }
+
+  @override
+  int hash(ScenarioHouseholdResponsesRecord? e) => const ListEquality().hash([
+        e?.responseItem,
+        e?.cost,
+        e?.responseItemName,
+        e?.scenario,
+        e?.powerRequired,
+        e?.postcode,
+        e?.psrCategories,
+        e?.priority,
+        e?.highestResilienceScore,
+        e?.needsRecharging
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is ScenarioHouseholdResponsesRecord;
 }

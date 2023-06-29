@@ -323,6 +323,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                       true);
                                                               var selectedUploadedFiles =
                                                                   <FFUploadedFile>[];
+
                                                               var downloadUrls =
                                                                   <String>[];
                                                               try {
@@ -334,10 +335,10 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                 );
                                                                 selectedUploadedFiles =
                                                                     selectedFiles
-                                                                        .map((f) =>
+                                                                        .map((m) =>
                                                                             FFUploadedFile(
-                                                                              name: f.storagePath.split('/').last,
-                                                                              bytes: f.bytes,
+                                                                              name: m.storagePath.split('/').last,
+                                                                              bytes: m.bytes,
                                                                             ))
                                                                         .toList();
 
@@ -533,15 +534,16 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                       true);
                                                               var selectedUploadedFiles =
                                                                   <FFUploadedFile>[];
+
                                                               var downloadUrls =
                                                                   <String>[];
                                                               try {
                                                                 selectedUploadedFiles =
                                                                     selectedFiles
-                                                                        .map((f) =>
+                                                                        .map((m) =>
                                                                             FFUploadedFile(
-                                                                              name: f.storagePath.split('/').last,
-                                                                              bytes: f.bytes,
+                                                                              name: m.storagePath.split('/').last,
+                                                                              bytes: m.bytes,
                                                                             ))
                                                                         .toList();
 
