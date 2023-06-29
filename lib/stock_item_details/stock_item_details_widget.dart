@@ -971,7 +971,11 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                                     16.0, 16.0, 16.0, 0.0),
                                             child: StreamBuilder<
                                                 List<DepotsRecord>>(
-                                              stream: queryDepotsRecord(),
+                                              stream: queryDepotsRecord(
+                                                queryBuilder: (depotsRecord) =>
+                                                    depotsRecord
+                                                        .orderBy('name'),
+                                              ),
                                               builder: (context, snapshot) {
                                                 // Customize what your widget looks like when it's loading.
                                                 if (!snapshot.hasData) {
