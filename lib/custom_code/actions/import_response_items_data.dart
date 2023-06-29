@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:fast_csv/fast_csv.dart' as _fast_csv;
 import 'package:firebase_storage/firebase_storage.dart';
 
-Future importResponseItemsData(String filePath) async {
+Future<String?> importResponseItemsData(String filePath) async {
   // Add your function code here!
 
   final storageRef = FirebaseStorage.instance.ref();
@@ -32,8 +32,7 @@ Future importResponseItemsData(String filePath) async {
     final rows = _fast_csv.parse(dataString);
 
     if (rows.length <= 1) {
-      print('Error importing Response Item data: no rows found');
-      return false;
+      return 'Error importing Response Item data: no rows found';
     }
 
     final responseItemOptions = await queryResponseItemsRecordOnce();
@@ -42,16 +41,13 @@ Future importResponseItemsData(String filePath) async {
     for (var row in rows.getRange(1, rows.length).toList()) {
       final responseItem = parseResponseItems(row[0], responseItemOptions);
       if (responseItem == null) {
-        print(
-            'Error importing Response Item data: no response item found with name ${row[0]}');
-        return false;
+                 
+        return 'Error importing Response Item data: no response item found with name ${row[0]}');
       }
 
       final homeDepot = parseDepots(row[1], depotOptions);
       if (homeDepot == null) {
-        print(
-            'Error importing Response Item data: no depot found with name: ${row[1]}');
-        return false;
+       return  'Error importing Response Item data: no depot found with name: ${row[1]}';
       }
 
       final activeResponseItemCreateData = createActiveResponseItemsRecordData(
@@ -70,10 +66,10 @@ Future importResponseItemsData(String filePath) async {
       await responseRecordReference.set(activeResponseItemCreateData);
     }
   } on FirebaseException catch (e) {
-    print('Error importing PSR data: $e');
+   return 'Error importing PSR data: $e';
   }
 
-  return true;
+  return null;
 }
 
 ResponseItemsRecord? parseResponseItems(
