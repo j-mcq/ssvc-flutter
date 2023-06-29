@@ -121,7 +121,7 @@ class _ScenariosWidgetState extends State<ScenariosWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 4.0, 0.0, 4.0, 24.0),
                             child: Container(
-                              width: MediaQuery.of(context).size.width * 1.0,
+                              width: MediaQuery.sizeOf(context).width * 1.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,

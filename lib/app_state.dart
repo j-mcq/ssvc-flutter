@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -91,6 +92,16 @@ class FFAppState extends ChangeNotifier {
   String get defautImage => _defautImage;
   set defautImage(String _value) {
     _defautImage = _value;
+  }
+
+  PolygonListStruct _polygonList = PolygonListStruct();
+  PolygonListStruct get polygonList => _polygonList;
+  set polygonList(PolygonListStruct _value) {
+    _polygonList = _value;
+  }
+
+  void updatePolygonListStruct(Function(PolygonListStruct) updateFn) {
+    updateFn(_polygonList);
   }
 }
 

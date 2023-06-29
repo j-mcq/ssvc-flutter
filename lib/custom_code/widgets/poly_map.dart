@@ -9,6 +9,7 @@ import 'package:ssvc/flutter_flow/flutter_flow_widgets.dart';
 import 'package:ssvc/scenario/scenario_model.dart';
 
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

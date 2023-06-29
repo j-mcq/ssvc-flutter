@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -98,4 +100,24 @@ Map<String, dynamic> createPolygonPointsRecordData({
   );
 
   return firestoreData;
+}
+
+class PolygonPointsRecordDocumentEquality
+    implements Equality<PolygonPointsRecord> {
+  const PolygonPointsRecordDocumentEquality();
+
+  @override
+  bool equals(PolygonPointsRecord? e1, PolygonPointsRecord? e2) {
+    return e1?.latitude == e2?.latitude &&
+        e1?.longitude == e2?.longitude &&
+        e1?.index == e2?.index &&
+        e1?.polygonIndex == e2?.polygonIndex;
+  }
+
+  @override
+  int hash(PolygonPointsRecord? e) => const ListEquality()
+      .hash([e?.latitude, e?.longitude, e?.index, e?.polygonIndex]);
+
+  @override
+  bool isValidKey(Object? o) => o is PolygonPointsRecord;
 }

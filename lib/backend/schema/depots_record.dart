@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -107,4 +109,31 @@ Map<String, dynamic> createDepotsRecordData({
   );
 
   return firestoreData;
+}
+
+class DepotsRecordDocumentEquality implements Equality<DepotsRecord> {
+  const DepotsRecordDocumentEquality();
+
+  @override
+  bool equals(DepotsRecord? e1, DepotsRecord? e2) {
+    return e1?.name == e2?.name &&
+        e1?.location == e2?.location &&
+        e1?.postcode == e2?.postcode &&
+        e1?.radiusOfInfluence == e2?.radiusOfInfluence &&
+        e1?.locationName == e2?.locationName &&
+        e1?.ownerName == e2?.ownerName;
+  }
+
+  @override
+  int hash(DepotsRecord? e) => const ListEquality().hash([
+        e?.name,
+        e?.location,
+        e?.postcode,
+        e?.radiusOfInfluence,
+        e?.locationName,
+        e?.ownerName
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is DepotsRecord;
 }

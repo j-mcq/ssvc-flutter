@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -106,4 +108,31 @@ Map<String, dynamic> createPsrRecordData({
   );
 
   return firestoreData;
+}
+
+class PsrRecordDocumentEquality implements Equality<PsrRecord> {
+  const PsrRecordDocumentEquality();
+
+  @override
+  bool equals(PsrRecord? e1, PsrRecord? e2) {
+    return e1?.address1 == e2?.address1 &&
+        e1?.address2 == e2?.address2 &&
+        e1?.postcode == e2?.postcode &&
+        e1?.longitude == e2?.longitude &&
+        e1?.latitude == e2?.latitude &&
+        e1?.owner == e2?.owner;
+  }
+
+  @override
+  int hash(PsrRecord? e) => const ListEquality().hash([
+        e?.address1,
+        e?.address2,
+        e?.postcode,
+        e?.longitude,
+        e?.latitude,
+        e?.owner
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is PsrRecord;
 }

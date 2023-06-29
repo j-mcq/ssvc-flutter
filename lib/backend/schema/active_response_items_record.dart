@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -148,4 +150,42 @@ Map<String, dynamic> createActiveResponseItemsRecordData({
   );
 
   return firestoreData;
+}
+
+class ActiveResponseItemsRecordDocumentEquality
+    implements Equality<ActiveResponseItemsRecord> {
+  const ActiveResponseItemsRecordDocumentEquality();
+
+  @override
+  bool equals(ActiveResponseItemsRecord? e1, ActiveResponseItemsRecord? e2) {
+    return e1?.dateAdded == e2?.dateAdded &&
+        e1?.imageLink == e2?.imageLink &&
+        e1?.chargingStatus == e2?.chargingStatus &&
+        e1?.location == e2?.location &&
+        e1?.statusDescription == e2?.statusDescription &&
+        e1?.homeDepotName == e2?.homeDepotName &&
+        e1?.responseItemName == e2?.responseItemName &&
+        e1?.isAvailable == e2?.isAvailable &&
+        e1?.status == e2?.status &&
+        e1?.responseItem == e2?.responseItem &&
+        e1?.homeDepot == e2?.homeDepot;
+  }
+
+  @override
+  int hash(ActiveResponseItemsRecord? e) => const ListEquality().hash([
+        e?.dateAdded,
+        e?.imageLink,
+        e?.chargingStatus,
+        e?.location,
+        e?.statusDescription,
+        e?.homeDepotName,
+        e?.responseItemName,
+        e?.isAvailable,
+        e?.status,
+        e?.responseItem,
+        e?.homeDepot
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is ActiveResponseItemsRecord;
 }

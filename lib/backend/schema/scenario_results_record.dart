@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -133,4 +135,36 @@ Map<String, dynamic> createScenarioResultsRecordData({
   );
 
   return firestoreData;
+}
+
+class ScenarioResultsRecordDocumentEquality
+    implements Equality<ScenarioResultsRecord> {
+  const ScenarioResultsRecordDocumentEquality();
+
+  @override
+  bool equals(ScenarioResultsRecord? e1, ScenarioResultsRecord? e2) {
+    return e1?.scenario == e2?.scenario &&
+        e1?.psrHouseholdsImpacted == e2?.psrHouseholdsImpacted &&
+        e1?.responseCoverage == e2?.responseCoverage &&
+        e1?.totalCost == e2?.totalCost &&
+        e1?.numberOfResponseItems == e2?.numberOfResponseItems &&
+        e1?.nearestDepot == e2?.nearestDepot &&
+        e1?.nearestDepotName == e2?.nearestDepotName &&
+        e1?.responseCoverageAll == e2?.responseCoverageAll;
+  }
+
+  @override
+  int hash(ScenarioResultsRecord? e) => const ListEquality().hash([
+        e?.scenario,
+        e?.psrHouseholdsImpacted,
+        e?.responseCoverage,
+        e?.totalCost,
+        e?.numberOfResponseItems,
+        e?.nearestDepot,
+        e?.nearestDepotName,
+        e?.responseCoverageAll
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is ScenarioResultsRecord;
 }

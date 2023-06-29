@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -107,4 +109,31 @@ Map<String, dynamic> createScenarioRecordData({
   );
 
   return firestoreData;
+}
+
+class ScenarioRecordDocumentEquality implements Equality<ScenarioRecord> {
+  const ScenarioRecordDocumentEquality();
+
+  @override
+  bool equals(ScenarioRecord? e1, ScenarioRecord? e2) {
+    return e1?.name == e2?.name &&
+        e1?.timestamp == e2?.timestamp &&
+        e1?.createdBy == e2?.createdBy &&
+        e1?.outageDuration == e2?.outageDuration &&
+        e1?.mapCenterLocation == e2?.mapCenterLocation &&
+        e1?.mapZoomLevel == e2?.mapZoomLevel;
+  }
+
+  @override
+  int hash(ScenarioRecord? e) => const ListEquality().hash([
+        e?.name,
+        e?.timestamp,
+        e?.createdBy,
+        e?.outageDuration,
+        e?.mapCenterLocation,
+        e?.mapZoomLevel
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is ScenarioRecord;
 }

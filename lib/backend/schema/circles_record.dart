@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -90,4 +92,22 @@ Map<String, dynamic> createCirclesRecordData({
   );
 
   return firestoreData;
+}
+
+class CirclesRecordDocumentEquality implements Equality<CirclesRecord> {
+  const CirclesRecordDocumentEquality();
+
+  @override
+  bool equals(CirclesRecord? e1, CirclesRecord? e2) {
+    return e1?.latitude == e2?.latitude &&
+        e1?.longitude == e2?.longitude &&
+        e1?.radius == e2?.radius;
+  }
+
+  @override
+  int hash(CirclesRecord? e) =>
+      const ListEquality().hash([e?.latitude, e?.longitude, e?.radius]);
+
+  @override
+  bool isValidKey(Object? o) => o is CirclesRecord;
 }

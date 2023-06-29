@@ -224,10 +224,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                       if (Theme.of(context).brightness ==
                                           Brightness.dark)
                                         Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
@@ -355,7 +354,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                       padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 32.0, 16.0, 24.0),
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 1.0,
+                        width: MediaQuery.sizeOf(context).width * 1.0,
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
@@ -896,7 +895,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                       padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 16.0, 16.0, 24.0),
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 1.0,
+                        width: MediaQuery.sizeOf(context).width * 1.0,
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
@@ -968,8 +967,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                       .requestFocus(
                                                           _model.unfocusNode),
                                               child: Padding(
-                                                padding: MediaQuery.of(context)
-                                                    .viewInsets,
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
                                                 child:
                                                     AddActiveResponseItemWidget(),
                                               ),
@@ -1331,7 +1331,7 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                       child:
                                                                           Padding(
                                                                         padding:
-                                                                            MediaQuery.of(context).viewInsets,
+                                                                            MediaQuery.viewInsetsOf(context),
                                                                         child:
                                                                             EditActiveResponseItemWidget(
                                                                           activeResponseItemReference:

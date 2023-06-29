@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -72,4 +74,22 @@ Map<String, dynamic> createResponseItemStatusOptionsRecordData({
   );
 
   return firestoreData;
+}
+
+class ResponseItemStatusOptionsRecordDocumentEquality
+    implements Equality<ResponseItemStatusOptionsRecord> {
+  const ResponseItemStatusOptionsRecordDocumentEquality();
+
+  @override
+  bool equals(ResponseItemStatusOptionsRecord? e1,
+      ResponseItemStatusOptionsRecord? e2) {
+    return e1?.name == e2?.name;
+  }
+
+  @override
+  int hash(ResponseItemStatusOptionsRecord? e) =>
+      const ListEquality().hash([e?.name]);
+
+  @override
+  bool isValidKey(Object? o) => o is ResponseItemStatusOptionsRecord;
 }
