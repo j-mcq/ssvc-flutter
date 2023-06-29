@@ -4,8 +4,8 @@ export '/create_profile/create_profile_widget.dart' show CreateProfileWidget;
 export '/sign_up/sign_up_widget.dart' show SignUpWidget;
 export '/phone_sign_in/phone_sign_in_widget.dart' show PhoneSignInWidget;
 export '/forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
-export '/dashboard/dashboard_widget.dart' show DashboardWidget;
 export '/scenario/scenario_widget.dart' show ScenarioWidget;
+export '/dashboard/dashboard_widget.dart' show DashboardWidget;
 export '/scenario_copy/scenario_copy_widget.dart' show ScenarioCopyWidget;
 export '/stock_information/stock_information_widget.dart'
     show StockInformationWidget;
