@@ -9,10 +9,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<DocumentReference?> saveScenario(
-  DocumentReference? scenarioReference,
-  double? scenarioDuration,
-  String scenarioName,
-) async {
+Future<String?> getResponseItemName(String responseItemReferenceId) async {
   // Add your function code here!
+  return null;
 }

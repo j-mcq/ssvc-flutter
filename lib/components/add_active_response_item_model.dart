@@ -30,6 +30,12 @@ class AddActiveResponseItemModel extends FlutterFlowModel {
   DocumentReference? outStatusReference;
   // Stores action output result for [Custom Action - getResponseItemReference] action in Button widget.
   DocumentReference? outResponseItemReference;
+  // Stores action output result for [Custom Action - getStatusName] action in Button widget.
+  String? outStatusName;
+  // Stores action output result for [Custom Action - getDepotName] action in Button widget.
+  String? outDepotName;
+  // Stores action output result for [Custom Action - getResponseItemName] action in Button widget.
+  String? outResponseItemName;
 
   /// Initialization and disposal methods.
 

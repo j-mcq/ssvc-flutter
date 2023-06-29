@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -296,12 +297,31 @@ class _EditActiveResponseItemWidgetState
                       ),
                       FFButtonWidget(
                         onPressed: () async {
+                          _model.outDepotReference =
+                              await actions.getDepotReference(
+                            _model.homeDepotDropDownValue!,
+                          );
+                          _model.outStatusReference =
+                              await actions.getStatusReference(
+                            _model.statusDropDownValue!,
+                          );
+                          _model.outStatusName = await actions.getStatusName(
+                            _model.statusDropDownValue!,
+                          );
+                          _model.outDepotName = await actions.getDepotName(
+                            _model.homeDepotDropDownValue!,
+                          );
+
                           await widget.activeResponseItemReference!
                               .update(createActiveResponseItemsRecordData(
-                            homeDepotName: _model.homeDepotDropDownValue,
-                            statusDescription: _model.statusDropDownValue,
+                            homeDepotName: _model.outDepotName,
+                            statusDescription: _model.outStatusName,
+                            status: _model.outStatusReference,
+                            homeDepot: _model.outDepotReference,
                           ));
                           Navigator.pop(context);
+
+                          setState(() {});
                         },
                         text: 'Confirm',
                         options: FFButtonOptions(

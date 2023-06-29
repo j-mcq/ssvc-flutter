@@ -392,6 +392,16 @@ class _AddActiveResponseItemWidgetState
                                 await actions.getResponseItemReference(
                               _model.resonseItemTypeValue!,
                             );
+                            _model.outStatusName = await actions.getStatusName(
+                              _model.statusDropDownValue!,
+                            );
+                            _model.outDepotName = await actions.getDepotName(
+                              _model.homeDepotDropDownValue!,
+                            );
+                            _model.outResponseItemName =
+                                await actions.getResponseItemName(
+                              _model.resonseItemTypeValue!,
+                            );
 
                             await ActiveResponseItemsRecord.collection
                                 .doc()
@@ -399,9 +409,9 @@ class _AddActiveResponseItemWidgetState
                                   dateAdded: getCurrentTimestamp,
                                   imageLink: '',
                                   chargingStatus: 1.0,
-                                  statusDescription: _model.statusDropDownValue,
-                                  homeDepotName: _model.homeDepotDropDownValue,
-                                  responseItemName: _model.statusDropDownValue,
+                                  statusDescription: _model.outStatusName,
+                                  homeDepotName: _model.outDepotName,
+                                  responseItemName: _model.outResponseItemName,
                                   isAvailable: true,
                                   status: _model.outStatusReference,
                                   responseItem: _model.outResponseItemReference,
