@@ -1338,9 +1338,9 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                                                           activeResponseItemReference:
                                                                               listViewActiveResponseItemsRecord.reference,
                                                                           homeDepotReference:
-                                                                              listViewActiveResponseItemsRecord.homeDepot!,
+                                                                              listViewActiveResponseItemsRecord.depotReference,
                                                                           statusReference:
-                                                                              listViewActiveResponseItemsRecord.status!,
+                                                                              listViewActiveResponseItemsRecord.statusReference,
                                                                         ),
                                                                       ),
                                                                     );
