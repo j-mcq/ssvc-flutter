@@ -292,7 +292,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                         0.0,
                                                                         0.0),
                                                             child: Text(
-                                                              'Import information on PSR household locations and needs',
+                                                              'Import information on PSR household locations and needs from a csv file',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodySmall,
@@ -502,7 +502,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                         0.0,
                                                                         0.0),
                                                             child: Text(
-                                                              'Import information on the status an location of active response items',
+                                                              'Import information on the status an location of active response items from a csv file',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodySmall,

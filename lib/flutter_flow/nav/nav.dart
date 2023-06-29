@@ -111,14 +111,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ForgotPasswordWidget(),
             ),
             FFRoute(
-              name: 'dashboard',
-              path: 'dashboard',
-              requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'dashboard')
-                  : DashboardWidget(),
-            ),
-            FFRoute(
               name: 'scenario',
               path: 'scenario',
               requireAuth: true,
@@ -126,6 +118,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 scenarioReference: params.getParam('scenarioReference',
                     ParamType.DocumentReference, false, ['scenario']),
               ),
+            ),
+            FFRoute(
+              name: 'dashboard',
+              path: 'dashboard',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'dashboard')
+                  : DashboardWidget(),
             ),
             FFRoute(
               name: 'scenarioCopy',
