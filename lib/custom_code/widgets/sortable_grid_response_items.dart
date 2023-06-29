@@ -14,6 +14,7 @@ import 'package:pluto_grid_export/pluto_grid_export.dart' as pluto_grid_export;
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:file_saver/file_saver.dart';
+import 'package:faker/faker.dart';
 
 class SortableGridResponseItems extends StatefulWidget {
   const SortableGridResponseItems({
@@ -36,7 +37,6 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
     'Response Item',
     'Current Charge (%)',
     'Home Depot',
-    'Location',
     'Status',
     'Is Available?',
   ];
@@ -45,7 +45,6 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
     'responseItem',
     'chargeStatus',
     'homeDepot',
-    'location',
     'statusDescription',
     'isAvailable',
   ];
@@ -62,7 +61,6 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
     PlutoColumnType.text(),
     PlutoColumnType.text(),
     PlutoColumnType.text(),
-    PlutoColumnType.text(),
   ];
 
   final List<bool> readOnlyFields = [
@@ -72,8 +70,8 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
     false,
     true,
     true,
-    true,
   ];
+
   final List<Widget Function(PlutoColumnRendererContext)?> renderers = [
     null,
     null,
@@ -100,10 +98,13 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
     null,
     null,
     null,
-    null,
   ];
 
-  late final PlutoGridStateManager stateManager;
+  late PlutoGridStateManager stateManager;
+
+  bool checkReadOnly(PlutoRow row, PlutoCell cell) {
+    return row.cells['status']!.value != 'created';
+  }
 
   void saveData() async {
     var exported = const Utf8Encoder()
@@ -123,12 +124,25 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
         .saveFile(name: 'export.csv', bytes: exported, ext: '.csv');
   }
 
+  void handleOnRowSelected(PlutoGridOnRowCheckedEvent event) {
+    if (event.isRow) {
+      // or event.isAll
+      print('Toggled A Row.');
+      print(event.row?.cells['column1']?.value);
+    } else {
+      print('Toggled All Rows.');
+      print(stateManager.checkedRows.length);
+    }
+  }
+
+  deleteItems() {}
   @override
   Widget build(BuildContext context) {
     final List<PlutoColumn> columns = <PlutoColumn>[];
     // create columns
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < fieldTitles.length; i++) {
       columns.add(PlutoColumn(
+          enableRowChecked: i == 0,
           title: fieldTitles[i],
           field: fields[i],
           type: fieldTypes[i],
@@ -178,13 +192,18 @@ class _SortableGridResponseItemsState extends State<SortableGridResponseItems> {
                       columns: columns,
                       rows: dataTableRows,
                       onLoaded: (PlutoGridOnLoadedEvent event) {
+                        event.stateManager
+                            .setSelectingMode(PlutoGridSelectingMode.row);
                         stateManager = event.stateManager;
                         stateManager.setShowColumnFilter(true);
                       },
                       onChanged: (PlutoGridOnChangedEvent event) {
                         print(event);
                       },
+                      onRowChecked: handleOnRowSelected,
                       configuration: plutoGridConfiguration,
+                      createHeader: (stateManager) =>
+                          _Header(stateManager: stateManager),
                     ))
               ],
             ),
@@ -229,4 +248,220 @@ Future<List<PlutoRow>> getData() async {
     ));
   }
   return rows;
+}
+
+class _Header extends StatefulWidget {
+  const _Header({
+    required this.stateManager,
+    Key? key,
+  }) : super(key: key);
+
+  final PlutoGridStateManager stateManager;
+
+  @override
+  State<_Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<_Header> {
+  final faker = Faker();
+
+  int addCount = 1;
+
+  int addedCount = 0;
+
+  PlutoGridSelectingMode gridSelectingMode = PlutoGridSelectingMode.row;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      widget.stateManager.setSelectingMode(gridSelectingMode);
+    });
+  }
+
+  void handleAddColumns() {
+    final List<PlutoColumn> addedColumns = [];
+
+    for (var i = 0; i < addCount; i += 1) {
+      addedColumns.add(
+        PlutoColumn(
+          title: faker.food.cuisine(),
+          field: 'column${++addedCount}',
+          type: PlutoColumnType.text(),
+        ),
+      );
+    }
+
+    widget.stateManager.insertColumns(
+      widget.stateManager.bodyColumns.length,
+      addedColumns,
+    );
+  }
+
+  void handleAddRows() {
+    final newRows = widget.stateManager.getNewRows(count: addCount);
+
+    for (var e in newRows) {
+      e.cells['status']!.value = 'created';
+    }
+
+    widget.stateManager.appendRows(newRows);
+
+    widget.stateManager.setCurrentCell(
+      newRows.first.cells.entries.first.value,
+      widget.stateManager.refRows.length - 1,
+    );
+
+    widget.stateManager.moveScrollByRow(
+      PlutoMoveDirection.down,
+      widget.stateManager.refRows.length - 2,
+    );
+
+    widget.stateManager.setKeepFocus(true);
+  }
+
+  void handleSaveAll() {
+    widget.stateManager.setShowLoading(true);
+
+    Future.delayed(const Duration(milliseconds: 500), () {
+      for (var row in widget.stateManager.refRows) {
+        if (row.cells['status']!.value != 'saved') {
+          row.cells['status']!.value = 'saved';
+        }
+
+        if (row.cells['id']!.value == '') {
+          row.cells['id']!.value = 'guest';
+        }
+
+        if (row.cells['name']!.value == '') {
+          row.cells['name']!.value = 'anonymous';
+        }
+      }
+
+      widget.stateManager.setShowLoading(false);
+    });
+  }
+
+  void handleRemoveCurrentColumnButton() {
+    final currentColumn = widget.stateManager.currentColumn;
+
+    if (currentColumn == null) {
+      return;
+    }
+
+    widget.stateManager.removeColumns([currentColumn]);
+  }
+
+  void handleRemoveCurrentRowButton() {
+    print(widget.stateManager.currentRow!.toJson());
+    widget.stateManager.removeCurrentRow();
+  }
+
+  void handleRemoveSelectedRowsButton() {
+    widget.stateManager.removeRows(widget.stateManager.currentSelectingRows);
+  }
+
+  void handleFiltering() {
+    widget.stateManager
+        .setShowColumnFilter(!widget.stateManager.showColumnFilter);
+  }
+
+  void setGridSelectingMode(PlutoGridSelectingMode? mode) {
+    if (mode == null || gridSelectingMode == mode) {
+      return;
+    }
+
+    setState(() {
+      gridSelectingMode = mode;
+      widget.stateManager.setSelectingMode(mode);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Wrap(
+          spacing: 10,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            DropdownButtonHideUnderline(
+              child: DropdownButton(
+                value: addCount,
+                items:
+                    [1, 5, 10, 50, 100].map<DropdownMenuItem<int>>((int count) {
+                  final color = addCount == count ? Colors.blue : null;
+
+                  return DropdownMenuItem<int>(
+                    value: count,
+                    child: Text(
+                      count.toString(),
+                      style: TextStyle(color: color),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (int? count) {
+                  setState(() {
+                    addCount = count ?? 1;
+                  });
+                },
+              ),
+            ),
+            ElevatedButton(
+              onPressed: handleAddColumns,
+              child: const Text('Add columns'),
+            ),
+            ElevatedButton(
+              onPressed: handleAddRows,
+              child: const Text('Add rows'),
+            ),
+            ElevatedButton(
+              onPressed: handleSaveAll,
+              child: const Text('Save all'),
+            ),
+            ElevatedButton(
+              onPressed: handleRemoveCurrentColumnButton,
+              child: const Text('Remove Current Column'),
+            ),
+            ElevatedButton(
+              onPressed: handleRemoveCurrentRowButton,
+              child: const Text('Remove Current Row'),
+            ),
+            ElevatedButton(
+              onPressed: handleRemoveSelectedRowsButton,
+              child: const Text('Remove Selected Rows'),
+            ),
+            ElevatedButton(
+              onPressed: handleFiltering,
+              child: const Text('Toggle filtering'),
+            ),
+            DropdownButtonHideUnderline(
+              child: DropdownButton(
+                value: gridSelectingMode,
+                items: PlutoGridSelectingMode.values
+                    .map<DropdownMenuItem<PlutoGridSelectingMode>>(
+                        (PlutoGridSelectingMode item) {
+                  final color = gridSelectingMode == item ? Colors.blue : null;
+
+                  return DropdownMenuItem<PlutoGridSelectingMode>(
+                    value: item,
+                    child: Text(
+                      item.name,
+                      style: TextStyle(color: color),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (PlutoGridSelectingMode? mode) {
+                  setGridSelectingMode(mode);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

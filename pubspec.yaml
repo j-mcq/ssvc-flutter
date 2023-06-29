@@ -111,6 +111,10 @@ dependencies:
   csv: ^5.0.2
   selectable_list: ^0.1.1
   menu_float: ^0.0.14
+  file_saver: ^0.2.5
+  pluto_grid_export: ^1.0.6
+  pluto_grid: ^7.0.2
+  faker: ^2.1.0
 
 dev_dependencies:
   flutter_launcher_icons: 0.12.0
