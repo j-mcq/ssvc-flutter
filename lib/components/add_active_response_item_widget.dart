@@ -382,7 +382,7 @@ class _AddActiveResponseItemWidgetState
                             }
                             _model.outDepotReference =
                                 await actions.getDepotReference(
-                              _model.statusDropDownValue!,
+                              _model.homeDepotDropDownValue!,
                             );
                             _model.outStatusReference =
                                 await actions.getStatusReference(
