@@ -29,12 +29,18 @@ class PolygonPointsRecord extends FirestoreRecord {
   int get index => _index ?? 0;
   bool hasIndex() => _index != null;
 
+  // "polygon_index" field.
+  int? _polygonIndex;
+  int get polygonIndex => _polygonIndex ?? 0;
+  bool hasPolygonIndex() => _polygonIndex != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _latitude = castToType<double>(snapshotData['latitude']);
     _longitude = castToType<double>(snapshotData['longitude']);
     _index = castToType<int>(snapshotData['index']);
+    _polygonIndex = castToType<int>(snapshotData['polygon_index']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -80,12 +86,14 @@ Map<String, dynamic> createPolygonPointsRecordData({
   double? latitude,
   double? longitude,
   int? index,
+  int? polygonIndex,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'latitude': latitude,
       'longitude': longitude,
       'index': index,
+      'polygon_index': polygonIndex,
     }.withoutNulls,
   );
 
