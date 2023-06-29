@@ -9,17 +9,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<int> calculateTotalStockLevels(
-    DocumentReference? responseItemReference) async {
+Future<String?> getDepotName(String depotReferenceId) async {
   // Add your function code here!
-
-  final stockDepotMappings = await queryStockDepotMappingRecordOnce(
-      queryBuilder: (stockDepotMappings) => stockDepotMappings
-          .where('response_item', isEqualTo: responseItemReference));
-
-  int totalStockLevel = 0;
-  for (var stockDepotMapping in stockDepotMappings) {
-    totalStockLevel += stockDepotMapping.numberInStock;
-  }
-  return totalStockLevel;
+  return null;
 }
