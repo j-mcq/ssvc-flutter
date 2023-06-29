@@ -314,6 +314,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                           onPressed: () async {
                                                             final selectedFiles =
                                                                 await selectFiles(
+                                                              allowedExtensions: [
+                                                                'pdf'
+                                                              ],
                                                               multiFile: false,
                                                             );
                                                             if (selectedFiles !=
@@ -525,6 +528,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                           onPressed: () async {
                                                             final selectedFiles =
                                                                 await selectFiles(
+                                                              allowedExtensions: [
+                                                                'pdf'
+                                                              ],
                                                               multiFile: false,
                                                             );
                                                             if (selectedFiles !=
