@@ -46,15 +46,19 @@ Future<DocumentReference> saveData(DocumentReference? scenarioReference,
   // remove all previous polygons and circles associated with this scenario before saving the new ones
   await deletePolygons(scenarioReference);
   // add newly created polygons and circles to the database
-  if (FFAppState().polygonLatLngList.isNotEmpty) {
-    FFAppState().polygonLatLngList.asMap().forEach((index, element) async {
-      final polygonPointsRecordData = createPolygonPointsRecordData(
-          latitude: element.latitude,
-          longitude: element.longitude,
-          index: index);
-      await PolygonPointsRecord.createDoc(scenarioReference!)
-          .set(polygonPointsRecordData);
-    });
+
+  if (FFAppState().polygonList.isNotEmpty) {
+    for (var polygonSet in FFAppState().polygonList) {
+      polygonSet.polygonLatLngs.asMap().forEach((index, element) async {
+        final polygonPointsRecordData = createPolygonPointsRecordData(
+            latitude: element.latitude,
+            longitude: element.longitude,
+            polygonIndex: polygonSet.polygonIndex,
+            index: index);
+        await PolygonPointsRecord.createDoc(scenarioReference!)
+            .set(polygonPointsRecordData);
+      });
+    }
   }
 
   await deleteCircles(scenarioReference);

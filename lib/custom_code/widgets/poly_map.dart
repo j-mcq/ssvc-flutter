@@ -9,7 +9,6 @@ import 'package:ssvc/flutter_flow/flutter_flow_widgets.dart';
 import 'package:ssvc/scenario/scenario_model.dart';
 
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -52,8 +51,10 @@ final searchScaffoldKey = GlobalKey<ScaffoldState>();
 
 class PolygonMarkerSet {
   gmf.PolygonId id;
+  int index;
   Set<gmf.Marker> markers;
-  PolygonMarkerSet(this.id, this.markers);
+  List<gmf.LatLng> markerPositions;
+  PolygonMarkerSet(this.id, this.index, this.markers, this.markerPositions);
 }
 
 class _PolyMapState extends State<PolyMap> {
@@ -65,6 +66,7 @@ class _PolyMapState extends State<PolyMap> {
   Set<gmf.Marker> _polygonMarkers = HashSet<gmf.Marker>();
   Set<PolygonMarkerSet> _polygonMarkerSet = HashSet<PolygonMarkerSet>();
   List<gmf.LatLng> _markerPositions = <gmf.LatLng>[];
+
   Set<gmf.Polygon> _polygons = HashSet<gmf.Polygon>();
   Set<gmf.Circle> _circles = HashSet<gmf.Circle>();
   late gmf.GoogleMapController _googleMapController;
@@ -76,7 +78,6 @@ class _PolyMapState extends State<PolyMap> {
 
   //ids
   int _polygonIdCounter = 1;
-  int _polygonMarkerSetIdCounter = 1;
   int _circleIdCounter = 1;
   int _markerIdCounter = 1;
 
@@ -312,19 +313,22 @@ class _PolyMapState extends State<PolyMap> {
   void createPolygon() {
     final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
     _selectedPolygonId = gmf.PolygonId(polygonIdVal);
+    final randomColour = Color((Random().nextDouble() * 0xFFFFFF).toInt());
     _polygons.add(gmf.Polygon(
       polygonId: gmf.PolygonId(polygonIdVal),
       points: polygonLatLngs.map((e) => e.latLng).toList(),
       strokeWidth: 2,
-      strokeColor: Colors.yellow,
-      fillColor: Colors.yellow.withOpacity(0.15),
+      strokeColor: randomColour.withOpacity(1.0),
+      fillColor: randomColour.withOpacity(0.15),
     ));
 
-    _polygonMarkerSet.add(PolygonMarkerSet(_selectedPolygonId, Set<Marker>()));
+    _selectedPolygonId = gmf.PolygonId(polygonIdVal);
+    _polygonMarkerSet.add(PolygonMarkerSet(
+        _selectedPolygonId, _polygonIdCounter, Set<Marker>(), []));
+    _polygonIdCounter++;
   }
 
-  void _setPolygonMarkers(
-      gmf.LatLng point, bool isDepot, String title, gmf.PolygonId polygonId) {
+  void _setPolygonMarkers(gmf.LatLng point, gmf.PolygonId polygonId) {
     final String markerIdVal = 'marker_id_$_markerIdCounter';
     _markerIdCounter++;
 
@@ -351,7 +355,11 @@ class _PolyMapState extends State<PolyMap> {
       _polygonMarkerSet
           .firstWhere((element) => element.id == polygonId)
           .markers
-          .addAll(_polygonMarkers);
+          .add(marker);
+      _polygonMarkerSet
+          .firstWhere((element) => element.id == polygonId)
+          .markerPositions
+          .add(point);
       updateMarkers();
       updatePolygonMarkerPosition(point, null, polygonId);
     });
@@ -364,36 +372,62 @@ class _PolyMapState extends State<PolyMap> {
     // }
   }
 
+  gmf.PolygonId? getPolygonIdFromMarkerId(gmf.MarkerId markerId) {
+    for (var markerSet in _polygonMarkerSet) {
+      for (var marker in markerSet.markers) {
+        if (marker.markerId == markerId) {
+          return markerSet.id;
+        }
+      }
+    }
+    return null;
+  }
+
   removeMarker(gmf.MarkerId markerId) {
     int index = 0;
-    Polygon polygon = _polygons
-        .firstWhere((polygon) => polygon.polygonId == _selectedPolygonId);
+    Polygon polygon = _polygons.firstWhere(
+        (polygon) => polygon.polygonId == getPolygonIdFromMarkerId(markerId));
 
-    for (var marker in _markers) {
+    final markerSet = _polygonMarkerSet.firstWhere(
+        (element) => element.id == getPolygonIdFromMarkerId(markerId));
+
+    for (var marker in markerSet.markers) {
       if (marker.markerId == markerId) {
         setState(() {
           _markers.remove(marker);
+          markerSet.markers.remove(marker);
           polygon.points.removeAt(index);
         });
         _markerPositions.removeAt(index);
+        markerSet.markerPositions.removeAt(index);
       }
+
       index += 1;
     }
   }
 
   void updatePolygonMarkerPosition(gmf.LatLng newPosition,
       gmf.MarkerId? markerId, gmf.PolygonId? polygonId) {
-    List<PolygonLatLng> polygonLatLngs = [];
+    List<gmf.LatLng>? polygonLatLngs = [];
 
     int index = 0;
-    for (var marker in _markers) {
+
+    if (markerId != null) {
+      polygonId = getPolygonIdFromMarkerId(markerId);
+    }
+    _selectedPolygonId = polygonId!;
+
+    final markerSet =
+        _polygonMarkerSet.firstWhere((element) => element.id == polygonId);
+
+    for (var marker in markerSet.markers) {
       if (marker.markerId == markerId) {
         marker.copyWith(positionParam: newPosition);
 
-        polygonLatLngs.add(PolygonLatLng(latLng: newPosition));
-        _markerPositions[index] = newPosition;
+        polygonLatLngs.add(newPosition);
+        markerSet.markerPositions[index] = newPosition;
       } else {
-        polygonLatLngs.add(PolygonLatLng(latLng: _markerPositions[index]));
+        polygonLatLngs.add(markerSet.markerPositions[index]);
       }
       index += 1;
     }
@@ -402,8 +436,30 @@ class _PolyMapState extends State<PolyMap> {
         _polygons.firstWhere((polygon) => polygon.polygonId == polygonId);
     setState(() {
       polygon.points.clear();
-      polygon.points.addAll(polygonLatLngs.map((e) => e.latLng).toList());
+      polygon.points.addAll(polygonLatLngs
+          .map((e) => gmf.LatLng(e.latitude, e.longitude))
+          .toList());
     });
+
+    FFAppState().polygonList = [];
+    List<PolygonListStruct> polygonList = [];
+
+    for (var polygonMarkerSet in _polygonMarkerSet) {
+      polygonList.add(PolygonListStruct(
+          polygonIndex: polygonMarkerSet.index,
+          polygonLatLngs: polygonMarkerSet.markerPositions
+              .map((e) => LatLng(e.latitude, e.longitude))
+              .toList()));
+    }
+    FFAppState().polygonList = polygonList;
+
+    FFAppState().polygonLatLngList.clear();
+    FFAppState().polygonLatLngList.addAll(
+        polygonLatLngs.map((e) => LatLng(e.latitude, e.longitude)).toList());
+  }
+
+  void _createPolygon() {
+    createPolygon();
   }
 
   // Remove last polygon point
@@ -412,12 +468,19 @@ class _PolyMapState extends State<PolyMap> {
       _polygons.clear();
       _polygonMarkers.clear();
       _markerPositions.clear();
-
       _markers.clear();
-      polygonLatLngs.clear();
+      _polygonMarkerSet.clear();
       _circles.clear();
+      _polygonIdCounter = 1;
+      _circleIdCounter = 1;
+      _markerIdCounter = 1;
+      _selectedPolygonId = gmf.PolygonId('polygon_id_1');
+
+      polygonLatLngs.clear();
 
       FFAppState().polygonLatLngList.clear();
+
+      FFAppState().polygonList = [];
 
       FFAppState().circleLatLng = null;
       FFAppState().circleRadius = 0.0;
@@ -607,8 +670,7 @@ class _PolyMapState extends State<PolyMap> {
                       } else if (_isMarker) {
                         setState(() {
                           // _markers.clear();
-                          _setPolygonMarkers(
-                              point, false, '', _selectedPolygonId);
+                          _setPolygonMarkers(point, _selectedPolygonId);
                         });
                       } else if (_isCircle) {
                         setState(() {
@@ -640,6 +702,37 @@ class _PolyMapState extends State<PolyMap> {
                     _clearAll();
                   },
                   text: 'Clear Polygon',
+                  options: FFButtonOptions(
+                    width: 130.0,
+                    height: 40.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).titleSmallFamily,
+                          color: Colors.white,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        ),
+                    elevation: 2.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () {
+                    //Remove the last point setted at the polygon
+                    _createPolygon();
+                  },
+                  text: 'New Polygon',
                   options: FFButtonOptions(
                     width: 130.0,
                     height: 40.0,

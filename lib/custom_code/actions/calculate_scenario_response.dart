@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 import 'package:maps_toolkit/maps_toolkit.dart' as mtk;
+import "package:collection/collection.dart";
 
 Future<String?> calculateScenarioResponse(
     DocumentReference scenarioReference) async {
@@ -22,9 +23,14 @@ Future<String?> calculateScenarioResponse(
 
     final psrRecords = await queryPsrRecordOnce();
 
+    final psrCategoryOptionsRecords = await queryPsrCategoryOptionsRecordOnce();
+
     final polygonRecords = await queryPolygonPointsRecordOnce(
         parent: scenarioReference,
         queryBuilder: (query) => query.orderBy('index'));
+
+    final polygonGroups =
+        groupBy(polygonRecords, (PolygonPointsRecord e) => e.polygonIndex);
 
     final circleRecords =
         await queryCirclesRecordOnce(parent: scenarioReference);
@@ -33,94 +39,94 @@ Future<String?> calculateScenarioResponse(
         await ScenarioRecord.getDocumentOnce(scenarioReference);
     final outageDuration = scenarioRecord.outageDuration;
 
+    final responseItemOptions = await queryResponseItemsRecordOnce();
+    var nearestDepot;
+
     if (outageDuration == null) {
       return 'Scenario duration is not set';
     }
-
-    // get polygon centroid to check nearest depot
-    final nearestDepot = await getNearestDepot(
-        polygonRecords.map((e) => mtk.LatLng(e.latitude, e.longitude)));
-
-    List<PsrRecord> impactedPsrHouseholds = [];
-
-    // check if households are in outage area
-    for (var household in psrRecords) {
-      if (household.latitude == null || household.longitude == null) {
-        continue;
-      }
-
-      if (polygonRecords.length > 0) {
-        final isInPolygon = checkLocationIsInPolygon(
-            mtk.LatLng(household.latitude!, household.longitude!),
-            polygonRecords);
-        if (isInPolygon) {
-          impactedPsrHouseholds.add(household);
-        }
-      }
-      if (circleRecords.length > 0) {
-        final isInPolygon = checkLocationIsInCircle(
-            mtk.LatLng(household.latitude!, household.longitude!),
-            circleRecords);
-        if (isInPolygon) {
-          impactedPsrHouseholds.add(household);
-        }
-      }
-    }
-
-    final psrCategoryOptionsRecords = await queryPsrCategoryOptionsRecordOnce();
 
     var totalCost = 0.0;
     var totalResponseItems = 0.0;
     List<ResponseItemsRecord> recommendedResponseItems = [];
 
-    final responseItemOptions = await queryResponseItemsRecordOnce();
+    List<PsrRecord> impactedPsrHouseholds = [];
+    double responseCoverage = 0.0;
 
-    for (var psrHousehold in impactedPsrHouseholds) {
-      final mappedPsrCategory =
-          await getPsrCategoryData(psrHousehold, psrCategoryOptionsRecords);
+    for (var polygonGroup in polygonGroups.entries) {
+      // get polygon centroid to check nearest depot
 
-      double householdPowerConsumption =
-          mappedPsrCategory.powerConsumption * outageDuration;
+      final polygonData = polygonGroup.value;
 
-      RecommendedResponseItem recommendedResponseItem =
-          await calculateResponseItem(
-              householdPowerConsumption, responseItemOptions);
+      nearestDepot = await getNearestDepot(
+          polygonData.map((e) => mtk.LatLng(e.latitude, e.longitude)));
 
-      if (recommendedResponseItem.responseItem != null) {
-        recommendedResponseItems.add(recommendedResponseItem.responseItem!);
-        totalCost += recommendedResponseItem.responseItem!.unitPrice;
-        totalResponseItems += 1;
+      // check if households are in outage area
+      for (var household in psrRecords) {
+        if (household.latitude == null || household.longitude == null) {
+          continue;
+        }
 
-        final createScenarioHouseholdResponsesCreateData =
-            createScenarioHouseholdResponsesRecordData(
-                cost: recommendedResponseItem.responseItem!.unitPrice,
-                responseItemName: recommendedResponseItem.responseItem!.name,
-                responseItem: recommendedResponseItem.responseItem!.reference,
-                postcode: psrHousehold.postcode,
-                psrCategories: mappedPsrCategory.names,
-                scenario: scenarioReference,
-                powerRequired: householdPowerConsumption,
-                highestResilienceScore: mappedPsrCategory.maxResilienceScore,
-                needsRecharging: recommendedResponseItem.needsRecharging);
+        if (polygonData.length > 0) {
+          final isInPolygon = checkLocationIsInPolygon(
+              mtk.LatLng(household.latitude!, household.longitude!),
+              polygonData);
+          if (isInPolygon) {
+            impactedPsrHouseholds.add(household);
+          }
+        }
+        if (circleRecords.length > 0) {
+          final isInPolygon = checkLocationIsInCircle(
+              mtk.LatLng(household.latitude!, household.longitude!),
+              circleRecords);
+          if (isInPolygon) {
+            impactedPsrHouseholds.add(household);
+          }
+        }
+      }
 
-        var scenarioHouseholdResponsesRecordReference =
-            ScenarioHouseholdResponsesRecord.createDoc(scenarioReference);
-        await scenarioHouseholdResponsesRecordReference
-            .set(createScenarioHouseholdResponsesCreateData);
+      for (var psrHousehold in impactedPsrHouseholds) {
+        final mappedPsrCategory =
+            await getPsrCategoryData(psrHousehold, psrCategoryOptionsRecords);
+
+        double householdPowerConsumption =
+            mappedPsrCategory.powerConsumption * outageDuration;
+
+        RecommendedResponseItem recommendedResponseItem =
+            await calculateResponseItem(
+                householdPowerConsumption, responseItemOptions);
+
+        if (recommendedResponseItem.responseItem != null) {
+          recommendedResponseItems.add(recommendedResponseItem.responseItem!);
+          totalCost += recommendedResponseItem.responseItem!.unitPrice;
+          totalResponseItems += 1;
+
+          final createScenarioHouseholdResponsesCreateData =
+              createScenarioHouseholdResponsesRecordData(
+                  cost: recommendedResponseItem.responseItem!.unitPrice,
+                  responseItemName: recommendedResponseItem.responseItem!.name,
+                  responseItem: recommendedResponseItem.responseItem!.reference,
+                  postcode: psrHousehold.postcode,
+                  psrCategories: mappedPsrCategory.names,
+                  scenario: scenarioReference,
+                  closestDepot: nearestDepot.reference,
+                  closestDepotName: nearestDepot.name,
+                  powerRequired: householdPowerConsumption,
+                  highestResilienceScore: mappedPsrCategory.maxResilienceScore,
+                  needsRecharging: recommendedResponseItem.needsRecharging);
+
+          var scenarioHouseholdResponsesRecordReference =
+              ScenarioHouseholdResponsesRecord.createDoc(scenarioReference);
+          await scenarioHouseholdResponsesRecordReference
+              .set(createScenarioHouseholdResponsesCreateData);
+        }
       }
     }
+    responseCoverage = await calculateResponseCoverage(
+        scenarioReference, nearestDepot.reference);
 
-    final responseCoverage = await calculateResponseCoverage(
-        scenarioReference, nearestDepot.reference, recommendedResponseItems);
-
-    saveScenarioResults(
-        scenarioReference,
-        impactedPsrHouseholds.length,
-        totalCost,
-        totalResponseItems,
-        responseCoverage,
-        nearestDepot.reference,
-        nearestDepot.name);
+    saveScenarioResults(scenarioReference, impactedPsrHouseholds.length,
+        totalCost, totalResponseItems, responseCoverage);
 
     return null;
   } catch (e) {
@@ -154,40 +160,44 @@ Future<DepotsRecord> getNearestDepot(Iterable<mtk.LatLng> polygons) async {
 }
 
 Future<double> calculateResponseCoverage(
-    DocumentReference scenarioReference,
-    DocumentReference closestDepot,
-    List<ResponseItemsRecord> recommendedResponseItems) async {
+    DocumentReference scenarioReference, DocumentReference closestDepot) async {
   final responseItems = await queryResponseItemsRecordOnce();
-
-  final responseItemsInAllDepots = await queryActiveResponseItemsRecordOnce();
-  final responseItemsForClosestDepot = responseItemsInAllDepots
-      .where((element) => element.homeDepot == closestDepot)
-      .toList();
-  final numberInAllDepots = responseItemsInAllDepots.length;
-  double responseCoverage = 0.0;
+  var responseCoverage = 0.0;
   int itemTypesNeeded = 0;
+  final activeResponseItems = await queryActiveResponseItemsRecordOnce();
 
-// find total of that response item in closest depot
+  final scenarioHouseholdResponsesRecord =
+      await queryScenarioHouseholdResponsesRecordOnce(
+          parent: scenarioReference);
+
+// get unique closestDepots from scenarioHouseholdResponsesRecord
   for (var responseItem in responseItems) {
-    final itemsInClosestDepotCount = responseItemsForClosestDepot
-        .where((element) => element.responseItem == responseItem.reference)
-        .length;
-    final recommendedResponseItemsCount = recommendedResponseItems
-        .where((element) => element.reference == responseItem.reference)
-        .length;
-
-    if (recommendedResponseItemsCount == 0) {
+    final filteredResponsesRecord = scenarioHouseholdResponsesRecord
+        .where((e) => e.responseItem == responseItem.reference)
+        .toList();
+    if (filteredResponsesRecord.length == 0) {
       continue;
     }
+
+    final filteredActiveResponseItems = activeResponseItems
+        .where((e) => e.responseItem == responseItem.reference)
+        .toList();
+
+    final itemsInClosestDepotCount = filteredActiveResponseItems
+        .where((e) => e.homeDepot == closestDepot)
+        .length;
+    final recommendedResponseItemsCount = filteredResponsesRecord.length;
+
     final itemCoverage =
         itemsInClosestDepotCount / recommendedResponseItemsCount;
+
     responseCoverage += itemCoverage <= 1 ? itemCoverage : 1;
     itemTypesNeeded += 1;
 
-    await saveScenarioResponseItems(
+    saveScenarioResponseItems(
         recommendedResponseItemsCount,
         itemsInClosestDepotCount,
-        numberInAllDepots,
+        filteredActiveResponseItems.length,
         responseItem,
         scenarioReference);
   }
@@ -310,18 +320,14 @@ Future<bool> saveScenarioResults(
     int totalPsrHomesImpacted,
     double totalCost,
     double totalResponseItems,
-    double responseCoverage,
-    DocumentReference nearestDepotReference,
-    String nearestDepot) async {
+    double responseCoverage) async {
   // save scenario results
   final scenarioResultsCreateData = createScenarioResultsRecordData(
       scenario: scenarioReference,
       psrHouseholdsImpacted: totalPsrHomesImpacted,
       totalCost: totalCost,
       numberOfResponseItems: totalResponseItems,
-      responseCoverage: responseCoverage,
-      nearestDepot: nearestDepotReference,
-      nearestDepotName: nearestDepot);
+      responseCoverage: responseCoverage);
 
   var scenarioResultsRecordReference =
       ScenarioResultsRecord.createDoc(scenarioReference);

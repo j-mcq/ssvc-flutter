@@ -33,7 +33,8 @@ Future<String?> exportResponseList(DocumentReference? scenarioReference) async {
     'Power Required',
     'Response Item Name',
     'Priority',
-    'Will Need Recharging'
+    'Will Need Recharging',
+    'Depot'
   ]);
   // Add data
   for (var scenarioResponses in scenarioHouseholdResponses) {
@@ -44,6 +45,7 @@ Future<String?> exportResponseList(DocumentReference? scenarioReference) async {
     scenarioHouseholdResponseList.add(scenarioResponses.responseItemName);
     scenarioHouseholdResponseList.add(scenarioResponses.highestResilienceScore);
     scenarioHouseholdResponseList.add(scenarioResponses.needsRecharging);
+    scenarioHouseholdResponseList.add(scenarioResponses.closestDepotName);
     scenarioResponseList.add(scenarioHouseholdResponseList);
   }
 
