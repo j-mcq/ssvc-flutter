@@ -27,6 +27,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:selectable_list/selectable_list.dart';
+import "package:collection/collection.dart";
 
 class PolyMap extends StatefulWidget {
   const PolyMap({
@@ -111,10 +112,10 @@ class _PolyMapState extends State<PolyMap> {
   void _onMapCreated(gmf.GoogleMapController controller) {
     _googleMapController = controller;
 
-    setState(() async {
-      _loadMapData();
+    setState(() {
       _setMarkerIcon();
     });
+    _loadMapData();
   }
 
   Future<bool> _getStartingMapLocation() async {
@@ -135,7 +136,7 @@ class _PolyMapState extends State<PolyMap> {
           widget.currentLocation!.latitude, widget.currentLocation!.longitude);
     }
     if (_isDataLoaded == false) {
-      await _loadMapData();
+      //  await _loadMapData();
     }
     return true;
   }
@@ -197,20 +198,25 @@ class _PolyMapState extends State<PolyMap> {
         final polygonPoints = await queryPolygonPointsRecordOnce(
             parent: widget.scenario!,
             queryBuilder: (query) => query.orderBy('index'));
+
+        final polygonGroups =
+            groupBy(polygonPoints, (PolygonPointsRecord e) => e.polygonIndex);
+
+        FFAppState().polygonList = [];
+
+        for (var polygonGroup in polygonGroups.entries) {
+          createPolygon();
+
+          final polygonData = polygonGroup.value;
+
+          for (var marker in polygonData) {
+            _setPolygonMarkers(gmf.LatLng(marker.latitude, marker.longitude),
+                _selectedPolygonId);
+          }
+        }
+
         final circles = await queryCirclesRecordOnce(parent: widget.scenario!);
 
-        // if there are polygonPoints then iterate through and add to _polygons
-        if (polygonPoints.isNotEmpty) {
-          FFAppState().polygonLatLngList.clear();
-          polygonPoints.forEach((element) {
-            // create a new polyLatLng and add to the list
-            polygonLatLngs.add(PolygonLatLng(
-                latLng: gmf.LatLng(element.latitude!, element.longitude!),
-                polygonReference: element.reference));
-          });
-
-          _setPolygon();
-        }
         // if there are circles then iterate through and add to _circles
         if (circles.isNotEmpty) {
           circles.forEach((element) {

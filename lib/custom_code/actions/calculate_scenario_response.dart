@@ -29,9 +29,6 @@ Future<String?> calculateScenarioResponse(
         parent: scenarioReference,
         queryBuilder: (query) => query.orderBy('index'));
 
-    final polygonGroups =
-        groupBy(polygonRecords, (PolygonPointsRecord e) => e.polygonIndex);
-
     final circleRecords =
         await queryCirclesRecordOnce(parent: scenarioReference);
 
@@ -52,6 +49,9 @@ Future<String?> calculateScenarioResponse(
 
     List<PsrRecord> impactedPsrHouseholds = [];
     double responseCoverage = 0.0;
+
+    final polygonGroups =
+        groupBy(polygonRecords, (PolygonPointsRecord e) => e.polygonIndex);
 
     for (var polygonGroup in polygonGroups.entries) {
       // get polygon centroid to check nearest depot
@@ -183,13 +183,14 @@ Future<double> calculateResponseCoverage(
         .where((e) => e.responseItem == responseItem.reference)
         .toList();
 
+    final totalNumberOfItems = filteredActiveResponseItems.length;
+
     final itemsInClosestDepotCount = filteredActiveResponseItems
         .where((e) => e.homeDepot == closestDepot)
         .length;
     final recommendedResponseItemsCount = filteredResponsesRecord.length;
 
-    final itemCoverage =
-        itemsInClosestDepotCount / recommendedResponseItemsCount;
+    final itemCoverage = totalNumberOfItems / recommendedResponseItemsCount;
 
     responseCoverage += itemCoverage <= 1 ? itemCoverage : 1;
     itemTypesNeeded += 1;
@@ -197,7 +198,7 @@ Future<double> calculateResponseCoverage(
     saveScenarioResponseItems(
         recommendedResponseItemsCount,
         itemsInClosestDepotCount,
-        filteredActiveResponseItems.length,
+        totalNumberOfItems,
         responseItem,
         scenarioReference);
   }
