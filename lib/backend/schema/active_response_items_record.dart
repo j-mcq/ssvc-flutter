@@ -24,11 +24,6 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
   String get imageLink => _imageLink ?? '';
   bool hasImageLink() => _imageLink != null;
 
-  // "response_item" field.
-  DocumentReference? _responseItem;
-  DocumentReference? get responseItem => _responseItem;
-  bool hasResponseItem() => _responseItem != null;
-
   // "charging_status" field.
   double? _chargingStatus;
   double get chargingStatus => _chargingStatus ?? 0.0;
@@ -44,11 +39,6 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
   String get statusDescription => _statusDescription ?? '';
   bool hasStatusDescription() => _statusDescription != null;
 
-  // "home_depot" field.
-  DocumentReference? _homeDepot;
-  DocumentReference? get homeDepot => _homeDepot;
-  bool hasHomeDepot() => _homeDepot != null;
-
   // "home_depot_name" field.
   String? _homeDepotName;
   String get homeDepotName => _homeDepotName ?? '';
@@ -59,28 +49,38 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
   String get responseItemName => _responseItemName ?? '';
   bool hasResponseItemName() => _responseItemName != null;
 
-  // "status" field.
-  DocumentReference? _status;
-  DocumentReference? get status => _status;
-  bool hasStatus() => _status != null;
-
   // "isAvailable" field.
   bool? _isAvailable;
   bool get isAvailable => _isAvailable ?? false;
   bool hasIsAvailable() => _isAvailable != null;
 
+  // "status_reference" field.
+  String? _statusReference;
+  String get statusReference => _statusReference ?? '';
+  bool hasStatusReference() => _statusReference != null;
+
+  // "response_item_reference" field.
+  String? _responseItemReference;
+  String get responseItemReference => _responseItemReference ?? '';
+  bool hasResponseItemReference() => _responseItemReference != null;
+
+  // "depot_reference" field.
+  String? _depotReference;
+  String get depotReference => _depotReference ?? '';
+  bool hasDepotReference() => _depotReference != null;
+
   void _initializeFields() {
     _dateAdded = snapshotData['date_added'] as DateTime?;
     _imageLink = snapshotData['image_link'] as String?;
-    _responseItem = snapshotData['response_item'] as DocumentReference?;
     _chargingStatus = castToType<double>(snapshotData['charging_status']);
     _location = snapshotData['location'] as LatLng?;
     _statusDescription = snapshotData['status_description'] as String?;
-    _homeDepot = snapshotData['home_depot'] as DocumentReference?;
     _homeDepotName = snapshotData['home_depot_name'] as String?;
     _responseItemName = snapshotData['response_item_name'] as String?;
-    _status = snapshotData['status'] as DocumentReference?;
     _isAvailable = snapshotData['isAvailable'] as bool?;
+    _statusReference = snapshotData['status_reference'] as String?;
+    _responseItemReference = snapshotData['response_item_reference'] as String?;
+    _depotReference = snapshotData['depot_reference'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -121,29 +121,29 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
 Map<String, dynamic> createActiveResponseItemsRecordData({
   DateTime? dateAdded,
   String? imageLink,
-  DocumentReference? responseItem,
   double? chargingStatus,
   LatLng? location,
   String? statusDescription,
-  DocumentReference? homeDepot,
   String? homeDepotName,
   String? responseItemName,
-  DocumentReference? status,
   bool? isAvailable,
+  String? statusReference,
+  String? responseItemReference,
+  String? depotReference,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'date_added': dateAdded,
       'image_link': imageLink,
-      'response_item': responseItem,
       'charging_status': chargingStatus,
       'location': location,
       'status_description': statusDescription,
-      'home_depot': homeDepot,
       'home_depot_name': homeDepotName,
       'response_item_name': responseItemName,
-      'status': status,
       'isAvailable': isAvailable,
+      'status_reference': statusReference,
+      'response_item_reference': responseItemReference,
+      'depot_reference': depotReference,
     }.withoutNulls,
   );
 

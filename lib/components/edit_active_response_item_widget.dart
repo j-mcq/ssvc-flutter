@@ -21,8 +21,8 @@ class EditActiveResponseItemWidget extends StatefulWidget {
   }) : super(key: key);
 
   final DocumentReference? activeResponseItemReference;
-  final DocumentReference? homeDepotReference;
-  final DocumentReference? statusReference;
+  final String? homeDepotReference;
+  final String? statusReference;
 
   @override
   _EditActiveResponseItemWidgetState createState() =>
@@ -139,8 +139,9 @@ class _EditActiveResponseItemWidgetState
                                   _model.homeDepotDropDownValueController ??=
                                       FormFieldController<String>(
                                 _model.homeDepotDropDownValue ??=
-                                    widget.homeDepotReference != null
-                                        ? widget.homeDepotReference?.id
+                                    widget.homeDepotReference != null &&
+                                            widget.homeDepotReference != ''
+                                        ? widget.homeDepotReference
                                         : '',
                               ),
                               options: homeDepotDropDownDepotsRecordList
@@ -214,8 +215,9 @@ class _EditActiveResponseItemWidgetState
                                   _model.statusDropDownValueController ??=
                                       FormFieldController<String>(
                                 _model.statusDropDownValue ??=
-                                    widget.statusReference != null
-                                        ? widget.statusReference?.id
+                                    widget.statusReference != null &&
+                                            widget.statusReference != ''
+                                        ? widget.statusReference
                                         : '',
                               ),
                               options:
