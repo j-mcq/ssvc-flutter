@@ -294,10 +294,16 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                             radius: 50.0,
                                                             lineWidth: 12.0,
                                                             animation: true,
-                                                            progressColor: functions
-                                                                .formatPercentageBar(
-                                                                    _model
-                                                                        .outTotalScenarioCoveragePercentage!),
+                                                            progressColor: _model
+                                                                        .outTotalScenarioCoveragePercentage !=
+                                                                    null
+                                                                ? functions
+                                                                    .formatPercentageBar(
+                                                                        _model
+                                                                            .outTotalScenarioCoveragePercentage!)
+                                                                : FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
                                                             backgroundColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)
