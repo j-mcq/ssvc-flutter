@@ -1807,11 +1807,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     flex: 1,
                                                                                     child: Text(
                                                                                       listViewScenarioHouseholdResponsesRecord.closestDepotName,
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                            color: listViewScenarioHouseholdResponsesRecord.needsRecharging ? FlutterFlowTheme.of(context).error : FlutterFlowTheme.of(context).primaryText,
-                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                          ),
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                     ),
                                                                                   ),
                                                                                 Expanded(
