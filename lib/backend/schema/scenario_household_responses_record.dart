@@ -66,6 +66,16 @@ class ScenarioHouseholdResponsesRecord extends FirestoreRecord {
   bool get needsRecharging => _needsRecharging ?? false;
   bool hasNeedsRecharging() => _needsRecharging != null;
 
+  // "closest_depot" field.
+  DocumentReference? _closestDepot;
+  DocumentReference? get closestDepot => _closestDepot;
+  bool hasClosestDepot() => _closestDepot != null;
+
+  // "closest_depot_name" field.
+  String? _closestDepotName;
+  String get closestDepotName => _closestDepotName ?? '';
+  bool hasClosestDepotName() => _closestDepotName != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -80,6 +90,8 @@ class ScenarioHouseholdResponsesRecord extends FirestoreRecord {
     _highestResilienceScore =
         castToType<double>(snapshotData['highest_resilience_score']);
     _needsRecharging = snapshotData['needs_recharging'] as bool?;
+    _closestDepot = snapshotData['closest_depot'] as DocumentReference?;
+    _closestDepotName = snapshotData['closest_depot_name'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -138,6 +150,8 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
   double? priority,
   double? highestResilienceScore,
   bool? needsRecharging,
+  DocumentReference? closestDepot,
+  String? closestDepotName,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -151,6 +165,8 @@ Map<String, dynamic> createScenarioHouseholdResponsesRecordData({
       'priority': priority,
       'highest_resilience_score': highestResilienceScore,
       'needs_recharging': needsRecharging,
+      'closest_depot': closestDepot,
+      'closest_depot_name': closestDepotName,
     }.withoutNulls,
   );
 
@@ -173,7 +189,9 @@ class ScenarioHouseholdResponsesRecordDocumentEquality
         e1?.psrCategories == e2?.psrCategories &&
         e1?.priority == e2?.priority &&
         e1?.highestResilienceScore == e2?.highestResilienceScore &&
-        e1?.needsRecharging == e2?.needsRecharging;
+        e1?.needsRecharging == e2?.needsRecharging &&
+        e1?.closestDepot == e2?.closestDepot &&
+        e1?.closestDepotName == e2?.closestDepotName;
   }
 
   @override
@@ -187,7 +205,9 @@ class ScenarioHouseholdResponsesRecordDocumentEquality
         e?.psrCategories,
         e?.priority,
         e?.highestResilienceScore,
-        e?.needsRecharging
+        e?.needsRecharging,
+        e?.closestDepot,
+        e?.closestDepotName
       ]);
 
   @override
