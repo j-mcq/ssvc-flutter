@@ -1,3 +1,18 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "active_response_items",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "response_item_name",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date_added",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
 }

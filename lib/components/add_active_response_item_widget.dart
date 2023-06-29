@@ -110,7 +110,10 @@ class _AddActiveResponseItemWidgetState
                       children: [
                         Expanded(
                           child: StreamBuilder<List<ResponseItemsRecord>>(
-                            stream: queryResponseItemsRecord(),
+                            stream: queryResponseItemsRecord(
+                              queryBuilder: (responseItemsRecord) =>
+                                  responseItemsRecord.orderBy('name'),
+                            ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
                               if (!snapshot.hasData) {
@@ -181,7 +184,10 @@ class _AddActiveResponseItemWidgetState
                       children: [
                         Expanded(
                           child: StreamBuilder<List<DepotsRecord>>(
-                            stream: queryDepotsRecord(),
+                            stream: queryDepotsRecord(
+                              queryBuilder: (depotsRecord) =>
+                                  depotsRecord.orderBy('name'),
+                            ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
                               if (!snapshot.hasData) {
@@ -252,7 +258,11 @@ class _AddActiveResponseItemWidgetState
                         Expanded(
                           child: StreamBuilder<
                               List<ResponseItemStatusOptionsRecord>>(
-                            stream: queryResponseItemStatusOptionsRecord(),
+                            stream: queryResponseItemStatusOptionsRecord(
+                              queryBuilder: (responseItemStatusOptionsRecord) =>
+                                  responseItemStatusOptionsRecord
+                                      .orderBy('name'),
+                            ),
                             builder: (context, snapshot) {
                               // Customize what your widget looks like when it's loading.
                               if (!snapshot.hasData) {
@@ -379,7 +389,7 @@ class _AddActiveResponseItemWidgetState
                                       .getResponseItemDocumentReference(
                                           _model.resonseItemTypeValue!),
                                   imageLink: '',
-                                  chargingStatus: 100.0,
+                                  chargingStatus: 1.0,
                                   statusDescription: _model.statusDropDownValue,
                                   homeDepot:
                                       functions.getDepotDocumentReference(
@@ -388,7 +398,7 @@ class _AddActiveResponseItemWidgetState
                                   responseItemName: _model.statusDropDownValue,
                                   status: functions.getStatusDocumentReference(
                                       _model.statusDropDownValue),
-                                  isAvailable: false,
+                                  isAvailable: true,
                                 ));
                             Navigator.pop(context);
                           },

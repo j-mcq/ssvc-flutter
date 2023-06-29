@@ -1114,12 +1114,16 @@ class _StockInformationWidgetState extends State<StockInformationWidget>
                                     List<ActiveResponseItemsRecord>>(
                                   stream: queryActiveResponseItemsRecord(
                                     queryBuilder: (activeResponseItemsRecord) =>
-                                        activeResponseItemsRecord.where(
-                                            'response_item_name',
-                                            isEqualTo:
-                                                _model.responseItemFilter != ''
-                                                    ? _model.responseItemFilter
-                                                    : null),
+                                        activeResponseItemsRecord
+                                            .where('response_item_name',
+                                                isEqualTo:
+                                                    _model.responseItemFilter !=
+                                                            ''
+                                                        ? _model
+                                                            .responseItemFilter
+                                                        : null)
+                                            .orderBy('date_added',
+                                                descending: true),
                                     limit: 50,
                                   ),
                                   builder: (context, snapshot) {
