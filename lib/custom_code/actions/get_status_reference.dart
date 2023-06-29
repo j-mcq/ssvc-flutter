@@ -11,5 +11,14 @@ import 'package:flutter/material.dart';
 
 Future<DocumentReference?> getStatusReference(String statusReferenceId) async {
   // Add your function code here!
+  final statuses = await queryResponseItemStatusOptionsRecordOnce();
+
+  final status = statuses
+      .where((element) => element.reference.id == statusReferenceId)
+      .toList();
+
+  if (status.length > 0) {
+    return status.first.reference;
+  }
   return null;
 }

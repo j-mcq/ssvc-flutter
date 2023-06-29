@@ -12,5 +12,14 @@ import 'package:flutter/material.dart';
 Future<DocumentReference?> getResponseItemReference(
     String responseItemReferenceId) async {
   // Add your function code here!
+  final responseItems = await queryResponseItemsRecordOnce();
+
+  final responseItem = responseItems
+      .where((element) => element.reference.id == responseItemReferenceId)
+      .toList();
+
+  if (responseItem.length > 0) {
+    return responseItem.first.reference;
+  }
   return null;
 }

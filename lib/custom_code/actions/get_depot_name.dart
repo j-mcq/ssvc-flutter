@@ -11,5 +11,14 @@ import 'package:flutter/material.dart';
 
 Future<String?> getDepotName(String depotReferenceId) async {
   // Add your function code here!
+  final depots = await queryDepotsRecordOnce();
+
+  final depot = depots
+      .where((element) => element.reference.id == depotReferenceId)
+      .toList();
+
+  if (depot.length > 0) {
+    return depot.first.name;
+  }
   return null;
 }

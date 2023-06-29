@@ -10,6 +10,14 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 Future<String?> getStatusName(String statusReferenceId) async {
-  // Add your function code here!
+  final statuses = await queryResponseItemStatusOptionsRecordOnce();
+
+  final status = statuses
+      .where((element) => element.reference.id == statusReferenceId)
+      .toList();
+
+  if (status.length > 0) {
+    return status.first.name;
+  }
   return null;
 }
