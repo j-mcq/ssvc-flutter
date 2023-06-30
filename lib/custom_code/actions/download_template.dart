@@ -26,6 +26,9 @@ Future downloadTemplate(String? type) async {
       case 'psrData':
         saveCsv('psr-data-template.csv');
         break;
+      case 'userGuide':
+        saveCsv('SSVC-User-Guide-v0.1.pdf');
+        break;
       default:
     }
   }

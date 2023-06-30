@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 import 'package:fast_csv/fast_csv.dart' as _fast_csv;
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:collection/collection.dart';
 
 Future<String?> importResponseItemsData(String filePath) async {
   // Add your function code here!
@@ -39,25 +40,31 @@ Future<String?> importResponseItemsData(String filePath) async {
 
     final responseItemOptions = await queryResponseItemsRecordOnce();
     final depotOptions = await queryDepotsRecordOnce();
-
+    final statusOptions = await queryResponseItemStatusOptionsRecordOnce();
     for (var row in rows.getRange(1, rows.length).toList()) {
       final responseItem = parseResponseItems(row[0], responseItemOptions);
       if (responseItem == null) {
-        return 'Error importing Response Item data: no response item found with name ${row[0]}';
+        return 'Error importing Response Item data: no matching response item option found for row: ${rows.indexOf(row).toString()}';
       }
 
       final homeDepot = parseDepots(row[1], depotOptions);
       if (homeDepot == null) {
-        return 'Error importing Response Item data: no depot found with name: ${row[1]}';
+        return 'Error importing Response Item data: no matching depot option found for row: ${rows.indexOf(row).toString()}';
+      }
+
+      final status = parseStatuses(row[2], statusOptions);
+      if (status == null) {
+        return 'Error importing Response Item data: no matching status option found for row: ${rows.indexOf(row).toString()}';
       }
 
       final activeResponseItemCreateData = createActiveResponseItemsRecordData(
         location: LatLng(double.parse(row[3]), double.parse(row[4])),
         responseItem: responseItem!.reference,
         responseItemName: responseItem.name,
-        homeDepot: homeDepot!.reference,
+        homeDepot: homeDepot.reference,
         homeDepotName: homeDepot.name,
         statusDescription: row[2],
+        status: status.reference,
         imageLink: responseItem.imageLink,
         chargingStatus: double.parse(row[5]),
         isAvailable: row[6] == 'TRUE' ? true : false,
@@ -76,11 +83,19 @@ Future<String?> importResponseItemsData(String filePath) async {
 ResponseItemsRecord? parseResponseItems(
     value, List<ResponseItemsRecord> responseItems) {
   final responseItem =
-      responseItems.firstWhere((element) => value.contains(element.name));
+      responseItems.firstWhereOrNull((element) => value.contains(element.name));
   return responseItem;
 }
 
 DepotsRecord? parseDepots(value, List<DepotsRecord> depots) {
-  final depot = depots.firstWhere((element) => value.contains(element.name));
+  final depot =
+      depots.firstWhereOrNull((element) => value.contains(element.name));
   return depot;
+}
+
+ResponseItemStatusOptionsRecord? parseStatuses(
+    value, List<ResponseItemStatusOptionsRecord> statuses) {
+  final status =
+      statuses.firstWhereOrNull((element) => value.contains(element.name));
+  return status;
 }

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 import 'package:fast_csv/fast_csv.dart' as _fast_csv;
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:collection/collection.dart';
 
 Future<bool> importPsrData(String filePath) async {
   // Add your function code here!
@@ -91,6 +92,6 @@ List<PsrCategoryOptionsRecord> getPsrCategories(
 PsrCategoryOptionsRecord? parsePsrCategory(
     psrCategoryColumn, List<PsrCategoryOptionsRecord> psrOptions) {
   final psrCategory = psrOptions
-      .firstWhere((element) => psrCategoryColumn.contains(element.name));
+      .firstWhereOrNull((element) => psrCategoryColumn.contains(element.name));
   return psrCategory;
 }

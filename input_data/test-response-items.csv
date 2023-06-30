@@ -1,61 +1,115 @@
 ﻿Response Item,Home Depot,Status,Latitude,Longitude,Charging Status,Is Available
-BLUETTI AC50S,Aberystwyth Offices,Repair Required,56.4618,-2.97736,0.29,FALSE
-EcoFlow Delta Max,Berwick Upon Tweed ,Repair Required,56.4797,-2.86337,0.27,FALSE
-BLUETTI AC200MAX,Bonnybridge,Repair Required,56.4366,-2.92816,0.02,FALSE
-BLUETTI EP500Pro,Caernarfon Offices,Repair Required,55.0733,-3.58566,0.63,FALSE
-BLUETTI AC50S,Cambuslang,Repair Required,55.321,-3.43921,0.16,FALSE
-EcoFlow Delta Max,Cefndy Road,Repair Required,55.1146,-3.3407,0.1,FALSE
-BLUETTI AC200MAX,Dealain House,Repair Required,54.9897,-3.25136,0.11,FALSE
-BLUETTI EP500Pro,Dumfries & Gall. Off,Repair Required,55.1744,-3.03233,0.32,FALSE
-BLUETTI AC50S,Galashiels Office,Repair Required,55.0801,-2.98763,0.79,FALSE
-EcoFlow Delta Max,Glenrothes Office,Repair Required,55.0654,-3.65697,0.24,FALSE
-BLUETTI AC200MAX,Hoylake,Repair Required,55.2369,-3.79898,0.95,FALSE
-BLUETTI EP500Pro,Kilmarnock Office,Repair Required,55.3752,-3.95486,0.98,FALSE
-BLUETTI AC50S,Lister Drive Offices,Repair Required,54.9215,-3.81294,0.6,FALSE
-EcoFlow Delta Max,Llandudno Junction,Repair Required,54.8372,-4.05552,0.13,FALSE
-BLUETTI AC200MAX,Middlewich,Repair Required,54.966,-4.00826,0.21,FALSE
-BLUETTI EP500Pro,Mona Depot,Repair Required,54.8748,-4.514,0.13,FALSE
-BLUETTI AC50S,Newtown Depot,Repair Required,54.8783,-5.02299,0.43,FALSE
-EcoFlow Delta Max,Porthmadoc,Repair Required,55.9523,-3.19207,0.74,FALSE
-BLUETTI AC200MAX,Prenton Offices,Repair Required,55.9216,-3.21082,0,FALSE
-BLUETTI EP500Pro,Queensferry,Repair Required,55.9334,-3.25136,0.92,FALSE
-BLUETTI AC50S,St Vincent Crescent,Repair Required,55.9412,-3.27459,0.09,FALSE
-EcoFlow Delta Max,Stranraer Depot,Repair Required,55.9086,-3.24252,0.99,FALSE
-BLUETTI AC200MAX,Telferton House,Repair Required,55.9117,-3.28064,0.83,FALSE
-BLUETTI EP500Pro,Wrexham,Repair Required,55.9471,-3.11305,0.95,FALSE
-BLUETTI AC50S,Aberystwyth Offices,Repair Required,55.9238,-3.15102,0.12,FALSE
-EcoFlow Delta Max,Berwick Upon Tweed ,At Depot (Storage),55.9061,-3.14339,0.2,TRUE
-BLUETTI AC200MAX,Bonnybridge,At Depot (Storage),55.8766,-3.12173,0.23,TRUE
-BLUETTI EP500Pro,Caernarfon Offices,At Depot (Storage),55.8725,-3.10481,0.39,TRUE
-BLUETTI AC50S,Cambuslang,At Depot (Storage),55.9532,-3.20047,0.94,TRUE
-EcoFlow Delta Max,Cefndy Road,At Depot (Storage),55.8787,-3.15359,0.66,TRUE
-BLUETTI AC200MAX,Dealain House,At Depot (Storage),55.9389,-3.04672,0.41,TRUE
-BLUETTI EP500Pro,Dumfries & Gall. Off,At Depot (Storage),55.8859,-3.06197,0.49,TRUE
-BLUETTI AC50S,Galashiels Office,At Depot (Storage),55.841,-3.05175,0.64,TRUE
-EcoFlow Delta Max,Glenrothes Office,At Depot (Storage),55.851,-3.13542,0.82,TRUE
-BLUETTI AC200MAX,Hoylake,At Depot (Storage),55.8593,-3.17773,0.54,TRUE
-BLUETTI EP500Pro,Kilmarnock Office,At Depot (Storage),55.8335,-3.22378,0.76,TRUE
-BLUETTI AC50S,Lister Drive Offices,At Depot (Storage),55.8895,-3.4246,0.92,TRUE
-EcoFlow Delta Max,Llandudno Junction,At Depot (Storage),55.9285,-3.40412,0.72,TRUE
-BLUETTI AC200MAX,Middlewich,At Depot (Storage),55.9569,-3.39566,0.07,TRUE
-BLUETTI EP500Pro,Mona Depot,At Depot (Storage),55.9522,-3.20511,0.76,TRUE
-BLUETTI AC50S,Newtown Depot,At Depot (Storage),55.9827,-3.3796,0.15,TRUE
-EcoFlow Delta Max,Porthmadoc,At Depot (Storage),56.0377,-2.82053,0.92,TRUE
-BLUETTI AC200MAX,Prenton Offices,At Depot (Storage),55.9664,-2.95212,0.91,TRUE
-BLUETTI EP500Pro,Queensferry,At Depot (Storage),55.9417,-2.94463,0.11,TRUE
-BLUETTI AC50S,St Vincent Crescent,In Transit,55.9105,-2.88561,0.72,FALSE
-EcoFlow Delta Max,Stranraer Depot,In Transit,55.9115,-2.94494,0.62,FALSE
-BLUETTI AC200MAX,Telferton House,In Transit,55.8554,-2.85429,0.19,FALSE
-BLUETTI EP500Pro,Wrexham,In Transit,55.8634,-2.96624,0.13,FALSE
-BLUETTI AC50S,Aberystwyth Offices,In Transit,55.7852,-2.96181,0.35,FALSE
-EcoFlow Delta Max,Berwick Upon Tweed ,In Transit,56.0481,-2.73267,0.54,FALSE
-BLUETTI AC200MAX,Bonnybridge,In Transit,55.9623,-3.2558,0.64,FALSE
-BLUETTI EP500Pro,Caernarfon Offices,In Transit,55.9903,-2.65117,0.05,FALSE
-BLUETTI AC50S,Cambuslang,In Transit,55.9495,-2.77824,0.39,FALSE
-EcoFlow Delta Max,Cefndy Road,In Transit,55.9938,-2.52455,0.92,FALSE
-BLUETTI AC200MAX,Dealain House,In Transit,55.6239,-3.01163,0.52,FALSE
-BLUETTI EP500Pro,Dumfries & Gall. Off,In Transit,55.621,-3.07046,0.98,FALSE
-BLUETTI AC50S,Galashiels Office,At Customer Home,55.6539,-3.19035,0.97,FALSE
-EcoFlow Delta Max,Glenrothes Office,At Customer Home,55.7344,-3.34326,0.38,FALSE
-BLUETTI AC200MAX,Hoylake,At Customer Home,55.8607,-3.66474,0.27,FALSE
-BLUETTI EP500Pro,Kilmarnock Office,At Customer Home,55.8983,-3.66075,0.06,FALSE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,FALSE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,0.41,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,0.49,TRUE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,0.64,TRUE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,0.82,TRUE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,0.54,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,0.76,TRUE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC50S,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC200MAX,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),55.9117,-3.28064,1,TRUE
+BLUETTI AC50S,Aberystwyth Offices,At Depot (Storage),56.4618,-2.97736,1,TRUE
+BLUETTI AC50S,Berwick Upon Tweed ,At Depot (Storage),56.4797,-2.86337,1,TRUE
+BLUETTI AC50S,Bonnybridge,At Depot (Storage),56.4366,-2.92816,1,TRUE
+BLUETTI AC50S,Caernarfon Offices,At Depot (Storage),55.0733,-3.58566,1,TRUE
+BLUETTI AC50S,Cambuslang,At Depot (Storage),55.321,-3.43921,1,TRUE
+BLUETTI AC50S,Cefndy Road,At Depot (Storage),55.1146,-3.3407,1,TRUE
+BLUETTI AC50S,Dealain House,At Depot (Storage),54.9897,-3.25136,1,TRUE
+BLUETTI AC50S,Dumfries & Gall. Off,At Depot (Storage),55.1744,-3.03233,1,TRUE
+BLUETTI AC50S,Galashiels Office,At Depot (Storage),55.0801,-2.98763,1,TRUE
+EcoFlow Delta Max,Glenrothes Office,At Depot (Storage),54.9858,-2.94293,1,TRUE
+EcoFlow Delta Max,Hoylake,At Depot (Storage),54.8915,-2.89823,1,TRUE
+EcoFlow Delta Max,Kilmarnock Office,At Depot (Storage),54.7972,-2.85353,1,TRUE
+EcoFlow Delta Max,Lister Drive Offices,At Depot (Storage),54.7029,-2.80883,1,TRUE
+EcoFlow Delta Max,Llandudno Junction,At Depot (Storage),54.6086,-2.76413,1,TRUE
+EcoFlow Delta Max,Middlewich,At Depot (Storage),54.5143,-2.71943,1,TRUE
+EcoFlow Delta Max,Mona Depot,At Depot (Storage),54.42,-2.67473,1,TRUE
+EcoFlow Delta Max,Newtown Depot,At Depot (Storage),54.3257,-2.63003,1,TRUE
+EcoFlow Delta Max,Porthmadoc,At Depot (Storage),54.2314,-2.58533,0.6,TRUE
+EcoFlow Delta Max,Prenton Offices,At Depot (Storage),54.1371,-2.54063,1,TRUE
+EcoFlow Delta Max,Queensferry,At Depot (Storage),54.0428,-2.49593,1,TRUE
+EcoFlow Delta Max,St Vincent Crescent,At Depot (Storage),53.9485,-2.45123,1,TRUE
+EcoFlow Delta Max,Stranraer Depot,At Depot (Storage),53.8542,-2.40653,1,TRUE
+EcoFlow Delta Max,Telferton House,At Depot (Storage),53.7599,-2.36183,1,TRUE
+EcoFlow Delta Max,Wrexham,At Depot (Storage),53.6656,-2.31713,1,TRUE
+BLUETTI EP500Pro,Glenrothes Office,At Depot (Storage),53.5713,-2.27243,1,TRUE
+BLUETTI EP500Pro,Hoylake,At Depot (Storage),53.477,-2.22773,0.5,TRUE
+BLUETTI EP500Pro,Kilmarnock Office,At Depot (Storage),53.3827,-2.18303,1,TRUE
+BLUETTI EP500Pro,Lister Drive Offices,At Depot (Storage),53.2884,-2.13833,1,TRUE
+BLUETTI EP500Pro,Llandudno Junction,At Depot (Storage),53.1941,-2.09363,1,TRUE
+BLUETTI EP500Pro,Middlewich,At Depot (Storage),53.0998,-2.04893,1,TRUE
+BLUETTI EP500Pro,Mona Depot,At Depot (Storage),53.0055,-2.00423,1,TRUE
+BLUETTI EP500Pro,Newtown Depot,At Depot (Storage),52.9112,-1.95953,1,TRUE
+BLUETTI EP500Pro,Porthmadoc,At Depot (Storage),52.8169,-1.91483,1,TRUE
+BLUETTI EP500Pro,Prenton Offices,At Depot (Storage),52.7226,-1.87013,1,TRUE
+BLUETTI EP500Pro,Queensferry,At Depot (Storage),52.6283,-1.82543,1,TRUE
+BLUETTI EP500Pro,St Vincent Crescent,At Depot (Storage),52.534,-1.78073,1,TRUE
+BLUETTI EP500Pro,Stranraer Depot,At Depot (Storage),52.4397,-1.73603,1,TRUE
+BLUETTI EP500Pro,Telferton House,At Depot (Storage),52.3454,-1.69133,1,TRUE
+BLUETTI EP500Pro,Wrexham,At Depot (Storage),52.2511,-1.64663,1,TRUE
+BLUETTI AC50S,Glenrothes Office,At Depot (Storage),52.1568,-1.60193,0.2,TRUE
+BLUETTI AC50S,Hoylake,At Depot (Storage),52.0625,-1.55723,1,TRUE
+BLUETTI AC50S,Kilmarnock Office,At Depot (Storage),51.9682,-1.51253,1,TRUE
+BLUETTI AC50S,Lister Drive Offices,At Depot (Storage),51.8739,-1.46783,1,TRUE
+BLUETTI AC50S,Llandudno Junction,At Depot (Storage),51.7796,-1.42313,1,TRUE
+BLUETTI AC50S,Middlewich,At Depot (Storage),51.6853,-1.37843,1,TRUE
+BLUETTI AC50S,Mona Depot,At Depot (Storage),51.591,-1.33373,1,TRUE
+BLUETTI AC50S,Newtown Depot,At Depot (Storage),51.4967,-1.28903,1,TRUE
+BLUETTI AC50S,Porthmadoc,At Depot (Storage),51.4024,-1.24433,1,TRUE
+BLUETTI AC50S,Prenton Offices,At Depot (Storage),51.3081,-1.19963,0,TRUE
+BLUETTI AC50S,Queensferry,At Depot (Storage),51.2138,-1.15493,1,TRUE
+BLUETTI AC50S,St Vincent Crescent,At Depot (Storage),51.1195,-1.11023,1,TRUE
+BLUETTI AC50S,Stranraer Depot,At Depot (Storage),51.0252,-1.06553,1,TRUE
+BLUETTI AC50S,Telferton House,At Depot (Storage),50.9309,-1.02083,1,TRUE
+BLUETTI AC50S,Wrexham,At Depot (Storage),50.8366,-0.97613,1,TRUE
