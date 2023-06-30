@@ -2110,7 +2110,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     color: FlutterFlowTheme.of(context).tertiary,
                                                                                   ),
                                                                                   FFBarChartData(
-                                                                                    yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberInAllDepots).toList(),
+                                                                                    yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberInClosestDepot).toList(),
                                                                                     color: FlutterFlowTheme.of(context).secondary,
                                                                                   ),
                                                                                   FFBarChartData(
