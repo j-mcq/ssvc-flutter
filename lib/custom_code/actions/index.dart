@@ -24,3 +24,4 @@ export 'download_template.dart' show downloadTemplate;
 export 'delete_all_psr_customers.dart' show deleteAllPsrCustomers;
 export 'delete_all_active_response_items.dart'
     show deleteAllActiveResponseItems;
+export 'delete_depot.dart' show deleteDepot;
