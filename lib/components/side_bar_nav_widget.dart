@@ -394,6 +394,53 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  await actions.downloadTemplate(
+                    'userGuide',
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 48.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 4.0, 4.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 12.0, 0.0),
+                          child: Icon(
+                            Icons.help_outline,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
+                        ),
+                        Text(
+                          'User Guide',
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              thickness: 1.0,
+              color: FlutterFlowTheme.of(context).accent4,
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
                   GoRouter.of(context).prepareAuthEvent();
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
@@ -423,49 +470,6 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                         ),
                         Text(
                           'Logout',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  await actions.downloadTemplate(
-                    'userGuide',
-                  );
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 48.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 4.0, 4.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 12.0, 0.0),
-                          child: Icon(
-                            Icons.help_outline,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
-                          ),
-                        ),
-                        Text(
-                          'User Guide',
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],
