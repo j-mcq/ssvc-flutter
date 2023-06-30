@@ -4,6 +4,7 @@ import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -563,10 +564,29 @@ class _DepotsWidgetState extends State<DepotsWidget> {
                                                                             ) ??
                                                                             false;
                                                                         if (confirmDialogResponse) {
-                                                                          await listViewDepotsRecord
-                                                                              .reference
-                                                                              .delete();
+                                                                          _model.outDeleteDepot =
+                                                                              await actions.deleteDepot(
+                                                                            listViewDepotsRecord.reference,
+                                                                          );
+                                                                          if (_model.outDeleteDepot != null &&
+                                                                              _model.outDeleteDepot != '') {
+                                                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                                              SnackBar(
+                                                                                content: Text(
+                                                                                  _model.outDeleteDepot!,
+                                                                                  style: TextStyle(
+                                                                                    color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  ),
+                                                                                ),
+                                                                                duration: Duration(milliseconds: 4000),
+                                                                                backgroundColor: FlutterFlowTheme.of(context).error,
+                                                                              ),
+                                                                            );
+                                                                          }
                                                                         }
+
+                                                                        setState(
+                                                                            () {});
                                                                       },
                                                                       child:
                                                                           Icon(

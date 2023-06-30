@@ -324,7 +324,7 @@ class _DashboardWidgetState extends State<DashboardWidget>
                                                                         'Outfit',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .alternate,
+                                                                        .primaryText,
                                                                     fontSize:
                                                                         14.0,
                                                                     fontWeight:
