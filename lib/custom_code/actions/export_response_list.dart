@@ -59,7 +59,7 @@ Future<void> exportToCsv(List<List<dynamic>> data) async {
   var exported = const Utf8Encoder().convert(csvData);
 
   await FileSaver.instance.saveFile(
-      name: 'response_list' + DateTime.now().toString() + '.csv',
+      name: 'response_list_' + DateTime.now().toString() + '.csv',
       bytes: exported,
       ext: '.csv');
 }
