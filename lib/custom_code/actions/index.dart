@@ -21,3 +21,6 @@ export 'export_response_list.dart' show exportResponseList;
 export 'export_psr_categories.dart' show exportPsrCategories;
 export 'get_depot_reference.dart' show getDepotReference;
 export 'download_template.dart' show downloadTemplate;
+export 'delete_all_psr_customers.dart' show deleteAllPsrCustomers;
+export 'delete_all_active_response_items.dart'
+    show deleteAllActiveResponseItems;

@@ -37,6 +37,8 @@ class AdminModel extends FlutterFlowModel {
 
   // Stores action output result for [Custom Action - importPsrData] action in Button widget.
   bool? outImportPsrData;
+  // Stores action output result for [Custom Action - deleteAllPsrCustomers] action in Button widget.
+  bool? outDeleteAllPsrCustomers;
   bool isDataUploading2 = false;
   FFUploadedFile uploadedLocalFile2 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -44,6 +46,8 @@ class AdminModel extends FlutterFlowModel {
 
   // Stores action output result for [Custom Action - importResponseItemsData] action in Button widget.
   String? outImportResponseItemData;
+  // Stores action output result for [Custom Action - deleteAllActiveResponseItems] action in Button widget.
+  bool? outDeleteAllPsrActiveResponseItems;
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
