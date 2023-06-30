@@ -2049,7 +2049,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     color: FlutterFlowTheme.of(context).tertiary,
                                                                                   ),
                                                                                   FFBarChartData(
-                                                                                    yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberInAllDepots).toList(),
+                                                                                    yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberInClosestDepot).toList(),
                                                                                     color: FlutterFlowTheme.of(context).secondary,
                                                                                   ),
                                                                                   FFBarChartData(
@@ -2096,8 +2096,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                     LegendEntry(FlutterFlowTheme.of(context).secondary, 'Stock at Local Depot'),
                                                                                     LegendEntry(FlutterFlowTheme.of(context).primary, 'Total in Stock'),
                                                                                   ],
-                                                                                  width: 200,
-                                                                                  height: 50,
+                                                                                  width: 200.0,
+                                                                                  height: 75.0,
                                                                                   textStyle: FlutterFlowTheme.of(context).bodyMedium,
                                                                                   textPadding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                   padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
