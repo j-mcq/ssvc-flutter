@@ -325,7 +325,7 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                 ))
                                                   Expanded(
                                                     child: Text(
-                                                      'Electrically Dependant',
+                                                      'Medically Dependant',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
