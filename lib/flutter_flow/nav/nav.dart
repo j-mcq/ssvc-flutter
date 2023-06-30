@@ -404,9 +404,9 @@ class FFRoute {
                   color: Colors.transparent,
                   child: Center(
                     child: Image.asset(
-                      'assets/images/SPEN-LOGO-MED-cropped.jpg',
-                      width: 300.0,
-                      fit: BoxFit.contain,
+                      'assets/images/logo_spen_new.png',
+                      width: 250.0,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 )
