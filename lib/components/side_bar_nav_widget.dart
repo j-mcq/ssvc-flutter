@@ -89,7 +89,7 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Image.asset(
-                    'assets/images/SPEN-LOGO-MED-cropped.jpg',
+                    'assets/images/logo_spen_new.png',
                     width: 130.0,
                     height: 40.0,
                     fit: BoxFit.fitWidth,

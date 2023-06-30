@@ -397,12 +397,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                               var downloadUrls =
                                                                   <String>[];
                                                               try {
-                                                                showUploadMessage(
-                                                                  context,
-                                                                  'Uploading file...',
-                                                                  showLoading:
-                                                                      true,
-                                                                );
                                                                 selectedUploadedFiles =
                                                                     selectedFiles
                                                                         .map((m) =>
@@ -429,9 +423,6 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                         u!)
                                                                     .toList();
                                                               } finally {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .hideCurrentSnackBar();
                                                                 _model.isDataUploading1 =
                                                                     false;
                                                               }
@@ -451,16 +442,8 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                       downloadUrls
                                                                           .first;
                                                                 });
-                                                                showUploadMessage(
-                                                                  context,
-                                                                  'Success!',
-                                                                );
                                                               } else {
                                                                 setState(() {});
-                                                                showUploadMessage(
-                                                                  context,
-                                                                  'Failed to upload file',
-                                                                );
                                                                 return;
                                                               }
                                                             }

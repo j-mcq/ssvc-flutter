@@ -80,7 +80,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Image.asset(
-                                    'assets/images/SPEN-LOGO-MED-cropped.jpg',
+                                    'assets/images/logo_spen_new.png',
                                     width: 150.0,
                                     height: 40.0,
                                     fit: BoxFit.fitWidth,
