@@ -2111,7 +2111,11 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                   ),
                                                                                   FFBarChartData(
                                                                                     yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberInAllDepots).toList(),
-                                                                                    color: Color(0xFF6F28CB),
+                                                                                    color: FlutterFlowTheme.of(context).secondary,
+                                                                                  ),
+                                                                                  FFBarChartData(
+                                                                                    yData: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.numberInAllDepots).toList(),
+                                                                                    color: FlutterFlowTheme.of(context).primary,
                                                                                   )
                                                                                 ],
                                                                                 xLabels: scenarioResultsContainerScenarioResponseItemsRecordList.map((d) => d.name).toList(),
@@ -2150,7 +2154,8 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                                 child: FlutterFlowChartLegendWidget(
                                                                                   entries: [
                                                                                     LegendEntry(FlutterFlowTheme.of(context).tertiary, 'Required for Scenario'),
-                                                                                    LegendEntry(Color(0xFF6F28CB), 'Total in Stock'),
+                                                                                    LegendEntry(FlutterFlowTheme.of(context).secondary, 'Stock at Local Depot'),
+                                                                                    LegendEntry(FlutterFlowTheme.of(context).primary, 'Total in Stock'),
                                                                                   ],
                                                                                   width: 200.0,
                                                                                   height: 50.0,
