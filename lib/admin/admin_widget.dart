@@ -59,6 +59,7 @@ class _AdminWidgetState extends State<AdminWidget> {
         body: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (responsiveVisibility(
               context: context,
