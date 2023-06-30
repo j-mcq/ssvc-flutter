@@ -20,3 +20,4 @@ export 'refresh_scenario_stock_levels.dart' show refreshScenarioStockLevels;
 export 'export_response_list.dart' show exportResponseList;
 export 'export_psr_categories.dart' show exportPsrCategories;
 export 'get_depot_reference.dart' show getDepotReference;
+export 'download_template.dart' show downloadTemplate;

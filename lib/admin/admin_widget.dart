@@ -319,7 +319,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                       4.0,
                                                                       4.0),
                                                           child: Text(
-                                                            'Download sample csv format',
+                                                            'Download PSR Data Import Template',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyLarge,
@@ -344,13 +344,28 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                       triggerMode:
                                                           TooltipTriggerMode
                                                               .tap,
-                                                      child: Icon(
-                                                        Icons.download,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 24.0,
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          await actions
+                                                              .downloadTemplate(
+                                                            'psrData',
+                                                          );
+                                                        },
+                                                        child: Icon(
+                                                          Icons.download,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 24.0,
+                                                        ),
                                                       ),
                                                     ),
                                                     Expanded(
@@ -577,7 +592,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                       4.0,
                                                                       4.0),
                                                           child: Text(
-                                                            'Download sample csv format',
+                                                            'Download Response Item Import Template',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyLarge,
@@ -602,13 +617,28 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                       triggerMode:
                                                           TooltipTriggerMode
                                                               .tap,
-                                                      child: Icon(
-                                                        Icons.download,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 24.0,
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          await actions
+                                                              .downloadTemplate(
+                                                            'responseItems',
+                                                          );
+                                                        },
+                                                        child: Icon(
+                                                          Icons.download,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 24.0,
+                                                        ),
                                                       ),
                                                     ),
                                                     Expanded(
