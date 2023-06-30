@@ -179,7 +179,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                       .fromSTEB(
                                                           0.0, 4.0, 0.0, 0.0),
                                                   child: Text(
-                                                    'Outage scenario details',
+                                                    '',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodySmall,
