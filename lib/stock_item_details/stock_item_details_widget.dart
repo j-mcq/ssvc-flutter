@@ -3,7 +3,6 @@ import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/components/refresh_stock_data_widget.dart';
 import '/components/side_bar_nav_widget.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -12,9 +11,7 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -33,39 +30,15 @@ class StockItemDetailsWidget extends StatefulWidget {
   _StockItemDetailsWidgetState createState() => _StockItemDetailsWidgetState();
 }
 
-class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
-    with TickerProviderStateMixin {
+class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
   late StockItemDetailsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  var hasContainerTriggered = false;
-  final animationsMap = {
-    'containerOnActionTriggerAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 350.ms,
-          begin: Offset(-40.0, 0.0),
-          end: Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => StockItemDetailsModel());
-
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -271,145 +244,6 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget>
                                               ],
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 12.0, 16.0, 0.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            if (Theme.of(context).brightness ==
-                                                Brightness.dark)
-                                              Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      blurRadius: 4.0,
-                                                      color: Color(0x33000000),
-                                                      offset: Offset(0.0, 2.0),
-                                                    )
-                                                  ],
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                  border: Border.all(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .lineColor,
-                                                    width: 1.0,
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(24.0, 12.0,
-                                                          24.0, 12.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        'Switch to Light Mode',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall,
-                                                      ),
-                                                      Container(
-                                                        width: 80.0,
-                                                        height: 40.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .lineColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      20.0),
-                                                        ),
-                                                        child: Stack(
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  0.0, 0.0),
-                                                          children: [
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      -0.9,
-                                                                      0.0),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8.0,
-                                                                            2.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .wb_sunny_rounded,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryText,
-                                                                  size: 24.0,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.9, 0.0),
-                                                              child: Container(
-                                                                width: 36.0,
-                                                                height: 36.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryBackground,
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      blurRadius:
-                                                                          4.0,
-                                                                      color: Color(
-                                                                          0x430B0D0F),
-                                                                      offset: Offset(
-                                                                          0.0,
-                                                                          2.0),
-                                                                    )
-                                                                  ],
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              30.0),
-                                                                  shape: BoxShape
-                                                                      .rectangle,
-                                                                ),
-                                                              ).animateOnActionTrigger(
-                                                                  animationsMap[
-                                                                      'containerOnActionTriggerAnimation']!,
-                                                                  hasBeenTriggered:
-                                                                      hasContainerTriggered),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                          ],
                                         ),
                                       ),
                                       Column(

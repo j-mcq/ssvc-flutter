@@ -80,22 +80,12 @@ class _SignInWidgetState extends State<SignInWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  if (Theme.of(context).brightness ==
-                                      Brightness.light)
-                                    Image.asset(
-                                      'assets/images/SPEN-LOGO-MED-cropped.jpg',
-                                      width: 160.2,
-                                      height: 50.0,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  if (Theme.of(context).brightness ==
-                                      Brightness.dark)
-                                    Image.asset(
-                                      'assets/images/noCode_UI_onDark@3x.png',
-                                      width: 150.0,
-                                      height: 40.0,
-                                      fit: BoxFit.fitWidth,
-                                    ),
+                                  Image.asset(
+                                    'assets/images/SPEN-LOGO-MED-cropped.jpg',
+                                    width: 160.2,
+                                    height: 50.0,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ],
                               ),
                             ),

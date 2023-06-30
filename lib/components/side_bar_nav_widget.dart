@@ -88,20 +88,12 @@ class _SideBarNavWidgetState extends State<SideBarNavWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  if (Theme.of(context).brightness == Brightness.light)
-                    Image.asset(
-                      'assets/images/SPEN-LOGO-MED-cropped.jpg',
-                      width: 130.0,
-                      height: 40.0,
-                      fit: BoxFit.fitWidth,
-                    ),
-                  if (Theme.of(context).brightness == Brightness.dark)
-                    Image.asset(
-                      'assets/images/noCode_UI_onDark@3x.png',
-                      width: 130.0,
-                      height: 40.0,
-                      fit: BoxFit.fitWidth,
-                    ),
+                  Image.asset(
+                    'assets/images/SPEN-LOGO-MED-cropped.jpg',
+                    width: 130.0,
+                    height: 40.0,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ],
               ),
             ),
