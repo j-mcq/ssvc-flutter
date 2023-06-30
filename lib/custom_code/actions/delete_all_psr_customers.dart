@@ -12,5 +12,16 @@ import 'package:flutter/material.dart';
 
 Future<bool> deleteAllPsrCustomers() async {
   // Add your function code here!
-  return true;
+  try {
+    final psr = await queryPsrRecordOnce();
+
+    // delete all records
+    for (var psrCustomer in psr) {
+      await psrCustomer.reference.delete();
+    }
+    return true;
+  } catch (e) {
+    print('Error deleting all PSR Customers: ' + e.toString());
+    return false;
+  }
 }

@@ -12,5 +12,16 @@ import 'package:flutter/material.dart';
 
 Future<bool> deleteAllActiveResponseItems() async {
   // Add your function code here!
-  return true;
+  try {
+    final activeResponseItems = await queryActiveResponseItemsRecordOnce();
+
+    // delete all records
+    for (var activeResponseItem in activeResponseItems) {
+      await activeResponseItem.reference.delete();
+    }
+    return true;
+  } catch (e) {
+    print('Error deleting all PSR Customers: ' + e.toString());
+    return false;
+  }
 }
