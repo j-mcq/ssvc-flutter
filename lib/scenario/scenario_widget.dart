@@ -1093,20 +1093,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                 .titleMedium,
                                                           ),
                                                         ),
-                                                        if (responsiveVisibility(
-                                                          context: context,
-                                                          phone: false,
-                                                          tablet: false,
-                                                        ))
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              'Nearest Depot',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .titleMedium,
-                                                            ),
-                                                          ),
                                                         Expanded(
                                                           flex: 1,
                                                           child: Padding(
@@ -1243,17 +1229,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                             Text(
                                                                           containerScenarioResultsRecord != null
                                                                               ? containerScenarioResultsRecord!.numberOfResponseItems.toString()
-                                                                              : '',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
-                                                                        ),
-                                                                      ),
-                                                                      Expanded(
-                                                                        flex: 1,
-                                                                        child:
-                                                                            Text(
-                                                                          containerScenarioResultsRecord != null
-                                                                              ? containerScenarioResultsRecord!.nearestDepotName
                                                                               : '',
                                                                           style:
                                                                               FlutterFlowTheme.of(context).bodyMedium,
@@ -1611,7 +1586,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       flex: 1,
                                                                       child:
                                                                           Text(
-                                                                        'Depot',
+                                                                        'Closest Depot',
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodySmall,
                                                                       ),

@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
+import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -267,38 +268,89 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                   children: [
                                                     Expanded(
                                                       flex: 3,
-                                                      child: Column(
+                                                      child: Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
                                                         children: [
-                                                          Text(
-                                                            'PSR Data Import',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .headlineSmall,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        4.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: Text(
-                                                              'Import information on PSR household locations and needs from a csv file',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodySmall,
-                                                            ),
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'PSR Data Import',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineSmall,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            4.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child: Text(
+                                                                  'Import information on PSR household locations and needs from a csv file',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall,
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ],
+                                                      ),
+                                                    ),
+                                                    AlignedTooltip(
+                                                      content: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      4.0,
+                                                                      4.0,
+                                                                      4.0,
+                                                                      4.0),
+                                                          child: Text(
+                                                            'Download sample csv format',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyLarge,
+                                                          )),
+                                                      offset: 4.0,
+                                                      preferredDirection:
+                                                          AxisDirection.down,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryBackground,
+                                                      elevation: 4.0,
+                                                      tailBaseWidth: 24.0,
+                                                      tailLength: 12.0,
+                                                      waitDuration: Duration(
+                                                          milliseconds: 100),
+                                                      showDuration: Duration(
+                                                          milliseconds: 1500),
+                                                      triggerMode:
+                                                          TooltipTriggerMode
+                                                              .tap,
+                                                      child: Icon(
+                                                        Icons.download,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        size: 24.0,
                                                       ),
                                                     ),
                                                     Expanded(
@@ -314,6 +366,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                           onPressed: () async {
                                                             final selectedFiles =
                                                                 await selectFiles(
+                                                              allowedExtensions: [
+                                                                'pdf'
+                                                              ],
                                                               multiFile: false,
                                                             );
                                                             if (selectedFiles !=
@@ -512,6 +567,50 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                         ],
                                                       ),
                                                     ),
+                                                    AlignedTooltip(
+                                                      content: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      4.0,
+                                                                      4.0,
+                                                                      4.0,
+                                                                      4.0),
+                                                          child: Text(
+                                                            'Download sample csv format',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyLarge,
+                                                          )),
+                                                      offset: 4.0,
+                                                      preferredDirection:
+                                                          AxisDirection.down,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryBackground,
+                                                      elevation: 4.0,
+                                                      tailBaseWidth: 24.0,
+                                                      tailLength: 12.0,
+                                                      waitDuration: Duration(
+                                                          milliseconds: 100),
+                                                      showDuration: Duration(
+                                                          milliseconds: 1500),
+                                                      triggerMode:
+                                                          TooltipTriggerMode
+                                                              .tap,
+                                                      child: Icon(
+                                                        Icons.download,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        size: 24.0,
+                                                      ),
+                                                    ),
                                                     Expanded(
                                                       child: Padding(
                                                         padding:
@@ -525,6 +624,9 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                           onPressed: () async {
                                                             final selectedFiles =
                                                                 await selectFiles(
+                                                              allowedExtensions: [
+                                                                'pdf'
+                                                              ],
                                                               multiFile: false,
                                                             );
                                                             if (selectedFiles !=
