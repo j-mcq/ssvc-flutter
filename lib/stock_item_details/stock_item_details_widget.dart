@@ -10,6 +10,7 @@ import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -414,6 +415,17 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                     clipContainerResponseItemsRecord
                                                         .name,
                                               ),
+                                              onChanged: (_) =>
+                                                  EasyDebounce.debounce(
+                                                '_model.itemNameController',
+                                                Duration(milliseconds: 2000),
+                                                () async {
+                                                  setState(() {
+                                                    FFAppState().isEditing =
+                                                        true;
+                                                  });
+                                                },
+                                              ),
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Item Name',
@@ -498,6 +510,17 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                 text:
                                                     clipContainerResponseItemsRecord
                                                         .description,
+                                              ),
+                                              onChanged: (_) =>
+                                                  EasyDebounce.debounce(
+                                                '_model.descriptionController',
+                                                Duration(milliseconds: 2000),
+                                                () async {
+                                                  setState(() {
+                                                    FFAppState().isEditing =
+                                                        true;
+                                                  });
+                                                },
                                               ),
                                               obscureText: false,
                                               decoration: InputDecoration(
@@ -585,6 +608,17 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                     clipContainerResponseItemsRecord
                                                         .unitPrice
                                                         .toString(),
+                                              ),
+                                              onChanged: (_) =>
+                                                  EasyDebounce.debounce(
+                                                '_model.unitPriceController',
+                                                Duration(milliseconds: 2000),
+                                                () async {
+                                                  setState(() {
+                                                    FFAppState().isEditing =
+                                                        true;
+                                                  });
+                                                },
                                               ),
                                               obscureText: false,
                                               decoration: InputDecoration(
@@ -677,6 +711,17 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                 text: clipContainerResponseItemsRecord
                                                     .totalEnergyStorageCapacity
                                                     .toString(),
+                                              ),
+                                              onChanged: (_) =>
+                                                  EasyDebounce.debounce(
+                                                '_model.energyCapacityController',
+                                                Duration(milliseconds: 2000),
+                                                () async {
+                                                  setState(() {
+                                                    FFAppState().isEditing =
+                                                        true;
+                                                  });
+                                                },
                                               ),
                                               obscureText: false,
                                               decoration: InputDecoration(
@@ -1012,6 +1057,10 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                         widget
                                                             .responseItemReference,
                                                       );
+                                                      setState(() {
+                                                        FFAppState().isEditing =
+                                                            false;
+                                                      });
 
                                                       await widget
                                                           .responseItemReference!

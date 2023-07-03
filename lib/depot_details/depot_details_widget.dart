@@ -7,6 +7,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -259,6 +261,17 @@ class _DepotDetailsWidgetState extends State<DepotDetailsWidget> {
                                                       categoryContainerDepotsRecord
                                                           .name,
                                                 ),
+                                                onChanged: (_) =>
+                                                    EasyDebounce.debounce(
+                                                  '_model.depotNameController',
+                                                  Duration(milliseconds: 2000),
+                                                  () async {
+                                                    setState(() {
+                                                      FFAppState().isEditing =
+                                                          true;
+                                                    });
+                                                  },
+                                                ),
                                                 obscureText: false,
                                                 decoration: InputDecoration(
                                                   labelText: 'Depot Name',
@@ -349,7 +362,30 @@ class _DepotDetailsWidgetState extends State<DepotDetailsWidget> {
                                                 child: StreamBuilder<
                                                     List<DepotOwnersRecord>>(
                                                   stream:
-                                                      queryDepotOwnersRecord(),
+                                                      queryDepotOwnersRecord()
+                                                        ..listen((snapshot) {
+                                                          List<DepotOwnersRecord>
+                                                              depotOwnerDepotOwnersRecordList =
+                                                              snapshot;
+                                                          if (_model.depotOwnerDepotOwnersRecordListPreviousSnapshot !=
+                                                                  null &&
+                                                              !const ListEquality(
+                                                                      DepotOwnersRecordDocumentEquality())
+                                                                  .equals(
+                                                                      depotOwnerDepotOwnersRecordList,
+                                                                      _model
+                                                                          .depotOwnerDepotOwnersRecordListPreviousSnapshot)) {
+                                                            setState(() {
+                                                              FFAppState()
+                                                                      .isEditing =
+                                                                  true;
+                                                            });
+
+                                                            setState(() {});
+                                                          }
+                                                          _model.depotOwnerDepotOwnersRecordListPreviousSnapshot =
+                                                              snapshot;
+                                                        }),
                                                   builder: (context, snapshot) {
                                                     // Customize what your widget looks like when it's loading.
                                                     if (!snapshot.hasData) {
@@ -440,6 +476,17 @@ class _DepotDetailsWidgetState extends State<DepotDetailsWidget> {
                                                   text:
                                                       categoryContainerDepotsRecord
                                                           .postcode,
+                                                ),
+                                                onChanged: (_) =>
+                                                    EasyDebounce.debounce(
+                                                  '_model.postcodeController',
+                                                  Duration(milliseconds: 2000),
+                                                  () async {
+                                                    setState(() {
+                                                      FFAppState().isEditing =
+                                                          true;
+                                                    });
+                                                  },
                                                 ),
                                                 obscureText: false,
                                                 decoration: InputDecoration(
@@ -634,6 +681,11 @@ class _DepotDetailsWidgetState extends State<DepotDetailsWidget> {
                                                               .postcodeController
                                                               .text,
                                                         ));
+                                                        setState(() {
+                                                          FFAppState()
+                                                                  .isEditing =
+                                                              false;
+                                                        });
 
                                                         context.pushNamed(
                                                             'depots');

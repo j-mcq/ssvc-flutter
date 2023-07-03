@@ -10,6 +10,7 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -343,6 +344,21 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                 scenarioInputsContainerScenarioRecord
                                                                     .name,
                                                           ),
+                                                          onChanged: (_) =>
+                                                              EasyDebounce
+                                                                  .debounce(
+                                                            '_model.scenarioNameController',
+                                                            Duration(
+                                                                milliseconds:
+                                                                    2000),
+                                                            () async {
+                                                              setState(() {
+                                                                FFAppState()
+                                                                        .isEditing =
+                                                                    true;
+                                                              });
+                                                            },
+                                                          ),
                                                           obscureText: false,
                                                           decoration:
                                                               InputDecoration(
@@ -454,6 +470,19 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             : scenarioInputsContainerScenarioRecord
                                                                 .outageDuration
                                                                 .toString(),
+                                                      ),
+                                                      onChanged: (_) =>
+                                                          EasyDebounce.debounce(
+                                                        '_model.outageDurationController',
+                                                        Duration(
+                                                            milliseconds: 2000),
+                                                        () async {
+                                                          setState(() {
+                                                            FFAppState()
+                                                                    .isEditing =
+                                                                true;
+                                                          });
+                                                        },
                                                       ),
                                                       obscureText: false,
                                                       decoration:
@@ -811,6 +840,12 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                       ),
                                                                     );
                                                                   }
+
+                                                                  setState(() {
+                                                                    FFAppState()
+                                                                            .isEditing =
+                                                                        false;
+                                                                  });
 
                                                                   context
                                                                       .pushNamed(
