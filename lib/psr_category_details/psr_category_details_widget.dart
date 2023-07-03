@@ -7,6 +7,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -261,6 +263,17 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget> {
                                                       categoryContainerPsrCategoryOptionsRecord
                                                           .name,
                                                 ),
+                                                onChanged: (_) =>
+                                                    EasyDebounce.debounce(
+                                                  '_model.itemNameController',
+                                                  Duration(milliseconds: 2000),
+                                                  () async {
+                                                    setState(() {
+                                                      FFAppState().isEditing =
+                                                          true;
+                                                    });
+                                                  },
+                                                ),
                                                 obscureText: false,
                                                 decoration: InputDecoration(
                                                   labelText: 'Category Name',
@@ -352,7 +365,30 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget> {
                                                     List<
                                                         PsrCategoryGroupOptionsRecord>>(
                                                   stream:
-                                                      queryPsrCategoryGroupOptionsRecord(),
+                                                      queryPsrCategoryGroupOptionsRecord()
+                                                        ..listen((snapshot) {
+                                                          List<PsrCategoryGroupOptionsRecord>
+                                                              psrgroupDropDownPsrCategoryGroupOptionsRecordList =
+                                                              snapshot;
+                                                          if (_model.psrgroupDropDownPsrCategoryGroupOptionsRecordListPreviousSnapshot !=
+                                                                  null &&
+                                                              !const ListEquality(
+                                                                      PsrCategoryGroupOptionsRecordDocumentEquality())
+                                                                  .equals(
+                                                                      psrgroupDropDownPsrCategoryGroupOptionsRecordList,
+                                                                      _model
+                                                                          .psrgroupDropDownPsrCategoryGroupOptionsRecordListPreviousSnapshot)) {
+                                                            setState(() {
+                                                              FFAppState()
+                                                                      .isEditing =
+                                                                  true;
+                                                            });
+
+                                                            setState(() {});
+                                                          }
+                                                          _model.psrgroupDropDownPsrCategoryGroupOptionsRecordListPreviousSnapshot =
+                                                              snapshot;
+                                                        }),
                                                   builder: (context, snapshot) {
                                                     // Customize what your widget looks like when it's loading.
                                                     if (!snapshot.hasData) {
@@ -444,6 +480,17 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget> {
                                                       categoryContainerPsrCategoryOptionsRecord
                                                           .resilienceScore
                                                           .toString(),
+                                                ),
+                                                onChanged: (_) =>
+                                                    EasyDebounce.debounce(
+                                                  '_model.resilienceScoreController',
+                                                  Duration(milliseconds: 2000),
+                                                  () async {
+                                                    setState(() {
+                                                      FFAppState().isEditing =
+                                                          true;
+                                                    });
+                                                  },
                                                 ),
                                                 obscureText: false,
                                                 decoration: InputDecoration(
@@ -545,6 +592,17 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget> {
                                                       categoryContainerPsrCategoryOptionsRecord
                                                           .powerConsumption
                                                           .toString(),
+                                                ),
+                                                onChanged: (_) =>
+                                                    EasyDebounce.debounce(
+                                                  '_model.estimatedEnergyConsumptionController',
+                                                  Duration(milliseconds: 2000),
+                                                  () async {
+                                                    setState(() {
+                                                      FFAppState().isEditing =
+                                                          true;
+                                                    });
+                                                  },
                                                 ),
                                                 obscureText: false,
                                                 decoration: InputDecoration(
@@ -751,6 +809,19 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget> {
                                                         setState(() => _model
                                                                 .checkboxValue =
                                                             newValue!);
+                                                        if (newValue!) {
+                                                          setState(() {
+                                                            FFAppState()
+                                                                    .isEditing =
+                                                                true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            FFAppState()
+                                                                    .isEditing =
+                                                                true;
+                                                          });
+                                                        }
                                                       },
                                                       activeColor:
                                                           FlutterFlowTheme.of(
@@ -817,6 +888,11 @@ class _PsrCategoryDetailsWidgetState extends State<PsrCategoryDetailsWidget> {
                                                           psrGroupName: _model
                                                               .psrgroupDropDownValue,
                                                         ));
+                                                        setState(() {
+                                                          FFAppState()
+                                                                  .isEditing =
+                                                              false;
+                                                        });
 
                                                         context.pushNamed(
                                                             'psrCategories');

@@ -118,6 +118,12 @@ class FFAppState extends ChangeNotifier {
   ) {
     _polygonList[_index] = updateFn(_polygonList[_index]);
   }
+
+  bool _isEditing = false;
+  bool get isEditing => _isEditing;
+  set isEditing(bool _value) {
+    _isEditing = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
