@@ -25,3 +25,5 @@ export 'delete_all_psr_customers.dart' show deleteAllPsrCustomers;
 export 'delete_all_active_response_items.dart'
     show deleteAllActiveResponseItems;
 export 'delete_depot.dart' show deleteDepot;
+export 'delete_response_item.dart' show deleteResponseItem;
+export 'delete_active_response_item.dart' show deleteActiveResponseItem;
