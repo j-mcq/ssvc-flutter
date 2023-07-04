@@ -28,6 +28,10 @@ class StockInformationModel extends FlutterFlowModel {
   late SideBarNavModel sideBarNavModel;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   ResponseItemsRecord? outCreateResponseItem;
+  // Stores action output result for [Custom Action - deleteResponseItem] action in Icon widget.
+  String? outDeleteResponseItem;
+  // Stores action output result for [Custom Action - deleteActiveResponseItem] action in Icon widget.
+  String? outDeleteActiveResponseItems;
 
   /// Initialization and disposal methods.
 

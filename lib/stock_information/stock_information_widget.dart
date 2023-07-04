@@ -699,12 +699,39 @@ class _StockInformationWidgetState extends State<StockInformationWidget> {
                                                                           ) ??
                                                                           false;
                                                                   if (confirmDialogResponse) {
-                                                                    await actions
-                                                                        .deleteDepotMappings(
+                                                                    _model.outDeleteResponseItem =
+                                                                        await actions
+                                                                            .deleteResponseItem(
                                                                       listViewResponseItemsRecord
                                                                           .reference,
                                                                     );
+                                                                    if (_model.outDeleteResponseItem !=
+                                                                            null &&
+                                                                        _model.outDeleteResponseItem !=
+                                                                            '') {
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                              Text(
+                                                                            _model.outDeleteResponseItem!,
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                            ),
+                                                                          ),
+                                                                          duration:
+                                                                              Duration(milliseconds: 4000),
+                                                                          backgroundColor:
+                                                                              FlutterFlowTheme.of(context).secondary,
+                                                                        ),
+                                                                      );
+                                                                    }
                                                                   }
+
+                                                                  setState(
+                                                                      () {});
                                                                 },
                                                                 child: Icon(
                                                                   Icons
@@ -1245,10 +1272,39 @@ class _StockInformationWidgetState extends State<StockInformationWidget> {
                                                                           ) ??
                                                                           false;
                                                                   if (confirmDialogResponse) {
-                                                                    await listViewActiveResponseItemsRecord
-                                                                        .reference
-                                                                        .delete();
+                                                                    _model.outDeleteActiveResponseItems =
+                                                                        await actions
+                                                                            .deleteActiveResponseItem(
+                                                                      listViewActiveResponseItemsRecord
+                                                                          .reference,
+                                                                    );
+                                                                    if (_model.outDeleteActiveResponseItems !=
+                                                                            null &&
+                                                                        _model.outDeleteActiveResponseItems !=
+                                                                            '') {
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                              Text(
+                                                                            _model.outDeleteActiveResponseItems!,
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                            ),
+                                                                          ),
+                                                                          duration:
+                                                                              Duration(milliseconds: 4000),
+                                                                          backgroundColor:
+                                                                              FlutterFlowTheme.of(context).secondary,
+                                                                        ),
+                                                                      );
+                                                                    }
                                                                   }
+
+                                                                  setState(
+                                                                      () {});
                                                                 },
                                                                 child: Icon(
                                                                   Icons
