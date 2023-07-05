@@ -41,15 +41,10 @@ class PsrRecord extends FirestoreRecord {
   double get latitude => _latitude ?? 0.0;
   bool hasLatitude() => _latitude != null;
 
-  // "owner" field.
-  List<DocumentReference>? _owner;
-  List<DocumentReference> get owner => _owner ?? const [];
-  bool hasOwner() => _owner != null;
-
-  // "oner" field.
-  DocumentReference? _oner;
-  DocumentReference? get oner => _oner;
-  bool hasOner() => _oner != null;
+  // "owners" field.
+  List<DocumentReference>? _owners;
+  List<DocumentReference> get owners => _owners ?? const [];
+  bool hasOwners() => _owners != null;
 
   void _initializeFields() {
     _address1 = snapshotData['address1'] as String?;
@@ -57,8 +52,7 @@ class PsrRecord extends FirestoreRecord {
     _postcode = snapshotData['postcode'] as String?;
     _longitude = castToType<double>(snapshotData['longitude']);
     _latitude = castToType<double>(snapshotData['latitude']);
-    _owner = getDataList(snapshotData['owner']);
-    _oner = snapshotData['oner'] as DocumentReference?;
+    _owners = getDataList(snapshotData['owners']);
   }
 
   static CollectionReference get collection =>
@@ -100,7 +94,6 @@ Map<String, dynamic> createPsrRecordData({
   String? postcode,
   double? longitude,
   double? latitude,
-  DocumentReference? oner,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -109,7 +102,6 @@ Map<String, dynamic> createPsrRecordData({
       'postcode': postcode,
       'longitude': longitude,
       'latitude': latitude,
-      'oner': oner,
     }.withoutNulls,
   );
 
@@ -127,8 +119,7 @@ class PsrRecordDocumentEquality implements Equality<PsrRecord> {
         e1?.postcode == e2?.postcode &&
         e1?.longitude == e2?.longitude &&
         e1?.latitude == e2?.latitude &&
-        listEquality.equals(e1?.owner, e2?.owner) &&
-        e1?.oner == e2?.oner;
+        listEquality.equals(e1?.owners, e2?.owners);
   }
 
   @override
@@ -138,8 +129,7 @@ class PsrRecordDocumentEquality implements Equality<PsrRecord> {
         e?.postcode,
         e?.longitude,
         e?.latitude,
-        e?.owner,
-        e?.oner
+        e?.owners
       ]);
 
   @override

@@ -71,11 +71,6 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
   DocumentReference? get homeDepot => _homeDepot;
   bool hasHomeDepot() => _homeDepot != null;
 
-  // "owners" field.
-  List<DocumentReference>? _owners;
-  List<DocumentReference> get owners => _owners ?? const [];
-  bool hasOwners() => _owners != null;
-
   void _initializeFields() {
     _dateAdded = snapshotData['date_added'] as DateTime?;
     _imageLink = snapshotData['image_link'] as String?;
@@ -88,7 +83,6 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
     _status = snapshotData['status'] as DocumentReference?;
     _responseItem = snapshotData['response_item'] as DocumentReference?;
     _homeDepot = snapshotData['home_depot'] as DocumentReference?;
-    _owners = getDataList(snapshotData['owners']);
   }
 
   static CollectionReference get collection =>
@@ -164,7 +158,6 @@ class ActiveResponseItemsRecordDocumentEquality
 
   @override
   bool equals(ActiveResponseItemsRecord? e1, ActiveResponseItemsRecord? e2) {
-    const listEquality = ListEquality();
     return e1?.dateAdded == e2?.dateAdded &&
         e1?.imageLink == e2?.imageLink &&
         e1?.chargingStatus == e2?.chargingStatus &&
@@ -175,8 +168,7 @@ class ActiveResponseItemsRecordDocumentEquality
         e1?.isAvailable == e2?.isAvailable &&
         e1?.status == e2?.status &&
         e1?.responseItem == e2?.responseItem &&
-        e1?.homeDepot == e2?.homeDepot &&
-        listEquality.equals(e1?.owners, e2?.owners);
+        e1?.homeDepot == e2?.homeDepot;
   }
 
   @override
@@ -191,8 +183,7 @@ class ActiveResponseItemsRecordDocumentEquality
         e?.isAvailable,
         e?.status,
         e?.responseItem,
-        e?.homeDepot,
-        e?.owners
+        e?.homeDepot
       ]);
 
   @override
