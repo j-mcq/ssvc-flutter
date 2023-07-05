@@ -509,26 +509,30 @@ class _PsrCategoriesWidgetState extends State<PsrCategoriesWidget> {
                                                                         MainAxisSize
                                                                             .max,
                                                                     children: [
-                                                                      Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            children: [
-                                                                              AutoSizeText(
-                                                                                listViewPsrCategoryOptionsRecord.name.maybeHandleOverflow(
-                                                                                  maxChars: 32,
-                                                                                  replacement: '…',
+                                                                      Expanded(
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: AutoSizeText(
+                                                                                    listViewPsrCategoryOptionsRecord.name.maybeHandleOverflow(
+                                                                                      maxChars: 32,
+                                                                                      replacement: '…',
+                                                                                    ),
+                                                                                    style: FlutterFlowTheme.of(context).titleMedium,
+                                                                                  ),
                                                                                 ),
-                                                                                style: FlutterFlowTheme.of(context).titleMedium,
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        ],
+                                                                              ],
+                                                                            ),
+                                                                          ],
+                                                                        ),
                                                                       ),
                                                                     ],
                                                                   ),

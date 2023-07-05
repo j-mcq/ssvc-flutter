@@ -112,15 +112,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ForgotPasswordWidget(),
             ),
             FFRoute(
-              name: 'scenario',
-              path: 'scenario',
-              requireAuth: true,
-              builder: (context, params) => ScenarioWidget(
-                scenarioReference: params.getParam('scenarioReference',
-                    ParamType.DocumentReference, false, ['scenario']),
-              ),
-            ),
-            FFRoute(
               name: 'dashboard',
               path: 'dashboard',
               requireAuth: true,
@@ -129,10 +120,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : DashboardWidget(),
             ),
             FFRoute(
-              name: 'scenarioCopy',
-              path: 'scenarioCopy',
+              name: 'scenario',
+              path: 'scenario',
               requireAuth: true,
-              builder: (context, params) => ScenarioCopyWidget(),
+              builder: (context, params) => ScenarioWidget(
+                scenarioReference: params.getParam('scenarioReference',
+                    ParamType.DocumentReference, false, ['scenario']),
+              ),
             ),
             FFRoute(
               name: 'stockInformation',
@@ -143,6 +137,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : StockInformationWidget(),
             ),
             FFRoute(
+              name: 'scenarioCopy',
+              path: 'scenarioCopy',
+              requireAuth: true,
+              builder: (context, params) => ScenarioCopyWidget(),
+            ),
+            FFRoute(
               name: 'stockItemDetails',
               path: 'stockItemDetails',
               requireAuth: true,
@@ -150,6 +150,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 responseItemReference: params.getParam('responseItemReference',
                     ParamType.DocumentReference, false, ['response_items']),
               ),
+            ),
+            FFRoute(
+              name: 'verifyEmail',
+              path: 'verifyEmail',
+              builder: (context, params) => VerifyEmailWidget(),
             ),
             FFRoute(
               name: 'admin',
@@ -169,11 +174,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'scenarios')
                   : ScenariosWidget(),
-            ),
-            FFRoute(
-              name: 'verifyEmail',
-              path: 'verifyEmail',
-              builder: (context, params) => VerifyEmailWidget(),
             ),
             FFRoute(
               name: 'psrCategories',
