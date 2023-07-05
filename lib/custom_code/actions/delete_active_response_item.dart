@@ -13,5 +13,6 @@ import 'package:flutter/material.dart';
 Future<String?> deleteActiveResponseItem(
     DocumentReference? activeResponseItemsReference) async {
   // Add your function code here!
+  activeResponseItemsReference?.delete();
   return null;
 }

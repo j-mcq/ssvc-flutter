@@ -1,4 +1,5 @@
 // Automatic FlutterFlow imports
+import '../../auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/actions/actions.dart' as action_blocks;
@@ -12,5 +13,21 @@ import 'package:flutter/material.dart';
 
 Future<DocumentReference?> createScenario() async {
   // Add your function code here!
-  return null;
+
+  // create new scenario
+
+  final adminUsers = await queryUsersRecordOnce(
+      queryBuilder: (record) => record.where('isAdmin', isEqualTo: true));
+
+  var scenarioRecordReference = ScenarioRecord.collection.doc();
+
+  await scenarioRecordReference.set({
+    ...createScenarioRecordData(createdBy: currentUserReference),
+    'owners': adminUsers.toList(),
+  });
+
+  return scenarioRecordReference;
 }
+
+DocumentReference? get currentUserReference =>
+    loggedIn ? UsersRecord.collection.doc(currentUser!.uid) : null;

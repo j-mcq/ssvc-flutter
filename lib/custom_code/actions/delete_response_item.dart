@@ -13,5 +13,30 @@ import 'package:flutter/material.dart';
 Future<String?> deleteResponseItem(
     DocumentReference? responseItemReference) async {
   // Add your function code here!
+
+  final activeResponseItemRecords = await queryActiveResponseItemsRecordOnce(
+      queryBuilder: (record) =>
+          record.where('response_item', isEqualTo: responseItemReference));
+
+  final scenarioHouseholdResponsesRecords =
+      await queryScenarioHouseholdResponsesRecordOnce(
+          queryBuilder: (record) =>
+              record.where('response_item', isEqualTo: responseItemReference));
+
+  final scenarioResponseItemRecords =
+      await queryScenarioResponseItemsRecordOnce(
+          queryBuilder: (record) =>
+              record.where('response_item', isEqualTo: responseItemReference));
+
+  if (scenarioHouseholdResponsesRecords.length > 0 ||
+      scenarioResponseItemRecords.length > 0) {
+    return 'You cannot delete this Response Item as it is being used in one or more scenarios. Please delete the scenario(s) first.';
+  }
+  if (activeResponseItemRecords.length > 0) {
+    return 'You cannot delete this Response Item as it is being used by one or more active response item. Please delete the active response item first.';
+  }
+
+  responseItemReference?.delete();
+
   return null;
 }

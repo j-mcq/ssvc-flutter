@@ -14,13 +14,11 @@ Future<int> calculateTotalStockLevels(
     DocumentReference? responseItemReference) async {
   // Add your function code here!
 
-  final stockDepotMappings = await queryStockDepotMappingRecordOnce(
-      queryBuilder: (stockDepotMappings) => stockDepotMappings
-          .where('response_item', isEqualTo: responseItemReference));
+  final activeResponseItems = await queryActiveResponseItemsRecordOnce(
+      queryBuilder: (items) =>
+          items.where('response_item', isEqualTo: responseItemReference));
 
-  int totalStockLevel = 0;
-  for (var stockDepotMapping in stockDepotMappings) {
-    totalStockLevel += stockDepotMapping.numberInStock;
-  }
+  int totalStockLevel = activeResponseItems.length;
+
   return totalStockLevel;
 }

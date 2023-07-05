@@ -35,7 +35,7 @@ Future downloadTemplate(String? type) async {
 }
 
 Future<void> saveCsv(String filename) async {
-  String templatePath = 'files/$filename';
+  String templatePath = 'assets/pdfs/$filename';
   ByteData bytes = await rootBundle.load(templatePath);
 
   await FileSaver.instance
