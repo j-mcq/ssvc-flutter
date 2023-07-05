@@ -21,16 +21,10 @@ class PsrCategoriesRecord extends FirestoreRecord {
   DocumentReference? get psrCategory => _psrCategory;
   bool hasPsrCategory() => _psrCategory != null;
 
-  // "owner" field.
-  DocumentReference? _owner;
-  DocumentReference? get owner => _owner;
-  bool hasOwner() => _owner != null;
-
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
     _psrCategory = snapshotData['psr_category'] as DocumentReference?;
-    _owner = snapshotData['owner'] as DocumentReference?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -74,12 +68,10 @@ class PsrCategoriesRecord extends FirestoreRecord {
 
 Map<String, dynamic> createPsrCategoriesRecordData({
   DocumentReference? psrCategory,
-  DocumentReference? owner,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'psr_category': psrCategory,
-      'owner': owner,
     }.withoutNulls,
   );
 
@@ -92,12 +84,12 @@ class PsrCategoriesRecordDocumentEquality
 
   @override
   bool equals(PsrCategoriesRecord? e1, PsrCategoriesRecord? e2) {
-    return e1?.psrCategory == e2?.psrCategory && e1?.owner == e2?.owner;
+    return e1?.psrCategory == e2?.psrCategory;
   }
 
   @override
   int hash(PsrCategoriesRecord? e) =>
-      const ListEquality().hash([e?.psrCategory, e?.owner]);
+      const ListEquality().hash([e?.psrCategory]);
 
   @override
   bool isValidKey(Object? o) => o is PsrCategoriesRecord;

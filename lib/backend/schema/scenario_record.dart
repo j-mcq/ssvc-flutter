@@ -46,20 +46,10 @@ class ScenarioRecord extends FirestoreRecord {
   double get mapZoomLevel => _mapZoomLevel ?? 0.0;
   bool hasMapZoomLevel() => _mapZoomLevel != null;
 
-  // "owner" field.
-  List<DocumentReference>? _owner;
-  List<DocumentReference> get owner => _owner ?? const [];
-  bool hasOwner() => _owner != null;
-
   // "owners" field.
-  List<String>? _owners;
-  List<String> get owners => _owners ?? const [];
+  List<DocumentReference>? _owners;
+  List<DocumentReference> get owners => _owners ?? const [];
   bool hasOwners() => _owners != null;
-
-  // "onr" field.
-  DocumentReference? _onr;
-  DocumentReference? get onr => _onr;
-  bool hasOnr() => _onr != null;
 
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
@@ -68,9 +58,7 @@ class ScenarioRecord extends FirestoreRecord {
     _outageDuration = castToType<double>(snapshotData['outage_duration']);
     _mapCenterLocation = snapshotData['map_center_location'] as LatLng?;
     _mapZoomLevel = castToType<double>(snapshotData['map_zoom_level']);
-    _owner = getDataList(snapshotData['owner']);
     _owners = getDataList(snapshotData['owners']);
-    _onr = snapshotData['onr'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -114,7 +102,6 @@ Map<String, dynamic> createScenarioRecordData({
   double? outageDuration,
   LatLng? mapCenterLocation,
   double? mapZoomLevel,
-  DocumentReference? onr,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -124,7 +111,6 @@ Map<String, dynamic> createScenarioRecordData({
       'outage_duration': outageDuration,
       'map_center_location': mapCenterLocation,
       'map_zoom_level': mapZoomLevel,
-      'onr': onr,
     }.withoutNulls,
   );
 
@@ -143,9 +129,7 @@ class ScenarioRecordDocumentEquality implements Equality<ScenarioRecord> {
         e1?.outageDuration == e2?.outageDuration &&
         e1?.mapCenterLocation == e2?.mapCenterLocation &&
         e1?.mapZoomLevel == e2?.mapZoomLevel &&
-        listEquality.equals(e1?.owner, e2?.owner) &&
-        listEquality.equals(e1?.owners, e2?.owners) &&
-        e1?.onr == e2?.onr;
+        listEquality.equals(e1?.owners, e2?.owners);
   }
 
   @override
@@ -156,9 +140,7 @@ class ScenarioRecordDocumentEquality implements Equality<ScenarioRecord> {
         e?.outageDuration,
         e?.mapCenterLocation,
         e?.mapZoomLevel,
-        e?.owner,
-        e?.owners,
-        e?.onr
+        e?.owners
       ]);
 
   @override

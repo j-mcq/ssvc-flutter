@@ -1012,17 +1012,14 @@ class _StockInformationWidgetState extends State<StockInformationWidget> {
                                         List<ActiveResponseItemsRecord>>(
                                       stream: queryActiveResponseItemsRecord(
                                         queryBuilder: (activeResponseItemsRecord) =>
-                                            activeResponseItemsRecord
-                                                .where('response_item_name',
-                                                    isEqualTo: _model
-                                                                .responseItemFilter !=
+                                            activeResponseItemsRecord.where(
+                                                'response_item_name',
+                                                isEqualTo:
+                                                    _model.responseItemFilter !=
                                                             ''
                                                         ? _model
                                                             .responseItemFilter
-                                                        : null)
-                                                .where('owners',
-                                                    arrayContains:
-                                                        currentUserReference),
+                                                        : null),
                                         limit: 50,
                                       ),
                                       builder: (context, snapshot) {
