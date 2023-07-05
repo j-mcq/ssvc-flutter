@@ -71,10 +71,10 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
   DocumentReference? get homeDepot => _homeDepot;
   bool hasHomeDepot() => _homeDepot != null;
 
-  // "owner" field.
-  DocumentReference? _owner;
-  DocumentReference? get owner => _owner;
-  bool hasOwner() => _owner != null;
+  // "owners" field.
+  List<DocumentReference>? _owners;
+  List<DocumentReference> get owners => _owners ?? const [];
+  bool hasOwners() => _owners != null;
 
   void _initializeFields() {
     _dateAdded = snapshotData['date_added'] as DateTime?;
@@ -88,7 +88,7 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
     _status = snapshotData['status'] as DocumentReference?;
     _responseItem = snapshotData['response_item'] as DocumentReference?;
     _homeDepot = snapshotData['home_depot'] as DocumentReference?;
-    _owner = snapshotData['owner'] as DocumentReference?;
+    _owners = getDataList(snapshotData['owners']);
   }
 
   static CollectionReference get collection =>
@@ -138,7 +138,6 @@ Map<String, dynamic> createActiveResponseItemsRecordData({
   DocumentReference? status,
   DocumentReference? responseItem,
   DocumentReference? homeDepot,
-  DocumentReference? owner,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -153,7 +152,6 @@ Map<String, dynamic> createActiveResponseItemsRecordData({
       'status': status,
       'response_item': responseItem,
       'home_depot': homeDepot,
-      'owner': owner,
     }.withoutNulls,
   );
 
@@ -166,6 +164,7 @@ class ActiveResponseItemsRecordDocumentEquality
 
   @override
   bool equals(ActiveResponseItemsRecord? e1, ActiveResponseItemsRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.dateAdded == e2?.dateAdded &&
         e1?.imageLink == e2?.imageLink &&
         e1?.chargingStatus == e2?.chargingStatus &&
@@ -177,7 +176,7 @@ class ActiveResponseItemsRecordDocumentEquality
         e1?.status == e2?.status &&
         e1?.responseItem == e2?.responseItem &&
         e1?.homeDepot == e2?.homeDepot &&
-        e1?.owner == e2?.owner;
+        listEquality.equals(e1?.owners, e2?.owners);
   }
 
   @override
@@ -193,7 +192,7 @@ class ActiveResponseItemsRecordDocumentEquality
         e?.status,
         e?.responseItem,
         e?.homeDepot,
-        e?.owner
+        e?.owners
       ]);
 
   @override
