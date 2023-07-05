@@ -27,3 +27,4 @@ export 'delete_all_active_response_items.dart'
 export 'delete_depot.dart' show deleteDepot;
 export 'delete_response_item.dart' show deleteResponseItem;
 export 'delete_active_response_item.dart' show deleteActiveResponseItem;
+export 'create_scenario.dart' show createScenario;

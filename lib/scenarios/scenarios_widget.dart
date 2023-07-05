@@ -677,22 +677,14 @@ class _ScenariosWidgetState extends State<ScenariosWidget> {
                                           FFAppState().circleLatLng = null;
                                           FFAppState().mapCenterLocation = null;
                                         });
-
-                                        var scenarioRecordReference =
-                                            ScenarioRecord.collection.doc();
-                                        await scenarioRecordReference
-                                            .set(createScenarioRecordData());
                                         _model.outCreateScenario =
-                                            ScenarioRecord.getDocumentFromData(
-                                                createScenarioRecordData(),
-                                                scenarioRecordReference);
+                                            await actions.createScenario();
 
                                         context.pushNamed(
                                           'scenario',
                                           queryParameters: {
                                             'scenarioReference': serializeParam(
-                                              _model
-                                                  .outCreateScenario!.reference,
+                                              _model.outCreateScenario,
                                               ParamType.DocumentReference,
                                             ),
                                           }.withoutNulls,
