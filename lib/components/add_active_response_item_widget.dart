@@ -416,6 +416,7 @@ class _AddActiveResponseItemWidgetState
                                   status: _model.outStatusReference,
                                   responseItem: _model.outResponseItemReference,
                                   homeDepot: _model.outDepotReference,
+                                  owner: currentUserReference,
                                 ));
                             Navigator.pop(context);
 
