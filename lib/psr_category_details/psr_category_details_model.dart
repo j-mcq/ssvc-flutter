@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,8 +30,6 @@ class PsrCategoryDetailsModel extends FlutterFlowModel {
   // State field(s) for psrgroupDropDown widget.
   String? psrgroupDropDownValue;
   FormFieldController<String>? psrgroupDropDownValueController;
-  List<PsrCategoryGroupOptionsRecord>?
-      psrgroupDropDownPsrCategoryGroupOptionsRecordListPreviousSnapshot;
   // State field(s) for resilienceScore widget.
   TextEditingController? resilienceScoreController;
   String? Function(BuildContext, String?)? resilienceScoreControllerValidator;
