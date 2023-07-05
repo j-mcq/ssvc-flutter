@@ -661,6 +661,8 @@ class _DepotDetailsWidgetState extends State<DepotDetailsWidget> {
                                                           postcode: _model
                                                               .postcodeController
                                                               .text,
+                                                          owner:
+                                                              currentUserReference,
                                                         ));
                                                         setState(() {
                                                           FFAppState()
