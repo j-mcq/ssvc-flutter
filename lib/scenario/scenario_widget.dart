@@ -1180,7 +1180,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             Expanded(
                                                               flex: 1,
                                                               child: Text(
-                                                                'PSR Housholds Impacted',
+                                                                'PSR Households Impacted',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .titleMedium,
