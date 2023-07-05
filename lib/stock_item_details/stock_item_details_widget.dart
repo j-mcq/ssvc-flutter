@@ -420,7 +420,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                 '_model.itemNameController',
                                                 Duration(milliseconds: 2000),
                                                 () async {
-                                                  setState(() {
+                                                  FFAppState().update(() {
                                                     FFAppState().isEditing =
                                                         true;
                                                   });
@@ -516,7 +516,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                 '_model.descriptionController',
                                                 Duration(milliseconds: 2000),
                                                 () async {
-                                                  setState(() {
+                                                  FFAppState().update(() {
                                                     FFAppState().isEditing =
                                                         true;
                                                   });
@@ -614,7 +614,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                 '_model.unitPriceController',
                                                 Duration(milliseconds: 2000),
                                                 () async {
-                                                  setState(() {
+                                                  FFAppState().update(() {
                                                     FFAppState().isEditing =
                                                         true;
                                                   });
@@ -717,7 +717,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                 '_model.energyCapacityController',
                                                 Duration(milliseconds: 2000),
                                                 () async {
-                                                  setState(() {
+                                                  FFAppState().update(() {
                                                     FFAppState().isEditing =
                                                         true;
                                                   });

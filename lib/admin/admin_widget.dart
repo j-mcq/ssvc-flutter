@@ -659,7 +659,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                             setState(() {});
                                                           },
                                                           text:
-                                                              'Clear Existing Records',
+                                                              'Clear All Existing Records',
                                                           icon: Icon(
                                                             Icons.close,
                                                             size: 15.0,
@@ -682,9 +682,8 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                         0.0,
                                                                         0.0,
                                                                         0.0),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .error,
+                                                            color: Color(
+                                                                0xFFFF0000),
                                                             textStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
@@ -1120,7 +1119,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                             setState(() {});
                                                           },
                                                           text:
-                                                              'Clear Existing Records',
+                                                              'Clear All Existing Records',
                                                           icon: Icon(
                                                             Icons.close,
                                                             size: 15.0,
@@ -1143,9 +1142,8 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                         0.0,
                                                                         0.0,
                                                                         0.0),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .error,
+                                                            color: Color(
+                                                                0xFFFF0033),
                                                             textStyle:
                                                                 FlutterFlowTheme.of(
                                                                         context)
