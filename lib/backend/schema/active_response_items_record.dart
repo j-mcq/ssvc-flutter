@@ -71,6 +71,11 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
   DocumentReference? get homeDepot => _homeDepot;
   bool hasHomeDepot() => _homeDepot != null;
 
+  // "owner" field.
+  DocumentReference? _owner;
+  DocumentReference? get owner => _owner;
+  bool hasOwner() => _owner != null;
+
   void _initializeFields() {
     _dateAdded = snapshotData['date_added'] as DateTime?;
     _imageLink = snapshotData['image_link'] as String?;
@@ -83,6 +88,7 @@ class ActiveResponseItemsRecord extends FirestoreRecord {
     _status = snapshotData['status'] as DocumentReference?;
     _responseItem = snapshotData['response_item'] as DocumentReference?;
     _homeDepot = snapshotData['home_depot'] as DocumentReference?;
+    _owner = snapshotData['owner'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -132,6 +138,7 @@ Map<String, dynamic> createActiveResponseItemsRecordData({
   DocumentReference? status,
   DocumentReference? responseItem,
   DocumentReference? homeDepot,
+  DocumentReference? owner,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -146,6 +153,7 @@ Map<String, dynamic> createActiveResponseItemsRecordData({
       'status': status,
       'response_item': responseItem,
       'home_depot': homeDepot,
+      'owner': owner,
     }.withoutNulls,
   );
 
@@ -168,7 +176,8 @@ class ActiveResponseItemsRecordDocumentEquality
         e1?.isAvailable == e2?.isAvailable &&
         e1?.status == e2?.status &&
         e1?.responseItem == e2?.responseItem &&
-        e1?.homeDepot == e2?.homeDepot;
+        e1?.homeDepot == e2?.homeDepot &&
+        e1?.owner == e2?.owner;
   }
 
   @override
@@ -183,7 +192,8 @@ class ActiveResponseItemsRecordDocumentEquality
         e?.isAvailable,
         e?.status,
         e?.responseItem,
-        e?.homeDepot
+        e?.homeDepot,
+        e?.owner
       ]);
 
   @override

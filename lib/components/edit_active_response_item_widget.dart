@@ -320,6 +320,7 @@ class _EditActiveResponseItemWidgetState
                             statusDescription: _model.outStatusName,
                             status: _model.outStatusReference,
                             homeDepot: _model.outDepotReference,
+                            owner: currentUserReference,
                           ));
                           Navigator.pop(context);
 
