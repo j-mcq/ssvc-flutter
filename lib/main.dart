@@ -131,7 +131,6 @@ class _NavBarPageState extends State<NavBarPage> {
       'psrCategories': PsrCategoriesWidget(),
       'depots': DepotsWidget(),
       'admin': AdminWidget(),
-      'stockInformationCopy': StockInformationCopyWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -202,14 +201,6 @@ class _NavBarPageState extends State<NavBarPage> {
                 size: 24.0,
               ),
               label: 'Admin',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.all_inbox,
-                size: 24.0,
-              ),
-              label: 'Stock',
               tooltip: '',
             )
           ],

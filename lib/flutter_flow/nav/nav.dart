@@ -211,14 +211,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 depotReference: params.getParam('depotReference',
                     ParamType.DocumentReference, false, ['depots']),
               ),
-            ),
-            FFRoute(
-              name: 'stockInformationCopy',
-              path: 'stockInformationCopy',
-              requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'stockInformationCopy')
-                  : StockInformationCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
