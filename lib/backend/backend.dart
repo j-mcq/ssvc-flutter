@@ -8,7 +8,6 @@ import 'schema/util/firestore_util.dart';
 import 'schema/users_record.dart';
 import 'schema/response_items_record.dart';
 import 'schema/scenario_record.dart';
-import 'schema/stock_depot_mapping_record.dart';
 import 'schema/psr_record.dart';
 import 'schema/psr_categories_record.dart';
 import 'schema/psr_category_options_record.dart';
@@ -32,7 +31,6 @@ export 'schema/util/schema_util.dart';
 export 'schema/users_record.dart';
 export 'schema/response_items_record.dart';
 export 'schema/scenario_record.dart';
-export 'schema/stock_depot_mapping_record.dart';
 export 'schema/psr_record.dart';
 export 'schema/psr_categories_record.dart';
 export 'schema/psr_category_options_record.dart';
@@ -202,59 +200,6 @@ Future<FFFirestorePage<ScenarioRecord>> queryScenarioRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
-
-/// Functions to query StockDepotMappingRecords (as a Stream and as a Future).
-Future<int> queryStockDepotMappingRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      StockDepotMappingRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<StockDepotMappingRecord>> queryStockDepotMappingRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      StockDepotMappingRecord.collection,
-      StockDepotMappingRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<StockDepotMappingRecord>> queryStockDepotMappingRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      StockDepotMappingRecord.collection,
-      StockDepotMappingRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<FFFirestorePage<StockDepotMappingRecord>>
-    queryStockDepotMappingRecordPage({
-  Query Function(Query)? queryBuilder,
-  DocumentSnapshot? nextPageMarker,
-  required int pageSize,
-  required bool isStream,
-}) =>
-        queryCollectionPage(
-          StockDepotMappingRecord.collection,
-          StockDepotMappingRecord.fromSnapshot,
-          queryBuilder: queryBuilder,
-          nextPageMarker: nextPageMarker,
-          pageSize: pageSize,
-          isStream: isStream,
-        );
 
 /// Functions to query PsrRecords (as a Stream and as a Future).
 Future<int> queryPsrRecordCount({
