@@ -413,7 +413,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                 final selectedFiles =
                                                                     await selectFiles(
                                                                   allowedExtensions: [
-                                                                    'pdf'
+                                                                    'csv'
                                                                   ],
                                                                   multiFile:
                                                                       false,
@@ -874,7 +874,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                                                 final selectedFiles =
                                                                     await selectFiles(
                                                                   allowedExtensions: [
-                                                                    'pdf'
+                                                                    'csv'
                                                                   ],
                                                                   multiFile:
                                                                       false,

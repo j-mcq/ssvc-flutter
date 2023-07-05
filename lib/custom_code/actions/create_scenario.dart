@@ -17,13 +17,13 @@ Future<DocumentReference?> createScenario() async {
   // create new scenario
 
   final adminUsers = await queryUsersRecordOnce(
-      queryBuilder: (record) => record.where('isAdmin', isEqualTo: true));
+      queryBuilder: (record) => record.where('is_admin', isEqualTo: true));
 
   var scenarioRecordReference = ScenarioRecord.collection.doc();
 
   await scenarioRecordReference.set({
     ...createScenarioRecordData(createdBy: currentUserReference),
-    'owners': adminUsers.toList(),
+    'owners': adminUsers.map((item) => item.reference).toList(),
   });
 
   return scenarioRecordReference;
