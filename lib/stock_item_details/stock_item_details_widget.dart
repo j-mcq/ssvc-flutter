@@ -514,7 +514,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                               onChanged: (_) =>
                                                   EasyDebounce.debounce(
                                                 '_model.descriptionController',
-                                                Duration(milliseconds: 2000),
+                                                Duration(milliseconds: 0),
                                                 () async {
                                                   setState(() {
                                                     FFAppState().isEditing =
@@ -612,7 +612,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                               onChanged: (_) =>
                                                   EasyDebounce.debounce(
                                                 '_model.unitPriceController',
-                                                Duration(milliseconds: 2000),
+                                                Duration(milliseconds: 0),
                                                 () async {
                                                   setState(() {
                                                     FFAppState().isEditing =
@@ -715,7 +715,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                               onChanged: (_) =>
                                                   EasyDebounce.debounce(
                                                 '_model.energyCapacityController',
-                                                Duration(milliseconds: 2000),
+                                                Duration(milliseconds: 0),
                                                 () async {
                                                   setState(() {
                                                     FFAppState().isEditing =

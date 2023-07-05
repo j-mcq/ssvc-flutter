@@ -338,7 +338,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                             '_model.scenarioNameController',
                                                             Duration(
                                                                 milliseconds:
-                                                                    2000),
+                                                                    0),
                                                             () async {
                                                               setState(() {
                                                                 FFAppState()
@@ -460,7 +460,7 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                           EasyDebounce.debounce(
                                                         '_model.outageDurationController',
                                                         Duration(
-                                                            milliseconds: 2000),
+                                                            milliseconds: 0),
                                                         () async {
                                                           setState(() {
                                                             FFAppState()
