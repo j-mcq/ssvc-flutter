@@ -284,10 +284,6 @@ class _StockInformationWidgetState extends State<StockInformationWidget> {
                                                           .defautImage,
                                                     ),
                                                     responseItemsRecordReference);
-                                            await actions.buildDepotMappings(
-                                              _model.outCreateResponseItem!
-                                                  .reference,
-                                            );
 
                                             context.pushNamed(
                                               'stockItemDetails',

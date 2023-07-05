@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/components/refresh_stock_data_widget.dart';
 import '/components/side_bar_nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -938,14 +937,6 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                     List<DepotsRecord>
                                                         listViewDepotsRecordList =
                                                         snapshot.data!;
-                                                    if (listViewDepotsRecordList
-                                                        .isEmpty) {
-                                                      return RefreshStockDataWidget(
-                                                        responseItemReference:
-                                                            widget
-                                                                .responseItemReference!,
-                                                      );
-                                                    }
                                                     return ListView.builder(
                                                       padding: EdgeInsets.zero,
                                                       primary: false,
