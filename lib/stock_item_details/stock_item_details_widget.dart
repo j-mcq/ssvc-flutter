@@ -418,9 +418,9 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                               onChanged: (_) =>
                                                   EasyDebounce.debounce(
                                                 '_model.itemNameController',
-                                                Duration(milliseconds: 2000),
+                                                Duration(milliseconds: 0),
                                                 () async {
-                                                  FFAppState().update(() {
+                                                  setState(() {
                                                     FFAppState().isEditing =
                                                         true;
                                                   });
@@ -516,7 +516,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                 '_model.descriptionController',
                                                 Duration(milliseconds: 2000),
                                                 () async {
-                                                  FFAppState().update(() {
+                                                  setState(() {
                                                     FFAppState().isEditing =
                                                         true;
                                                   });
@@ -614,7 +614,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                 '_model.unitPriceController',
                                                 Duration(milliseconds: 2000),
                                                 () async {
-                                                  FFAppState().update(() {
+                                                  setState(() {
                                                     FFAppState().isEditing =
                                                         true;
                                                   });
@@ -717,7 +717,7 @@ class _StockItemDetailsWidgetState extends State<StockItemDetailsWidget> {
                                                 '_model.energyCapacityController',
                                                 Duration(milliseconds: 2000),
                                                 () async {
-                                                  FFAppState().update(() {
+                                                  setState(() {
                                                     FFAppState().isEditing =
                                                         true;
                                                   });
