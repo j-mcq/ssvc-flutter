@@ -19,8 +19,8 @@ class ScenariosModel extends FlutterFlowModel {
   final unfocusNode = FocusNode();
   // Model for sideBarNav component.
   late SideBarNavModel sideBarNavModel;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  ScenarioRecord? outCreateScenario;
+  // Stores action output result for [Custom Action - createScenario] action in Button widget.
+  DocumentReference? outCreateScenario;
 
   /// Initialization and disposal methods.
 

@@ -66,6 +66,11 @@ class UsersRecord extends FirestoreRecord {
   bool get emailVerified => _emailVerified ?? false;
   bool hasEmailVerified() => _emailVerified != null;
 
+  // "is_admin" field.
+  bool? _isAdmin;
+  bool get isAdmin => _isAdmin ?? false;
+  bool hasIsAdmin() => _isAdmin != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -77,6 +82,7 @@ class UsersRecord extends FirestoreRecord {
     _bio = snapshotData['bio'] as String?;
     _city = snapshotData['city'] as String?;
     _emailVerified = snapshotData['email_verified'] as bool?;
+    _isAdmin = snapshotData['is_admin'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -123,6 +129,7 @@ Map<String, dynamic> createUsersRecordData({
   String? bio,
   String? city,
   bool? emailVerified,
+  bool? isAdmin,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -136,6 +143,7 @@ Map<String, dynamic> createUsersRecordData({
       'bio': bio,
       'city': city,
       'email_verified': emailVerified,
+      'is_admin': isAdmin,
     }.withoutNulls,
   );
 
@@ -156,7 +164,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.state == e2?.state &&
         e1?.bio == e2?.bio &&
         e1?.city == e2?.city &&
-        e1?.emailVerified == e2?.emailVerified;
+        e1?.emailVerified == e2?.emailVerified &&
+        e1?.isAdmin == e2?.isAdmin;
   }
 
   @override
@@ -170,7 +179,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.state,
         e?.bio,
         e?.city,
-        e?.emailVerified
+        e?.emailVerified,
+        e?.isAdmin
       ]);
 
   @override
