@@ -829,6 +829,15 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                     }.withoutNulls,
                                                                   );
                                                                 } else {
+                                                                  if (_model.formKey
+                                                                              .currentState ==
+                                                                          null ||
+                                                                      !_model
+                                                                          .formKey
+                                                                          .currentState!
+                                                                          .validate()) {
+                                                                    return;
+                                                                  }
                                                                   ScaffoldMessenger.of(
                                                                           context)
                                                                       .showSnackBar(
@@ -850,17 +859,17 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                               .secondary,
                                                                     ),
                                                                   );
-                                                                  if (_model.formKey
-                                                                              .currentState ==
-                                                                          null ||
-                                                                      !_model
-                                                                          .formKey
-                                                                          .currentState!
-                                                                          .validate()) {
-                                                                    return;
-                                                                  }
                                                                 }
                                                               } else {
+                                                                if (_model.formKey
+                                                                            .currentState ==
+                                                                        null ||
+                                                                    !_model
+                                                                        .formKey
+                                                                        .currentState!
+                                                                        .validate()) {
+                                                                  return;
+                                                                }
                                                                 ScaffoldMessenger.of(
                                                                         context)
                                                                     .showSnackBar(
@@ -882,15 +891,6 @@ class _ScenarioWidgetState extends State<ScenarioWidget> {
                                                                             .secondary,
                                                                   ),
                                                                 );
-                                                                if (_model.formKey
-                                                                            .currentState ==
-                                                                        null ||
-                                                                    !_model
-                                                                        .formKey
-                                                                        .currentState!
-                                                                        .validate()) {
-                                                                  return;
-                                                                }
                                                               }
 
                                                               setState(() {});

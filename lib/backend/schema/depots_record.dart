@@ -46,6 +46,11 @@ class DepotsRecord extends FirestoreRecord {
   String get ownerName => _ownerName ?? '';
   bool hasOwnerName() => _ownerName != null;
 
+  // "owner" field.
+  DocumentReference? _owner;
+  DocumentReference? get owner => _owner;
+  bool hasOwner() => _owner != null;
+
   void _initializeFields() {
     _name = snapshotData['name'] as String?;
     _location = snapshotData['location'] as LatLng?;
@@ -54,6 +59,7 @@ class DepotsRecord extends FirestoreRecord {
         castToType<double>(snapshotData['radius_of_influence']);
     _locationName = snapshotData['location_name'] as String?;
     _ownerName = snapshotData['owner_name'] as String?;
+    _owner = snapshotData['owner'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -96,6 +102,7 @@ Map<String, dynamic> createDepotsRecordData({
   double? radiusOfInfluence,
   String? locationName,
   String? ownerName,
+  DocumentReference? owner,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -105,6 +112,7 @@ Map<String, dynamic> createDepotsRecordData({
       'radius_of_influence': radiusOfInfluence,
       'location_name': locationName,
       'owner_name': ownerName,
+      'owner': owner,
     }.withoutNulls,
   );
 
@@ -121,7 +129,8 @@ class DepotsRecordDocumentEquality implements Equality<DepotsRecord> {
         e1?.postcode == e2?.postcode &&
         e1?.radiusOfInfluence == e2?.radiusOfInfluence &&
         e1?.locationName == e2?.locationName &&
-        e1?.ownerName == e2?.ownerName;
+        e1?.ownerName == e2?.ownerName &&
+        e1?.owner == e2?.owner;
   }
 
   @override
@@ -131,7 +140,8 @@ class DepotsRecordDocumentEquality implements Equality<DepotsRecord> {
         e?.postcode,
         e?.radiusOfInfluence,
         e?.locationName,
-        e?.ownerName
+        e?.ownerName,
+        e?.owner
       ]);
 
   @override

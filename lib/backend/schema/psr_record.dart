@@ -42,9 +42,14 @@ class PsrRecord extends FirestoreRecord {
   bool hasLatitude() => _latitude != null;
 
   // "owner" field.
-  DocumentReference? _owner;
-  DocumentReference? get owner => _owner;
+  List<DocumentReference>? _owner;
+  List<DocumentReference> get owner => _owner ?? const [];
   bool hasOwner() => _owner != null;
+
+  // "oner" field.
+  DocumentReference? _oner;
+  DocumentReference? get oner => _oner;
+  bool hasOner() => _oner != null;
 
   void _initializeFields() {
     _address1 = snapshotData['address1'] as String?;
@@ -52,7 +57,8 @@ class PsrRecord extends FirestoreRecord {
     _postcode = snapshotData['postcode'] as String?;
     _longitude = castToType<double>(snapshotData['longitude']);
     _latitude = castToType<double>(snapshotData['latitude']);
-    _owner = snapshotData['owner'] as DocumentReference?;
+    _owner = getDataList(snapshotData['owner']);
+    _oner = snapshotData['oner'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -94,7 +100,7 @@ Map<String, dynamic> createPsrRecordData({
   String? postcode,
   double? longitude,
   double? latitude,
-  DocumentReference? owner,
+  DocumentReference? oner,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -103,7 +109,7 @@ Map<String, dynamic> createPsrRecordData({
       'postcode': postcode,
       'longitude': longitude,
       'latitude': latitude,
-      'owner': owner,
+      'oner': oner,
     }.withoutNulls,
   );
 
@@ -115,12 +121,14 @@ class PsrRecordDocumentEquality implements Equality<PsrRecord> {
 
   @override
   bool equals(PsrRecord? e1, PsrRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.address1 == e2?.address1 &&
         e1?.address2 == e2?.address2 &&
         e1?.postcode == e2?.postcode &&
         e1?.longitude == e2?.longitude &&
         e1?.latitude == e2?.latitude &&
-        e1?.owner == e2?.owner;
+        listEquality.equals(e1?.owner, e2?.owner) &&
+        e1?.oner == e2?.oner;
   }
 
   @override
@@ -130,7 +138,8 @@ class PsrRecordDocumentEquality implements Equality<PsrRecord> {
         e?.postcode,
         e?.longitude,
         e?.latitude,
-        e?.owner
+        e?.owner,
+        e?.oner
       ]);
 
   @override
